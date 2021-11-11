@@ -103,7 +103,7 @@
                                     @Html.DisplayFor(model => item.SubjectName)
                                 </td>
                                 <td style='min-width:80px;max-width:80px'>
-                                    @Html.TextBoxFor(model => item.MarkValue, new { @class = "form-control", @id = '"' + rowId + '"' })
+                                    @Html.TextBoxFor(model => item.MarkValue, new { @class = "form-control", @id = ""+ @rowId })
                                 </td>
                                 <td style='min-width:60px;max-width:60px;display:none'>
                                     @Html.DisplayFor(model => item.Symbol, new { @class = "form-control" })
@@ -185,14 +185,14 @@
             _inputs.push("rowId" + i)
         }
 
-        //isvalid = ClassValidationHelper.ValidateInput(_inputs)
-        //if (isvalid === false) {
-        //    ClassValidationHelper.errorEmptyField();
-        //    return isvalid
-        //}
+        isvalid = ClassValidationHelper.ValidateInput(_inputs)
+        if (isvalid === false) {
+            ClassValidationHelper.errorEmptyField();
+            return isvalid
+        }
 
 
-
+        return false;
 
         var grade = $("#gradeId option:selected").val();
         var subjectId = $("#subjectId").val();
