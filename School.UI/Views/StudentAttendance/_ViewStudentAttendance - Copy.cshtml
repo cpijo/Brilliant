@@ -1,0 +1,387 @@
+﻿@model School.UI.Models.StudentModel.StudentAttendanceModel
+
+
+<style>
+
+    .card_t {
+        border-radius: 2px;
+        display: inline-block;
+        min-height: 100px;
+        margin: 1rem;
+        position: relative;
+        width: calc(100% - 20px);
+        padding-top: 5px;
+    }
+
+    .card-s {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+        .card-s:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+        }
+</style>
+
+@using (Ajax.BeginForm("Save", "StudentAttendance", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
+{
+<div id="attendance-page" class="col-md-12" style="border: 0px solid white; display: inline-block;">
+
+    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+
+        <div class="card_t card-s">
+            <div class="col-xs-12 form-horizontal">
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(m => m.Grades.Grade, Model.GradeDropboxItemList, new { @id = "gradeId", @class = "form-control" })
+                    </div>
+                    <div id="inputHolderId" class="col-md-6">
+                        @Html.DropDownListFor(m => m.Subject.SubjectName, Model.SubjectDropboxItemList, new { @id = "subjectId", @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <input type="text" id="pickdateId" class="form-control" style="margin-left:1px;margin-right:1px">
+                    </div>
+                    <div class="col-md-6">
+                        <button id="btnSearch" type="button" class="btnSearch btn btn-primary">Search</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+
+        <div class="card_t card-s">
+            <div class="col-xs-12" style="padding:15px;">
+
+                <div class="form-group">
+                    <div class="col-md-12">
+
+                        @{
+                            int co = 0;
+                        }
+                        <table id="tableId" class="table" style="border:1px solid silver;">
+                            <thead style="background-color:rgb(47, 71, 86);color:white;">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SubjectId)
+                                    </th>
+                                    @*<th style="display:none">
+                                            SubjectId
+                                        </th>*@
+                                    <th style="display:none">
+                                        StudentId
+                                    </th>
+                                    <th>
+                                        Wednessday
+                                    </th>
+                                    <th>
+                                        <input type="checkbox" id="presentAllId" class="present" /> Present
+                                    </th>
+                                    <th>
+                                        <input type="checkbox" id="absentAllId" class="present" /> Absent
+                                    </th>
+                                    <th>
+                                        Attendance
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.StudentAttendance)
+                                {
+                                    co++;
+                                    <tr class="tr_id">
+                                        @*<td style="display:none">
+                                                @Html.DisplayFor(model => item.SubjectId)
+                                            </td>*@
+                                        <td style="display:none">
+                                            @Html.DisplayFor(model => item.StudentId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.FirstName)  @Html.DisplayFor(model => item.LastName)
+                                        </td>
+                                        <td>
+                                            Wednesday @co
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="present" class="present" />
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="absent" class="absent" />
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.AttendanceStatus, new { @id = "AttendanceStatusId", @class = "AttendanceStatus" })
+                                        </td>
+
+                                        @*<td>
+                                                <button id="btnEdit" type="button" class="btnEdit btn btn-primary" style="width:100px;">Edit</button>
+                                            </td>*@
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        <div class="card_t card-s col-sm-12">
+                            <div class="col-xs-12" style="padding:15px;">
+
+                                <div class="form-group col-xs-12">
+
+                                    <button id="btnSaveRegister" type="button" class="btnSave btn btn-primary">Save Register</button>
+                                    <button id="btnSeachRegister" type="button" class="btn btn-warning btnWidth btnlogColor">Edit Register</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+
+
+
+
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+        $('#tableId input[type="checkbox"]').click(function () {
+
+            var hh = this.name;
+            if (this.name == "present") {
+                if (this.checked) {
+
+                    $(this).closest('td').parent('tr').find("td:eq(5)").text("present").css("color", "green");
+                    $(this).closest('tr').find("td:eq(4)").find('[type=checkbox]').prop('checked', false);
+
+                } else {
+                    $(this).closest('td').parent('tr').find("td:eq(5)").text("not set").css("color", "black");
+                }
+            }
+            else if (this.name == "absent") {
+                if (this.checked) {
+                    $(this).closest('td').parent('tr').find("td:eq(5)").text("abset").css("color", "orange");
+                    $(this).closest('tr').find("td:eq(3)").find('[type=checkbox]').prop('checked', false);
+
+                } else {
+                    $(this).closest('td').parent('tr').find("td:eq(5)").text("not set").css("color", "black");
+                }
+            }
+            else {
+                console.log("signs"); // replace with logic
+            }
+
+
+        });
+    });
+
+    $("#gradeId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        // debugger;
+        var selectedValue = $("#gradeId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim(),
+            'gradeId': selectedValue.trim()
+        };
+
+        //selectedValue = "Grade8";//position 1
+        var _searchValue = selectedValue.trim().substring(0, 5);
+
+        var partialHolder = "#attendance-page #inputHolderId";
+        var header = 'Update UserInfor';
+        //var url = button-clicked.closest-page-id/SearchResult
+        var url = '/StudentAttendance/SearchResult';
+        var pageObj = {};
+        if (_searchValue === "Grade") {
+            header = 'Update UserInfor';
+            url = '/StudentAttendance/dropBoxUpdate';
+            partialHolder = "#attendance-page #inputHolderId";
+            pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+            classControllerHelper.callController(pageObj);
+        }
+        else if (_searchValue === "filterGrade") {
+            header = 'Update UserInfor';
+            url = '/StudentAttendance/dropBoxUpdate8888';
+            partialHolder = "#attendance-page #inputHolderId";
+            pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+            classControllerHelper.callController(pageObj);
+        }
+        else {
+            partialHolder = "#studentSubjectMarks-page #inputHolderId";
+            var response = '<input id="txtName" type="text" placeholder="search by name" class="col-md-12 form-control" />'
+            pageObj = { function: "append", partialHolder: partialHolder };
+            classControllerHelper.appendPartial(response, pageObj);
+        }
+    });
+
+    //$("#btnSearch, #btnSeachRegister").click(function (event) {
+    //    event.preventDefault();
+    //    event.stopPropagation();
+
+    //    classMessageResponse.showMessage({ message: "Sorry, but this function is still under construction", type: "warning", title: "Under construction", pageId: "" });
+
+    //    //var grade = $("#gradeId option:selected").val();
+    //    //var subjectId = $("#subjectId").val();
+    //    //var searchDate = $("#pickdateId").val();
+    //    //var data = {
+    //    //    'gradeId': grade.trim(),
+    //    //    'subjectId': subjectId.trim(),
+    //    //    'searchDate': searchDate.trim(),
+    //    //};
+
+    //    //var partialHolder = "#name-page #tableHolderId";
+    //    //var header = 'Update UserInfor';
+    //    //var url = '/StudentAttendance/SearchResult';
+    //    //var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+    //    //classControllerHelper.callController(pageObj);
+
+    //});
+
+
+
+    $("#btnSeachEdit").click(function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var _inputs = ['subjectId', 'pickdateId'];
+        ClassValidationHelper.preValidateDropbox(['gradeId']);
+        var isvalid = ClassValidationHelper.ValidateInput(_inputs)
+        if (isvalid === false) {
+            ClassValidationHelper.errorEmptyField();
+            return isvalid
+        }
+
+        var grade = $("#gradeId option:selected").val();
+        var subjectId = $("#subjectId").val();
+        var searchDate = $("#pickdateId").val();
+        var data = {
+            'GradeId': grade.trim(),
+            'subjectId': subjectId.trim(),
+            'searchDate': searchDate.trim(),
+        };
+        var partialHolder = "#studentSubjectMarks-page #tableHolderId";
+        var header = 'Update UserInfor';
+        var url = '/StudentSubjectMarks/SearchResult';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+
+
+
+
+
+    $('#tableId .btnEdit').click(function () {
+        event.preventDefault();
+        event.stopPropagation();
+        //debugger;
+        //var SubjectId = $(this).closest('td').parent('tr').find("td:eq(0)").text().trim();
+        var monday = $(this).closest('td').parent('tr').find("td:eq(3)").text().trim();
+        var tuesday = $(this).closest('td').parent('tr').find("td:eq(4)").text().trim();
+        var wednessday = $(this).closest('td').parent('tr').find("td:eq(5)").text().trim();
+        var thurday = $(this).closest('td').parent('tr').find("td:eq(6)").text().trim();
+        var friday = $(this).closest('td').parent('tr').find("td:eq(7)").text().trim();
+        //make it a text box
+        //$(this).closest('td').parent('tr').find("td:eq(0)").html(" <input type='text' value='" + SubjectId + "' style='width:130px' />");
+        $(this).closest('td').parent('tr').find("td:eq(3)").html(" <input type='text' value='" + monday + "' style='width:100px' />");
+        $(this).closest('td').parent('tr').find("td:eq(4)").html(" <input type='text' value='" + tuesday + "' style='width:100px' />");
+        $(this).closest('td').parent('tr').find("td:eq(5)").html(" <input type='text' value='" + wednessday + "' style='width:100px' />");
+        $(this).closest('td').parent('tr').find("td:eq(6)").html(" <input type='text' value='" + thurday + "' style='width:100px' />");
+        $(this).closest('td').parent('tr').find("td:eq(7)").html(" <input type='text' value='" + friday + "' style='width:100px' />");
+
+    });
+
+
+    
+    $('.add_contact').click(function () {
+
+        var context = {
+            first_name: $(this).closest('tr').find('td:eq(0)').find('input').val(),
+            last_name: $(this).closest('tr').find('td:eq(1)').find('input').val(),
+            contact_email: $(this).closest('tr').find('td:eq(2)').find('input').val(),
+            contact_phone_num: $(this).closest('tr').find('td:eq(3)').find('input').val(),
+            contact_notes: $(this).closest('tr').find('td:eq(4)').find('input').val()
+        };
+    });
+
+
+    $("#presentAllId").on("click", function (event) {
+        var chk = document.getElementById('presentAllId').checked;
+        selectAll(chk);
+    });
+    $("#absentAllId").on("click", function (event) {
+        var chk = document.getElementById('absentAllId').checked;
+        selectAll(chk);
+    });
+
+
+    //var chk = document.getElementById('presentAllId').checked;
+
+    function selectAll(chk) {
+
+        if (chk) {
+            var arr = document.getElementsByTagName("input");
+            for (var i in arr) {
+                if (arr[i].name == 'check') arr[i].checked = true;
+            }
+        } else {
+            var arr = document.getElementsByTagName("input");
+            for (var i in arr) {
+                if (arr[i].name == 'check') arr[i].checked = false;
+            }
+        }
+    }
+
+
+    $('#attendance-page #dateOfAttendanceId').datepicker({
+        format: 'yyyy/mm/dd',
+        /* container: container,*/
+        todayHighlight: true,
+        autoclose: true,
+    });
+
+
+
+    //$('#attendance-page #dateOfAttendanceId').click(function () {     
+    //    $('#attendance-page #dateOfAttendanceId').datepicker({
+    //        format: 'yyyy/mm/dd',         
+    //        todayHighlight: true,
+    //        autoclose: true,
+    //    });
+    //});
+
+
+    function OnSuccess(response) {
+
+        classBusyIconHelper.hideBusyIcon();
+        if (response.result === "true") {
+            var msgObj = { message: response.message, type: "success", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+        else {
+            var msgObj = { message: response.message, type: "error", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+    }
+
+    function OnFailure(response) {
+        var msgObj = { message: "error", type: "error", title: "error", pageId: "" };
+        classMessageResponse.showMessage(msgObj);
+    }
+
+</script>

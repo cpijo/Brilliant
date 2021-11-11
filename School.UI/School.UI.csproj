@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\TeacherRegisterController.cs" />
     <Compile Include="Controllers\StudentRolesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\DeviceMenuController.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="ViewModels\StudentAttendanceModel.cs" />
     <Compile Include="ViewModels\StudentSubjectMarksVM.cs" />
     <Compile Include="ViewModels\StudentResultsVM.cs" />
+    <Compile Include="ViewModels\StudentViewModel.cs" />
     <Compile Include="ViewModels\TeacherViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1260,6 +1262,14 @@
     <Content Include="Views\Student\_ViewStudent.cshtml" />
     <Content Include="Views\Student\_ViewStudentInfor.cshtml" />
     <Content Include="Views\Teacher\_ViewTeacherInfor.cshtml" />
+    <Content Include="Views\TeacherRegister\_CreateTeacher.cshtml" />
+    <Content Include="Views\TeacherRegister\_TableGrade.cshtml" />
+    <Content Include="Views\TeacherRegister\_TableSubject.cshtml" />
+    <Content Include="Views\TeacherRegister\_TableTeacher.cshtml" />
+    <Content Include="Views\TeacherRegister\_ViewTeacher.cshtml" />
+    <Content Include="Views\TeacherRegister\_ViewTeacherInfor.cshtml" />
+    <Content Include="Views\TeacherRegister\_PartialDropbox.cshtml" />
+    <Content Include="Views\StudentAttendance\_ViewStudentAttendance - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

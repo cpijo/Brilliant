@@ -61,8 +61,8 @@ namespace School.UI.Models.StudentModel
 
 
     }
-
-    public class StudentModel
+/*
+    public class StudentViewModel_old
     {
         public Student Student { get; set; }
         public Address Address { get; set; }
@@ -85,7 +85,7 @@ namespace School.UI.Models.StudentModel
         public string UnkownItem { get; set; }
         public SelectList UnkownItemList { get; set; }
 
-        public StudentModel()
+        public StudentViewModel_old()
         {
             Student = new Student();
             Address = new Address();
@@ -117,5 +117,6 @@ namespace School.UI.Models.StudentModel
         }
 
     }
+    */
 }
 

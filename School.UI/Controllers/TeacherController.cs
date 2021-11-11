@@ -22,6 +22,7 @@ namespace School.UI.Controllers
             this.studentRepository = studentRepository;
         }
 
+        /*
         #region Get Student
         [HttpGet]
         public ActionResult GetRecord()
@@ -57,6 +58,8 @@ namespace School.UI.Controllers
         }
         #endregion
 
+        */
+
 
         #region Get Student By Filter
         [HttpPost]
@@ -82,7 +85,7 @@ namespace School.UI.Controllers
 
         #region Add New Record
         [HttpGet]
-        public ActionResult AddRecord(StudentModel model)
+        public ActionResult AddRecord(StudentViewModel model)
         {
             //StudentModel _model = new StudentModel();
             Dictionary<string, string> genderDictionary = CostantData.dictGender();

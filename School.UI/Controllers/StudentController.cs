@@ -1,7 +1,6 @@
-﻿using School.Common.JsonStringHelper;
-using School.Entities.Fields;
+﻿using School.Entities.Fields;
 using School.Services.Interface;
-using School.UI.Models.StudentModel;
+using School.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -40,9 +39,9 @@ namespace School.UI.Controllers
         #endregion
 
 
-        #region View Student
+        #region Student Information
         [HttpPost]
-        public ActionResult ViewStudent(string userId)
+        public ActionResult StudentInformation(string userId)
         {
             Student student = null;
             if (Session["students"]!=null)
@@ -55,7 +54,7 @@ namespace School.UI.Controllers
                 List<Student> students = studentRepository.GetAll();
                 student = students.ToList().Where(x => x.StudentId == userId).FirstOrDefault();
             }
-            StudentModel model = new StudentModel();
+            StudentViewModel model = new StudentViewModel();
             model.Student = student;
 
             return PartialView("_ViewStudentInfor", model);

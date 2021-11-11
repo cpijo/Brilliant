@@ -213,7 +213,7 @@
                     </span>
                 </a>
                 <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentRegister/AddRecord','Create Student')"><a href="#"><i class="fa fa-circle-o"></i>Create Stundent</a></li>
+                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')"><a href="#"><i class="fa fa-circle-o"></i>Create Stundent</a></li>
                     <li id=subjecte1 name="subject" style="display:block" onclick="callController('/Student/GetRecord','View Students')"><a href="#"><i class="fa fa-circle-o"></i>View Student</a></li>
                 </ul>
             </li>
@@ -264,14 +264,17 @@
             <li class="treeview" id="menu-teacher" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
                 <a href="#" class="aprovince">
                     <i class="fa fa-home"></i>
-                    <span class="menu-header-name">Teacher Maintanance</span>
+                    <span class="menu-header-name">Teacher Registration</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-down pull-right erroSign"></i>
                     </span>
                 </a>
                 <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=student3 name="student" style="display:block" onclick="callController('/Teacher/AddRecord','Create Teacher')"><a href="#"><i class="fa fa-circle-o"></i>Create Teacher</a></li>
-                    <li id=student1 name="student" style="display:block" onclick="callController('/Teacher/GetRecord','View Teacher')"><a href="#"><i class="fa fa-circle-o"></i>View Teacher</a></li>
+                    <li id=student3 name="student" style="display:block" onclick="callController('/TeacherRegister/CreateRecord','Create Teacher')"><a href="#"><i class="fa fa-circle-o"></i>Create Teacher</a></li>
+                    <li id=student1 name="student" style="display:block" onclick="callController('/TeacherRegister/GetRecord','View Teacher')"><a href="#"><i class="fa fa-circle-o"></i>View Teacher</a></li>
+
+                    @*<li id=student3 name="student" style="display:block" onclick="callController('/Teacher/AddRecord','Create Teacher')"><a href="#"><i class="fa fa-circle-o"></i>Create Teacher</a></li>
+                    <li id=student1 name="student" style="display:block" onclick="callController('/Teacher/GetRecord','View Teacher')"><a href="#"><i class="fa fa-circle-o"></i>View Teacher</a></li>*@
                 </ul>
             </li>
 

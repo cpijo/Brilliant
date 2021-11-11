@@ -1,6 +1,11 @@
 ﻿@model School.UI.Models.StudentModel.StudentAttendanceModel
 
 
+@{
+    int co = 0;
+    int nomberOfRows = Model.StudentAttendance.Count();
+}
+
 <style>
 
     .card_t {
@@ -25,131 +30,105 @@
 
 @using (Ajax.BeginForm("Save", "StudentAttendance", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
 {
-<div id="attendance-page" class="col-md-12" style="border: 0px solid white; display: inline-block;">
+    <div id="attendance-page" class="col-md-12" style="border: 0px solid white; display: inline-block;">
 
-    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+        <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
 
-        <div class="card_t card-s">
-            <div class="col-xs-12 form-horizontal">
+            <div class="card_t card-s">
+                <div class="col-xs-12 form-horizontal">
 
-                <div class="form-group">
-                    <div class="col-md-6">
-                        @Html.DropDownListFor(m => m.Grades.Grade, Model.GradeDropboxItemList, new { @id = "gradeId", @class = "form-control" })
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(m => m.Grades.Grade, Model.GradeDropboxItemList, new { @id = "gradeId", @class = "form-control" })
+                        </div>
+                        <div id="inputHolderId" class="col-md-6">
+                            @Html.DropDownListFor(m => m.Subject.SubjectName, Model.SubjectDropboxItemList, new { @id = "subjectId", @class = "form-control" })
+                        </div>
                     </div>
-                    <div id="inputHolderId" class="col-md-6">
-                        @Html.DropDownListFor(m => m.Subject.SubjectName, Model.SubjectDropboxItemList, new { @id = "subjectId", @class = "form-control" })
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <input type="text" id="pickdateId" class="form-control" style="margin-left:1px;margin-right:1px">
+                        </div>
+                        <div class="col-md-6">
+                            <button id="btnSaveAttend" type="button" class="btnSaveAttend btn btn-primary">Save Attendance</button>
+                            @*<button id="btnSearchAttend" type="button" class="btn btn-warning btnWidth btnlogColor">Edit Register</button>*@
+                        </div>
                     </div>
+
                 </div>
-
-                <div class="form-group">
-                    <div class="col-md-6">
-                        <input type="text" id="pickdateId" class="form-control" style="margin-left:1px;margin-right:1px">
-                    </div>
-                    <div class="col-md-6">
-                        <button id="btnSearch" type="button" class="btnSearch btn btn-primary">Search</button>
-                    </div>
-                </div>
-
             </div>
         </div>
-    </div>
 
-    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+        <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
 
-        <div class="card_t card-s">
-            <div class="col-xs-12" style="padding:15px;">
+            <div class="card_t card-s">
+                <div class="col-xs-12" style="padding:15px;">
 
-                <div class="form-group">
-                    <div class="col-md-12">
+                    <div class="form-group">
+                        <div class="col-md-12">
 
-                        @{
-                            int co = 0;
-                        }
-                        <table id="tableId" class="table" style="border:1px solid silver;">
-                            <thead style="background-color:rgb(47, 71, 86);color:white;">
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.SubjectId)
-                                    </th>
-                                    @*<th style="display:none">
-                                            SubjectId
-                                        </th>*@
-                                    <th style="display:none">
-                                        StudentId
-                                    </th>
-                                    <th>
-                                        Wednessday
-                                    </th>
-                                    <th>
-                                        <input type="checkbox" id="presentAllId" class="present" /> Present
-                                    </th>
-                                    <th>
-                                        <input type="checkbox" id="absentAllId" class="present" /> Absent
-                                    </th>
-                                    <th>
-                                        Attendance
-                                    </th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
+                            <table id="tableId" class="table" style="border:1px solid silver;">
+                                <thead style="background-color:rgb(47, 71, 86);color:white;">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.SubjectId)
+                                        </th>
+                                        <th style="display:none">
+                                            StudentId
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.LastName)
+                                        </th>
+                                        <th>
+                                            <input type="checkbox" id="presentAllId" class="present" /> Present
+                                        </th>
+                                        <th>
+                                            <input type="checkbox" id="absentAllId" class="present" /> Absent
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.attandance)
+                                        </th>
 
-                                @foreach (var item in Model.StudentAttendance)
-                                {
-                                    co++;
-                                    <tr class="tr_id">
-                                        @*<td style="display:none">
-                                                @Html.DisplayFor(model => item.SubjectId)
-                                            </td>*@
-                                        <td style="display:none">
-                                            @Html.DisplayFor(model => item.StudentId)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(model => item.FirstName)  @Html.DisplayFor(model => item.LastName)
-                                        </td>
-                                        <td>
-                                            Wednesday @co
-                                        </td>
-                                        <td>
-                                            <input type="checkbox" name="present" class="present" />
-                                        </td>
-                                        <td>
-                                            <input type="checkbox" name="absent" class="absent" />
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(model => item.AttendanceStatus, new { @id = "AttendanceStatusId", @class = "AttendanceStatus" })
-                                        </td>
-
-                                        @*<td>
-                                                <button id="btnEdit" type="button" class="btnEdit btn btn-primary" style="width:100px;">Edit</button>
-                                            </td>*@
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
 
-                        <div class="card_t card-s col-sm-12">
-                            <div class="col-xs-12" style="padding:15px;">
+                                    @foreach (var item in Model.StudentAttendance)
+                                    {
+                                    
+                                        <tr class="tr_id">
+                                            <td style="display:none">
+                                                @Html.DisplayFor(model => item.StudentId)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => item.FirstName)  @Html.DisplayFor(model => item.LastName)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => item.LastName)
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="present" class="present" />
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" name="absent" class="absent" />
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(model => item.AttendanceStatus, new { @id = "AttendanceStatusId", @class = "AttendanceStatus" })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
 
-                                <div class="form-group col-xs-12">
-
-                                    <button id="btnSaveRegister" type="button" class="btnSave btn btn-primary">Save Register</button>
-                                    <button id="btnSeachRegister" type="button" class="btn btn-warning btnWidth btnlogColor">Edit Register</button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 }
-
-
-
-
-
 
 
 <script>
@@ -227,71 +206,75 @@
         }
     });
 
-    $("#btnSearch, #btnSeachRegister").click(function (event) {
+    $("#btnSaveAttend").click(function (event) {
+
         event.preventDefault();
         event.stopPropagation();
-        classMessageResponse.showMessage({ message: "Sorry, but this function is still under construction", type: "warning", title: "Under construction", pageId: "" });
 
-        //var grade = $("#gradeId option:selected").val();
-        //var subjectId = $("#subjectId").val();
-        //var searchDate = $("#pickdateId").val();
-        //var data = {
-        //    'gradeId': grade.trim(),
-        //    'subjectId': subjectId.trim(),
-        //    'searchDate': searchDate.trim(),
-        //};
-
-        //var partialHolder = "#name-page #tableHolderId";
-        //var header = 'Update UserInfor';
-        //var url = '/StudentAttendance/SearchResult';
-        //var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
-        //classControllerHelper.callController(pageObj);
-
-    });
-
-
-    $('#tableId .btnEdit').click(function () {
-        event.preventDefault();
-        event.stopPropagation();
+        var _inputs = ['subjectId', 'pickdateId'];
+        ClassValidationHelper.preValidateDropbox(['gradeId']);
+        var isvalid = ClassValidationHelper.ValidateInput(_inputs)
+        if (isvalid === false) {
+            ClassValidationHelper.errorEmptyField();
+            return isvalid
+        }
         //debugger;
-        //var SubjectId = $(this).closest('td').parent('tr').find("td:eq(0)").text().trim();
-        var monday = $(this).closest('td').parent('tr').find("td:eq(3)").text().trim();
-        var tuesday = $(this).closest('td').parent('tr').find("td:eq(4)").text().trim();
-        var wednessday = $(this).closest('td').parent('tr').find("td:eq(5)").text().trim();
-        var thurday = $(this).closest('td').parent('tr').find("td:eq(6)").text().trim();
-        var friday = $(this).closest('td').parent('tr').find("td:eq(7)").text().trim();
-        //make it a text box
-        //$(this).closest('td').parent('tr').find("td:eq(0)").html(" <input type='text' value='" + SubjectId + "' style='width:130px' />");
-        $(this).closest('td').parent('tr').find("td:eq(3)").html(" <input type='text' value='" + monday + "' style='width:100px' />");
-        $(this).closest('td').parent('tr').find("td:eq(4)").html(" <input type='text' value='" + tuesday + "' style='width:100px' />");
-        $(this).closest('td').parent('tr').find("td:eq(5)").html(" <input type='text' value='" + wednessday + "' style='width:100px' />");
-        $(this).closest('td').parent('tr').find("td:eq(6)").html(" <input type='text' value='" + thurday + "' style='width:100px' />");
-        $(this).closest('td').parent('tr').find("td:eq(7)").html(" <input type='text' value='" + friday + "' style='width:100px' />");
+        var nomberOfRows = Number(@nomberOfRows) + 1;
 
-    });
-
-
-    
-    $('.add_contact').click(function () {
-
-        var context = {
-            first_name: $(this).closest('tr').find('td:eq(0)').find('input').val(),
-            last_name: $(this).closest('tr').find('td:eq(1)').find('input').val(),
-            contact_email: $(this).closest('tr').find('td:eq(2)').find('input').val(),
-            contact_phone_num: $(this).closest('tr').find('td:eq(3)').find('input').val(),
-            contact_notes: $(this).closest('tr').find('td:eq(4)').find('input').val()
+        var grade = $("#gradeId option:selected").val();
+        var subjectId = $("#subjectId").val();
+        var searchDate = $("#pickdateId").val();
+        var commonData = {
+            'StudentId': "",
+            'GradeId': grade.trim(),
+            'SubjectId': subjectId.trim(),
+            'AttendanceStatus': 0,
+            'ExamDate': searchDate.trim()
         };
+
+        var data = {
+            'jsonString': JSON.stringify(tabledata(commonData))
+        };
+
+        var url = '/StudentAttendance/SaveRecord';
+        var pageObj = { function: "message", url: url, type: "Post", data: data, header: "", pageId: "", partialHolder: "" };
+        classControllerHelper.callController(pageObj);
+
     });
 
 
-    $("#presentAllId").on("click", function (event) {
-        var chk = document.getElementById('presentAllId').checked;
-        selectAll(chk);
-    });
-    $("#absentAllId").on("click", function (event) {
-        var chk = document.getElementById('absentAllId').checked;
-        selectAll(chk);
-    });
+    function tabledata(obj) {
+        var countRows = $("#tableId>tbody>tr").length;
+        var allRows = [];
+        for (var i = 0; i < countRows; i++) {
+            var _studentId = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(0)").text();
+            var _attandance = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(5)").text();
+            var row = {
+                'StudentId': _studentId.trim(),
+                'GradeId': obj.GradeId,
+                'SubjectId': obj.SubjectId,
+                'AttendanceStatus': _attandance.trim(),
+                'ExamDate': obj.ExamDate
+            };
+            allRows.push(row);
+        }
+        return allRows;
+    }
+
+
+
+
+
+
+
+    //$("#presentAllId").on("click", function (event) {
+    //    var chk = document.getElementById('presentAllId').checked;
+    //    selectAll(chk);
+    //});
+    //$("#absentAllId").on("click", function (event) {
+    //    var chk = document.getElementById('absentAllId').checked;
+    //    selectAll(chk);
+    //});
 
 
     //var chk = document.getElementById('presentAllId').checked;
@@ -311,24 +294,11 @@
         }
     }
 
-
-    $('#attendance-page #dateOfAttendanceId').datepicker({
-        format: 'yyyy/mm/dd',
-        /* container: container,*/
+    $('#pickdateId').datepicker({
+        format: 'yyyy-mm-dd',
         todayHighlight: true,
         autoclose: true,
     });
-
-
-
-    //$('#attendance-page #dateOfAttendanceId').click(function () {     
-    //    $('#attendance-page #dateOfAttendanceId').datepicker({
-    //        format: 'yyyy/mm/dd',         
-    //        todayHighlight: true,
-    //        autoclose: true,
-    //    });
-    //});
-
 
     function OnSuccess(response) {
 

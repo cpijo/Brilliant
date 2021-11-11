@@ -1,7 +1,7 @@
 ﻿using School.Common.Constants;
 using School.Entities.Fields;
 using School.Services.Interface;
-using School.UI.Models.StudentModel;
+using School.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,20 +24,9 @@ namespace School.UI.Controllers
             this.studentRepository = studentRepository;
         }
 
-        #region Get Student
+        #region Create Record
         [HttpGet]
-        public ActionResult GetReport()
-        {
-            List<Student> _model = studentRepository.GetAll();
-
-            return PartialView("_StudentRegisteredReport", _model);
-        }
-        #endregion
-
-
-        #region Add New Record
-        [HttpGet]
-        public ActionResult AddRecord(StudentModel model)
+        public ActionResult CreateRecord(StudentViewModel model)
         {
             //StudentModel _model = new StudentModel();
             Dictionary<string, string> genderDictionary = CostantData.dictGender();
@@ -93,9 +82,9 @@ namespace School.UI.Controllers
         }
         #endregion
 
-        #region Save Student 
+        #region Save Record 
         [HttpPost]
-        public ActionResult Save(StudentModel model)
+        public ActionResult SaveRecord(StudentViewModel model)
         {
             try
             {
@@ -121,7 +110,61 @@ namespace School.UI.Controllers
         #endregion
 
 
-        #region Add New Record
+        #region Get Student
+        [HttpGet]
+        public ActionResult GetRecord()
+        {
+            List<Student> students = studentRepository.GetAll();
+            Session["teacher"] = students;
+            return PartialView("_ViewStudent", students);
+        }
+        #endregion
+
+        #region Teacher Information
+        [HttpPost]
+        public ActionResult TeacherInformation(string userId)
+        {
+            Student student = null;
+            if (Session["teacher"] != null)
+            {
+                List<Student> students = Session["teacher"] as List<Student>;
+                student = students.ToList().Where(x => x.StudentId == userId).FirstOrDefault();
+            }
+            else
+            {
+                List<Student> students = studentRepository.GetAll();
+                student = students.ToList().Where(x => x.StudentId == userId).FirstOrDefault();
+            }
+            StudentViewModel model = new StudentViewModel();
+            model.Student = student;
+
+            return PartialView("_ViewTeacherInfor", model);
+        }
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+        #region Get Student
+        [HttpGet]
+        public ActionResult GetReport()
+        {
+            List<Student> _model = studentRepository.GetAll();
+
+            return PartialView("_StudentRegisteredReport", _model);
+        }
+        #endregion
+
+
+
+        #region Grade Information
         [HttpPost]
         public ActionResult GradeInformation(Student model, string StudentId, string Firstname, string Surname)
         {

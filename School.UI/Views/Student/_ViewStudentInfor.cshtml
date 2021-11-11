@@ -1,4 +1,4 @@
-﻿@model School.UI.Models.StudentModel.StudentModel
+﻿@model School.UI.ViewModels.StudentViewModel
 
 <style>
     #childPage {
@@ -37,8 +37,8 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
         }
 
-    #Home-Container #PopupBodyChildOne #partialHolder{
-        background-color:white;
+    #Home-Container #PopupBodyChildOne #partialHolder {
+        background-color: white;
     }
 </style>
 
@@ -266,13 +266,13 @@
 
 
 
-        /* var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";*/
-        $('#pickdateId').datepicker({
-            format: 'yyyy/mm/dd',
-            /* container: container,*/
-            todayHighlight: true,
-            autoclose: true,
-        });
+    /* var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";*/
+    $('#pickdateId').datepicker({
+        format: 'yyyy/mm/dd',
+        /* container: container,*/
+        todayHighlight: true,
+        autoclose: true,
+    });
 
 
     function clearInputs() {
@@ -400,66 +400,66 @@
 
 
 @*
-<script>
-    $(document).ready(function () {
+    <script>
+        $(document).ready(function () {
 
-        $("#demoGrid").DataTable({
+            $("#demoGrid").DataTable({
 
-            "processing": true, // for show progress bar
-            "serverSide": true, // for process server side
-            "filter": true, // this is for disable filter (search box)
-            "orderMulti": false, // for disable multiple column at once
-            "pageLength": 5,
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "pageLength": 5,
 
-            "ajax": {
-                "url": "/Demo/LoadData",
-                "type": "POST",
-                "datatype": "json"
-            },
-
-            "columnDefs":
-                [{
-                    "targets": [0],
-                    "visible": false,
-                    "searchable": false
-                },
-                {
-                    "targets": [7],
-                    "searchable": false,
-                    "orderable": false
-                },
-                {
-                    "targets": [8],
-                    "searchable": false,
-                    "orderable": false
-                },
-                {
-                    "targets": [9],
-                    "searchable": false,
-                    "orderable": false
-                }],
-
-            "columns": [
-                { "data": "CustomerID", "name": "CustomerID", "autoWidth": true },
-                { "data": "CompanyName", "name": "CompanyName", "autoWidth": true },
-                { "data": "ContactName", "title": "ContactName", "name": "ContactName", "autoWidth": true },
-                { "data": "ContactTitle", "name": "ContactTitle", "autoWidth": true },
-                { "data": "City", "name": "City", "autoWidth": true },
-                { "data": "PostalCode", "name": "PostalCode", "autoWidth": true },
-                { "data": "Country", "name": "Country", "autoWidth": true },
-                { "data": "Phone", "name": "Phone", "title": "Status", "autoWidth": true },
-                {
-                    "render": function (data, type, full, meta) { return '<a class="btn btn-info" href="/Demo/Edit/' + full.CustomerID + '">Edit</a>'; }
-                },
-                {
-                    data: null, render: function (data, type, row) {
-                        return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.CustomerID + "'); >Delete</a>";
-                    }
+                "ajax": {
+                    "url": "/Demo/LoadData",
+                    "type": "POST",
+                    "datatype": "json"
                 },
 
-            ]
+                "columnDefs":
+                    [{
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    },
+                    {
+                        "targets": [7],
+                        "searchable": false,
+                        "orderable": false
+                    },
+                    {
+                        "targets": [8],
+                        "searchable": false,
+                        "orderable": false
+                    },
+                    {
+                        "targets": [9],
+                        "searchable": false,
+                        "orderable": false
+                    }],
 
+                "columns": [
+                    { "data": "CustomerID", "name": "CustomerID", "autoWidth": true },
+                    { "data": "CompanyName", "name": "CompanyName", "autoWidth": true },
+                    { "data": "ContactName", "title": "ContactName", "name": "ContactName", "autoWidth": true },
+                    { "data": "ContactTitle", "name": "ContactTitle", "autoWidth": true },
+                    { "data": "City", "name": "City", "autoWidth": true },
+                    { "data": "PostalCode", "name": "PostalCode", "autoWidth": true },
+                    { "data": "Country", "name": "Country", "autoWidth": true },
+                    { "data": "Phone", "name": "Phone", "title": "Status", "autoWidth": true },
+                    {
+                        "render": function (data, type, full, meta) { return '<a class="btn btn-info" href="/Demo/Edit/' + full.CustomerID + '">Edit</a>'; }
+                    },
+                    {
+                        data: null, render: function (data, type, row) {
+                            return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.CustomerID + "'); >Delete</a>";
+                        }
+                    },
+
+                ]
+
+            });
         });
-    });
-</script>
+    </script>
 *@

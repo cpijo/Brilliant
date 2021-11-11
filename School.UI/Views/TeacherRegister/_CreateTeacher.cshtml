@@ -1,4 +1,4 @@
-﻿@model School.UI.ViewModels.StudentViewModel
+﻿@model School.UI.ViewModels.TeacherViewModel
 
 <style>
     #childPage {
@@ -14,6 +14,11 @@
             overflow-x: hidden;
             max-height: 260px;
         }
+
+
+    .select select div.option {
+        background-color: rgb(232, 240, 254);
+    }
 </style>
 
 <style>
@@ -39,30 +44,34 @@
 </style>
 
 
-@using (Ajax.BeginForm("SaveRecord", "StudentRegister", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
+@using (Ajax.BeginForm("SaveRecord", "TeacherRegister", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
 {
-    <div id="register-page" class="col-xs-12" style="border-color:rgb(241, 242, 247);border:0px solid red;">
+    <div id="register-page" class="col-xs-12" style="border-color:rgb(241, 242, 247);">
         <div class="card_t card-s">
-            <div class="form-horizontal" style="padding:10px;border:0px solid red;">
+
+            <h4 class="col-xs-12 text-center rm-pd" style="padding:5px; color:black">  Create New Teacher</h4>
+            <hr style="padding:5px; color:black" />
+
+            <div class="form-horizontal" style="padding:10px;">
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Student.Firstname, new { @class = "col-sm-2 control-label" })
+                    @Html.LabelFor(model => model.Teacher.Firstname, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
-                        @Html.TextBoxFor(m => m.Student.Firstname, new { @id = "Firstname", @class = " col-sm-12 form-control" })
+                        @Html.TextBoxFor(m => m.Teacher.Firstname, new { @id = "Firstname", @class = " col-sm-12 form-control" })
                     </div>
 
-                    @Html.LabelFor(model => model.Student.LastName, new { @class = "col-sm-2 control-label" })
+                    @Html.LabelFor(model => model.Teacher.LastName, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
-                        @Html.TextBoxFor(model => model.Student.LastName, new { @id = "LastName", @class = "form-control" })
+                        @Html.TextBoxFor(model => model.Teacher.LastName, new { @id = "LastName", @class = "form-control" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Student.DateOfBirth, new { @class = "col-sm-2 control-label" })
+                    @Html.LabelFor(model => model.Teacher.DateOfBirth, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
-                        @Html.TextBoxFor(model => model.Student.DateOfBirth, new { @id = "DateOfBirth", @class = "form-control" })
+                        @Html.TextBoxFor(model => model.Teacher.DateOfBirth, new { @id = "DateOfBirth", @class = "form-control" })
                     </div>
-                    @Html.LabelFor(model => model.Student.Gender, new { @class = "col-sm-2 control-label" })
+                    @Html.LabelFor(model => model.Teacher.Gender, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
                         <label class="col-md-6">
                             <input type="radio" id="rdMale" name="gendar" />
@@ -72,36 +81,24 @@
                             <input type="radio" id="rdfemale" name="gendar" />
                             Female
                         </label>
-                        @Html.HiddenFor(model => model.Student.Gender, new { @id = "genderId", @class = "form-control" })
+                        @Html.HiddenFor(model => model.Teacher.Gender, new { @id = "genderId", @class = "form-control" })
+
+                        @* @Html.DropDownListFor(m => m.GenderDropboxItem, Model.GenderDropboxItemList, new { @id = "gender", @class = "form-control" })*@
 
                     </div>
 
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Student.Language, new { @class = "col-sm-2 control-label" })
+                    @Html.LabelFor(model => model.Teacher.Language, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
-                        @Html.DropDownListFor(m => m.Student.Language, Model.LanguageDropboxItemList, new { @id = "languageId", @class = "form-control" })
+                        @Html.DropDownListFor(m => m.Teacher.Language, Model.LanguageDropboxItemList, new { @id = "languageId", @class = "form-control" })
                     </div>
                     <label class="col-sm-2" for="assignTeachers">assign Teachers:</label>
                     <div class="col-md-4">
                         @Html.CheckBoxFor(m => m.AssignTeacher.IsAssign, new { @id = "isAssign", @class = "form-control" })
                     </div>
-
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Grades.Grade, new { @class = "col-sm-2 control-label" })
-                    <div class="col-md-4">
-                        @Html.DropDownListFor(m => m.Grades.Grade, Model.GradeDropboxItemList, new { @id = "gradeId", @class = "form-control" })
-                    </div>
-                    @Html.LabelFor(model => model.ClassOrCourse.ClassName, new { @class = "col-sm-2 control-label" })
-                    <div id="divClassOrCourseId" class="col-md-4">
-                        @Html.DropDownListFor(m => m.ClassOrCourse.ClassName, Model.ClassOrCourseDropboxItemList, new { @id = "className", @class = "form-control" })
-                    </div>
-                </div>
-
                 <hr />
-
                 <div class="form-group">
                     @Html.LabelFor(model => model.Address.Province, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
@@ -148,19 +145,20 @@
                 <hr />
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Student.Phone1, new { @class = "col-sm-2 control-label" })
+                    @Html.LabelFor(model => model.Teacher.Phone1, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
-                        @Html.TextBoxFor(m => m.Student.Phone1, new { @id = "phone1", @class = " col-sm-12 form-control" })
+                        @Html.TextBoxFor(m => m.Teacher.Phone1, new { @id = "phone1", @class = " col-sm-12 form-control" })
                     </div>
-                    @Html.LabelFor(model => model.Student.Phone2, new { @class = "col-sm-2 control-label" })
+                    @Html.LabelFor(model => model.Teacher.Phone2, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
-                        @Html.TextBoxFor(m => m.Student.Phone2, new { @id = "phone2", @class = " col-sm-12 form-control" })
+                        @Html.TextBoxFor(m => m.Teacher.Phone2, new { @id = "phone2", @class = " col-sm-12 form-control" })
                     </div>
                 </div>
+
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Student.Photo, new { @class = "col-sm-2 control-label" })
+                    @Html.LabelFor(model => model.Teacher.Photo, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-10">
-                        @Html.TextBoxFor(model => model.Student.Photo, new { type = "file", @id = "uploaFile", @readonly = "readonly", @class = "uploaFile col-sm-12 fileStyle form-control" })
+                        @Html.TextBoxFor(model => model.Teacher.Photo, new { type = "file", @id = "uploaFile", @readonly = "readonly", @class = "uploaFile col-sm-12 fileStyle form-control" })
                     </div>
                 </div>
 
@@ -191,24 +189,32 @@
             return false;
         });
 
-        $('#rdMale, #rdfemale').click(function () {
+        $('#rdMale,#rdfemale').click(function () {
             if (this.id == "rdMale")
-                $('#genderId').val('Male');          
-            else
-                $('#genderId').val('Female');          
+                $('#genderId').val('Male');         
+            else 
+                $('#genderId').val('Female');
+           
         });
     });
 
+    $("#phone1,#phone2").keyup(function (me) {
+        ClassValidationHelper.formatPhoneNumber(me);
+    });
+
     function validateInput() {
-        var dropBox = ['languageId', 'provinceId', 'suburbId', 'locationId', 'className'];
-        var _inputs = ['Firstname', 'LastName', 'DateOfBirth', 'genderId', 'languageId', 'gradeId', 'className', 'provinceId', 'cityId', 'suburbId', 'locationId', 'unitNumber', 'houseNumber', 'streetName', 'postalCode', 'phone1'];
-        var _phones = ['phone1', 'phone2',];
+        var dropBox = ['languageId', 'provinceId', 'suburbId', 'locationId'];
+        var _inputs = ['Firstname', 'LastName', 'DateOfBirth', 'genderId', 'languageId', 'provinceId', 'cityId', 'suburbId', 'locationId', 'unitNumber', 'houseNumber', 'streetName', 'postalCode', 'phone1'];
 
         ClassValidationHelper.preValidateDropbox(dropBox);
         var isvalid = ClassValidationHelper.ValidateInput(_inputs)
         if (isvalid === false) {
             ClassValidationHelper.errorEmptyField();
             return isvalid
+        }
+
+        if (isvalid) {
+            classMessageResponse.showMessage({ message: "Sorry, but this function is still under construction", type: "warning", title: "Under construction", pageId: "" });
         }
         return isvalid;
     }
@@ -233,22 +239,19 @@
         $('.btnlogColor').prop('disabled', false);
     }
 
-        $('#DateOfBirth').datepicker({
-            format: 'yyyy-mm-dd',
-            todayHighlight: true,
-            autoclose: true,
-        });
-
+    $('#DateOfBirth').datepicker({
+        format: 'yyyy-mm-dd',
+        todayHighlight: true,
+        autoclose: true,
+    });
 
     $("#register-page #gradeId,#register-page #provinceId,#register-page #suburbId").change(function (event) {
         event.preventDefault();
         event.stopPropagation();
-
         let myId = this.id;
         var selectedValue = $("#" + myId + " option:selected").val();
         var data = {}
-        var partialHolder = "#register-page #divClassOrCourseId";
-
+        var partialHolder = "";
 
         switch (myId) {
             case "gradeId":
@@ -277,12 +280,10 @@
         }
 
         var header = 'Update UserInfor';
-        url = '/StudentMaintanance/dropBoxUpdate';
+        var url = '/TeacherRegister/dropBoxUpdate';
         var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
         classControllerHelper.callController(pageObj);
     });
-
-
 
     $("#register-page #GradeId").change(function (event) {
         event.preventDefault();
@@ -293,12 +294,12 @@
         };
 
         var partialHolder = "#register-page #divClassOrCourseId";
-
-
         var header = 'Update UserInfor';
         url = '/StudentMaintanance/dropBoxUpdate';
         var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
         classControllerHelper.callController(pageObj);
     });
+
 </script>
+
 

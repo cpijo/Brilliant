@@ -52,6 +52,7 @@ namespace School.Entities.Fields
         //public string AttendanceStatus { get; set; } = "Not Assign";
 
         private string _attendanceStatus;
+        [Display(Name = "Attendance")]
         public string AttendanceStatus
         {
             get

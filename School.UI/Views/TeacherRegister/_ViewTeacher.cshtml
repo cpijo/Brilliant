@@ -1,4 +1,4 @@
-﻿@model IEnumerable<School.Entities.Fields.Student>
+﻿@model IEnumerable<School.Entities.Fields.Teacher>
 
 <style>
 
@@ -22,7 +22,8 @@
         }
 </style>
 
-<div id="student-page" class="col-md-12" style="border: 0px solid white; display: inline-block;">
+
+<div id="teacher-page" class="col-md-12" style="border: 0px solid white; display: inline-block;">
 
     <div class="col-md-12" style="border: 0px solid white; display: block;">
 
@@ -65,7 +66,7 @@
                     <thead style="background-color:rgb(240, 240, 240);">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.StudentId)
+                                @Html.DisplayNameFor(model => model.TeacherId)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Firstname)
@@ -80,33 +81,33 @@
                                 View Report
                             </th>
                             <th>
-                               User Details
+                                User Details
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.StudentId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Firstname)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LastName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Gender)
-                            </td>
-                            <td style="display:none;">
-                                <button id="btnEdit" type="button" class="btnEdit btn btn-primary" style="width:100px;display:none;">View Report</button>
-                            </td>
-                            <td>
-                                <button id="btnUserDetails" type="button" class="btnUserDetails btn btn-primary" style="width:100px;">User Details</button>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TeacherId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Firstname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Gender)
+                                </td>
+                                <td style="display:none;">
+                                    <button id="btnEdit" type="button" class="btnEdit btn btn-primary" style="width:100px;display:none;">View Report</button>
+                                </td>
+                                <td>
+                                    <button id="btnUserDetails" type="button" class="btnUserDetails btn btn-primary" style="width:100px;">User Details</button>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -116,6 +117,7 @@
     </div>
 
 </div>
+
 <script>
 
     $('#tableId #btnUserDetails').click(function (event) {
@@ -130,12 +132,11 @@
             'LastName': LastName.trim()
         };
 
-        var header = 'Student Information';
-        var url = '/Student/StudentInformation';
+        var header = 'Teacher Information';
+        var url = '/TeacherRegister/TeacherInformation';
         var objPopup = classPageConstant.popupChildOne;
         var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
         classControllerHelper.callController(pageObj);
     });
 
 </script>
-

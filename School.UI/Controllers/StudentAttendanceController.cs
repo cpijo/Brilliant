@@ -26,7 +26,7 @@ namespace School.UI.Controllers
             this.studentSubjectMarksRepository = studentSubjectMarksRepository;
         }
 
-        #region Get Student
+        #region Get Record
         [HttpGet]
         public ActionResult GetRecord()
         {
@@ -90,79 +90,13 @@ namespace School.UI.Controllers
         }
         #endregion
 
-        #region dropBox Update
+        #region Save Record
         [HttpPost]
-        public ActionResult dropBoxUpdate_New(string selectedValue, string searchType)
+        public ActionResult SaveRecord(string jsonString)
         {
-            StudentAttendanceVM model = new StudentAttendanceVM();
-            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-            switch (selectedValue)
-            {
-                case "Grade8":
-                    dictionary = CostantData.dictGrade8Classes();
-                    break;
-                case "Grade9":
-                    dictionary = CostantData.dictGrade9Classes();
-                    break;
-                case "Grade10":
-                    dictionary = CostantData.dictGrade10Classes();
-                    break;
-                case "Grade11":
-                    dictionary = CostantData.dictGrade11Classes();
-                    break;
-                case "Grade12":
-                    dictionary = CostantData.dictGrade12Classes();
-                    break;
-                default:
-                    dictionary = CostantData.dictGrade8Classes();
-                    break;
-            }
-
-            List<SelectListItem> list = dropdownHelper(dictionary);
-            model.SubjectDropboxItemList = new SelectList(list, "Value", "Text");
-
-            return PartialView("_PartialDropBox", model);
-        }
-        #endregion
-
-        #region Search By Filter
-        [HttpPost]
-        public ActionResult SearchResult(string teacherId, string gradeId,string subjectId,string searchDate, string queryType = "searchByGrade")
-        {
-            //Passing an anonymous object as an argument in C#
-            gradeId = CostantData.getFieldId(CostantData.dictGrades(), gradeId);
-            //GradeId = CostantData.getDictionaryValueByIndex(CostantData.dictGrades(),int.Parse(GradeId));
-
-            dynamic anonymous = new ExpandoObject();
-            anonymous.StudentId = "StudentId"; anonymous.GradeId = gradeId; anonymous.queryType = queryType;
-
-            //dynamic anonymous = new { StudentId = "StudentId", GradeId = "GradeI2" , queryType = "searchByGrade" };
-
-           // StudentAttendanceModel mod = new StudentAttendanceModel();
-
-
-            //List<StudentAttendance> model = studentResultsRepository.GetByAny(anonymous);
-
-            //var anonymousList = new[] {
-            //                            new { txt = "test1" },
-            //                            new { txt = "test2" },
-            //                            new { txt = "test3" }
-            //                           };
-
-            //return PartialView("_TableStudentSeachResult", _model);
-
-            return PartialView("_TableStudentSeachResult");
-        }
-        #endregion
-
-        #region Save Student Results 
-        [HttpPost]
-        public ActionResult Save(string teacherModel, string jsonString, string dictionary)
-        {
-
             try
             {
-                StudentAttendanceVM model = myDeserialiseFromJson<StudentAttendanceVM>.Deserialise(jsonString);
+                List<StudentAttendance> model = myDeserialiseFromJson<List<StudentAttendance>>.Deserialise(jsonString);
                 //StudentAttendanceModel model = JsonConvert.DeserializeObject<StudentAttendanceModel>(jsonString);
 
                 // model.StudentId = Guid.NewGuid().ToString();
@@ -204,39 +138,38 @@ namespace School.UI.Controllers
 
 
 
+        [HttpPost]
+        public ActionResult Save_0000(Student inputModel)
+        {
+            if (ModelState.IsValid)
+            {
+                string message = string.Format("Created user '{0}' aged '{1}' in the system."
+                  , inputModel.Firstname, inputModel.Age);
+                return Json(new Student { Firstname = message });
+            }
+            else
+            {
+                string errorMessage = "<div class=\"validation-summary-errors\">"
+                  + "The following errors occurred:<ul>";
+                foreach (var key in ModelState.Keys)
+                {
+                    var error = ModelState[key].Errors.FirstOrDefault();
+                    if (error != null)
+                    {
+                        errorMessage += "<li class=\"field-validation-error\">"
+                         + error.ErrorMessage + "</li>";
+                    }
+                }
+                errorMessage += "</ul>";
+                return Json(new Student { Firstname = errorMessage });
+            }
+        }
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-        //#region Get Student By Filter
-        //[HttpPost]
-        //public ActionResult SearchRecord(string selectedValue)
-        //{
-        //    List<Student> _model = studentRepository.GetAll();
-
-        //    return PartialView("_TableStudent", _model);
-        //}
-        //#endregion
-
-
-        //#region Add New Record
-        //[HttpGet]
-        //public ActionResult AddRecord(Student model)
-        //{
-        //    return PartialView("_AddStudent", model);
-        //}
-        //#endregion
-
+/*
 
         public ActionResult Create([Bind(Include = "CourseID,Title,Credits,DepartmentID")]Course course)
         {
@@ -280,50 +213,9 @@ namespace School.UI.Controllers
 
 
 
-        [HttpPost]
-        public ActionResult Save_0000(Student inputModel)
-        {
-            if (ModelState.IsValid)
-            {
-                string message = string.Format("Created user '{0}' aged '{1}' in the system."
-                  , inputModel.Firstname, inputModel.Age);
-                return Json(new Student { Firstname = message });
-            }
-            else
-            {
-                string errorMessage = "<div class=\"validation-summary-errors\">"
-                  + "The following errors occurred:<ul>";
-                foreach (var key in ModelState.Keys)
-                {
-                    var error = ModelState[key].Errors.FirstOrDefault();
-                    if (error != null)
-                    {
-                        errorMessage += "<li class=\"field-validation-error\">"
-                         + error.ErrorMessage + "</li>";
-                    }
-                }
-                errorMessage += "</ul>";
-                return Json(new Student { Firstname = errorMessage });
-            }
-        }
 
 
 
-        /*
-        [HttpPost]
-        public ActionResult Upsert([FromBody] Employee myJSON)
-        {
-            string myMessage = (myJSON != null) ? "Not Null" : "isNull";
-            return Json(myMessage);
-        }
-
-        public class Employee
-        {
-            public string name { get; set; }
-            public int age { get; set; }
-            public string city { get; set; }
-        }
-        */
 
 
         #region Add New Record
@@ -373,58 +265,7 @@ namespace School.UI.Controllers
         }
         #endregion
 
-
-        public ActionResult LoadData()
-        {
-            try
-            {
-                var draw = Request.Form.GetValues("draw").FirstOrDefault();
-                var start = Request.Form.GetValues("start").FirstOrDefault();
-                var length = Request.Form.GetValues("length").FirstOrDefault();
-                var sortColumn = Request.Form.GetValues("columns[" + Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
-                var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
-                var searchValue = Request.Form.GetValues("search[value]").FirstOrDefault();
-
-
-                //Paging Size (10,20,50,100)    
-                int pageSize = length != null ? Convert.ToInt32(length) : 0;
-                int skip = start != null ? Convert.ToInt32(start) : 0;
-                int recordsTotal = 0;
-
-
-                /*
-                // Getting all Customer data    
-                var customerData = (from tempcustomer in _context.Customers
-                                    select tempcustomer);
-
-                //Sorting    
-                if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDir)))
-                {
-                    customerData = customerData.OrderBy(sortColumn + " " + sortColumnDir);
-                }
-                //Search    
-                if (!string.IsNullOrEmpty(searchValue))
-                {
-                    customerData = customerData.Where(m => m.CompanyName == searchValue);
-                }
-
-                //total number of rows count     
-                recordsTotal = customerData.Count();
-                //Paging     
-                var data = customerData.Skip(skip).Take(pageSize).ToList();
-                */
-                return null;
-                //return Json(new { dra/ = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-        }
-
-        /* */
+         */
     }
 }
 
