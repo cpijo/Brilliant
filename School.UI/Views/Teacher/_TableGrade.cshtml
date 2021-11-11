@@ -1,0 +1,71 @@
+﻿@model IEnumerable<School.Entities.Fields.Grades>
+@{
+    //in a Teacher
+    string test = "testing";
+}
+<table id="tableId" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GradeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th>
+                Edit
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GradeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+                <td>
+                    <button id="btnEditGrade" type="button" class="btnEditGrade btn btn-primary">Edit</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+
+    $('#tableId .btnEditGrade').click(function () {
+
+        var CourseId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
+        var Grade = $(this).closest('td').parent('tr').find("td:eq(1)").text();
+
+        var data = {
+            'GradeId': CourseId.trim(),
+            'Grade': Grade.trim()
+        };
+
+        var partialHolder = "#basePartialHolder #partialHolder";
+        var header = 'Edit Drade';
+        var url = '/Grade/PreUpdate';
+
+        var objPopup = classPageConstant.popupChildOne;
+        var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+        classControllerHelper.callController(pageObj);
+
+
+        //var objPage = controllerHelper.objPage;
+        //objPage.partialHolder = "#Home-Container #childPage #partialHolder"
+        //objPage.header = 'Edit Course';
+        //objPage.type = 'Post';
+        //objPage.url = '/Grade/PreUpdate';
+        //objPage.data = data;
+
+        //controllerHelper.requestController({ pageType: "popup", pageData: objPage });
+    });
+
+</script>
+
+

@@ -1,0 +1,144 @@
+﻿
+
+
+<style>
+
+
+#sign-container ,.sign-container{
+     /*border:thick solid green;
+     background-color:red;*/
+
+     min-height:43px;
+     display:block;
+
+
+}
+
+    .sign-container{
+     min-height:43px;
+     display:block;
+}
+.sign-container .sign-header{
+     max-height:43px;
+}
+
+    .pfl_user{
+        min-height:24px;
+        max-height:24px;
+        padding-top:5px;
+        margin-top:0px;
+         /*border:thin solid red;*/
+    }
+
+    p.pfl_user:hover{
+
+font-size:16px;
+color:orange;
+/*padding-top:3px;*/
+}
+
+
+     .pfl_user1 ,.pf_user ,.pl_user {
+        min-height:25px;
+        min-width:100px;
+
+        border-bottom:thin solid rgb(25, 55, 121);
+    }
+     #btnOpenProfile{
+         border:none;
+     }
+      #btnOpenProfile:hover{
+         border:none;
+     }
+
+/*.sign-container{
+            border:thin solid white;
+        }
+    .sign-header , .sign-body{
+            border:thin solid red;
+        }*/
+
+
+</style>
+
+
+
+<div class="sign-container">
+    <div class="sign-header">
+
+        <label id="btnOpenProfile" type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo" aria-expanded="false">
+            @*<strong class="p_user">Sphiwe Maluleke</strong>*@
+            <p class="col-sm-12 pfl_user"></p>
+        </label>
+    </div>
+
+    <div id="demo" class="sign-body col-sm-12 collapse in">
+        <br />
+        <ul class="win-user col-sm-12">
+            <li>
+                <div class="navbar-login">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <p class="text-center">
+                                <span class="glyphicon glyphicon-user icon-size win-user-photo"></span>
+                            </p>
+                        </div>
+                        <div class="col-sm-8 doInput">
+
+                            <p class="col-sm-12 pfl_user1">
+                                @*<strong> rrrrrrrrrrrrrrrrrrrrr</strong>*@
+
+                            </p>
+                            <p class="text-left col-sm-12 pf_user"> </p>
+                            <p class="text-left col-sm-12 pl_user"> </p>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li class="divider navbar-login-session-bg"></li>
+            <li><a href="#" onclick="callingChangePassword('/Manage/ChangePassword')">Change Password <span class="glyphicon glyphicon-lock pull-right"></span></a></li>
+
+            @*@Html.ActionLink("Change Password", "ChangePassword", "Manage", null, new { @class = "btn btn-default", data_modal = "" })
+                @Ajax.ActionLink("View Reviews", "View", new { id = item.ID }, new AjaxOptions { UpdateTargetId = "result", InsertionMode = InsertionMode.InsertAfter })*@
+
+
+
+            <li class="divider"></li>
+
+            <li>
+                <a href="#" id="xd" onclick="LogOff();event.preventDefault();">Sign Out <span class="glyphicon glyphicon-log-out pull-right"></span></a>
+
+                <div hidden>
+                    @using (Html.BeginForm("SignOutNoForgeryToken", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button id="btnsignOut" type="submit" class="hidden" hidden></button>
+                    }
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+
+<script>
+
+    $(document).ready(function () {
+        alert("ttttttttttttttttttt");
+    });
+     function callingChangePassword(url) {
+         //debugger
+            $.get('@Url.Action("ChangePassword","Manage")', { id: "spijo" }, function (result) {
+                //debugger;
+                $("#PopupLayoutBody").empty();
+                $("#PopupLayoutBody").html(result);
+                $("#PopupLayoutOverlay").show();
+                $("#PopupLayoutBodyCover").show();
+
+            });
+
+        };
+</script>

@@ -1,0 +1,111 @@
+﻿@model IEnumerable<School.Entities.Fields.Grades>
+@{
+    //in a Teacher
+    string test = "testing";
+}
+<table id="tableId" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GradeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th>
+                Edit
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GradeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+                <td>
+                    <button id="btnEditGrade" type="button" class="btnEditGrade btn btn-primary">Edit</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<script>
+
+    //https://forums.asp.net/t/2161006.aspx?after+select+data+from+jquery+autocomplete+set+data+into+other+td
+    $(function () {
+        for (var i = 1; i < $("#Items_tbl tr").length; i++) {
+            doAjax(i);
+        }
+
+        function doAjax(i) {
+            $.ajax({
+                type: 'POST',
+                url: '/Demo/Return_Item_Price',
+                data: { a: "123" },
+                success: function (response) {
+                    $("#Items_tbl").find("tr:eq(" + i + ")").find("td:eq(0)").find("input").val(response + i);
+                }
+            });
+        }
+    })
+</script>
+
+
+
+<script>
+
+
+
+    $("input[type='checkbox']").on('change', function () {
+        $(this).val(this.checked ? "TRUE" : "FALSE");
+
+
+        var checkbox = $("#checkbox");
+        checkbox.val(checkbox[0].checked ? "true" : "false");
+
+        $("#Items_tbl").find("tr:eq(" + i + ")").find("td:eq(0)").find("input").val(response + i);
+
+    })
+
+
+
+    $('#tableId .btnEditGrade').click(function () {
+
+        var CourseId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
+        var Grade = $(this).closest('td').parent('tr').find("td:eq(1)").text();
+
+        var data = {
+            'GradeId': CourseId.trim(),
+            'Grade': Grade.trim()
+        };
+
+        var partialHolder = "#basePartialHolder #partialHolder";
+        var header = 'Edit Drade';
+        var url = '/Grade/PreUpdate';
+
+        var objPopup = classPageConstant.popupChildOne;
+        var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+        classControllerHelper.callController(pageObj);
+
+
+        //var objPage = controllerHelper.objPage;
+        //objPage.partialHolder = "#Home-Container #childPage #partialHolder"
+        //objPage.header = 'Edit Course';
+        //objPage.type = 'Post';
+        //objPage.url = '/Grade/PreUpdate';
+        //objPage.data = data;
+
+        //controllerHelper.requestController({ pageType: "popup", pageData: objPage });
+    });
+
+</script>
+
+

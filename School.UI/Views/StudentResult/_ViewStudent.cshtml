@@ -1,0 +1,243 @@
+﻿@model School.UI.ViewModels.StudentResultsVM
+
+<style>
+
+    .card_t {
+        border-radius: 2px;
+        display: inline-block;
+        min-height: 50px;
+        margin: 1rem;
+        position: relative;
+        width: calc(100% - 20px);
+        padding-top: 10px;
+    }
+
+    .card-s {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+        .card-s:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+        }
+</style>
+
+<div id="name-page" class="col-md-12" style="border: 0px solid white; display: inline-block;">
+
+    <div class="col-md-12" style="border: 0px solid white; display: block;">
+
+        <div class="card_t card-s">
+            <div class="col-xs-12 form-horizontal">
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="col-md-3">
+                            @Html.DropDownListFor(m => m.Grade, Model.GradeDropboxItemList, new { @id = "GradeId", @class = "form-control selectedSearchId" })
+                        </div>
+                        <div id="inputHolderId" class="col-md-7">
+                            <input id="txtName" type="text" placeholder="Search by surname" class="col-md-12 form-control" />
+                        </div>
+                        <div class="col-md-2">
+                            <input id="btnSearch" type="button" value="Search" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <hr />
+    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+
+
+        <div class="card_t card-s">
+
+            <div  id="tableHolderId" class="col-xs-12" style="padding:15px;">
+
+                <table id="tableId" class="table" style="background-color:white; border:1px solid silver;">
+                    <thead style="background-color:rgb(240, 240, 240);">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StudentResults.StudentId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StudentResults.Firstname)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StudentResults.LastName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StudentResults.GradeName)
+                            </th>
+                            <th>
+                                View Report
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.StudentResultsList)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StudentId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Firstname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GradeName)
+                                </td>
+                                <td>
+                                    <button id="btnEdit" type="button" class="btnEdit btn btn-primary" style="width:100px;">View Report</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+
+
+    $("#GradeId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+       // debugger;
+        var selectedValue = $("#GradeId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim(),
+            'GradeId': selectedValue.trim()
+        };
+
+        //selectedValue = "Grade8";//position 1
+        var _searchValue =  selectedValue.trim().substring(0, 5);
+       
+        var partialHolder = "#name-page #tableHolderId";
+        var header = 'Update UserInfor';
+        var url = '/StudentResult/SearchResult';
+        var pageObj = {};
+        if (_searchValue==="Grade") {
+            header = 'Update UserInfor';
+            url = '/StudentResult/SearchByDropBox';
+            partialHolder = "#name-page #tableHolderId";
+            pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+            classControllerHelper.callController(pageObj);
+        }
+        else {
+            partialHolder = "#name-page #inputHolderId";
+            var response = '<input id="txtName" type="text" placeholder="search by name" class="col-md-12 form-control" />'
+            pageObj = { function: "append", partialHolder: partialHolder };
+            classControllerHelper.appendPartial(response, pageObj);
+        }
+    });
+
+
+
+    $("#btnSearch").click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        // debugger;
+        var grade = $("#GradeId option:selected").val();
+        var studentName = $("#txtName").val();
+        var data = {
+            'gradeId': grade.trim(),
+            'studentName': studentName.trim()
+        };
+
+        //selectedValue = "Grade8";//position 1
+       
+
+        var partialHolder = "#name-page #tableHolderId";
+        var header = 'Update UserInfor';
+        var url = '/StudentResult/SearchByLastName';
+
+        //if (!studentName === "") {
+       var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+        //}
+
+        //else {
+
+        //}
+    });
+
+
+
+
+
+
+    $('#tableId .btnEdit').click(function (e) {
+        event.preventDefault();
+        event.stopPropagation();
+        var me = $(this);
+
+        var StudentId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
+        var Firstname = $(this).closest('td').parent('tr').find("td:eq(1)").text();
+        var LastName = $(this).closest('td').parent('tr').find("td:eq(2)").text();
+        var CourseId = $(this).closest('td').parent('tr').find("td:eq(3)").text();
+
+        var data = {
+            'StudentId': StudentId.trim(),
+            'Firstname': Firstname.trim(),
+            'LastName': LastName.trim(),
+            'CourseId': CourseId.trim()
+        };
+
+        //var _data= JSON.stringify({ jsonString: data}),
+
+        //var objPage = controllerHelper.objPage;
+        //objPage.partialHolder = "#Home-Container #childPage #partialHolder"
+        //objPage.header = 'Upload File';
+        //objPage.type = 'Post';
+        //objPage.url = '/Student/PreUpdate';
+        //objPage.data = data;
+
+        //controllerHelper.requestController({ pageType: "popup", pageData: objPage });
+
+
+        var header = 'Update Student';
+        var url = '/StudentResult/GetStudentResult';
+        var objPopup = classPageConstant.popupChildOne;
+        var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+        classControllerHelper.callController(pageObj);
+
+
+        /* alert(data.surbub);*/
+        //var url = '/Product/EditProduct';
+        //var header = "Edit Product";
+        //var objPopup = constantPages.popupChildOne;
+        //var pageObj = { function: "popup", url: url, data: data, header: header, pageId: "", objPopup: objPopup };
+        //classControllerHelper.callController(pageObj);
+    });
+
+
+
+
+
+
+
+
+    $('#pickdateId').click(function () {
+
+        /* var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";*/
+        $('#pickdateId').datepicker({
+            format: 'yyyy/mm/dd',
+            /* container: container,*/
+            todayHighlight: true,
+            autoclose: true,
+        });
+    });
+
+
+
+</script>
+

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<School.Entities.Fields.Grades>
+
+@{
+    //in a grade
+    string test = "testing";
+}
+<table id="tableId" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GradeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade)
+            </th>
+            <th>
+                Edit
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GradeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade)
+                </td>
+                <td>
+                    <button id="btnEditGrade" type="button" class="btnEditGrade btn btn-primary">Edit</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+
+    $('#tableId .btnEditGrade').click(function () {
+
+        var GradeId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
+        var Grade = $(this).closest('td').parent('tr').find("td:eq(1)").text();
+        //debugger;
+        var tc = _teacher.getTeacher();
+        var id = _teacher.teacher.userId;
+        var _id = tc.userId;
+        var data = {
+            'GradeId': GradeId.trim(),
+            'Grade': Grade.trim(),
+            'userId': _teacher.teacher.userId
+        };
+
+        var partialHolder = "#partialTableSubjectHolder";
+        var header = 'Update UserInfor';
+        var url = '/SubjectTeacher/GetRecordById';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+
+
+        //var objPage = controllerHelper.objPage;
+        //objPage.partialHolder = "#Home-Container #childPage #partialHolder"
+        //objPage.header = 'Edit Course';
+        //objPage.type = 'Post';
+        //objPage.url = '/Grade/PreUpdate';
+        //objPage.data = data;
+
+        //controllerHelper.requestController({ pageType: "popup", pageData: objPage });
+    });
+
+</script>
+
+

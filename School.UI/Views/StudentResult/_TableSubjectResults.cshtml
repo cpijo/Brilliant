@@ -1,0 +1,86 @@
+﻿@model IEnumerable<School.Entities.Fields.SubjectResult>
+
+<table id="tableId" class="table">
+    <thead style="background-color:rgb(240, 240, 240);">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Symbol)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentId)
+            </th>
+            <th>
+                Edit
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubjectName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Marks)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Symbol)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StudentId)
+                </td>
+                <td>
+                    <button id="btnEditSubjectReult" type="button" class="btnEditSubjectReult btn btn-primary">Edit</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+
+    
+    $('#tableId .btnEditSubjectReult').click(function () {
+        event.preventDefault();
+        event.stopPropagation();
+       // debugger;
+        var SubjectId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
+        var SubjectName = $(this).closest('td').parent('tr').find("td:eq(1)").text();
+        var Marks = $(this).closest('td').parent('tr').find("td:eq(2)").text();
+        var Symbol = $(this).closest('td').parent('tr').find("td:eq(3)").text();
+        var StudentId = $(this).closest('td').parent('tr').find("td:eq(4)").text();
+
+        var data = {
+            'SubjectId': SubjectId.trim(),
+            'SubjectName': SubjectName.trim(),
+            'Marks': Marks.trim(),
+            'Symbol': Symbol.trim(),
+            'StudentId': StudentId.trim()
+        };
+
+        var partialHolder = "#basePartialHolder #partialHolder";
+        var header = 'Edit Subject';
+        var url = '/SubjectResult/PreUpdate';
+
+        var objPopup = classPageConstant.popupChildTwo;
+        var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+        classControllerHelper.callController(pageObj);
+
+    });
+    /**/
+</script>
+
+

@@ -1,0 +1,141 @@
+﻿@model IEnumerable<School.Entities.Fields.StudentResults>
+
+<style>
+        button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+        .rm-pd {
+            padding: 0px;
+            margin: 0;
+        }
+
+    #partialTableHolder {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 400px;
+    }
+</style>
+
+<div id="viewStudent-Page" class="bodyClass" style="padding-top:0px;border:0px solid rgb(29, 52, 67)">
+
+    <div class="col-sm-12" style="display:inline-block;border:0px solid yellow;display:block;height:500px;padding:0px;">
+        <div id="divParentId" class="divParent row col-md-12" style="padding:0;margin:0;">
+
+            <div class="divHeader col-md-12 rm-pd">
+                <p class="text-center col-md-12 rm-pd " style="top:4px;min-height:20px;max-height:20px; color:white">View Students Results</p>
+            </div>
+
+            <div class="col-md-12" style="padding:15px;padding-top:15px;border:2px solid silver;">
+
+                <div class="form-horizontal">
+
+                    <div id="div-searchId" class="form-group row" style="display:block;">
+                        <label class="col-md-4 control-label">Search Table :</label>
+                        <div class="col-md-8">
+                            <select id="selectedSearchId" class="form-control">
+                                <option value="0" selected>view students Report</option>
+                                <option value="1">view students </option>
+                                <option value="2">view Courses </option>
+                                <option value="3">view Subjects</option>
+                                <option value="3">view Grades</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="div-btnAdd" class="form-group row" style="display:none;">
+                        <label class="col-md-4 control-label"></label>
+                        <div class="col-md-8">
+                            <input id="btnUploadFile" type="submit" value="Add New Record" class="btn btn-success" style="width:140px;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="divSeach col-xs-12" style="padding: 0px; padding: 20px; margin: 0; border: 2px solid silver;">
+
+                <div id="partialTableHolder" class="col-xs-12" style="padding:0;padding:20px;min-height:30px;max-height:520px;border:0px solid silver;">
+
+                    @Html.Partial("_TableStudentResults", Model)
+
+                </div>
+
+            </div>
+
+            <div class="col-xs-12 rm-pd" style="min-height:5px;max-height:5px;background-color:rgb(59, 90, 108);border:0px solid red;">
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+    $('#btnUploadFile').click(function () {
+        var selectedValue = $("#selectedSearchId option:selected").val();
+
+        var objPage = controllerHelper.objPage;
+        objPage.partialHolder = "#Home-Container #childPage #partialHolder"
+        objPage.header = 'Upload File';
+        objPage.type = 'Post';
+        objPage.url = '/Student/AddRecord';
+        if (selectedValue === "1") {
+            objPage.url = '/Student/AddRecord';
+        }
+        else if (selectedValue === "2") {
+            objPage.url = '/Course/AddRecord';
+        }
+        else if (selectedValue === "3") {
+            objPage.url = '/Grade/AddRecord';
+        }
+        controllerHelper.requestController({ pageType: "popup", pageData: objPage });
+
+    });
+
+    $("#selectedSearchId").change(function (e) {
+        e.preventDefault();
+        $('#div-btnAdd').show();
+
+        var objPage = controllerHelper.objPage;
+        objPage.partialHolder = '#partialTableHolder';
+        objPage.header = 'Add New Student';
+        objPage.type = 'Get';
+        objPage.url = '/StudentResult/GetRecord';
+
+        var selectedValue = $("#selectedSearchId option:selected").val();
+        if (selectedValue === "1") {
+            objPage.url = '/Student/GetRecord';
+            objPage.header = 'Add New Student';
+        }
+        else if (selectedValue === "2") {
+            objPage.url = '/Course/GetRecord';
+            objPage.header = 'Add New Course';
+        }
+        else if (selectedValue === "3") {
+            objPage.url = '/Subject/GetRecord';
+            objPage.header = 'Add New Subject';
+        }
+        else if (selectedValue === "4") {
+            objPage.url = '/Grade/GetRecord';
+            objPage.header = 'Add New Grades';
+        }
+        else {
+            objPage.url = '/StudentResult/GetRecord';
+            objPage.header = 'Student Results';
+            $('#div-btnAdd').hide();
+        }
+        controllerHelper.requestController({ pageType: "append", pageData: objPage });
+
+    });
+
+</script>

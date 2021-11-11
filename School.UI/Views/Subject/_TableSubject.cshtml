@@ -1,0 +1,66 @@
+﻿@model IEnumerable<School.Entities.Fields.Subject>
+
+<div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+    <div class="card_t card-s">
+        <div style="padding:15px;">
+            <table id="tableId" class="table" style="border:1px solid silver;">
+                <thead style="background-color:rgb(240, 240, 240);">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SubjectId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SubjectName)
+                        </th>
+                        <th>
+                            Edit
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubjectId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SubjectName)
+                        </td>
+                        <td style='min-width:60px;max-width:60px'>
+                            <button id="btnEdit" type="button" class="btn btn-primary">Edit</button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+            <script>
+
+                $('#tableId #btnEdit').click(function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                   
+                    var SubjectId = $(this).closest('td').parent('tr').find("td:eq(0)").text().trim();
+                    var SubjectName = $(this).closest('td').parent('tr').find("td:eq(1)").text().trim();
+
+                    var data = {
+                        'SubjectId': SubjectId.trim(),
+                        'SubjectName': SubjectName.trim()
+                    };
+
+                    var header = 'Edit Drade';
+                    var url = '/Subject/PreUpdate';
+
+                    var objPopup = classPageConstant.popupChildOne;
+                    var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+                    classControllerHelper.callController(pageObj);
+                  
+                });
+
+
+            </script>
+

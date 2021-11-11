@@ -1,0 +1,1367 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<link href="~/Content/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet" />*@
+    <link href="~/Content/commonCSS.css" rel="stylesheet" />
+</head>
+
+<style>
+
+    #Home-Container {
+        height: calc(100% - 2px);
+        border: none;
+        /*overflow-y: scroll;*/
+        overflow-x: hidden;
+        /*border: thin solid rgb(86, 108, 127);*/
+    }
+
+    #HomeBodyGallery {
+        position: absolute;
+        /*min-height: 2px;*/
+        min-height: calc(100vh - 80px);
+        /*width: calc(100% - 40px);
+        left: 10px;*/
+        /*top: 1px;*/
+        opacity: 1;
+        z-index: 80;
+        /*border-top-left-radius: 5px;*/
+        /*overflow-y: auto;*/
+        /*height:656px;*/
+    }
+
+        #HomeBodyGallery .divHeader {
+            /*width: 100%;*/
+            padding: 0;
+            margin: 0;
+            height: 0px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        #HomeBodyGallery #btnCloseGeneric {
+            position: absolute;
+            background: red;
+            color: white;
+            top: 0px;
+            right: 0px;
+            padding: 4px 10px;
+            border: 1px solid rgb(160, 172, 181);
+            border-top-right-radius: 8px;
+            z-index: 1;
+            min-height: 30px;
+            min-width: 28px;
+        }
+
+        #HomeBodyGallery #partialHolder {
+        }
+
+    #PopupBodyChatting {
+        position: absolute;
+        min-height: 180px;
+        width: calc(100% - 40px);
+        left: 10px;
+        top: 2px;
+        opacity: 1;
+        z-index: 101;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background-color: white;
+        min-height: calc(100vh - 90px);
+        display: none;
+    }
+
+    #PopupBodyChildOne, #PopupBodyChildTwo, #PopupBodyChildThree {
+        position: absolute;
+        border: 0px solid red;
+        min-height: 240px;
+        width: 900px;
+        left: calc(50% - 450px);
+        top: 2px;
+        opacity: 1;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background-color: white;
+        max-height: calc(100vh - 60px);
+        display: none;
+     
+    }
+
+    #Home-Container, #PartialContainer {
+        background-color: rgb(241, 242, 247);
+        height: calc(100% - 2px);
+        display: inline-block;
+    }
+
+    #PopupBodyChildOne {
+        z-index: 101;
+    }
+
+
+        #PopupBodyChildOne #partialHolder {
+            max-height: calc(100vh - 80px);
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+    #PopupBodyChildTwo {
+        z-index: 201;
+    }
+
+    #PopupBodyChildThree {
+        z-index: 301;
+    }
+
+    #PopupBodyUserLogin {
+        position: absolute;
+        border: 0px solid red;
+        min-height: 300px;
+        width: 360px;
+        left: calc(50% - 180px);
+        top: 2px;
+        background-color: wheat;
+        opacity: 1;
+        z-index: 601;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        display: none;
+    }
+
+    #PopupBodyBusyIcon {
+        position: absolute;
+        border: thin solid darkblue;
+        height: 170px;
+        width: 170px;
+        left: calc((100% - (170px + 2px)) / 2 );
+        top: 160px;
+        background-color: rgb(77, 96, 130);
+        opacity: 1;
+        z-index: 1001;
+        border-radius: 50%;
+        display: none;
+    }
+
+
+
+    #PopupBodyMessageResponse{
+        position: absolute;
+        border: thin solid darkblue;
+        min-height: 220px;
+        max-height: 400px;
+        /*height: 220px;*/
+        width: 360px;
+        left: calc((100% - (360px + 2px)) / 2 );
+        top: 160px;
+        /*background-color: rgb(77, 96, 130);*/
+        background-color: rgb(47, 72, 86);
+        opacity: 1;
+        z-index: 1001;
+        border-radius: 10px;
+        display: none;
+    }
+
+    #PopupBodyMessageAppend {
+        position: absolute;
+        border: thin solid darkblue;
+        min-height: 220px;
+        max-height: 400px;
+        width: 360px;
+        left: calc((100% - (360px + 2px)) / 2 );
+        top: 160px;
+        background-color: rgb(47, 72, 86);
+        opacity: 1;
+        z-index: 1001;
+        border-radius: 10px;
+        display: none;
+    }
+
+
+    #PopupBodyMessageResponse333 .btnOkWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .containerOk {
+        display: table;
+        vertical-align: middle;
+    }
+
+    .vertical-center-row {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    #PopupBodyConfirmMessageResponse {
+        position: absolute;
+        border: thin solid darkblue;
+        height: 220px;
+        width: 360px;
+        left: calc((100% - (360px + 2px)) / 2 );
+        top: 160px;
+        /*background-color: rgb(77, 96, 130);*/
+        background-color: rgb(47, 72, 86);
+        opacity: 1;
+        z-index: 1001;
+        border-radius: 10px;
+        display: none;
+    }
+
+    .imgstyle {
+        width: 100%;
+    }
+
+    .rotatedCloseBtn36044 {
+        -webkit-transform: rotate(1080deg);
+        -moz-transform: rotate(1080deg);
+        -ms-transform: rotate(1080deg);
+        -o-transform: rotate(1080deg);
+        transition-duration: 3s;
+        /*animation: rotation 1s infinite linear;*/
+    }
+
+    .rotatedCloseBtn360 {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transition-duration: 1s;
+        /*animation: rotation 1s infinite linear;*/
+    }
+
+    .rotatedCloseBtn0 {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transition-duration: 1s;
+        /*animation: rotation 1s infinite linear;*/
+    }
+
+    .rotatedCloseBtn0 {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+    }
+
+    #complex-transform {
+        -webkit-transform: rotate(30deg) scale(1.2) skew(10deg) translate(5px, 5px);
+        -moz-transform: rotate(30deg) scale(1.2) skew(10deg) translate(5px, 5px);
+        -ms-transform: rotate(30deg) scale(1.2) skew(10deg) translate(5px, 5px);
+        -o-transform: rotate(30deg) scale(1.2) skew(10deg) translate(5px, 5px);
+    }
+
+    .home-boxShadow {
+        /*margin: 10px;*/
+        box-shadow: 0px 0px 3px 1px rgba(59, 90, 108,0.5);
+    }
+
+    .myHeader {
+        border-bottom: 2px solid orange;
+        background-color: rgb(59, 90, 108);
+        height: 28px;
+        color: white;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+
+    .myPage {
+        display: inline-block;
+        border: 0px solid red;
+        min-height: 100px;
+        padding-bottom: 5px;
+        padding-top: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .My_center_div_container {
+        width: 80%;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f0e68c;
+    }
+
+    .centerMyChild {
+        text-align: center;
+    }
+
+    /*#child {
+        margin: 0 auto;
+        display: inline-block;
+        background: red;
+        color: white;
+    }*/
+
+    #parentIcons span {
+        /*color: transparent !important;*/
+        height: 60px;
+        width: 60px;
+        border: 2px solid green;
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+    #divParentId .divHeader {
+        padding: 0;
+        margin: 0;
+        height: 30px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background-color: rgb(59, 90, 108);
+    }
+
+    #divParentId #btnCloseGeneric {
+        position: absolute;
+        background: red;
+        color: white;
+        top: 0px;
+        right: 0px;
+        padding: 4px 10px;
+        border: 1px solid rgb(160, 172, 181);
+        border-top-right-radius: 5px;
+        z-index: 1;
+        min-height: 30px;
+        min-width: 28px;
+    }
+
+    #divParentId #partialHolder {
+    }
+
+
+    /*#PopupBodyBusyIconOnly {
+        position: absolute;
+        border: thin solid wheat;
+        height: 60px;
+        width: 60px;
+        left: calc((100% - (50px + 0px)) / 2 );
+        top: 160px;
+        background-color: rgb(77, 96, 130);
+        opacity: 1;
+        z-index: 1001;
+        border-radius: 50%;
+        display: block;
+    }*/
+
+
+    #basePartialHolder {
+        position: absolute;
+        /* border: 2px solid red;*/
+        /*width: 900px;
+        left: calc(50% - 450px);*/
+        /*width: calc(100% - 50px);*/
+        width: calc(100% - 20px);
+        left: 25px;
+        /*left: calc(50% - 550px);*/
+        top: 2px;
+        opacity: 1;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        /*background-color: rgb(92 74 89);*/
+        /*border: 1px solid rgb(29, 52, 67);*/
+        /* min-height: 240px;*/
+        min-height: calc(100vh - 64px);
+        max-height: calc(100vh - 64px);
+        display: none;
+        /*box-shadow*/
+        box-shadow: 0px 0px 3px 1px rgba(59, 90, 108,0.5);
+        /*background-color: rgb(43, 67, 81);*/
+        background-color: white;
+        /*margin-top: 5px;*/
+        /*border-top-left-radius: 5px;
+        border-top-right-radius: 5px;*/
+    }
+
+        #basePartialHolder .divHeader {
+            /*width: 100%;*/
+            padding: 0;
+            margin: 0;
+            height: 0px;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+          
+        }
+
+        #basePartialHolder #partialHolder {
+            height: calc(100vh - 106px);
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+
+/*    body {
+        background: #e2e1e0;
+        text-align: center;
+    }*/
+
+    .card {
+        /*background: #fff;*/
+        background-color: rgb(59 90 108);
+        border-radius: 2px;
+        display: inline-block;
+        /*height: 300px;*/
+        height: 200px;
+        margin: 1rem;
+        position: relative;
+        /*width: 300px;*/
+        width: calc(100% - 10px);
+    }
+    .mycard {
+        background: #fff;
+        border-radius: 2px;
+        display: inline-block;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+/*        height: 300px;
+        margin: 1rem;
+        position: relative;
+        width: 300px;*/
+    }
+
+    .card-1 {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+        .card-1:hover {
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        }
+
+    .card-2 {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+
+    .card-3 {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    }
+
+    .card-4 {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    .card-5 {
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    }
+
+
+    .containerOk {
+        display: table;
+        vertical-align: middle;
+    }
+
+    .cardHeader{
+        height:40px;
+    }
+    /*
+ <div class="divHeader1 col-xs-12" style="padding: 0px; margin: 0; background-color: rgb(93 107 153);">
+https://css-tricks.com/almanac/properties/b/box-shadow/
+https://getcssscan.com/css-box-shadow-examples
+https://getcssscan.com/css-box-shadow-examples
+box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+
+*/
+    #basePartialHolder {
+        /*width: calc(100% - 10px);
+        left: 5px;*/
+    }
+
+
+
+
+
+    .card_t {
+        /*background: #fff;*/
+        /*background-color: rgb(59 90 108);*/
+        border-radius: 2px;
+        display: inline-block;
+        /*height: 300px;*/
+        min-height: 100px;
+        margin: 1rem;
+        position: relative;
+        /*width: 300px;*/
+        width: calc(100% - 60px);
+        padding-top: 10px;
+    }
+    .card-s {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+    .card-s:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+     }
+
+
+</style>
+
+
+<div id="Home-Container" class="col-xs-12 rm-pd">
+
+    <div id="PartialContainer" class="col-xs-12 rm-pd" style="border: 0px solid red;">
+
+        <div id="HomeBodyGallery" class="childBodyPage col-xs-12 rm-pd" style="background-color:rgb(43, 67, 81);display:block;border:1px solid wheat;padding-top:30px;">
+
+
+            @*<div class="card"></div>
+            <div class="card card-1"></div>
+            <div class="card card-2"></div>
+            <div class="card card-3"></div>
+            <div class="card card-4"></div>
+            <div class="card card-5"></div>*@
+
+
+            <div class="col-xs-12">
+                <div class="col-xs-4">
+                    <div class="card card-1">
+                        <div class="col-xs-12" style="padding: 0px; margin: 0; border: 0px solid red;">
+                            <div class="divHeader1 col-xs-12" style="padding: 0px; margin: 0; border: 1px solid wheat;">
+                                <h3 class="col-xs-12 text-center rm-pd" style="top:0px; color:white"> Software Developer</h3>
+                            </div>
+
+                            <div class="divBody col-xs-12" style="min-height:90px;border:1px solid wheat;">
+
+                                <h5 class="col-xs-12">
+                                    More About Sphiwe the Developer
+                                </h5>
+                                <h5 class="col-xs-12">
+                                    <span style="color: orange;">I'm a C# Asp.net MVC,JS,JQuery,CSS,HTML,Razor,SQL</span>
+                                </h5>
+
+                            </div>
+                            <div class="divFooter col-xs-12 centerMyChild" style="border:1px solid wheat; margin-bottom:10px;">
+                                <button class="btn btn-primary" type="button">View More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <div class="card card-1">
+                        <div class="col-xs-12" style="padding: 0px; margin: 0; border: 0px solid red;">
+                            <div class="divHeader1 col-xs-12" style="padding: 0px; margin: 0; border: 1px solid wheat;">
+                                <h3 class="col-xs-12 text-center rm-pd" style="top:0px; color:white"> Software Developer</h3>
+                            </div>
+
+                            <div class="divBody col-xs-12" style="min-height:90px;border:1px solid wheat;">
+
+                                <h5 class="col-xs-12">
+                                    More About Sphiwe the Developer
+                                </h5>
+                                <h5 class="col-xs-12">
+                                    <span style="color: orange;">I'm a C# Asp.net MVC,JS,JQuery,CSS,HTML,Razor,SQL</span>
+                                </h5>
+
+                            </div>
+                            <div class="divFooter col-xs-12 centerMyChild" style="border:1px solid wheat; margin-bottom:10px;">
+                                <button class="btn btn-primary" type="button">View More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <div class="card card-1">
+                        <div class="col-xs-12" style="padding: 0px; margin: 0; border: 0px solid red;">
+                            <div class="divHeader1 col-xs-12" style="padding: 0px; margin: 0; border: 1px solid wheat;">
+                                <h3 class="col-xs-12 text-center rm-pd" style="top:0px; color:white"> Software Developer</h3>
+                            </div>
+
+                            <div class="divBody col-xs-12" style="min-height:90px;border:1px solid wheat;">
+
+                                <h5 class="col-xs-12">
+                                    More About Sphiwe the Developer
+                                </h5>
+                                <h5 class="col-xs-12">
+                                    <span style="color: orange;">I'm a C# Asp.net MVC,JS,JQuery,CSS,HTML,Razor,SQL</span>
+                                </h5>
+
+                            </div>
+                            <div class="divFooter col-xs-12 centerMyChild" style="border:1px solid wheat; margin-bottom:10px;">
+                                <button class="btn btn-primary" type="button">View More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-12">
+                <div class="col-xs-4">
+                    <div class="card card-1">
+                        <div class="col-xs-12" style="padding: 0px; margin: 0; border: 0px solid red;">
+                            <div class="divHeader1 col-xs-12" style="padding: 0px; margin: 0; background-color: rgb(163 200 219);">
+                                <h3 class="col-xs-12 text-center rm-pd" style="top:0px; color:white"> Software Developer</h3>
+                            </div>
+
+                            <div class="divBody col-xs-12" style="min-height:90px;border:0px solid wheat;">
+
+                                <h5 class="col-xs-12">
+                                    More About Sphiwe the Developer
+                                </h5>
+                                <h5 class="col-xs-12">
+                                    <span style="color: orange;">I'm a C# Asp.net MVC,JS,JQuery,CSS,HTML,Razor,SQL</span>
+                                </h5>
+
+                            </div>
+                            <div class="divFooter col-xs-12 centerMyChild" style="border:0px solid wheat; margin-bottom:10px;">
+                                <button class="btn btn-primary" type="button">View More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <div class="card card-1">
+                        <div class="col-xs-12" style="padding: 0px; margin: 0; border: 0px solid red;">
+                            <div class="divHeader1 col-xs-12" style="padding: 0px; margin: 0; background-color: rgb(163 200 219);">
+                                <h3 class="col-xs-12 text-center rm-pd" style="top:0px; color:white"> Software Developer</h3>
+                            </div>
+
+                            <div class="divBody col-xs-12" style="min-height:90px;border:0px solid wheat;">
+
+                                <h5 class="col-xs-12">
+                                    More About Sphiwe the Developer
+                                </h5>
+                                <h5 class="col-xs-12">
+                                    <span style="color: orange;">I'm a C# Asp.net MVC,JS,JQuery,CSS,HTML,Razor,SQL</span>
+                                </h5>
+
+                            </div>
+                            <div class="divFooter col-xs-12 centerMyChild" style="border:0px solid wheat; margin-bottom:10px;">
+                                <button class="btn btn-primary" type="button">View More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <div class="card card-1">
+                        <div class="col-xs-12" style="padding: 0px; margin: 0; border: 0px solid red;">
+                            <div class="divHeader1 col-xs-12" style="padding: 0px; margin: 0; background-color: rgb(163 200 219);">
+                                <h3 class="col-xs-12 text-center rm-pd" style="top:0px; color:white"> Software Developer</h3>
+                            </div>
+
+                            <div class="divBody col-xs-12" style="min-height:90px;border:0px solid wheat;">
+
+                                <h5 class="col-xs-12">
+                                    More About Sphiwe the Developer
+                                </h5>
+                                <h5 class="col-xs-12">
+                                    <span style="color: orange;">I'm a C# Asp.net MVC,JS,JQuery,CSS,HTML,Razor,SQL</span>
+                                </h5>
+
+                            </div>
+                            <div class="divFooter col-xs-12 centerMyChild" style="border:0px solid wheat; margin-bottom:10px;">
+                                <button class="btn btn-primary" type="button">View More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xs-12">
+                <div class="col-xs-4">
+                    <div class="card card-1">
+                        <div class="col-xs-12" style="padding: 0px; margin: 0; border: 0px solid red;">
+                            <div class="divHeader1 col-xs-12" style="padding: 0px; margin: 0; border: 0px solid wheat;">
+                                <h3 class="col-xs-12 text-center rm-pd" style="top:0px; color:white"> Software Developer</h3>
+                            </div>
+
+                            <div class="divBody col-xs-12" style="min-height:90px;border:0px solid wheat;">
+
+                                <h5 class="col-xs-12">
+                                    More About Sphiwe the Developer
+                                </h5>
+                                <h5 class="col-xs-12">
+                                    <span style="color: orange;">I'm a C# Asp.net MVC,JS,JQuery,CSS,HTML,Razor,SQL</span>
+                                </h5>
+
+                            </div>
+                            <div class="divFooter col-xs-12 centerMyChild" style="border:0px solid wheat; margin-bottom:10px;">
+                                <button class="btn btn-primary" type="button">View More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <div class="card card-1">
+                        <div class="col-xs-12" style="padding: 0px; margin: 0; border: 0px solid red;">
+                            <div class="divHeader1 col-xs-12" style="padding: 0px; margin: 0; border: 0px solid wheat;">
+                                <h3 class="col-xs-12 text-center rm-pd" style="top:0px; color:white"> Software Developer</h3>
+                            </div>
+
+                            <div class="divBody col-xs-12" style="min-height:90px;border:0px solid wheat;">
+
+                                <h5 class="col-xs-12">
+                                    More About Sphiwe the Developer
+                                </h5>
+                                <h5 class="col-xs-12">
+                                    <span style="color: orange;">I'm a C# Asp.net MVC,JS,JQuery,CSS,HTML,Razor,SQL</span>
+                                </h5>
+
+                            </div>
+                            <div class="divFooter col-xs-12 centerMyChild" style="border:0px solid wheat; margin-bottom:10px;">
+                                <button class="btn btn-primary" type="button">View More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <div class="card card-1">
+                        <div class="col-xs-12" style="padding: 0px; margin: 0; border: 0px solid red;">
+                            <div class="divHeader1 col-xs-12" style="padding: 0px; margin: 0; border: 0px solid wheat;">
+                                <h3 class="col-xs-12 text-center rm-pd" style="top:0px; color:white"> Software Developer</h3>
+                            </div>
+
+                            <div class="divBody col-xs-12" style="min-height:90px;border:0px solid wheat;">
+
+                                <h5 class="col-xs-12">
+                                    More About Sphiwe the Developer
+                                </h5>
+                                <h5 class="col-xs-12">
+                                    <span style="color: orange;">I'm a C# Asp.net MVC,JS,JQuery,CSS,HTML,Razor,SQL</span>
+                                </h5>
+
+                            </div>
+                            <div class="divFooter col-xs-12 centerMyChild" style="border:0px solid wheat; margin-bottom:10px;">
+                                <button class="btn btn-primary" type="button">View More</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="basePartialHolder" class="row rm-pd" style="display:none;border: 1px solid silver;">
+            <div class="divParent rd col-xs-12 rm-pd rd" style="padding:0;margin:0;position: relative;">
+
+                <div class="divHeader col-xs-12 rm-pd" style="padding: 0px; margin: 0;padding:10px; min-height: 40px; max-height: 40px; display: block; background-color: rgb(47 ,71 ,86); border: 1px solid wheat; ">
+                    <p class="col-xs-12 headerText login-box-msg text-center rm-pd" style="min-height:25px;max-height:25px; color:white">Header Heading</p>
+                </div>
+
+                <div id="partialHolder" class="partialHolder col-xs-12 rm-pd rd" style="padding:20px;min-height:30px;border:0px solid red;">
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="PopupBodyUserLogin" class="childBodyPage home-boxShadow_not_used slide-messagePopup" style="display:none;background-color:rgb(43, 67, 81); border: 1px solid wheat;">
+            <div id="divParentId" class="divParent col-xs-12" style="padding:0;margin:0;position: relative;">
+                <button id="btnCloseGeneric" style="padding:0;position: absolute; right: 0px;display:block">
+                    X
+                </button>
+
+                <div class="divHeader col-xs-12" style="padding:0px;margin:0;">
+                    <p class="col-xs-12 headerText login-box-msg text-center rm-pd" style="top:4px;min-height:20px;max-height:20px; color:white"></p>
+                </div>
+
+                <div id="partialHolder" class="partialHolder col-xs-12" style="padding:0;min-height:30px;border:0px solid red;">
+                </div>
+
+                <div class="divSpaceAfterBody col-xs-12 rm-pd" style="margin-bottom:1px;min-height:5px;max-height:5px;background-color:rgb(59, 90, 108);border:0px solid red;">
+                </div>
+
+            </div>
+        </div>
+
+        @* <div id="PopupBodyChildOne" class="row rm-pd" style="background-color:rgb(43, 67, 81);display:inline-block;border:1px solid red;display:none;">
+        <div id="PopupBodyChildOne" class="childBodyPage home-boxShadow rd slide-messagePopup" style="background-color:rgb(43, 67, 81);display:inline-block;border:1px solid red;display:none;"> *@
+        <div id="PopupBodyChildOne" class="row rm-pd home-boxShadow rd childBodyPage slide-messagePopup" style="background-color:rgb(43, 67, 81);display:inline-block;border:1px solid red;display:none;">
+            <div id="divParentId" class="divParent col-xs-12" style="padding:0;margin:0;position: relative;">
+                <button id="btnCloseGeneric" style="padding:0;position: absolute; right: 0px;display:block">
+                    X
+                </button>
+
+                <div class="divHeader col-xs-12" style="padding:0px;margin:0;">
+                    <p class="col-xs-12 headerText login-box-msg text-center rm-pd" style="top:4px;min-height:20px;max-height:20px; color:white"></p>
+                </div>
+
+                <div id="partialHolder" class="partialHolder col-xs-12" style="padding:0;min-height:30px;border:0px solid red;">
+
+                    <div id="welcomeEmail-page" style="border:5px solid rgb(43 67 81);background-color:rgb(59 90 108);">
+                        <div style="padding-left:10px;">
+                            <h5 style="color: black;">
+                                Hello replace.profileName, thanks for Signing up with <span style="color: orange;">mySchool.com </span>
+                            </h5>
+                            <h5 style="color: black;">Your User Name :  replace.userName</h5>
+                            <h5 style="color: black;">Your Password  :  replace.password</h5>
+                            <h5 style="color: black;">Please First confirm your account by clicking Confirm Email Button Below</h5>
+                            <div style="width:100%">
+                                <a href="replace.Link" style="outline: none;outline: 0;text-decoration: none;text-decoration-line:none;text-decoration: none !important;">
+                                    <span class="menu-header-name btn btn-success" style="width:160px;padding:5px;border-radius:3px;background-color:orange;color:white;border:1px solid darkorange;outline: 0;text-decoration: none;text-decoration-line:none;text-decoration: none !important;">Confirm Email</span>
+                                </a>
+                            </div>
+                            <div style="width: 100%; top: 10px; margin-top: 20px">
+                                <i style="color: black;top:10px;margin-top:20px">Regards <br />myschoolk.com</i>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="divSpaceAfterBody col-xs-12 rm-pd" style="min-height:5px;max-height:5px;background-color:rgb(59, 90, 108);border:0px solid red;">
+                </div>
+
+            </div>
+        </div>
+        <div id="PopupBodyChildTwo" class="childBodyPage home-boxShadow slide-messagePopup" style="background-color:rgb(43, 67, 81);display:inline-block;min-height:100px;display:none;">
+            <div id="divParentId" class="divParent col-xs-12" style="padding:0;margin:0;position: relative;">
+                <button id="btnCloseGeneric" style="padding:0;position: absolute; right: 0px;display:block">
+                    X
+                </button>
+
+                <div class="divHeader col-xs-12" style="padding:0px;margin:0;">
+                    <p class="col-xs-12 headerText login-box-msg text-center rm-pd" style="top:4px;min-height:20px;max-height:20px; color:white"></p>
+                </div>
+
+                <div id="partialHolder" class="partialHolder col-xs-12" style="padding:0;min-height:30px;border:0px solid red;">
+                </div>
+
+                <div class="divSpaceAfterBody col-xs-12 rm-pd" style="min-height:5px;max-height:5px;background-color:rgb(59, 90, 108);border:0px solid red;">
+                </div>
+
+            </div>
+        </div>
+        <div id="PopupBodyChildThree" class="childBodyPage home-boxShadow slide-messagePopup" style="background-color:rgb(43, 67, 81);display:inline-block;min-height:100px;display:none;">
+            <div id="divParentId" class="divParent col-xs-12" style="padding:0;margin:0;position: relative;">
+                <button id="btnCloseGeneric" style="padding:0;position: absolute; right: 0px;display:block">
+                    X
+                </button>
+
+                <div class="divHeader col-xs-12" style="padding:0px;margin:0;">
+                    <p class="col-xs-12 headerText login-box-msg text-center rm-pd" style="top:4px;min-height:20px;max-height:20px; color:white"></p>
+                </div>
+
+                <div id="partialHolder" class="partialHolder col-xs-12" style="padding:0;min-height:30px;border:0px solid red;">
+                </div>
+
+                <div class="divSpaceAfterBody col-xs-12 rm-pd" style="min-height:5px;max-height:5px;background-color:rgb(59, 90, 108);border:0px solid red;">
+                </div>
+
+            </div>
+        </div>
+        <div id="PopupBodyChildFour" class="childBodyPage home-boxShadow slide-messagePopup" style="background-color:rgb(43, 67, 81);display:inline-block;min-height:100px;display:none;">
+            <div id="divParentId" class="divParent col-xs-12" style="padding:0;margin:0;position: relative;">
+                <button id="btnCloseGeneric" style="padding:0;position: absolute; right: 0px;display:block">
+                    X
+                </button>
+
+                <div class="divHeader col-xs-12" style="padding:0px;margin:0;">
+                    <p class="col-xs-12 headerText login-box-msg text-center rm-pd" style="top:4px;min-height:20px;max-height:20px; color:white"></p>
+                </div>
+
+                <div id="partialHolder" class="partialHolder col-xs-12" style="padding:0;min-height:30px;border:0px solid red;">
+                </div>
+
+                <div class="divSpaceAfterBody col-xs-12 rm-pd" style="min-height:5px;max-height:5px;background-color:rgb(59, 90, 108);border:0px solid red;">
+                </div>
+
+            </div>
+        </div>
+        <div id="PopupBodyChatting" class="childBodyPage home-boxShadow rd slide-messagePopup" style="border:0px solid red;display:none;">
+            <div id="divParentId" class="divParent col-xs-12" style="padding:0;margin:0;position: relative;">
+                <button id="btnCloseGeneric" style="padding:0;position: absolute; right: 0px;display:block">
+                    X
+                </button>
+
+                <div class="divHeader col-xs-12" style="padding:0px;margin:0;">
+                    <p class="col-xs-12 headerText login-box-msg text-center rm-pd" style="min-height:20px;max-height:20px; color:white"></p>
+                </div>
+
+                <div id="partialHolder" class="partialHolder col-xs-12" style="padding:0;min-height:30px;background-color:white;border:0px solid red;">
+                </div>
+
+                <div class="divSpaceAfterBody col-xs-12 rm-pd" style="min-height:5px;max-height:5px;background-color:rgb(59, 90, 108);border:0px solid red;">
+                </div>
+
+            </div>
+        </div>
+
+        <div id="PopupBodyBusyIcon" class="col-xs-12 slide-messagePopup" style="display:none; padding:0;margin:0;border: 1px solid wheat;">
+            <div id="innerBusyIcon" class="gridParent col-xs-12" style="padding:0;margin:0;">
+
+                <div class="gridColumnLeft" style="min-width:2px;max-width:10px;">
+
+                </div>
+                <div class="gridColumnCenter" style="width: calc(100% - 2px);margin-left: 1px;padding:0;display: inline-block;">
+
+                    <div class="gridChild  col-xs-12" style="border:0px solid red;">
+                        <div class="gridRowSpace col-xs-12" style="min-height:20px;max-height:20px;">
+
+                        </div>
+                        <div class="gridRow_0 col-xs-12" style="min-height:60px;max-height:60px;">
+
+                            <span class="fa fa-spinner fa-spin" style="font-size:44px;margin-top:2px;  margin-left:30px;color:darkblue"></span>
+
+                        </div>
+                        <div class="gridRowSpace  col-xs-12 rm-pd" style="min-height:10px;max-height:10px;">
+                            <p class="login-box-msg text-center message rm-pd" style="font-size:14px;color:darkblue;"> ...Still Busy...<br /> ...Please Wait ...</p>
+                        </div>
+                        <div class="gridRow_1" style="min-height:2px;max-height:2px;">
+
+                        </div>
+                        <div class="gridRowSpace gridRow-Zore">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="gridColumnRight">
+
+                </div>
+            </div>
+
+        </div>
+
+        <div id="PopupBodyMessageResponse" class="col-xs-12 slide-messagePopup" style="display:none; padding:0;margin:0;border: 1px solid orange;">
+
+            <div class="gridParent col-xs-12" style="padding:0;margin:0;">
+
+                <div class="gridColumnLeft" style="min-width:10px;max-width:10px;">
+
+                </div>
+                <div class="gridColumnCenter" style="width: calc(100% - 2px);margin-left: 1px;padding:0;display: inline-block;">
+
+                    <div class="gridChild  col-xs-12">
+                        <div class="gridRowSpace col-xs-12" style="min-height:10px;max-height:10px;">
+
+                        </div>
+
+                        <div id="parentIcons" class="col-xs-12 centerMyChild" style="min-height:50px;max-height:50px;">
+                            <span id="success" class="fa fa-check" style="font-size:44px;margin-top:3px;margin-left:calc(50% - 32px);color:green;display:block;"></span>
+                            <span id="infor" class="fa fa-info" style="font-size:44px;margin-top:3px;margin-left:calc(50% - 32px);color:blue;display:none;"></span>
+                            <span id="warning" class="fa fa-exclamation" style="font-size:44px;margin-top:3px;margin-left:calc(50% - 32px);color:orange;display:none;"></span>
+                            <span id="error" class="fa fa-close" style="font-size:44px;margin-top:3px;margin-left:calc(50% - 32px);color:red;display:none;"></span>
+                        </div>
+                        <div class="gridRowSpace  col-xs-12" style="min-height:20px;max-height:20px;">
+
+                        </div>
+
+                        <div id="msgTitleId" class="col-xs-12" style="min-height:20px;max-height:20px;">
+                            <p id="MessageTitle" class="title login-box-msg text-center" style="font-size:18px;color:white;">Successfull</p>
+                        </div>
+                        <div class="gridRowSpace  col-xs-12" style="min-height:15px;max-height:15px;">
+
+                        </div>
+
+                        <div id="msgContextId" class="col-xs-12" style="min-height:20px;max-height:20px;">
+                            <p id="message" class="message login-box-msg text-center" style="font-size:14px;color:white;">Request was Successfull</p>
+                        </div>
+
+                        <div class="gridRowSpace  col-xs-12" style="min-height:15px;max-height:15px;">
+                        </div>
+
+                        <div id="btnOk" class="centerMyChild  col-xs-12" style="display:block;margin-top:20px;">
+                            <button type="button" class="btnOk btn btn-success" style="min-width:80px;">OK</button>
+                        </div>
+
+                        <div id="btnOkCancel" class="col-sm-12" style="display:none;border:0px solid green;margin-top:30px;">
+                            <div class="col-sm-12 centerMyChild" style="border:0px solid red;">
+                                <div style="width:100%;border:0px solid red;display:inline-block;height:36px;">
+                                    <button class="btnOk btn btn-primary" style="min-width:80px;">Do Not Close</button>
+                                    <label class="" style="border:0px solid green;width:10px;"></label>
+                                    <button class="btnCancel btn btn-danger" style="min-width:80px;">Close</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="btnConfirm" class="gridRow_3  col-xs-12" style="display:none;border:0px solid green;margin-top:30px;">
+                            <div style="width:100%;margin-left: auto;margin-right: auto;position: relative;border:0px solid red;display:inline-block;height:36px;">
+                                <button type="button" class="btnOk btn btn-primary" style="min-width:80px;position: absolute;right:160px">Do Not Close</button>
+                                <button type="button" class="btnCancel btn btn-danger" style="min-width:80px;position: absolute;left:160px;">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="gridColumnRight">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="PopupBodyConfirmMessageResponse" class="col-xs-12 slide-messagePopup" style="display:none; padding:0;margin:0;border: 1px solid orange;">
+
+            <div class="gridParent col-xs-12" style="padding:0;margin:0;">
+
+                <div class="gridColumnLeft" style="min-width:10px;max-width:10px;">
+
+                </div>
+                <div class="gridColumnCenter" style="width: calc(100% - 2px);margin-left: 1px;padding:0;display: inline-block;">
+
+                    <div class="gridChild  col-xs-12">
+                        <div class="gridRowSpace col-xs-12" style="min-height:10px;max-height:10px;">
+
+                        </div>
+
+                        <div id="parentIcons" class="col-xs-12 centerMyChild" style="min-height:50px;max-height:50px;">
+                            <span id="success" class="fa fa-check" style="font-size:44px;margin-top:3px;margin-left:calc(50% - 32px);color:green;display:none;"></span>
+                            <span id="infor" class="fa fa-info-circle" style="font-size:44px;margin-top:3px;margin-left:calc(50% - 32px);color:blue;display:none;"></span>
+                            <span id="warning" class="fa fa-exclamation" style="font-size:44px;margin-top:3px;margin-left:calc(50% - 32px);color:orange;display:none;"></span>
+                            <span id="error" class="fa fa-close" style="font-size:44px;margin-top:3px;margin-left:calc(50% - 32px);color:red;display:none;"></span>
+                        </div>
+                        <div class="gridRowSpace  col-xs-12" style="min-height:20px;max-height:20px;">
+
+                        </div>
+
+                        <div id="msgTitleId" class="gridRow_1 col-xs-12" style="min-height:20px;max-height:20px;">
+                            <p id="MessageTitle" class="title login-box-msg text-center" style="font-size:18px;color:white;">Successfull</p>
+                        </div>
+                        <div class="gridRowSpace  col-xs-12" style="min-height:15px;max-height:15px;">
+
+                        </div>
+
+                        <div id="msgContextId" class="gridRow_2  col-xs-12" style="min-height:20px;max-height:20px;">
+                            <p id="message" class="message login-box-msg text-center" style="font-size:14px;color:white;">Request was Successfull</p>
+                        </div>
+                        <div class="gridRowSpace  col-xs-12" style="min-height:15px;max-height:15px;">
+
+                        </div>
+                        <div id="btnOk" class="gridRow_3  col-xs-12" style="display:none;margin-top:20px;">
+                            <button type="button" class="btn btn-danger">OK</button>
+                        </div>
+
+                        <div id="btnOkCancel" class="gridRow_3  col-xs-12" style="display:none;margin-top:20px;">
+                            <div style="width:100%;margin-left: auto;margin-right: auto;position: relative;border:1px solid red;display:inline-block;height:36px;">
+                                <button class="btnOk btn btn-primary" style="min-width:80px;position: absolute;right:160px">Ok</button>
+                                <button class="btnCancel btn btn-danger" style="min-width:80px;position: absolute;left:160px;">Cancel</button>
+                            </div>
+                        </div>
+
+                        <div id="btnConfirm" class="gridRow_3  col-xs-12" style="display:block;margin-top:20px;">
+                            <div style="width:100%;margin-left: auto;margin-right: auto;position: relative;border:0px solid red;display:inline-block;height:36px;">
+                                <button type="button" class="btnCancel btn btn-primary" style="min-width:80px;position: absolute;right:160px">Do Not Close</button>
+                                <button type="button" class="btnOk btn btn-danger" style="min-width:80px;position: absolute;left:160px;">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="gridColumnRight">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="PopupBodyMessageAppend" class="col-xs-12 slide-messagePopup" style="display:none; padding:0;margin:0;border: 1px solid orange;">
+
+            <div class="gridParent col-xs-12" style="padding:0;margin:0;">
+
+                <div class="gridColumnLeft" style="min-width:10px;max-width:10px;">
+
+                </div>
+                <div class="gridColumnCenter" style="width: calc(100% - 2px);margin-left: 1px;padding:0;display: inline-block;">
+
+                    <div class="gridChild  col-xs-12">
+                        <div class="gridRowSpace col-xs-12" style="min-height:10px;max-height:10px;">
+
+                        </div>
+
+                        <div id="parentIcons" class="col-xs-12 centerMyChild" style="min-height:50px;max-height:50px;">
+                            <span id="success" class="fa fa-check" style="font-size:44px;margin-top:3px;margin-left:calc(50% - 32px);color:green;display:block;"></span>
+                            <span id="infor" class="fa fa-info" style="font-size:44px;margin-top:3px;margin-left:calc(50% - 32px);color:blue;display:none;"></span>
+                            <span id="warning" class="fa fa-exclamation" style="font-size:44px;margin-top:3px;margin-left:calc(50% - 32px);color:orange;display:none;"></span>
+                            <span id="error" class="fa fa-close" style="font-size:44px;margin-top:3px;margin-left:calc(50% - 32px);color:red;display:none;"></span>
+                        </div>
+                        <div class="gridRowSpace  col-xs-12" style="min-height:20px;max-height:20px;">
+
+                        </div>
+
+                        <div id="msgTitleId" class="col-xs-12" style="min-height:20px;max-height:20px;">
+                            <p id="MessageTitle" class="title login-box-msg text-center" style="font-size:18px;color:white;">Successfull</p>
+                        </div>
+                        <div class="gridRowSpace  col-xs-12" style="min-height:15px;max-height:15px;">
+
+                        </div>
+
+                        <div id="msgContextId" class="col-xs-12" style="min-height:20px;">
+                            <p id="message" class="message login-box-msg text-center" style="font-size:14px;color:white;">Username = spijo20</p>
+                            <p id="message" class="message login-box-msg text-center" style="font-size:14px;color:white;">Password = Password123</p>
+                        </div>
+
+                        <div class="gridRowSpace  col-xs-12" style="min-height:15px;max-height:15px;">
+                        </div>
+
+                        <div id="btnOk" class="centerMyChild  col-xs-12" style="display:block;margin-top:20px;">
+                            <button type="button" class="btnOk btn btn-success" style="min-width:80px;">OK</button>
+                        </div>
+
+                        <div id="btnOkCancel" class="col-sm-12" style="display:none;border:0px solid green;margin-top:30px;">
+                            <div class="col-sm-12 centerMyChild" style="border:0px solid red;">
+                                <div style="width:100%;border:0px solid red;display:inline-block;height:36px;">
+                                    <button class="btnOk btn btn-primary" style="min-width:80px;">Do Not Close</button>
+                                    <label class="" style="border:0px solid green;width:10px;"></label>
+                                    <button class="btnCancel btn btn-danger" style="min-width:80px;">Close</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="btnConfirm" class="gridRow_3  col-xs-12" style="display:none;border:0px solid green;margin-top:30px;">
+                            <div style="width:100%;margin-left: auto;margin-right: auto;position: relative;border:0px solid red;display:inline-block;height:36px;">
+                                <button type="button" class="btnOk btn btn-primary" style="min-width:80px;position: absolute;right:160px">Do Not Close</button>
+                                <button type="button" class="btnCancel btn btn-danger" style="min-width:80px;position: absolute;left:160px;">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="gridColumnRight">
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+
+    //function closepopup(me) {
+    //    //$("#PopupOverlay , #Home-Container #childPage").css("display", "none");
+    //    $("#PopupOverlay , #Home-Container #childPage").css("display", "none");
+    //}
+ 
+    $(document).ready(function () {
+      
+        //function importScript111(src) {
+        //    let script = document.createElement('script');
+        //    script.setAttribute('src', src);
+        //    document.head.appendChild(script);
+        //    //layoutRightHeaderId
+        //}
+
+        //Use This OR document.addEventListener('DOMContentLoaded', async event
+        //importScript111('~/AppJs/OOP/classUserBase.js');
+        //importScript111('~/AppJs/OOP/classUserObjects.js');
+        //importScript111('~/AppJs/page/escort/gallery.js');
+        //importScript111('~/AppJs/page/escort/escortInformation.js');
+        //importScript111('~/AppJs/page/escort/escortGallerySlider.js');
+
+
+        //var currentUrl = window.location.href;
+        //var __url0 = window.location;//__url0 = {http://localhost:52278/Home/Index}
+        //var __url = window.location.pathname;//__url = "/Home/Index"
+
+
+        //debugger;
+
+        function counter(initValue) {
+            //debugger
+            var currentValue = initValue;
+
+            var increment = function (step) {
+                //debugger
+                currentValue += step;
+                //console.log('currentValue = ' + currentValue);
+                return currentValue
+            };
+
+            return increment;
+        }
+
+        //debugger
+        var incrementCounter = counter(0);
+        var r1 = incrementCounter(1);
+        var r2 = incrementCounter(2);
+        var r3 = incrementCounter(3);
+
+
+        if (deviceSize.width < 620) { ; }
+
+        //classBusyIconHelper.setPageSize();
+        classMessageResponse.setPageSize();
+
+        document.oncontextmenu = document.body.oncontextmenu = function () { return false; }
+
+            // Self-invoking functions
+
+            /*
+            (function callingGallery(url) {
+
+                var pageSizeObj = classPageSize.pageSizeGallery();
+
+                //var jsonStringPageSize = JSON.stringify(pageSizeObj);
+                $('#Home-Container').css({
+                    'height': pageSizeObj.pageHeight + 50 + 'px',
+                    'overflow-y': 'auto'
+                });
+
+                //    var formdata = new FormData();
+                //formdata.append('jsonStringPageSize', pageSizeObj);
+                url = "/ViewEscort/PreGallery";
+                classBusyIconHelper.showBusyIcon();
+                var header = 'Gauteng Girls';
+
+                //debugger;
+                var pageObj = { function: "menu", url: url, data: pageSizeObj, header: header, pageId: "" };
+                classControllerHelper.callController(pageObj);
+
+
+                //LOAD OTHER SCRIPTS HERE;
+
+                //(function localStorage_SelfCall(url) {
+                //    // debugger
+
+                //    var _localStorage = classLocalStorageHelper.user;
+                //    var _aboutUser = _localStorage.aboutUser;
+                //    try {
+
+                //        var init_localStorage = localStorage.getItem("userLocalStorage");
+                //        var init_jsonLocalStorage = JSON.parse(init_localStorage);
+
+                //        localStorage.setItem("userLocalStorage", JSON.stringify(_localStorage));
+                //    } catch (e) {
+                //        alert("Error when writing to Local Storage\n" + e);
+                //    }
+
+                //    try {
+                //        //  debugger
+                //        _localStorage = localStorage.getItem("userLocalStorage");
+                //        var jsonLocalStorage = JSON.parse(_localStorage);
+
+                //    } catch (e) {
+                //        alert("Error when writing to Local Storage\n" + e);
+                //    }
+                //}());
+
+            }());
+
+        */
+
+        classAppSession.autoReloadApp();
+
+        $('#Home-Container .divParent button#btnCloseGeneric').click(function (event) {
+            //debugger;
+            event.preventDefault();
+            event.stopPropagation();
+            var _this = this;
+            classIndexPage.closePopup(_this);
+        });
+
+        var btnConfirmList = document.querySelectorAll('#PopupBodyMessageResponse button');
+        for (var i = 0; i < btnConfirmList.length; i++) {
+            btnConfirmList[i].addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                classMessageResponse.hideMessage();
+                //var test_override = classMessageResponse.pageObj;
+                //var _this = this;
+                //classMessageResponse.closeMessageResponse(_this);
+            });
+        }
+
+        var btnMessageAppend = document.querySelectorAll('#PopupBodyMessageAppend button');
+        for (var i = 0; i < btnMessageAppend.length; i++) {
+            btnMessageAppend[i].addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                classMessageResponse.hideMessageAppend();
+            });
+        }
+
+
+        var btnConfirm = document.querySelectorAll('#PopupBodyConfirmMessageResponse #btnConfirm button');
+        for (var i = 0; i < btnConfirm.length; i++) {
+            btnConfirm[i].addEventListener("click", function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                //debugger;
+                var $thisButton = $(this);
+                var classList = $thisButton[0].className;
+                var classNames = classList.split(" ");
+                var hasOk = false;
+                for (var i = 0; i < classNames.length; i++) {
+
+                    if (classNames[i] === "btnOk") {
+                        hasOk = true;
+                        break;
+                    }
+                }
+                //classMessageResponse.isConfirmPre(hasOk);
+                //debugger;
+                if (classMessageResponse.pageObj.sender === "popup") {
+                    var _this = this;
+                    classMessageResponse.closeMessageResponse(_this);
+                }
+                else {
+                    classMessageResponse.isConfirmPre(hasOk);
+                    //overrideClassMessageResponse.isConfirmPre(hasOk);
+                }
+            });
+        }
+
+
+        // window.addEventListener('beforeunload', function (e)
+        var out = false;
+        $("body").mouseover(function () {
+            out = false;
+        }).mouseout(function () {
+            out = true;
+        });
+
+        function mywait(ms) {
+            var start = new Date().getTime();
+            var end = start;
+            while (end < start + ms) {
+                end = new Date().getTime();
+            }
+        }
+
+        window.addEventListener('beforeunload', function (e) {
+            var url = '@Url.Action("updateVisitor", "WebVisitors")';
+            var endTime = new Date();
+            var data = { visitorId: "", endTime: endTime };
+            $.post(url, data, function (result) {
+                //return from controller
+            });
+            mywait(1000);
+        })
+        window.addEventListener('unload', function (e) {
+            mywait(1000);
+        });
+
+        /*
+
+        var library = ["../../AppJs/page/escort/escortInformation.js",
+            "../../AppJs/page/escort/escortGallerySlider.js",
+
+            "../../AppJs/imageHelper/classImageCreateHelper.js",
+            "../../AppJs/imageHelper/classImageDeleteHelper.js",
+            "../../AppJs/imageHelper/classImageSlides.js",
+            "../../AppJs/imageHelper/classImageReplaceHelper.js",
+            "../../AppJs/imageHelper/classImageUploadHelper.js",
+            "../../AppJs/imageHelper/classImageHelper.js",
+            "../../AppJs/imageHelper/classImageResizer.js",
+            "../../AppJs/imageHelper/classUpdateProfilePhoto.js",
+
+            "../../AppJs/ImageLibrary/ImageLibrary.js",
+
+            "../../AppJs/user/classUserBase.js",
+            "../../AppJs/user/classUserObjects.js",
+
+            "../../AppJs/imageHelper/thisImageHelper.js"
+
+        ];
+        for (var i = 0; i < library.length; i++) {
+            var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.src = library[i];
+            //$("#layoutHeaderId").append(s);
+        }
+
+        */
+
+    });
+  
+</script>            
+

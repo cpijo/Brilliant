@@ -1,0 +1,72 @@
+﻿@model IEnumerable<School.Entities.Fields.Teacher>
+
+<table id="tableId" class="table">
+    <thead style="background-color: rgb(59 ,90 ,108);">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TeacherId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                View More
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeacherId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                <button id="btnEditTeacher" type="button" class="btnEditTeacher btn btn-primary" style="width:100px;">View More</button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<script>
+
+    $('#tableId .btnEditTeacher').click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var userId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
+        var Firstname = $(this).closest('td').parent('tr').find("td:eq(1)").text();
+        var LastName = $(this).closest('td').parent('tr').find("td:eq(2)").text();
+
+        var data = {
+            'userId': userId.trim(),
+            'Firstname': Firstname.trim(),
+            'LastName': LastName.trim()
+        };
+
+        var header = 'Teacher Information';
+        var url = '/Teacher/ViewTeacher';
+        var objPopup = classPageConstant.popupChildOne;
+        var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+</script>

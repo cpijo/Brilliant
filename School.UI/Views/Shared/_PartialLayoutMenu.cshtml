@@ -1,0 +1,347 @@
+﻿@*@using bheboo.Entities.Fields*@
+
+<style>
+
+    #custom-loading-overlay {
+        position: relative;
+    }
+
+    .primary {
+        margin-bottom: 1px;
+        -ms-scrollbar-highlight-color: rgb(77, 111, 131);
+        -ms-scrollbar-face-color: bisque;
+        -ms-scrollbar-arrow-color: rgb(51, 122, 183);
+        max-height: calc(100vh - 110px);
+    }
+
+    .showSubMenu {
+        position: absolute;
+        display: block;
+        z-index: 1;
+        min-width: 240px;
+        min-height: 40px;
+        left: 48px;
+        margin-top: -40px;
+    }
+
+    .list_Header {
+        border: thin solid orange;
+        display: block;
+        background-color: red;
+        min-height: 45px;
+    }
+
+    div#content {
+        position: relative;
+        border: thin solid gray;
+        margin: 20px;
+        padding: 20px;
+        height: 150px;
+        width: 150px;
+    }
+
+    .sidebar-submenu .fa {
+        color: orange;
+    }
+
+    .sidebar-menu .treeview a span {
+        font-size: 13px;
+    }
+
+    .sidebar-menu .treeview .treeview-menu a {
+        font-size: 13px;
+    }
+
+    .sidebar-menu > .treeview > a:hover {
+        background-color: rgb(9, 33, 85);
+    }
+
+    .treeview > a > i {
+        color: orange;
+    }
+
+    .treeview > a, .treeview-menu li > a, .treeview-menu li {
+        outline: 0;
+    }
+
+    .showSubMenu22 {
+        position: relative;
+        display: none;
+        padding-left: 5px;
+        margin: 0 1px;
+    }
+
+    .showSubMenu_ul {
+        position: relative;
+        display: none;
+        padding-left: 5px;
+        margin: 0 1px;
+    }
+
+    .showSubMenu_ul_li {
+        display: block;
+    }
+
+    .sidebar-submenu, .treeview-menu {
+        display: none;
+    }
+
+        .sidebar-submenu span, .sidebar-submenu a {
+            font-size: 11px;
+            color: white;
+        }
+
+    .sidebar-menu > li > a {
+        padding: 12px 5px 12px 15px;
+        display: block;
+        border-left: 3px solid transparent;
+        font-size: 11px;
+        color: white;
+    }
+
+    .treeview {
+        /*border: thin solid rgb(82, 109, 129);*/
+    }
+
+    .container-parent {
+        display: inline-block; /* WRAP CHILD DIV*/
+        padding-top: 2px;
+        padding-bottom: 10px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .my-container {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .tagPic {
+        height: 300px;
+        width: auto;
+    }
+
+    #txtSearchSurburb {
+        width: 100%;
+        height: 25px;
+    }
+
+    .inneMsg {
+        position: relative;
+        min-height: 30px;
+    }
+
+    .senderMsg {
+        min-height: 30px;
+        left: 2px;
+        position: absolute;
+    }
+
+    .notifyMsg {
+        height: 15px;
+        bottom: 2px;
+        right: 2px;
+        font: 10px;
+        position: absolute;
+    }
+
+    .advertHere-boxShadow {
+        /*box-shadow: 0px 0px 3px 1px rgba(59, 90, 108,0.5);*/
+        box-shadow: 0px 0px 3px 1px rgba(82, 109, 129,0.5);
+        margin-top: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        padding-left: 0px;
+        padding-right: 0px;
+        display: inline-block;
+        /*padding-bottom: 5px;*/
+    }
+
+    .span-advert {
+        background-color: orange;
+        border: 1px solid silver;
+        border-bottom: 4px solid wheat;
+        height: 40px;
+        /* font-size:24px;
+        width:100%;*/
+    }
+
+    #SurbubId:hover, #a-SurbubId:hover {
+        background-color: orangered;
+    }
+    .treeview {
+        border: 2px solid black;
+    }
+
+    .advertHere {
+        border: 1px solid black;
+    }
+    .centerChild {
+        text-align: center;
+    }
+</style>
+
+<aside id="menuId" class="main-sidebar">
+    <section class="sidebar" style="border:0px solid silver;">
+        <ul class="sidebar-menu primary primary_ScrollBar" style="display:none;">
+
+            <li class="treeview" id="usr0" style="display:block">
+                <a class="centerChild" href="#" style="background-color: rgb(163 200 219);">
+                    <span class="menu-header-name" style="background-color: rgb(163 200 219); ">Menue</span>
+                </a>
+            </li>
+            <li class="treeview" id="menu-student" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+                <a href="#" class="aprovince">
+                    <i class="fa fa-home"></i>
+                    <span class="menu-header-name">Students Maintanance</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-down pull-right erroSign"></i>
+                    </span>
+                </a>
+                <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id=student2 name="student" style="display:block" onclick="callController('/StudentResult/GetRecord','Student Report')"><a href="#"><i class="fa fa-circle-o"></i>Student Report</a></li>
+                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentSubjectMarks/GetRecord','Record Marks')"><a href="#"><i class="fa fa-circle-o"></i>Record Marks</a></li>
+                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentAttendance/GetRecord','Student Attendance')"><a href="#"><i class="fa fa-circle-o"></i>Student Attendance</a></li>
+                </ul>
+            </li>
+            <li class="treeview" id="menu-subject" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+                <a href="#" class="aprovince">
+                    <i class="fa fa-home"></i>
+                    <span class="menu-header-name">Students Registration</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-down pull-right erroSign"></i>
+                    </span>
+                </a>
+                <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentRegister/AddRecord','Create Student')"><a href="#"><i class="fa fa-circle-o"></i>Create Stundent</a></li>
+                    <li id=subjecte1 name="subject" style="display:block" onclick="callController('/Student/GetRecord','View Students')"><a href="#"><i class="fa fa-circle-o"></i>View Student</a></li>
+                </ul>
+            </li>
+            <li class="treeview" id="me-teacher" style="display:none;width:auto;background-color:rgb(43, 67, 81)">
+                <a href="#" class="aprovince">
+                    <i class="fa fa-home"></i>
+                    <span class="menu-header-name">Profile Teacher</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-down pull-right erroSign"></i>
+                    </span>
+                </a>
+                <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id=student1 name="student" style="display:block" onclick="callController('/Student/GetRecord','View Student')"><a href="#"><i class="fa fa-circle-o"></i>View Student</a></li>
+                    <li id=student2 name="student" style="display:block" onclick="callController('/StudentResult/GetRecord','Subject Scores')"><a href="#"><i class="fa fa-circle-o"></i>Subject Scores</a></li>
+                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentSubjectMarks/PreRecordMark','Stundent Marks')"><a href="#"><i class="fa fa-circle-o"></i>Record Marks</a></li>
+                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentSubjectMarks/PreAddMark','Stundent Marks')"><a href="#"><i class="fa fa-circle-o"></i>Stundent Marks</a></li>
+                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentAttendance/GetRecord','Student Attendance')"><a href="#"><i class="fa fa-circle-o"></i>Student Attendance</a></li>
+                </ul>
+            </li>
+            <li class="treeview" id="menu-course" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+                <a href="#" class="aprovince">
+                    <i class="fa fa-home"></i>
+                    <span class="menu-header-name">Grade/Courses</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-down pull-right erroSign"></i>
+                    </span>
+                </a>
+                <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id=course3 name="course" style="display:block" onclick="callController('/Grade/AddRecord','Add Grade')"><a href="#"><i class="fa fa-circle-o"></i>Add Grade</a></li>
+                    <li id=course1 name="course" style="display:block" onclick="callController('/Grade/GetRecord','View Grade')"><a href="#"><i class="fa fa-circle-o"></i>View Grade</a></li>
+
+                </ul>
+            </li>
+            <li class="treeview" id="menu-subject" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+                <a href="#" class="aprovince">
+                    <i class="fa fa-home"></i>
+                    <span class="menu-header-name">Subjects</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-down pull-right erroSign"></i>
+                    </span>
+                </a>
+                <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id=subjecte3 name="subject" style="display:block" onclick="callController('/Subject/AddRecord','Add Subject')"><a href="#"><i class="fa fa-circle-o"></i>Add Subject</a></li>
+                    <li id=subjecte1 name="subject" style="display:block" onclick="callController('/Subject/GetRecord','View Subject')"><a href="#"><i class="fa fa-circle-o"></i>View Subject</a></li>
+
+                </ul>
+            </li>
+            <li class="treeview" id="menu-teacher" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+                <a href="#" class="aprovince">
+                    <i class="fa fa-home"></i>
+                    <span class="menu-header-name">Teacher Maintanance</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-down pull-right erroSign"></i>
+                    </span>
+                </a>
+                <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id=student3 name="student" style="display:block" onclick="callController('/Teacher/AddRecord','Create Teacher')"><a href="#"><i class="fa fa-circle-o"></i>Create Teacher</a></li>
+                    <li id=student1 name="student" style="display:block" onclick="callController('/Teacher/GetRecord','View Teacher')"><a href="#"><i class="fa fa-circle-o"></i>View Teacher</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview SurbubsId" id="N3" style="display:block;width:auto;">
+                <a id="a-SurbubId" href="#" onclick="callController('/Dashboard/GetRecord')">
+                    <i class="fa fa-home"></i>
+                    <span id="span-SurbubId" class="menu-header-name">Dashboard</span>
+                    <span class="pull-right-container">
+                        <i class="fa pull-right"></i>
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </section>
+</aside>
+
+
+
+<script>
+
+    $(document).ready(function () {
+
+        $('.byidminspijo').hide().css("display", "none")
+
+        classMenuEventsHelper();
+
+        var _menuList = [];
+        var _listUserPermission = JSON.parse('@Html.Raw(Json.Encode(Session["ListUserPermission"]))');
+        var _userInfor = JSON.parse('@Html.Raw(Json.Encode(Session["UserDetailsInfor"]))');
+
+        if (_userInfor !== null) {
+            $(".sign-container .pfl_user").append(_userInfor.fName + "  " + _userInfor.lName + "  " + _userInfor.isAdmin);
+            $(".sign-container .pfl_user1").append(_userInfor.fName + "  " + _userInfor.lName);
+            $(".sign-container .pf_user").append(_userInfor.usrName);
+            $(".sign-container .pl_user").append(_userInfor.telephoneNo);
+        }
+    });
+
+    var selectedProvince = "";
+    var __selectedSuburb = "";
+
+    function callController(url, header) {
+        //debugger;
+        if (deviceSize.width < 700) {
+            classMenuHelper.openMobileMenu();
+        }
+
+        var objPage = {};// controllerHelper.objPage;
+        objPage.partialHolder = "#basePartialHolder #partialHolder";
+        objPage.divHeader = "#basePartialHolder .divHeader p.headerText";
+        objPage.header = header;//'Add New Student';
+        objPage.type = 'Get';
+        objPage.url = '/StudentResult/GetRecord';
+        // divHeader: "#Home-Container #PopupBodyRegister .divHeader p.headerText",
+        //var divHeader = objPopup.divHeader;
+        //var button = objPopup.button;
+            //$(divHeader).empty().text(header);
+        //var pageId = "";
+        //var pageObj = { function: "append", url: url, data: data, header: "", pageId: "" };
+
+
+        var partialHolder = "#basePartialHolder #partialHolder";
+        //var header = 'Update UserInfor';
+        //url = '/StudentResult/GetRecord';
+        var pageObj = { function: "append", url: url, type: "Get", data: objPage, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+        //overrideUserSession.openPage = objPopup.popupName;
+    }
+
+</script>
+
+
+

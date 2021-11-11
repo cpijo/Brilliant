@@ -1,0 +1,247 @@
+﻿@model School.UI.ViewModels.StudentSubjectMarksVM
+
+@{ 
+    string t = "8888888888";
+}
+
+<style>
+
+    .card_t {
+        border-radius: 2px;
+        display: inline-block;
+        min-height: 100px;
+        margin: 1rem;
+        position: relative;
+        width: calc(100% - 20px);
+        padding-top: 5px;
+    }
+
+    .card-s {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+        .card-s:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+        }
+</style>
+
+<div id="studentSubjectMarks-page" class="col-md-12" style="border: 0px solid white; display: inline-block;">
+
+    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+        <div class="card_t card-s">
+            <div class="col-xs-12 form-horizontal">
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(m => m.Grade, Model.GradeDropboxItemList, new { @id = "gradeId", @class = "form-control selectedSearchId" })
+                    </div>
+                    <div id="inputHolderId66" class="col-md-6">
+                        <input id="txtName" type="text" placeholder="Search by Surname" class="col-md-12 form-control" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <input type="text" id="pickdateId" class="form-control" style="margin-left:1px;margin-right:1px">
+                    </div>
+                    <div class="col-md-6">
+                        <button id="btnSave" type="button" class="btnSave btn btn-primary">Save Marks</button>
+                        <button type="button" id="btnSeachEdit" class="btn btn-warning btnWidth btnlogColor">Edit Marks</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+        <div class="card_t card-s">
+            <div id="tableHolderId" class="form-group" style="padding:15px;">
+                <table id="tableId" class="table" style="border:1px solid silver;">
+                    <thead style="background-color:rgb(47, 71, 86);color:white;">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StudentSubjectMarks.StudentId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StudentSubjectMarks.FirstName)
+                            </th>
+                            <th style='display:none;'>
+                                @Html.DisplayNameFor(model => model.StudentSubjectMarks.SubjectName)
+                            </th>
+                            <th style='min-width:80px;max-width:80px'>
+                                @Html.DisplayNameFor(model => model.StudentSubjectMarks.MarkValue)
+                            </th>
+                            <th style='min-width:60px;max-width:60px;display:none'>
+                                @Html.DisplayNameFor(model => model.StudentSubjectMarks.Symbol)
+                            </th>
+                            <th style='min-width:60px;max-width:60px;display:none'>
+                                Edit
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.StudentSubjectMarksList)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(model => item.StudentId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => item.FirstName) @Html.DisplayFor(model => item.LastName)
+                                </td>
+                                <td style='display:none;'>
+                                    @Html.DisplayFor(model => item.SubjectName)
+                                </td>
+                                <td style='min-width:80px;max-width:80px'>
+                                    @Html.TextBoxFor(model => item.MarkValue, new { @class = "form-control" })
+                                </td>
+                                <td style='min-width:60px;max-width:60px;display:none'>
+                                    @Html.DisplayFor(model => item.Symbol, new { @class = "form-control" })
+                                </td>
+
+                                <td style='min-width:60px;max-width:60px;display:none'>
+                                    <button id="btnEdit" type="button" class="btnEdit btn btn-primary">Edit</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+    $("#gradeId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        // debugger;
+        var selectedValue = $("#gradeId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim(),
+            'gradeId': selectedValue.trim()
+        };
+
+        //selectedValue = "Grade8";//position 1
+        var _searchValue = selectedValue.trim().substring(0, 5);
+
+        var partialHolder = "#tableHolderId";
+        var header = 'Update UserInfor';
+        //var url = button-clicked.closest-page-id/SearchResult
+        var url = '/StudentSubjectMarks/SearchResult';
+        var pageObj = {};
+        if (_searchValue === "Grade") {
+            header = 'Update UserInfor';
+            url = '/StudentSubjectMarks/dropBoxUpdate';
+            partialHolder = "#inputHolderId66";
+            pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+            classControllerHelper.callController(pageObj);
+        }
+        else if (_searchValue === "filterGrade") {
+            header = 'Update UserInfor';
+            url = '/StudentSubjectMarks/dropBoxUpdate8888';
+            partialHolder = "#studentSubjectMarks-page #inputHolderId";
+            pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+            classControllerHelper.callController(pageObj);
+        }
+        else {
+            partialHolder = "#studentSubjectMarks-page #inputHolderId";
+            var response = '<input id="txtName" type="text" placeholder="search by name" class="col-md-12 form-control" />'
+            pageObj = { function: "append", partialHolder: partialHolder };
+            classControllerHelper.appendPartial(response, pageObj);
+        }
+    });
+
+    $("#btnSave").click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var grade = $("#gradeId option:selected").val();
+        var subjectId = $("#subjectId").val();
+        var searchDate = $("#pickdateId").val();
+    var commonData = {
+        'StudentId': "",
+        'GradeId': grade.trim(),
+        'SubjectId': subjectId.trim(),
+        'MarkValue': 0,
+        'Score': 0,
+        'ExamType': "none",
+        'ExamDate': searchDate.trim()
+    };
+
+        var data = {
+            'jsonString': JSON.stringify(tabledata(commonData))
+        };
+
+        var url = '/StudentSubjectMarks/SaveResults';
+        var pageObj = { function: "message", url: url, type: "Post", data: data, header: "", pageId: "", partialHolder: "" };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+
+    $("#btnSeachEdit").click(function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var grade = $("#gradeId option:selected").val();
+        var subjectId = $("#subjectId").val();
+        var searchDate = $("#pickdateId").val();
+        var data = {
+            'GradeId': grade.trim(),
+            'subjectId': subjectId.trim(),
+            'searchDate': searchDate.trim(),
+        };
+     
+        var partialHolder = "#tableHolderId";
+        var header = 'Update UserInfor';
+        var url = '/StudentSubjectMarks/SearchResult';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+    $('#tableId .btnEdit').click(function () {
+        event.preventDefault();
+        event.stopPropagation();
+        var score = $(this).closest('td').parent('tr').find("td:eq(3)").text().trim();
+        $(this).closest('td').parent('tr').find("td:eq(3)").html(" <input type='text' value='" + score + "' style='width:100%'/>");
+    });
+
+    $('#pickdateId').datepicker({
+        format: 'yyyy-mm-dd',
+        todayHighlight: true,
+        autoclose: true,
+    });
+
+    function tabledata(obj) {
+        var countRows = $("#tableId>tbody>tr").length;
+        var allRows = [];        
+        for (var i = 0; i < countRows; i++) {
+            var _studentId = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(0)").text();
+            var _markValue = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3) input:eq(0)").val();
+            var row = {
+                'StudentId': _studentId.trim(),
+                'GradeId': obj.GradeId,
+                'SubjectId': obj.SubjectId,
+                'MarkValue': _markValue.trim(),
+                'Score': _markValue.trim(),
+                'ExamType': "none",
+                'ExamDate': obj.ExamDate
+            };
+
+            allRows.push(row);
+        }
+
+        return allRows;
+    }
+
+</script>
+

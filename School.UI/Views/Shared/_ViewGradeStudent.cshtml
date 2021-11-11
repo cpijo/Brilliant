@@ -1,0 +1,128 @@
+﻿@model School.Entities.Fields.GradeStudent
+
+<style>
+    button {
+        border: none;
+        outline: 0;
+        display: inline-block;
+        padding: 8px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+
+    /*.rm-pd {
+        padding: 0px;
+        margin: 0;
+    }
+
+    #partialTableHolder {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 400px;
+    }*/
+    #viewStudent-Page {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: calc(100% - 20px);
+    }
+
+    .card_t {
+        /*background: #fff;*/
+        /*background-color: rgb(59 90 108);*/
+        border-radius: 2px;
+        display: inline-block;
+        /*height: 300px;*/
+        min-height: 210px;
+        margin: 1rem;
+        position: relative;
+        /*width: 300px;*/
+        width: calc(100% - 20px);
+    }
+</style>
+
+<div id="viewStudent-Page" class="bodyClass col-sm-12" style="padding-top:0px;border:5px solid white">
+
+    <div class="col-md-6" style="border: 0px solid white; display: inline-block;">
+        <div class="card_t card-1">
+            <div class="col-xs-12 rm-pd" >
+                <div class="cardHeader col-xs-12" style="padding: 0px; margin: 0; background-color: orange;border: 1px solid wheat;">
+                    <h3 class="col-xs-12 text-center rm-pd" style="top:0px; color:white"> Grades For Teachers</h3>
+                </div>
+
+                <div class="divBody col-md-12" style="min-height:90px;border:1px solid wheat;">
+                    <div id="partialTableGradeHolder" class="col-xs-12" style="padding:0;padding:20px;min-height:30px;max-height:520px;border:0px solid silver;">
+                        @Html.Partial("_TableGradeT", Model.Grades)
+                        @*@Html.Partial("_TableGrade", Model)*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6" style="border: 0px solid white; display: inline-block;">
+        <div class="card_t card-1">
+            <div class="col-xs-12 rm-pd" >
+                <div class="cardHeader col-xs-12" style="padding: 0px; margin: 0; background-color: orange;border: 1px solid wheat;">
+                    <h3 class="col-xs-12 text-center rm-pd" style="top:0px; color:white">  Teachers Subjects</h3>
+                </div>
+
+                <div class="divBody col-md-12" style="min-height:90px;border:1px solid wheat;">
+                    <div id="partialTableSubjectHolder" class="col-xs-12" style="padding:0;padding:20px;min-height:30px;max-height:520px;border:0px solid silver;">
+                        @Html.Partial("_TableSubjectT", Model.Subjects)
+                        @*@Html.Partial("_TableSubject", Model)*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    
+    function TeacherConstractor(teacher) {
+        this.teacher = teacher;
+    }
+    TeacherConstractor.prototype.getTeacher = function () {
+        return this.teacher;
+    };
+    var _teacher = new TeacherConstractor({});
+
+    $("#selectedSearchId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        //debugger;
+        var selectedValue = $("#selectedSearchId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim()
+        };
+
+        var partialHolder = "#viewStudent-Page #partialTableHolder";
+        var header = 'Update UserInfor';
+        url = '/Student/SearchRecord';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+    $('#btnSearch').click(function () {
+        event.preventDefault();
+        event.stopPropagation();
+        //debugger;
+        var selectedValue = $("#selectedSearchId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim()
+        };
+
+        var partialHolder = "#viewStudent-Page #partialTableHolder";
+        var header = 'Update UserInfor';
+        url = '/Student/SearchRecord';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+    });
+
+
+</script>

@@ -1,0 +1,337 @@
+﻿<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="mySchool is South African Oline School App, your every day learning">
+    <meta name="keywords" content="mySchool in South Africa">
+
+    <script type="text/javascript" src="~/AppJs/layout/deviceSize.js"></script>
+    <script type="text/javascript" src="~/AppJs/layout/startApp.js"></script>
+    <script type="text/javascript" src="~/AppJs/constant/classConstants.js"></script>
+    <script type="text/javascript" src="~/AppJs/constant/classPageConstant.js"></script>
+    <script type="text/javascript" src="~/AppJs/menu/classMenuHelper.js"></script>
+    <script type="text/javascript" src="~/AppJs/menu/classMenuEventsHelper.js"></script>
+    <script type="text/javascript" src="~/AppJs/common/classMessageResponse.js"></script>
+    <script type="text/javascript" src="~/AppJs/common/classBusyIconHelper.js"></script>
+    <script type="text/javascript" src="~/AppJs/common/classAppSession.js"></script>
+    <script type="text/javascript" src="~/AppJs/common/classTimerGeneric.js"></script>
+    <script type="text/javascript" src="~/AppJs/common/timeDateHelper.js"></script>
+    <script type="text/javascript" src="~/AppJs/common/classValidationHelper.js"></script>
+    <script type="text/javascript" src="~/AppJs/common/classCheckBox.js"></script>
+    <script type="text/javascript" src="~/AppJs/common/autoClickEvent.js"></script>
+    <script type="text/javascript" src="~/AppJs/common/classPreviousValue.js"></script>
+    <script type="text/javascript" src="~/AppJs/pageSize/classPageSize.js"></script>
+    <script type="text/javascript" src="~/AppJs/pageSize/classChildPageSize.js"></script>
+    <script type="text/javascript" src="~/AppJs/home/classIndexPage.js"></script>
+    <script type="text/javascript" src="~/AppJs/controller/classControllerHelper.js"></script>
+    <script type="text/javascript" src="~/AppJs/controller/classController.js"></script>
+    <script type="text/javascript" src="~/AppJs/login/classLogIn.js"></script>
+</head>
+
+<style>
+
+    .layoutRight-header-top {
+        /*border-left: 5px solid rgb(59, 90, 108);*/
+        /*color:rgb(255, 165, 0);*/
+    }
+
+    .layoutRight-header-bottom {
+        position: relative;
+        background-color: rgb(59, 90, 108);
+        /*background-color: wheat;*/
+        min-height: 48px;
+        max-height: 48px;
+    }
+
+    .layoutRight-header-top {
+        /*height: 60px;*/
+        height: 0px;
+        /*border: thin solid rgb(59, 90, 108);*/
+        /*background-color: rgb(82, 109, 129);*/
+        /*background-color: wheat;*/
+    }
+
+    .layout-loginCo {
+        height: 23px;
+        /*width: 220px;*/
+        width: 174px;
+        right: 0px;
+        position: absolute;
+        margin-top: 12px;
+    }
+
+    .searchUser {
+        height: 28px;
+        /*width: 220px;*/
+        /*width: 174px;
+        right: 174px;*/
+        width: calc(100% - 214px);
+        left: 40px;
+        position: absolute;
+        margin-top: 10px;
+    }
+
+    .loIng-label {
+        position: absolute;
+        /*border: thin solid rgb(82, 109, 129);*/
+        right: 76px;
+        width: 62px;
+        transform: skew(-15deg);
+        padding-left: 1px;
+        color: orange;
+    }
+
+    .register-label {
+        position: absolute;
+        /*border: thin solid rgb(82, 109, 129);*/
+        right: 10px;
+        width: 62px;
+        transform: skew(-15deg);
+        padding-left: 2px;
+        color:wheat;
+    }
+
+        .loIng-label:hover, .register-label:hover {
+            cursor: pointer;
+            box-shadow: 0px 2px 0px 0px rgba(255, 165, 0,1);
+        }
+
+    #layoutRightHeader-page .div-logEasySex24-small {
+        min-height: 90px;
+        max-height: 90px;
+        display: inline-block;
+    }
+
+    .logEasySex24-small {
+        position: absolute;
+        box-shadow: 1px 1px 21px 1px red;
+        border-color: orangered;
+        border-radius: 20px;
+        max-width: 110px;
+        min-width: 110px;
+        top: 5px;
+        left: 0px;
+        text-align: center;
+        line-height: 30px;
+        font-weight: bold;
+    }
+
+    .layout-OnOff-div {
+        position: absolute;
+        height: 23px;
+        width: 40px;
+        left: 0px;
+        margin-top: 12px;
+    }
+
+    .layout-OnOff-icon {
+        margin-left: 10px
+    }
+
+        .layout-OnOff-icon:hover {
+            cursor: pointer;
+        }
+
+    .txtSearchBig {
+        /*height: 26px;*/
+        height: 32px;
+        width: 350px;
+        max-width: 350px;
+        /*margin-left: calc(50% - 150px);*/
+        /*--widthA: 100px;
+        --widthB: calc(var(--widthA) / 2);
+        --widthC: calc(var(--widthB) / 2);
+        width: var(--widthC);*/
+    }
+
+    .divtxtSearchBig {
+        height: 34px;
+        width: 350px;
+        max-width: 350px;
+        /*margin-left: calc(50% - 150px);*/
+        margin-left: calc(50% - 125px);
+    }
+
+    .divtxtSearchSmall {
+        width: calc(100% - 4px);
+        height: 28px;
+        border: thin solid silver;
+        border-radius: 3px;
+        margin-left: 2px;
+        margin-right: 2px;
+        /*height: 26px;*/
+    }
+
+    #ul-txtSearchUserId li:hover {
+        cursor: pointer;
+    }
+</style>
+
+<div id="layoutRightHeader-page col-xs-12" class="rm-pd" style="border-bottom: 5px solid orange;height:50px;">
+    @using (Ajax.BeginForm("", "", new AjaxOptions { HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "formSearchGr" }))
+    {
+        <div class="layoutRight-header-top col-xs-12  rm-pd">
+
+        </div>
+
+        <div class="layoutRight-header-bottom col-xs-12" style="border:0px solid red;z-index:1000;">
+
+            <div class="layout-OnOff-div" style="border:0px solid red;">
+                <p id="layout-OnOff-icon" class="layout-OnOff-icon fa fa-bars" style="font:20px;color:orange"></p>
+            </div>
+
+
+
+            <div id="holder-logIn" class="layout-loginCo" style="border:0px solid red;">
+
+                <div id="divloginCanvas" class="loginCanvas" style="margin-top:-6px;margin-left:-4px;float:left;border:1px solid rgb(82, 109, 129);border-radius:50%;">
+                </div>
+
+                <span id="rightHeader-logInUserPageId" class="loIng-label" hidden onclick="callController('/EscortAccount/partialEscortLogin','Create Your Account')" href="#">my Name</span>
+                <span id="rightHeader-registerPageId" class="loIng-label" onclick="login('/RegisterEmail/RegisterEmail','Create Your Account')" href="#">Register</span>
+                <span id="rightHeader-logInPageId" class="register-label logInPageId" onclick="login('/LogIn/LoginPartial','Log In')" href="#">Login</span>
+                <span id="rightHeader-logOffPageId" class="register-label logOffPageId" hidden onclick="userLogOff()" href="#">LogOff</span>
+            </div>
+        </div>
+    }
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        if (deviceSize.width < 500) {
+            $("#divSearchContainer").removeClass("divtxtSearchBig").addClass("divtxtSearchSmall");
+        }
+        else {
+            $("#divSearchContainer").addClass("divtxtSearchBig").removeClass("divtxtSearchSmall");
+        }
+
+        $("#layout-OnOff-icon").click(function () {
+            if (deviceSize.width < 620) {
+                classMenuHelper.openMobileMenu();
+            }
+            else {
+                classMenuHelper.openCloseMenu(deviceSize.width);
+            }
+        });
+    });
+
+    function userLogOff() {
+
+        //close menu  or toggle menu
+        $('.logInPageId').css({ "display": "block", "background-color": "rgb(59, 90, 108)" });
+        $('.logOffPageId').css("display", "none");
+
+        $('#rightHeader-registerPageId').css("display", "block");
+        $('#rightHeader-logInUserPageId').css("display", "none");
+
+        var permissionList = overrideUserSession.permissionList;
+        for (let i = 0; i < permissionList.length; i++) {
+
+            const id = permissionList[i];
+            const listItems = document.querySelector('#menuId #' + id);
+
+            if (listItems !== null) {
+                var vis = listItems.style;
+                vis.display = 'none';
+                //overrideClassLogIn.id = "null";
+
+                classLogin.setUserObj({ id: null, name: null, islogin: false })
+                //classLogin.setUserObj({ id: 1234, name: "sphiwe", islogin: true })
+                //var status = classLogin.status();
+
+                //$("#userPrifileImage").empty();
+            }
+        }
+
+        if (overrideUserSession.openPage !== null) {
+
+            var popupBodyID = overrideUserSession.openPage;
+
+            $('#' + popupBodyID).css("display", "none");
+            if (popupBodyID === "PopupBodyUserLogin") {
+                $('#PopupOverlayLogIn').css("display", "none");
+            }
+            else if (popupBodyID === "PopupBodyChildOne") {
+                $('#PopupOverlayChildOne').css("display", "none");
+            }
+            else if (popupBodyID === "PopupBodyChildTwo") {
+                $('#PopupOverlayChildTwo').css("display", "none");
+            }
+            else if (popupBodyID === "PopupBodyChildThree") {
+                $('#PopupOverlayChildThree').css("display", "none");
+            }
+            else if (popupBodyID === "PopupBodyChildChat") {
+                $('#PopupOverlayChildChat').css("display", "none");
+            }
+            else {
+                ;
+            }
+        }
+
+        $("#divloginCanvas").empty();
+        $("aside#menuId #userProfileImage").empty()
+        $("aside#menuId #myNameId").text("");
+        $("aside#menuId #myProvinceId").text("");
+        $("aside#menuId #myId").text("");
+        $("aside#menuId #userInforId").css("display", "none").hide;
+        $('#usr0 ul').hide();
+
+        var msgObj =
+        {
+            title: "Logged Off!",
+            message: "You are logged out",
+            type: "success",
+            pageId: "none",
+            autoClose: true,
+            timer: 2,
+            showCancelButton: false,
+            doWork: function (element) {
+                $(element).trigger('click');
+            }
+        }
+        classMessageResponse.showMessage(msgObj);
+
+        if (deviceSize.width < 620) {
+            classMenuHelper.closeMenuOnly();
+        }
+        else {
+            //classMenuHelper.openCloseMenu(deviceSize.width);
+        }
+    }
+
+    function login(url, header) {
+
+        if (header === "Create Your Account") {
+            classMessageResponse.showMessage({ message: "Sorry, but this function is still under construction", type: "warning", title: "Under construction", pageId: "" });
+        }
+        else {
+            var data = { 'returnUrl': "" };
+            var objPopup = classPageConstant.loginPage;
+            var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+            classControllerHelper.callController(pageObj);
+        }
+
+    }
+
+    $("#divloginCanvas").click(function () {
+
+    });
+
+    var isMouseleave = false;
+    $('#div_SearchUserId').mouseleave(function () {
+        isMouseleave = true;
+    });
+
+    $('#layoutBodyId').mousedown(function () {
+
+        if (isMouseleave === true) {
+
+            isMouseleave = false;
+            $('#div_SearchUserId').css("display", "none");
+            //$('.clickstatus').text('mousedown');
+        }
+    });
+
+</script>
+

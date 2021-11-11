@@ -1,0 +1,112 @@
+﻿@model IEnumerable<School.Entities.Fields.Student>
+
+@{ 
+    string title = "view Student";
+}
+
+<style>
+        button {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+        .rm-pd {
+            padding: 0px;
+            margin: 0;
+        }
+
+    #partialTableHolder {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        height: 400px;
+    }
+</style>
+
+<div id="viewStudent-Page" class="bodyClass" style="padding-top:0px;border:0px solid rgb(29, 52, 67)">
+
+    <div class="col-sm-12" style="display:inline-block;border:0px solid yellow;display:block;height:500px;padding:0px;">
+        <div id="divParentId" class="divParent row col-md-12" style="padding:0;margin:0;">
+
+            <div class="divHeader col-md-12 rm-pd">
+                <p class="text-center col-md-12 rm-pd " style="top:4px;min-height:20px;max-height:20px; color:white">View Students Results</p>
+            </div>
+
+            <div class="col-md-12" style="padding:15px;padding-top:15px;border:2px solid silver;">
+
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <select id="selectedSearchId" class="form-control">
+                            <option value="0" selected>Name</option>
+                            <option value="1">Surname</option>
+                            <option value="2">Gender</option>
+                            <option value="3">Grade</option>
+                        </select>
+                    </div>
+                    <div class="col-md-7">
+                        <input id="btnUploadFile" type="text" value="Sphiwe" class="col-md-12 form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <input id="btnSearch" type="button" value="Search" class="btn btn-default" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div id="partialTableHolder" class="col-xs-12" style="padding:0;padding:20px;min-height:30px;max-height:520px;border:0px solid silver;">
+                        @Html.Partial("_TableStudent", Model)
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 rm-pd" style="min-height:5px;max-height:5px;background-color:rgb(59, 90, 108);border:0px solid red;">
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+    $("#selectedSearchId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        //debugger;
+        var selectedValue = $("#selectedSearchId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim()
+        };
+
+        var partialHolder = "#viewStudent-Page #partialTableHolder";
+        var header = 'Update UserInfor';
+        url = '/Student/SearchRecord';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+    $('#btnSearch').click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        //debugger;
+        var selectedValue = $("#selectedSearchId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim()
+        };
+
+        var partialHolder = "#viewStudent-Page #partialTableHolder";
+        var header = 'Update UserInfor';
+        url = '/Student/SearchRecord';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+    });
+
+
+</script>

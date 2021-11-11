@@ -1,0 +1,161 @@
+﻿    div[class*=col-sp-] > input[type=text]{
+padding-left:10px;
+}
+
+
+    .col-sp-1 {
+        width: 8.33333%;
+        float: left;
+    }
+
+    .col-sp-2 {
+        width: 16.6667%;
+        float: left;
+    }
+
+    .col-sp-3 {
+        width: 25%;
+        float: left;
+    }
+
+    .col-sp-4 {
+        width: 33.3333%;
+        float: left;
+    }
+
+    .col-sp-5 {
+        width: 41.6667%;
+        float: left;
+    }
+
+    .col-sp-6 {
+        width: 50%;
+        float: left;
+    }
+
+    .col-sp-7 {
+        width: 58.3333%;
+        float: left;
+    }
+
+    .col-sp-8 {
+        width: 66.6667%;
+        float: left;
+    }
+
+    .col-sp-9 {
+        width: 75%;
+        float: left;
+    }
+
+    .col-sp-10 {
+        width: 83.3333%;
+        float: left;
+    }
+
+    .col-sp-11 {
+        width: 91.6667%;
+        float: left;
+    }
+
+    .col-sp-12 {
+        width: 100%;
+        float: left;
+    }
+
+    .col-sp-push-0 {
+        margin-left: 0px;
+    }
+
+    .col-sp-push-1 {
+        margin-left: 8.33333%;
+    }
+
+    .col-sp-push-2 {
+        margin-left: 16.6667%;
+    }
+
+    .col-sp-push-2-3 {
+        margin-left: 20.83336%;
+    }
+
+    .col-sp-push-3 {
+        margin-left: 25%;
+    }
+
+    .col-sp-push-4 {
+        margin-left: 33.3333%;
+     
+    }
+
+    .col-sp-push-5 {
+        margin-left: 41.6667%;
+    }
+
+    .col-sp-push-6 {
+        margin-left: 50%;
+    }
+
+    .col-sp-push-7 {
+        margin-left: 58.3333%;
+    }
+
+    .col-sp-push-8 {
+        width: 66.6667%;
+        float: left;
+    }
+
+    .col-sp-push-9 {
+        margin-left: 75%;
+    }
+
+    .col-sp-push-10 {
+        margin-left: 83.3333%;
+    }
+
+    .col-sp-push-11 {
+        margin-left: 91.6667%;
+    }
+
+    .col-sp-push-12 {
+        margin-left: 100%;
+    }
+
+
+    .sp-parent input {
+        min-height: 22px;
+        max-height: 22px;
+
+        min-height: 30px;
+        max-height: 30px;
+
+        border: thin solid silver;
+        width: 90%;
+        border-radius: 3px;
+    }
+
+    .sp-parent label {
+        margin-left: 10px;
+        color: rgb(5, 29, 81);
+        font-size: 12px;
+    }
+
+    .sp-wrapper {
+        padding-bottom: 4px;
+    }
+
+    .sp-top-5px {
+        margin-top: 5px;
+    }
+
+    .sp-top-10px {
+        margin-top: 10px;
+    }
+
+    .sp-top-15px {
+        margin-top: 15px;
+    }
+
+    .sp-top-20px {
+        margin-top: 20px;
+    }

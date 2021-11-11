@@ -1,0 +1,97 @@
+﻿
+<style>
+
+    #PopupOverlayMessageSuccess {
+        position: absolute;
+        /*border: thick solid silver;
+            margin-left: 2px;*/
+        min-height: calc(100vh - 110px);
+        width: 100%;
+        top: 0px;
+        background-color: black;
+        opacity: 0.1;
+        z-index: 800;
+        display: none;
+    }
+
+    #PopupBodyMessageSuccess {
+        position: absolute;
+        border: thin solid darkblue;
+        height: 200px;
+        width: 300px;
+        left: calc((100% - (300px + 2px)) / 2 );
+        top: 160px;
+        background-color: rgb(77, 96, 130);
+        opacity: 1;
+        z-index: 810;
+        border-radius: 10px;
+        display: none;
+    }
+
+        #PopupBodyMessageSuccess .divHeader {
+        }
+
+        #PopupBodyMessageSuccess #btnCloseGeneric {
+        }
+
+        #PopupBodyMessageSuccess #partialHolder {
+        }
+
+</style>
+
+
+
+<div id="PopupOverlayMessageSuccess" style="display:none;"></div>
+
+<div id="PopupBodyMessageSuccess" class="col-xs-12 childBodyPage" style="display:none; padding:0;margin:0;border: 1px solid wheat;">
+
+    <div class="gridParent col-xs-12" style="padding:0;margin:0;">
+
+        <div class="gridColumnLeft" style="min-width:10px;max-width:10px;">
+
+        </div>
+        <div class="gridColumnCenter" style="width: calc(100% - 2px);margin-left: 1px;padding:0;display: inline-block;">
+
+            <div class="gridChild  col-xs-12">
+                <div class="gridRowSpace col-xs-12" style="min-height:10px;max-height:10px;">
+
+                </div>
+                <div id="parentIcons" class="gridRow_0 col-xs-12" style="min-height:50px;max-height:50px;">
+                    <span id="successIcon" class="fa fa-check-circle" style="font-size:44px;margin-top:3px;  margin-left:calc(50% - 22px);color:green;display:none;"></span>
+                    <span id="inforIcon" class="fa fa-info-circle" style="font-size:44px;margin-top:3px;  margin-left:calc(50% - 22px);color:green;display:none;"></span>
+                    <span id="warningIcon" class="fa fa-warning" style="font-size:44px;margin-top:3px;  margin-left:calc(50% - 22px);color:orange;display:none;"></span>
+                    <span id="errorIcon" class="fa fa-close" style="font-size:44px;margin-top:3px;  margin-left:calc(50% - 22px);color:red;display:none;"></span>
+                </div>
+                <div class="gridRowSpace  col-xs-12" style="min-height:10px;max-height:10px;">
+
+                </div>
+                <div id="msgTitleId" class="gridRow_1 col-xs-12" style="min-height:20px;max-height:20px;">
+                    <p id="MessageTitle" class="login-box-msg text-center" style="font-size:18px;color:white;">Successfull</p>
+                </div>
+                <div class="gridRowSpace  col-xs-12" style="min-height:15px;max-height:15px;">
+
+                </div>
+                <div id="msgContextId" class="gridRow_2  col-xs-12" style="min-height:20px;max-height:20px;">
+                    <p id="message" class="login-box-msg text-center" style="font-size:18px;color:white;">Request was Successfull</p>
+                </div>
+                <div class="gridRowSpace  col-xs-12" style="min-height:15px;max-height:15px;">
+
+                </div>
+                <div id="btnOk" class="gridRow_3  col-xs-12" style="min-height:20px;max-height:20px;">
+                    <a href="#" onclick="closeThisPopup('PopupOverlayMessageSuccess', 'PopupBodyMessageSuccess')" style="width : 50px; min-height:30px;max-height:30px; margin-left: calc(50% - 25px);" class="btn btn-success">OK</a>
+                </div>
+            </div>
+        </div>
+        <div class="gridColumnRight">
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function closeThisPopup(PopupOverlayMessageSuccess, PopupBodyMessageSuccess) {
+
+        $('#' + PopupOverlayMessageSuccess).css("display", "none");
+        $('#' + PopupBodyMessageSuccess).css("display", "none");
+    }
+</script>

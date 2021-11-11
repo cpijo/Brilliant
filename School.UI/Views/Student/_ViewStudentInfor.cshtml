@@ -1,0 +1,465 @@
+﻿@model School.UI.Models.StudentModel.StudentModel
+
+<style>
+    #childPage {
+        width: 800px;
+        left: calc(50% - 400px);
+        display: none;
+    }
+
+        #childPage #partialHolder {
+            /*height: calc(100% - 2px);*/
+            border: none;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            max-height: 260px;
+        }
+</style>
+
+<style>
+
+    .card_t {
+        border-radius: 2px;
+        display: inline-block;
+        min-height: 100px;
+        margin: 1rem;
+        position: relative;
+        width: calc(100% - 20px);
+        padding-top: 5px;
+    }
+
+    .card-s {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+        .card-s:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+        }
+
+    #Home-Container #PopupBodyChildOne #partialHolder{
+        background-color:white;
+    }
+</style>
+
+
+@using (Ajax.BeginForm("Save", "StudentRegister", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
+{
+    <div id="student-infor-page" class="col-xs-12" style="border-color:rgb(241, 242, 247);border:0px solid red;">
+        <div class="card_t card-s">
+            <div class="form-horizontal" style="padding:10px;border:0px solid red;">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student.Firstname, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Student.Firstname, new { @class = " col-sm-12 form-control" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Student.LastName, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Student.LastName, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student.DateOfBirth, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Student.DateOfBirth, new { @id = "pickdateId", @class = "form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.Student.Gender, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Student.Gender, new { @id = "genderId", @class = "form-control" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student.Language, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Student.LastName, new { @class = "form-control" })
+                    </div>
+                    <label class="col-sm-2" for="assignTeachers">assign Teachers:</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.AssignTeacher.IsAssign, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Grades.Grade, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Student.LastName, new { @class = "form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.ClassOrCourse.ClassName, new { @class = "col-sm-2 control-label" })
+                    <div id="divClassOrCourseId" class="col-md-4">
+                        @Html.TextBoxFor(model => model.ClassOrCourse.ClassName, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address.Province, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Address.Province, new { @class = "form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.Address.City, new { @class = "col-sm-2 control-label" })
+                    <div id="divCityId" class="col-md-4">
+                        @Html.TextBoxFor(model => model.Address.City, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address.Suburb, new { @class = "col-sm-2 control-label" })
+                    <div id="divSuburbId" class="col-md-4">
+                        @Html.TextBoxFor(model => model.Address.Suburb, new { @class = "form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.Address.Location, new { @class = "col-sm-2 control-label" })
+                    <div id="divLocationId" class="col-md-4">
+                        @Html.TextBoxFor(model => model.Address.Location, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address.UnitNumber, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Address.UnitNumber, new { @id = "unitNumber", @class = " col-sm-12 form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.Address.HouseNumber, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Address.HouseNumber, new { @id = "houseNumber", @class = " col-sm-12 form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address.StreetName, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Address.StreetName, new { @id = "streetName", @class = " col-sm-12 form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.Address.PostalCode, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Address.StreetName, new { @id = "postalCode", @class = " col-sm-12 form-control" })
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student.Phone1, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Student.Phone1, new { @id = "phone1", @class = " col-sm-12 form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.Student.Phone2, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Student.Phone2, new { @id = "phone2", @class = " col-sm-12 form-control" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Address.StreetName, new { @class = "col-sm-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.GradeDropboxItem, Model.GradeDropboxItemList, new { @id = "GradeId", @class = "form-control" })
+                        </div>
+                        @Html.LabelFor(model => model.Address.PostalCode, new { @class = "col-sm-2 control-label" })
+                        <div id="divClassOrCourseId" class="col-md-4">
+                            @Html.DropDownListFor(m => m.ClassOrCourseDropboxItem, Model.ClassOrCourseDropboxItemList, new { @id = "classOrCourseId", @class = "form-control" })
+                        </div>
+                    </div>*@
+
+
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.DateOfBirth, new { @class = "col-sm-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.DateOfBirth, new { @id = "pickdateId", @class = "form-control" })
+                        </div>
+                    </div>*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Student.Photo, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Student.Photo, new { type = "file", @id = "uploaFile", @class = "uploaFile col-sm-12 fileStyle form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group" style="display:none;">
+                    <div id="parentImgId" class="col-md-offset-4 col-md-8">
+                        <img id="targetImg" class="thumbnail img-responsive" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input id="btnEdit" type="submit" value="Edit" class="btn btn-warning" onclick='return validateInput()' />
+                        <button type="button" id="btnSave" class="btn btn-primary btnWidth" onclick="closepopup(this)">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    $(document).ready(function () {
+        $("#uploaFile").change(function () {
+            //$(".div_loadPic , .btn_SavePic").show();
+            var File = this.files;
+            if (File && File[0]) {
+                ReadImage(File[0]);
+            }
+        });
+
+        $('#tableId input[type="checkbox"]').click(function () {
+
+            var hh = this.name;
+            if (this.id == "rdMale") {
+                $('#genderId').val('Male');
+            }
+            else {
+                $('#genderId').val('Female');
+            }
+        });
+    });
+
+    var ReadImage = function (file) {
+        var reader = new FileReader;
+        var image = new Image;
+
+        reader.readAsDataURL(file);
+        reader.onload = function (_file) {
+            image.src = _file.target.result;
+
+            image.onload = function () {
+
+                $("#targetImg").attr('src', _file.target.result);
+                /*      $("#imgSave").show();*/
+            }
+        }
+    }
+
+</script>
+
+
+
+<script>
+
+    function validateInput() {
+        return true;
+    }
+
+    function OnSuccess(response) {
+
+        classBusyIconHelper.hideBusyIcon();
+        if (response.result === "true") {
+            var msgObj = { message: response.message, type: "success", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+            //clearInputs();
+        }
+        else {
+            var msgObj = { message: response.message, type: "error", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+    }
+
+    function OnFailure(response) {
+        var msgObj = { message: "error", type: "error", title: "error", pageId: "" };
+        classMessageResponse.showMessage(msgObj);
+        $('.btnlogColor').prop('disabled', false);
+    }
+
+
+
+        /* var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";*/
+        $('#pickdateId').datepicker({
+            format: 'yyyy/mm/dd',
+            /* container: container,*/
+            todayHighlight: true,
+            autoclose: true,
+        });
+
+
+    function clearInputs() {
+        $('#SubjectId').val("");
+        $('#SubjectName').val("");
+    }
+
+
+    $("#register-page #gradeId,#register-page #provinceId,#register-page #suburbId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        let myId = this.id;
+        var selectedValue = $("#" + myId + " option:selected").val();
+        var data = {}
+        var partialHolder = "#register-page #divClassOrCourseId";
+
+
+        switch (myId) {
+            case "gradeId":
+                partialHolder = "#register-page #divClassOrCourseId";
+                data = {
+                    'selectedValue': selectedValue.trim(),
+                    'searchType': 'grade'
+                };
+                break;
+            case "provinceId":
+                partialHolder = "#register-page #divCityId,#register-page #divSuburbId,#register-page #divLocationId";
+                data = {
+                    'selectedValue': selectedValue.trim(),
+                    'searchType': 'province'
+                };
+                break;
+            case "suburbId":
+                partialHolder = "#register-page #divLocationId";
+                data = {
+                    'selectedValue': selectedValue.trim(),
+                    'searchType': 'suburb'
+                };
+                break;
+            default:
+                break;
+        }
+
+        var header = 'Update UserInfor';
+        url = '/StudentMaintanance/dropBoxUpdate';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+    });
+
+
+
+    $("#register-page #GradeId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var selectedValue = $("#GradeId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim()
+        };
+
+        var partialHolder = "#register-page #divClassOrCourseId";
+
+
+        var header = 'Update UserInfor';
+        url = '/StudentMaintanance/dropBoxUpdate';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+    });
+</script>
+
+
+<script>
+
+    function myInit() {
+
+     document.addEventListener('DomContentLooaded', myInit);
+
+    let btn = document.getElementById('btn');
+    let lnk = document.getElementById('link');
+    let txt = document.getElementById('txt');
+
+    txt.addEventListener('input', function (event) {
+        var _type = event.type;
+        var _target = event.target;
+        var _value = event.target.value;
+    });
+    txt.addEventListener('change', function (event) {
+        var _type = event.type;
+        var _target = event.target;
+        var _value = event.target.value;
+    });
+    txt.addEventListener('blur', function (event) {
+    var _type = event.type;
+    var _target = event.target;
+    var _value = event.target.value;
+    });
+
+    }
+
+
+
+
+
+
+@*<script type="text/javascript" src="http://www.bheboo.com/AppJs/common/classPreviousValue.js" crossorigin="anonymous"></script>
+
+    document.addEventListener('DomContentLooaded', function() {
+        let img = document.getElementById('badImg');
+        img.onerror = function () {
+            console.warn('image did not load');
+        }
+    })
+
+    window.onerror = function (msg, url, line, err) {
+        console.log(msg, url, line, err);
+
+    }
+    window.addEventListener('error', function (event) {
+        console.log(event.type);
+        console.warn(event);
+        event.preventDefault();
+    })*@
+
+</script>
+
+
+@*
+<script>
+    $(document).ready(function () {
+
+        $("#demoGrid").DataTable({
+
+            "processing": true, // for show progress bar
+            "serverSide": true, // for process server side
+            "filter": true, // this is for disable filter (search box)
+            "orderMulti": false, // for disable multiple column at once
+            "pageLength": 5,
+
+            "ajax": {
+                "url": "/Demo/LoadData",
+                "type": "POST",
+                "datatype": "json"
+            },
+
+            "columnDefs":
+                [{
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [7],
+                    "searchable": false,
+                    "orderable": false
+                },
+                {
+                    "targets": [8],
+                    "searchable": false,
+                    "orderable": false
+                },
+                {
+                    "targets": [9],
+                    "searchable": false,
+                    "orderable": false
+                }],
+
+            "columns": [
+                { "data": "CustomerID", "name": "CustomerID", "autoWidth": true },
+                { "data": "CompanyName", "name": "CompanyName", "autoWidth": true },
+                { "data": "ContactName", "title": "ContactName", "name": "ContactName", "autoWidth": true },
+                { "data": "ContactTitle", "name": "ContactTitle", "autoWidth": true },
+                { "data": "City", "name": "City", "autoWidth": true },
+                { "data": "PostalCode", "name": "PostalCode", "autoWidth": true },
+                { "data": "Country", "name": "Country", "autoWidth": true },
+                { "data": "Phone", "name": "Phone", "title": "Status", "autoWidth": true },
+                {
+                    "render": function (data, type, full, meta) { return '<a class="btn btn-info" href="/Demo/Edit/' + full.CustomerID + '">Edit</a>'; }
+                },
+                {
+                    data: null, render: function (data, type, row) {
+                        return "<a href='#' class='btn btn-danger' onclick=DeleteData('" + row.CustomerID + "'); >Delete</a>";
+                    }
+                },
+
+            ]
+
+        });
+    });
+</script>
+*@

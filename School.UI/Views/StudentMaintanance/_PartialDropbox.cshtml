@@ -1,0 +1,24 @@
+﻿@model School.UI.Models.StudentModel.StudentModel
+
+@{
+    switch (Model.DropboxModel.name)
+    {
+        case "class":
+            @Html.DropDownListFor(m => m.ClassOrCourse.ClassName, Model.ClassOrCourseDropboxItemList, new { @id = "classOrCourseId", @class = "form-control" })
+            break;
+        case "city":
+            @Html.DropDownListFor(m => m.Address.City, Model.CityDropboxItemList, new { @id = "cityId", @class = "form-control" })
+            break;
+        case "suburb":
+            @Html.DropDownListFor(m => m.Address.Suburb, Model.SurbubDropboxItemList, new { @id = "suburbId", @class = "form-control" })
+            break;
+        case "location":
+            @Html.DropDownListFor(model => model.Address.Location, Model.LocationDropboxItemList, new { @id = "locationId", @class = "form-control" }) break;
+        default:
+            @Html.DropDownListFor(m => m.UnkownItem, Model.UnkownItemList, new { @id = "UnkownItem", @class = "form-control" })
+            break;
+    }
+}
+
+
+

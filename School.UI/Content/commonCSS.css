@@ -1,0 +1,30 @@
+﻿.rm-pd {
+    padding: 0;
+}
+.container-parent {
+    display: inline-block; 
+    padding-top: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
+  
+}
+.my-container {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.gallery-page {
+    padding: 0px;
+    margin: 0px;
+}
+.my-head div {
+    padding: 0px;
+    margin: 0px;
+}
+
+.my-head {
+    height: 20px;
+    max-height: 20px;
+}
+    .my-head > p {
+        padding-top: 6px;
+    }

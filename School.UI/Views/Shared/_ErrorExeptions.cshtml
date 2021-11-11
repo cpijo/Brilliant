@@ -1,0 +1,75 @@
+﻿@using System.Diagnostics
+
+@{
+    ViewBag.Title = "Limited Permissions";
+}
+
+<style type="text/css">
+
+
+
+    #errorDIV {
+        padding-bottom: 0px;
+        /*display: inline;
+        min-height: 420px;
+        min-width: 420px;*/
+        background-color: black;
+    }
+
+    #btnCloseX {
+        position: absolute;
+        background: red;
+        color: white;
+        top: -10px;
+        right: -10px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .errorTimes {
+        font-size: 70px;
+        font-weight: bold;
+        color: orange;
+    }
+</style>
+
+
+
+        <div id="errorDIV">          
+
+            
+
+        </div>
+       
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        alert("Testing");
+
+        var message = "SQL error";
+        var MessageType = "error";
+        var MessageTitle = "Exception Error By SQL !";
+        showMessage(message, MessageType, MessageTitle)
+
+    });
+
+    function showMessage(Message, MessageType, MessageTitle) {
+        swal({
+            title: MessageTitle,
+            text: Message,
+            type: MessageType,
+            showCancelButton: false,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "OK!",
+            closeOnConfirm: true,
+            customClass: 'sweetalert-lg',
+            confirmButtonColor: '#294FA0',
+
+        });
+
+    }
+</script>
+
+

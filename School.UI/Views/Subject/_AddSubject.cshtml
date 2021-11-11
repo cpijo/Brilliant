@@ -1,0 +1,132 @@
+﻿@model School.Entities.Fields.Subject
+
+<style>
+    #childPage {
+        width: 800px;
+        left: calc(50% - 400px);
+        display: none;
+    }
+
+        #childPage #partialHolder {
+            /*height: calc(100% - 2px);*/
+            border: none;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            max-height: 260px;
+        }
+</style>
+<style>
+
+    .card_t {
+        border-radius: 2px;
+        display: inline-block;
+        min-height: 100px;
+        margin: 1rem;
+        position: relative;
+        width: calc(100% - 20px);
+        padding-top: 5px;
+    }
+
+    .card-s {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+        .card-s:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+        }
+</style>
+
+@using (Ajax.BeginForm("Save", "Subject", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
+{
+<div id="addSubject-page" class="col-xs-12">
+    <div class="card_t card-s">
+        <div class="form-horizontal" style="padding:15px;">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubjectId, new { @class = "col-sm-4 control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.SubjectId, new { @id = "SubjectId", @class = "col-sm-12 form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubjectName, new { @class = "col-sm-4 control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.SubjectName, new {@id= "SubjectName", @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-10">
+                    <input id="btnSave" type="submit" value="Save" class="btn btn-primary" onclick='return validateInput()' />
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    }
+
+
+
+    <script>
+
+
+        $('#addSubject-page #btnSave').click(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            if (validateInput() === false) {
+                return false;
+            }
+
+            var data = {
+                SubjectId: $('#SubjectId').val(),
+                SubjectName: $('#SubjectName').val()
+            };
+
+            var header = 'Update Subject';
+            var url = '/Subject/Save';
+            var objPopup = classPageConstant.popupChildOne;
+            var pageObj = {
+                function: "message", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: {}
+            };
+            classControllerHelper.callController(pageObj);
+        });
+
+        function clearInputs() {
+            $('#SubjectId').val("");
+            $('#SubjectName').val("");
+        }
+
+        function validateInput() {
+
+            var _inputs = ['SubjectId', 'SubjectName'];
+            var isvalid = ClassValidationHelper.ValidateInput(_inputs)
+            if (isvalid === false) {
+                ClassValidationHelper.errorEmptyField();
+                return isvalid;
+            }
+        }
+
+        function OnSuccess(response) {
+
+            classBusyIconHelper.hideBusyIcon();
+            if (response.result === "true") {
+                var msgObj = { message: response.message, type: "success", title: response.title, pageId: "" };
+                classMessageResponse.showMessage(msgObj);
+                clearInputs();
+            }
+            else {
+                var msgObj = { message: response.message, type: "error", title: response.title, pageId: "" };
+                classMessageResponse.showMessage(msgObj);
+            }
+        }
+
+        function OnFailure(response) {
+            var msgObj = { message: "error", type: "error", title: "error", pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+            $('.btnlogColor').prop('disabled', false);
+        }
+
+    </script>

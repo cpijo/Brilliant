@@ -1,0 +1,65 @@
+﻿@model IEnumerable<School.Entities.Fields.Subject>
+
+<table id="tableId" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectName)
+            </th>
+            <th>
+                Details
+            </th>
+            <th>
+                Edit
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubjectName)
+            </td>
+            <td>
+                <button id="btnEdit" type="button" class="btnEdit btn btn-primary">Details</button>
+            </td>
+            <td>
+                <button id="btnEdit" type="button" class="btnEdit btn btn-primary">Edit</button>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+
+    $('#tableId .btnEdit').click(function () {
+
+        var SubjectId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
+        var SubjectName = $(this).closest('td').parent('tr').find("td:eq(1)").text();
+
+        var data = {
+            'SubjectId': SubjectId.trim(),
+            'SubjectName': SubjectName.trim()
+        };
+
+        var objPage = controllerHelper.objPage;
+        objPage.partialHolder = "#Home-Container #childPage #partialHolder"
+        objPage.header = 'Edit Course';
+        objPage.type = 'Post';
+        objPage.url = '/Subject/PreUpdate';
+        objPage.data = data;
+
+        controllerHelper.requestController({ pageType: "popup", pageData: objPage });
+    });
+
+</script>
+
+

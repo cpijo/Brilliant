@@ -1,0 +1,106 @@
+﻿@model IEnumerable<School.Entities.Fields.Student>
+
+<div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+    <div class="card_t card-s">
+        <div class="col-xs-12" style="padding:10px;">
+
+            <table id="tableId" class="table" style="border:1px solid silver;">
+                <thead style="background-color:rgb(47, 71, 86);">
+                    <tr>
+                        <th>
+                            Grade Name
+                        </th>
+                        <th>
+                            Total Space
+                        </th>
+                        <th>
+                            Registered
+                        </th>
+                        <th>
+                            Remaining
+                        </th>
+                        <th>
+                            Percentage
+                        </th>
+                        <th>
+                            View
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @for (int i = 8; i < 13; i++)
+                    {
+                        <tr>
+                            <td>
+                                Grade @i
+                            </td>
+                            <td>
+                                40
+                            </td>
+                            <td>
+                                32
+                            </td>
+                            <td>
+                                8
+                            </td>
+                            <td>
+                                92 %
+                            </td>
+                            <td>
+                                <button id="btnEdit" type="button" class="btnEdit btn btn-primary" style="width:100px;">View</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+            <script>
+
+                $('#tableId .btnEdit').click(function () {
+                    /*        debugger;*/
+                    var getID = $(this);
+
+                    var StudentId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
+                    var Firstname = $(this).closest('td').parent('tr').find("td:eq(1)").text();
+                    var LastName = $(this).closest('td').parent('tr').find("td:eq(2)").text();
+                    var Email = $(this).closest('td').parent('tr').find("td:eq(3)").text();
+                    var DateOfBirth = $(this).closest('td').parent('tr').find("td:eq(4)").text();
+
+                    var data = {
+                        'StudentId': StudentId.trim(),
+                        'Firstname': Firstname.trim(),
+                        'LastName': LastName.trim(),
+                        'Email': Email.trim(),
+                        'DateOfBirth': DateOfBirth.trim()
+                    };
+
+                    var header = 'Update Student';
+                    var url = '/StudentRegister/GradeInformation';
+                    var objPopup = classPageConstant.popupChildOne;
+                    var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+                    classControllerHelper.callController(pageObj);
+                });
+
+            </script>

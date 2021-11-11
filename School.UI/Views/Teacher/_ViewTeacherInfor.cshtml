@@ -1,0 +1,224 @@
+﻿@model School.UI.ViewModels.TeacherViewModel
+
+<style>
+    #childPage {
+        width: 800px;
+        left: calc(50% - 400px);
+        display: none;
+    }
+
+        #childPage #partialHolder {
+            /*height: calc(100% - 2px);*/
+            border: none;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            max-height: 260px;
+        }
+</style>
+
+<style>
+
+    .card_t {
+        border-radius: 2px;
+        display: inline-block;
+        min-height: 100px;
+        margin: 1rem;
+        position: relative;
+        width: calc(100% - 20px);
+        padding-top: 5px;
+    }
+
+    .card-s {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+        .card-s:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+        }
+
+    #Home-Container #PopupBodyChildOne #partialHolder{
+        background-color:white;
+    }
+</style>
+
+
+@using (Ajax.BeginForm("Save", "StudentRegister", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
+{
+    <div id="teacher-infor-page" class="col-xs-12" style="border-color:rgb(241, 242, 247);border:0px solid red;">
+        <div class="card_t card-s">
+            <div class="form-horizontal" style="padding:10px;border:0px solid red;">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Teacher.Firstname, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Teacher.Firstname, new { @class = " col-sm-12 form-control" })
+                    </div>
+
+                    @Html.LabelFor(model => model.Teacher.LastName, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Teacher.LastName, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Teacher.DateOfBirth, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Teacher.DateOfBirth, new { @id = "pickdateId", @class = "form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.Teacher.Gender, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Teacher.Gender, new { @id = "genderId", @class = "form-control" })
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Teacher.Language, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Teacher.LastName, new { @class = "form-control" })
+                    </div>
+                    <label class="col-sm-2" for="assignTeachers">assign Teachers:</label>
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.AssignTeacher.IsAssign, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Grades.Grade, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Teacher.LastName, new { @class = "form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.ClassOrCourse.ClassName, new { @class = "col-sm-2 control-label" })
+                    <div id="divClassOrCourseId" class="col-md-4">
+                        @Html.TextBoxFor(model => model.ClassOrCourse.ClassName, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address.Province, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Address.Province, new { @class = "form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.Address.City, new { @class = "col-sm-2 control-label" })
+                    <div id="divCityId" class="col-md-4">
+                        @Html.TextBoxFor(model => model.Address.City, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address.Suburb, new { @class = "col-sm-2 control-label" })
+                    <div id="divSuburbId" class="col-md-4">
+                        @Html.TextBoxFor(model => model.Address.Suburb, new { @class = "form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.Address.Location, new { @class = "col-sm-2 control-label" })
+                    <div id="divLocationId" class="col-md-4">
+                        @Html.TextBoxFor(model => model.Address.Location, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address.UnitNumber, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Address.UnitNumber, new { @id = "unitNumber", @class = " col-sm-12 form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.Address.HouseNumber, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Address.HouseNumber, new { @id = "houseNumber", @class = " col-sm-12 form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Address.StreetName, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Address.StreetName, new { @id = "streetName", @class = " col-sm-12 form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.Address.PostalCode, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Address.StreetName, new { @id = "postalCode", @class = " col-sm-12 form-control" })
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Teacher.Phone1, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Teacher.Phone1, new { @id = "phone1", @class = " col-sm-12 form-control" })
+                    </div>
+                    @Html.LabelFor(model => model.Teacher.Phone2, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.Teacher.Phone2, new { @id = "phone2", @class = " col-sm-12 form-control" })
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.Address.StreetName, new { @class = "col-sm-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(m => m.GradeDropboxItem, Model.GradeDropboxItemList, new { @id = "GradeId", @class = "form-control" })
+                        </div>
+                        @Html.LabelFor(model => model.Address.PostalCode, new { @class = "col-sm-2 control-label" })
+                        <div id="divClassOrCourseId" class="col-md-4">
+                            @Html.DropDownListFor(m => m.ClassOrCourseDropboxItem, Model.ClassOrCourseDropboxItemList, new { @id = "classOrCourseId", @class = "form-control" })
+                        </div>
+                    </div>*@
+
+
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.DateOfBirth, new { @class = "col-sm-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.DateOfBirth, new { @id = "pickdateId", @class = "form-control" })
+                        </div>
+                    </div>*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Teacher.Photo, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.Teacher.Photo, new { type = "file", @id = "uploaFile", @class = "uploaFile col-sm-12 fileStyle form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group" style="display:none;">
+                    <div id="parentImgId" class="col-md-offset-4 col-md-8">
+                        <img id="targetImg" class="thumbnail img-responsive" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input id="btnEdit" type="submit" value="Edit" class="btn btn-warning" onclick='return validateInput()' />
+                        <button type="button" id="btnSave" class="btn btn-primary btnWidth" onclick="closepopup(this)">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    function validateInput() {
+        return true;
+    }
+
+    function OnSuccess(response) {
+
+        classBusyIconHelper.hideBusyIcon();
+        if (response.result === "true") {
+            var msgObj = { message: response.message, type: "success", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+        else {
+            var msgObj = { message: response.message, type: "error", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+    }
+
+    function OnFailure(response) {
+        var msgObj = { message: "error", type: "error", title: "error", pageId: "" };
+        classMessageResponse.showMessage(msgObj);
+        $('.btnlogColor').prop('disabled', false);
+    }
+
+</script>
+
