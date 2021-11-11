@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using School.Common.Constants;
 using School.Entities.Fields;
 using School.Services.Interface;

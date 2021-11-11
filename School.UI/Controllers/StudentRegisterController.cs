@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using School.Common.Constants;
+﻿using School.Common.Constants;
 using School.Entities.Fields;
 using School.Services.Interface;
 using School.UI.Models.StudentModel;

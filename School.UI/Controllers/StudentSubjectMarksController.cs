@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using School.Common.Constants;
+﻿using School.Common.Constants;
 using School.Common.JsonStringHelper;
 using School.Entities.Fields;
 using School.Services.Interface;
