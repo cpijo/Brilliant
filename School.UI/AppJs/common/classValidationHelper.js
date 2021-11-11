@@ -6,7 +6,7 @@ var ClassValidationHelper = {
         for (var i = 0; i < validateControls.length; i++) {
             if ($('#' + validateControls[i]).val() === '' || $('#' + validateControls[i]).val() < 1) {
                 $('#' + validateControls[i]).css("border-color", "red");
-                alert(validateControls[i]);
+                //alert(validateControls[i]);
                 hasError = false;
             }
             else {

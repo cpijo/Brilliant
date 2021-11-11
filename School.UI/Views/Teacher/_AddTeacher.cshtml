@@ -205,9 +205,9 @@
 
     function validateInput() {
         var dropBox = ['languageId', 'provinceId', 'suburbId', 'locationId'];
-        var _inputs = ['Firstname', 'LastName', 'DateOfBirth', 'genderId', 'cityId', 'unitNumber', 'houseNumber', 'streetName', 'postalCode', 'phone1', 'languageId', 'provinceId', 'suburbId', 'locationId'];
+        var _inputs = ['Firstname', 'LastName', 'DateOfBirth', 'genderId', 'languageId', 'provinceId', 'cityId', 'suburbId', 'locationId', 'unitNumber', 'houseNumber', 'streetName', 'postalCode', 'phone1'];
         var _phones = ['phone1', 'phone2',];
-        debugger;
+
         ClassValidationHelper.preValidateDropbox(dropBox);
         var isvalid = ClassValidationHelper.ValidateInput(_inputs)
         if (isvalid === false) {
@@ -218,6 +218,10 @@
         if (isvalid === false) {
             ClassValidationHelper.errorEmptyField();
             return isvalid
+        }
+
+        if (isvalid) {
+            classMessageResponse.showMessage({ message: "Sorry, but this function is still under construction", type: "warning", title: "Under construction", pageId: "" });
         }
         return isvalid;
     }
