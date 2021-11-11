@@ -93,6 +93,7 @@ var classControllerHelper = {
             cache: false,
             async: true,
             success: function (response) {
+
                 switch (pageObj.function) {
 
                     case "message":
@@ -275,15 +276,24 @@ var classControllerHelper = {
         }
     }
     ,
-    appendPartial: function (response, pageObj) {      
+    appendPartial: function (response, pageObj) { 
 
+        if (response.result === "false") {
+
+            classBusyIconHelper.hideBusyIcon();
+            var msgObj = { message: response.message, type: "error", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+        else {
+      
         var divHeader = pageObj.data.divHeader;
         if (divHeader!==undefined) {
              $(divHeader).empty().text(pageObj.header);
         }
 
         $(pageObj.partialHolder).empty().html(response);
-        classBusyIconHelper.hideBusyIcon();
+            classBusyIconHelper.hideBusyIcon();
+        }
     }
     ,
     getMessage: function (response, pageObj) {

@@ -1,9 +1,5 @@
 ﻿@model School.UI.ViewModels.StudentSubjectMarksVM
 
-@{ 
-    string t = "8888888888";
-}
-
 <style>
 
     .card_t {
@@ -37,7 +33,7 @@
                         @Html.DropDownListFor(m => m.Grade, Model.GradeDropboxItemList, new { @id = "gradeId", @class = "form-control selectedSearchId" })
                     </div>
                     <div id="inputHolderId66" class="col-md-6">
-                        <input id="txtName" type="text" placeholder="Search by Surname" class="col-md-12 form-control" />
+                        <input id="subjectId" type="text" placeholder="Search by subjectId" class="col-md-12 form-control" />
                     </div>
                 </div>
 
@@ -60,6 +56,13 @@
     <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
         <div class="card_t card-s">
             <div id="tableHolderId" class="form-group" style="padding:15px;">
+
+                @{
+                    int rows = 0;
+                    string rowId = "";
+                }
+                <input id="nomberOfRows" type="hidden" value=@Model.StudentSubjectMarksList.Count() />
+
                 <table id="tableId" class="table" style="border:1px solid silver;">
                     <thead style="background-color:rgb(47, 71, 86);color:white;">
                         <tr>
@@ -84,8 +87,11 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         @foreach (var item in Model.StudentSubjectMarksList)
                         {
+                            rows++;
+                            rowId = "rowId" + rows;
                             <tr>
                                 <td>
                                     @Html.DisplayFor(model => item.StudentId)
@@ -97,7 +103,7 @@
                                     @Html.DisplayFor(model => item.SubjectName)
                                 </td>
                                 <td style='min-width:80px;max-width:80px'>
-                                    @Html.TextBoxFor(model => item.MarkValue, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => item.MarkValue, new { @class = "form-control", @id = '"' + rowId + '"' })
                                 </td>
                                 <td style='min-width:60px;max-width:60px;display:none'>
                                     @Html.DisplayFor(model => item.Symbol, new { @class = "form-control" })
@@ -162,6 +168,32 @@
     $("#btnSave").click(function (event) {
         event.preventDefault();
         event.stopPropagation();
+
+
+
+        var _inputs = ['subjectId', 'pickdateId'];
+        ClassValidationHelper.preValidateDropbox(['gradeId']);
+        var isvalid = ClassValidationHelper.ValidateInput(_inputs)
+        if (isvalid === false) {
+            ClassValidationHelper.errorEmptyField();
+            return isvalid
+        }
+
+        var nomberOfRows = Number($("#nomberOfRows").val()) + 1;
+        var _inputs = [];
+        for (var i = 1; i < nomberOfRows; i++) {
+            _inputs.push("rowId" + i)
+        }
+
+        //isvalid = ClassValidationHelper.ValidateInput(_inputs)
+        //if (isvalid === false) {
+        //    ClassValidationHelper.errorEmptyField();
+        //    return isvalid
+        //}
+
+
+
+
         var grade = $("#gradeId option:selected").val();
         var subjectId = $("#subjectId").val();
         var searchDate = $("#pickdateId").val();
@@ -191,6 +223,14 @@
         event.preventDefault();
         event.stopPropagation();
 
+        var _inputs = ['subjectId','pickdateId'];
+        ClassValidationHelper.preValidateDropbox(['gradeId']);
+        var isvalid = ClassValidationHelper.ValidateInput(_inputs)
+        if (isvalid === false) {
+            ClassValidationHelper.errorEmptyField();
+            return isvalid
+        }
+
         var grade = $("#gradeId option:selected").val();
         var subjectId = $("#subjectId").val();
         var searchDate = $("#pickdateId").val();
@@ -199,8 +239,7 @@
             'subjectId': subjectId.trim(),
             'searchDate': searchDate.trim(),
         };
-     
-        var partialHolder = "#tableHolderId";
+        var partialHolder = "#studentSubjectMarks-page #tableHolderId";
         var header = 'Update UserInfor';
         var url = '/StudentSubjectMarks/SearchResult';
         var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };

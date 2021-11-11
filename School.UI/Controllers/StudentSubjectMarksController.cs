@@ -136,7 +136,13 @@ namespace School.UI.Controllers
 
             List<StudentSubjectMarks> _StudentSubjectMarks = studentMarksRepository.GetByAny(_dynamic);
             StudentSubjectMarksVM model = new StudentSubjectMarksVM();
-            model.StudentSubjectMarksList = _StudentSubjectMarks;            
+            model.StudentSubjectMarksList = _StudentSubjectMarks;
+            //StudentSubjectMarksList
+            if (_StudentSubjectMarks.Count==0)
+            {
+                return Json(new { result = "false", message = "No records found 0n "+ searchDate, title = "Empty Records" }, JsonRequestBehavior.AllowGet);
+            }
+
             return PartialView("_TableSubjectMarksOnly", model);
         }
         #endregion
