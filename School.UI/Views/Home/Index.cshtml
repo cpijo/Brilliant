@@ -868,24 +868,6 @@ box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2
 
             </div>
         </div>
-        <div id="PopupBodyChatting" class="childBodyPage home-boxShadow rd slide-messagePopup" style="border:0px solid red;display:none;">
-            <div id="divParentId" class="divParent col-xs-12" style="padding:0;margin:0;position: relative;">
-                <button id="btnCloseGeneric" style="padding:0;position: absolute; right: 0px;display:block">
-                    X
-                </button>
-
-                <div class="divHeader col-xs-12" style="padding:0px;margin:0;">
-                    <p class="col-xs-12 headerText login-box-msg text-center rm-pd" style="min-height:20px;max-height:20px; color:white"></p>
-                </div>
-
-                <div id="partialHolder" class="partialHolder col-xs-12" style="padding:0;min-height:30px;background-color:white;border:0px solid red;">
-                </div>
-
-                <div class="divSpaceAfterBody col-xs-12 rm-pd" style="min-height:5px;max-height:5px;background-color:rgb(59, 90, 108);border:0px solid red;">
-                </div>
-
-            </div>
-        </div>
 
         <div id="PopupBodyBusyIcon" class="col-xs-12 slide-messagePopup" style="display:none; padding:0;margin:0;border: 1px solid wheat;">
             <div id="innerBusyIcon" class="gridParent col-xs-12" style="padding:0;margin:0;">
@@ -1126,118 +1108,14 @@ box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2
 
 <script>
 
-    //function closepopup(me) {
-    //    //$("#PopupOverlay , #Home-Container #childPage").css("display", "none");
-    //    $("#PopupOverlay , #Home-Container #childPage").css("display", "none");
-    //}
- 
     $(document).ready(function () {
       
-        //function importScript111(src) {
-        //    let script = document.createElement('script');
-        //    script.setAttribute('src', src);
-        //    document.head.appendChild(script);
-        //    //layoutRightHeaderId
-        //}
-
-        //Use This OR document.addEventListener('DOMContentLoaded', async event
-        //importScript111('~/AppJs/OOP/classUserBase.js');
-        //importScript111('~/AppJs/OOP/classUserObjects.js');
-        //importScript111('~/AppJs/page/escort/gallery.js');
-        //importScript111('~/AppJs/page/escort/escortInformation.js');
-        //importScript111('~/AppJs/page/escort/escortGallerySlider.js');
-
-
-        //var currentUrl = window.location.href;
-        //var __url0 = window.location;//__url0 = {http://localhost:52278/Home/Index}
-        //var __url = window.location.pathname;//__url = "/Home/Index"
-
-
-        //debugger;
-
-        function counter(initValue) {
-            //debugger
-            var currentValue = initValue;
-
-            var increment = function (step) {
-                //debugger
-                currentValue += step;
-                //console.log('currentValue = ' + currentValue);
-                return currentValue
-            };
-
-            return increment;
-        }
-
-        //debugger
-        var incrementCounter = counter(0);
-        var r1 = incrementCounter(1);
-        var r2 = incrementCounter(2);
-        var r3 = incrementCounter(3);
-
-
         if (deviceSize.width < 620) { ; }
 
-        //classBusyIconHelper.setPageSize();
         classMessageResponse.setPageSize();
 
         document.oncontextmenu = document.body.oncontextmenu = function () { return false; }
-
-            // Self-invoking functions
-
-            /*
-            (function callingGallery(url) {
-
-                var pageSizeObj = classPageSize.pageSizeGallery();
-
-                //var jsonStringPageSize = JSON.stringify(pageSizeObj);
-                $('#Home-Container').css({
-                    'height': pageSizeObj.pageHeight + 50 + 'px',
-                    'overflow-y': 'auto'
-                });
-
-                //    var formdata = new FormData();
-                //formdata.append('jsonStringPageSize', pageSizeObj);
-                url = "/ViewEscort/PreGallery";
-                classBusyIconHelper.showBusyIcon();
-                var header = 'Gauteng Girls';
-
-                //debugger;
-                var pageObj = { function: "menu", url: url, data: pageSizeObj, header: header, pageId: "" };
-                classControllerHelper.callController(pageObj);
-
-
-                //LOAD OTHER SCRIPTS HERE;
-
-                //(function localStorage_SelfCall(url) {
-                //    // debugger
-
-                //    var _localStorage = classLocalStorageHelper.user;
-                //    var _aboutUser = _localStorage.aboutUser;
-                //    try {
-
-                //        var init_localStorage = localStorage.getItem("userLocalStorage");
-                //        var init_jsonLocalStorage = JSON.parse(init_localStorage);
-
-                //        localStorage.setItem("userLocalStorage", JSON.stringify(_localStorage));
-                //    } catch (e) {
-                //        alert("Error when writing to Local Storage\n" + e);
-                //    }
-
-                //    try {
-                //        //  debugger
-                //        _localStorage = localStorage.getItem("userLocalStorage");
-                //        var jsonLocalStorage = JSON.parse(_localStorage);
-
-                //    } catch (e) {
-                //        alert("Error when writing to Local Storage\n" + e);
-                //    }
-                //}());
-
-            }());
-
-        */
-
+     
         classAppSession.autoReloadApp();
 
         $('#Home-Container .divParent button#btnCloseGeneric').click(function (event) {

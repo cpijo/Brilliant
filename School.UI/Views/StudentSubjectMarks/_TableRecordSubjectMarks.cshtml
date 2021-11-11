@@ -169,30 +169,25 @@
         event.preventDefault();
         event.stopPropagation();
 
-
-
         var _inputs = ['subjectId', 'pickdateId'];
         ClassValidationHelper.preValidateDropbox(['gradeId']);
         var isvalid = ClassValidationHelper.ValidateInput(_inputs)
         if (isvalid === false) {
             ClassValidationHelper.errorEmptyField();
-            return isvalid
+            return isvalid;
         }
 
         var nomberOfRows = Number($("#nomberOfRows").val()) + 1;
         var _inputs = [];
         for (var i = 1; i < nomberOfRows; i++) {
-            _inputs.push("rowId" + i)
+            _inputs.push("rowId" + i);
         }
 
         isvalid = ClassValidationHelper.ValidateInput(_inputs)
         if (isvalid === false) {
             ClassValidationHelper.errorEmptyField();
-            return isvalid
+            return isvalid;
         }
-
-
-        return false;
 
         var grade = $("#gradeId option:selected").val();
         var subjectId = $("#subjectId").val();
