@@ -190,8 +190,6 @@
             classMessageResponse.showMessage(msgObj);
             return false;
         });
-
-
     });
 
     $('#rdMale, #rdfemale').click(function () {
@@ -215,11 +213,6 @@
             ClassValidationHelper.errorEmptyField();
             return isvalid
         }
-        //isvalid = ClassValidationHelper.ValidatePhone(_phones)
-        //if (isvalid === false) {
-        //    ClassValidationHelper.errorEmptyField();
-        //    return isvalid
-        //}
         return isvalid;
     }
 
