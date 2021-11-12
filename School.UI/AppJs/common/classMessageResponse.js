@@ -247,16 +247,16 @@ var classMessageResponse = {
             if (popupBodyID === "PopupBodyUserLogin") {
                 $('#PopupOverlayLogIn').css("display", "none");
             }
-            else if (popupBodyID === "PopupBodyChildOne") {
+            else if (popupBodyID === "popupChildOne") {
                 $('#PopupOverlayChildOne').css("display", "none");
             }
-            else if (popupBodyID === "PopupBodyChildTwo") {
+            else if (popupBodyID === "popupChildTwo") {
                 $('#PopupOverlayChildTwo').css("display", "none");
             }
-            else if (popupBodyID === "PopupBodyChildThree") {
+            else if (popupBodyID === "popupChildThree") {
                 $('#PopupOverlayChildThree').css("display", "none");
             }
-            else if (popupBodyID === "PopupBodyChildChat") {
+            else if (popupBodyID === "popupChildChat") {
                 $('#PopupOverlayChildChat').css("display", "none");
             }
             else {

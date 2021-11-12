@@ -55,17 +55,17 @@ var classIndexPage = {
             if (popupBodyID === "PopupBodyUserLogin") {
                 $('#PopupOverlayLogIn').css("display", "none");
             }
-            if (popupBodyID === "PopupBodyChildOne") {
+            if (popupBodyID === "popupChildOne") {
                 $('#PopupOverlayChildOne').css("display", "none");
             }
-            else if (popupBodyID === "PopupBodyChildTwo") {
+            else if (popupBodyID === "popupChildTwo") {
                 $('#PopupOverlayChildTwo').css("display", "none");
-                $('#PopupBodyChildTwo .divHeader').css({ "background-color": "rgb(59, 90, 108)" });
+                $('#popupChildTwo .divHeader').css({ "background-color": "rgb(59, 90, 108)" });
             }
-            else if (popupBodyID === "PopupBodyChildThree") {
+            else if (popupBodyID === "popupChildThree") {
                 $('#PopupOverlayChildThree').css("display", "none");
             }
-            else if (popupBodyID === "PopupBodyChildChat") {
+            else if (popupBodyID === "popupChildChat") {
                 $('#PopupOverlayChildChat').css("display", "none");
             }
             else {

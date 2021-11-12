@@ -191,9 +191,9 @@ var classControllerHelper = {
             classBusyIconHelper.hideBusyIcon();
 
 
-            //$("#Home-Container #PopupBodyChildOne #btnCloseGeneric").trigger("click");
+            //$("#Home-Container #popupChildOne #btnCloseGeneric").trigger("click");
             //$('#PopupOverlayChildOne').css("display", "none");
-            //$("#Home-Container #PopupBodyChildOne").css("display", "none");
+            //$("#Home-Container #popupChildOne").css("display", "none");
 
             //debugger;
             //var pop1 = classPageConstant.popupChildOne;
@@ -315,13 +315,13 @@ var classControllerHelper = {
                     $('#' + popupBodyID + " #partialHolder").empty();
                     $('#' + popupBodyID).css("display", "none");
 
-                    if (popupBodyID === "PopupBodyChildOne") {
+                    if (popupBodyID === "popupChildOne") {
                         $('#PopupOverlayChildOne').css("display", "none");
                     }
-                    else if (popupBodyID === "PopupBodyChildTwo") {
+                    else if (popupBodyID === "popupChildTwo") {
                         $('#PopupOverlayChildTwo').css("display", "none");
                     }
-                    else if (popupBodyID === "PopupBodyChildThree") {
+                    else if (popupBodyID === "popupChildThree") {
                         $('#PopupOverlayChildThree').css("display", "none");
                     }
                 }
@@ -343,13 +343,13 @@ var classControllerHelper = {
                     $('#' + popupBodyID + " #partialHolder").empty();
                     $('#' + popupBodyID).css("display", "none");
 
-                    if (popupBodyID === "PopupBodyChildOne") {
+                    if (popupBodyID === "popupChildOne") {
                         $('#PopupOverlayChildOne').css("display", "none");
                     }
-                    else if (popupBodyID === "PopupBodyChildTwo") {
+                    else if (popupBodyID === "popupChildTwo") {
                         $('#PopupOverlayChildTwo').css("display", "none");
                     }
-                    else if (popupBodyID === "PopupBodyChildThree") {
+                    else if (popupBodyID === "popupChildThree") {
                         $('#PopupOverlayChildThree').css("display", "none");
                     }
                 }
@@ -466,13 +466,13 @@ var classControllerHelper = {
                 $('#' + popupBodyID + " #partialHolder").empty();
                 $('#' + popupBodyID).css("display", "none");
 
-                if (popupBodyID === "PopupBodyChildOne") {
+                if (popupBodyID === "popupChildOne") {
                     $('#PopupOverlayChildOne').css("display", "none");
                 }
-                else if (popupBodyID === "PopupBodyChildTwo") {
+                else if (popupBodyID === "popupChildTwo") {
                     $('#PopupOverlayChildTwo').css("display", "none");
                 }
-                else if (popupBodyID === "PopupBodyChildThree") {
+                else if (popupBodyID === "popupChildThree") {
                     $('#PopupOverlayChildThree').css("display", "none");
                 }
             }

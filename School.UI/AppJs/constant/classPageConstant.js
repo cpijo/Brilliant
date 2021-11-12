@@ -33,28 +33,28 @@ var classPageConstant = {
     ,
     popupChildChat: {
         popupOverlayLayout: "#PopupOverlayChildChat",
-        basePartialHolder: "#Home-Container #PopupBodyChildChat",
-        partialHolder: "#Home-Container #PopupBodyChildChat #partialHolder",
-        divHeader: "#Home-Container #PopupBodyChildChat .divHeader p.headerText",
-        popupName: "PopupBodyChildChat",
+        basePartialHolder: "#Home-Container #popupChildChat",
+        partialHolder: "#Home-Container #popupChildChat #partialHolder",
+        divHeader: "#Home-Container #popupChildChat .divHeader p.headerText",
+        popupName: "popupChildChat",
         z_index: "90"
     }
     ,
     popupChildOne: {
         popupOverlayLayout: "#PopupOverlayChildOne",
-        basePartialHolder: "#Home-Container #PopupBodyChildOne",
-        partialHolder: "#Home-Container #PopupBodyChildOne #partialHolder",
-        divHeader: "#Home-Container #PopupBodyChildOne .divHeader p.headerText",
-        popupName: "PopupBodyChildOne",
+        basePartialHolder: "#Home-Container #popupChildOne",
+        partialHolder: "#Home-Container #popupChildOne #partialHolder",
+        divHeader: "#Home-Container #popupChildOne .divHeader p.headerText",
+        popupName: "popupChildOne",
         z_index: "100,101"
     }
     ,
     popupChildTwo: {
         popupOverlayLayout: "#PopupOverlayChildTwo",
-        basePartialHolder: "#Home-Container #PopupBodyChildTwo",
-        partialHolder: "#Home-Container #PopupBodyChildTwo #partialHolder",
-        divHeader: "#Home-Container #PopupBodyChildTwo .divHeader p.headerText",
-        popupName: "PopupBodyChildTwo",
+        basePartialHolder: "#Home-Container #popupChildTwo",
+        partialHolder: "#Home-Container #popupChildTwo #partialHolder",
+        divHeader: "#Home-Container #popupChildTwo .divHeader p.headerText",
+        popupName: "popupChildTwo",
         z_index: "200,201",
         divHeaderBackgroundColor: "rgb(59, 90, 108)",
         divHeaderClass: {
@@ -65,46 +65,46 @@ var classPageConstant = {
     ,
     popupChildThree: {
         popupOverlayLayout: "#PopupOverlayChildThree",
-        basePartialHolder: "#Home-Container #PopupBodyChildThree",
-        partialHolder: "#Home-Container #PopupBodyChildThree #partialHolder",
-        divHeader: "#Home-Container #PopupBodyChildThree .divHeader p.headerText",
-        popupName: "PopupBodyChildThree",
+        basePartialHolder: "#Home-Container #popupChildThree",
+        partialHolder: "#Home-Container #popupChildThree #partialHolder",
+        divHeader: "#Home-Container #popupChildThree .divHeader p.headerText",
+        popupName: "popupChildThree",
         z_index: "300,301"
     }
     ,
     popupChildFour: {
         popupOverlayLayout: "#PopupOverlayChildFour",
-        basePartialHolder: "#Home-Container #PopupBodyChildFour",
-        partialHolder: "#Home-Container #PopupBodyChildFour #partialHolder",
-        divHeader: "#Home-Container #PopupBodyChildFour .divHeader p.headerText",
-        popupName: "PopupBodyChildFour",
+        basePartialHolder: "#Home-Container #popupChildFour",
+        partialHolder: "#Home-Container #popupChildFour #partialHolder",
+        divHeader: "#Home-Container #popupChildFour .divHeader p.headerText",
+        popupName: "popupChildFour",
         z_index: "400"
     }
     ,
     popupChildFive: {
         popupOverlayLayout: "#PopupOverlayChildFive",
-        basePartialHolder: "#Home-Container #PopupBodyChildFive",
-        partialHolder: "#Home-Container #PopupBodyChildFive #partialHolder",
-        divHeader: "#Home-Container #PopupBodyChildFive .divHeader p.headerText",
-        popupName: "PopupBodyChildFive",
+        basePartialHolder: "#Home-Container #popupChildFive",
+        partialHolder: "#Home-Container #popupChildFive #partialHolder",
+        divHeader: "#Home-Container #popupChildFive .divHeader p.headerText",
+        popupName: "popupChildFive",
         z_index: "500"
     }
     ,
     popupChildLast: {
         popupOverlayLayout: "#PopupOverlayChildLast",
-        basePartialHolder: "#Home-Container #PopupBodyChildLast",
-        partialHolder: "#Home-Container #PopupBodyChildLast #partialHolder",
-        divHeader: "#Home-Container #PopupBodyChildLast .divHeader p.headerText",
-        popupName: "PopupBodyChildLast",
+        basePartialHolder: "#Home-Container #popupChildLast",
+        partialHolder: "#Home-Container #popupChildLast #partialHolder",
+        divHeader: "#Home-Container #popupChildLast .divHeader p.headerText",
+        popupName: "popupChildLast",
         z_index: "1000"
     }
     ,
     popupChildMessage: {
         popupOverlayLayout: "#Home-Container #PopupOverlayChildLast",
-        basePartialHolder: "#Home-Container #PopupBodyChildLast",
-        partialHolder: "#Home-Container #PopupBodyChildLast #partialHolder",
-        divHeader: "#Home-Container #PopupBodyChildLast .divHeader p.headerText",
-        popupName: "PopupBodyChildLast",
+        basePartialHolder: "#Home-Container #popupChildLast",
+        partialHolder: "#Home-Container #popupChildLast #partialHolder",
+        divHeader: "#Home-Container #popupChildLast .divHeader p.headerText",
+        popupName: "popupChildLast",
         z_index: "1000"
     },
     appendPartial: {

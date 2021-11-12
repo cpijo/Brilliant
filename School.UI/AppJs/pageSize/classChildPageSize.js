@@ -38,18 +38,18 @@ var classChildPageSize = {
     },
 
     popupChildOne: function () {
-        this.popupChildBase("PopupBodyChildOne");
+        this.popupChildBase("popupChildOne");
         //var page = deviceSize;
         //if (page.pageWidth < 900) {
         //    var width = page.pageWidth - 20;
         //    var avg = page.pageWidth / 2;
 
-        //    $('#Home-Container #PartialContainer #PopupBodyChildOne').css({
+        //    $('#Home-Container #PartialContainer #popupChildOne').css({
         //        'width': width + 'px',
         //        'margin': '10px',
         //        'left': 'calc(50% - ' + avg + 'px)'
         //    });
-        //    $('#Home-Container #PartialContainer #PopupBodyChildOne #partialHolder').css({
+        //    $('#Home-Container #PartialContainer #popupChildOne #partialHolder').css({
         //        'max-height': page.pageHeight + 'px',
         //        'overflow-y': 'auto'
         //    });
@@ -57,18 +57,18 @@ var classChildPageSize = {
     }
     ,
     popupChildTwo: function () {
-        this.popupChildBase("PopupBodyChildTwo");
+        this.popupChildBase("popupChildTwo");
         //var page = deviceSize;
         //if (page.pageWidth < 900) {
         //    var width = page.pageWidth - 20;
         //    var avg = page.pageWidth / 2;
 
-        //    $('#Home-Container #PartialContainer #PopupBodyChildTwo').css({
+        //    $('#Home-Container #PartialContainer #popupChildTwo').css({
         //        'width': width + 'px',
         //        'margin': '10px',
         //        'left': 'calc(50% - ' + avg + 'px)'
         //    });
-        //    $('#Home-Container #PartialContainer #PopupBodyChildTwo #partialHolder').css({
+        //    $('#Home-Container #PartialContainer #popupChildTwo #partialHolder').css({
         //        'max-height': page.pageHeight + 'px',
         //        'overflow-y': 'auto'
         //    });
@@ -76,18 +76,18 @@ var classChildPageSize = {
     }
     ,
     popupChildThree: function () {
-        this.popupChildBase("PopupBodyChildThree");
+        this.popupChildBase("popupChildThree");
         //var page = deviceSize;
         //if (page.pageWidth < 900) {
         //    var width = page.pageWidth - 20;
         //    var avg = page.pageWidth / 2;
 
-        //    $('#Home-Container #PartialContainer #PopupBodyChildThree').css({
+        //    $('#Home-Container #PartialContainer #popupChildThree').css({
         //        'width': width + 'px',
         //        'margin': '10px',
         //        'left': 'calc(50% - ' + avg + 'px)'
         //    });
-        //    $('#Home-Container #PartialContainer #PopupBodyChildThree #partialHolder').css({
+        //    $('#Home-Container #PartialContainer #popupChildThree #partialHolder').css({
         //        'max-height': page.pageHeight + 'px',
         //        'overflow-y': 'auto'
         //    });
@@ -95,18 +95,18 @@ var classChildPageSize = {
     }
     ,
     popupChildFour: function () {
-        this.popupChildBase("PopupBodyChildFour");
+        this.popupChildBase("popupChildFour");
         //var page = deviceSize;
         //if (page.pageWidth < 900) {
         //    var width = page.pageWidth - 20;
         //    var avg = page.pageWidth / 2;
 
-        //    $('#Home-Container #PartialContainer #PopupBodyChildFour').css({
+        //    $('#Home-Container #PartialContainer #popupChildFour').css({
         //        'width': width + 'px',
         //        'margin': '10px',
         //        'left': 'calc(50% - ' + avg + 'px)'
         //    });
-        //    $('#Home-Container #PartialContainer #PopupBodyChildFour #partialHolder').css({
+        //    $('#Home-Container #PartialContainer #popupChildFour #partialHolder').css({
         //        'max-height': page.pageHeight + 'px',
         //        'overflow-y': 'auto'
         //    });
