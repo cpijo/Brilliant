@@ -129,10 +129,6 @@ var classParentChildHelper = {
 };
 
 
-
-
-//C:\Users\Sphiwe\Documents\Visual Studio 2017\MyProjects\easyDate24-To-EasySex\bheboo.UI\Content\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all
-//bootstrap3-wysihtml5.all
 function sp_removeLastChildIfLineBreak(node) {
     var lastChild = node.lastChild;
     if (lastChild && sp_isLineBreak(lastChild)) {

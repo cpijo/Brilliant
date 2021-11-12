@@ -27,8 +27,8 @@ var classMenuHelper = {
 
         if ($('#layoutRightId').hasClass('noDelayCloseOpen')) {
 
-            if ($('#layoutLeftId').hasClass('startEasySex')) {
-                $("#layoutLeftId").removeClass("startEasySex");
+            if ($('#layoutLeftId').hasClass('startEasy')) {
+                $("#layoutLeftId").removeClass("startEasy");
             }
             else {
                 $("#layoutRightId").addClass("addDelay");
