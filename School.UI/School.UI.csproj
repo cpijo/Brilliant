@@ -138,6 +138,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\TeacherRegisterController.cs" />
     <Compile Include="Controllers\StudentRolesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -1277,6 +1278,7 @@
     <Folder Include="Content\images\delete\" />
     <Folder Include="Content\images\ReSized\img\" />
     <Folder Include="Content\images\Spijo\" />
+    <Folder Include="Views\Errors\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

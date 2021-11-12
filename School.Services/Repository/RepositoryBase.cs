@@ -53,6 +53,7 @@ namespace School.Services.Repository
                 }
                 catch (Exception ex)
                 {
+                    throw;
                 }
                 finally
                 {
