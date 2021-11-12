@@ -36,7 +36,7 @@
 
     .layoutRight-header-bottom {
         position: relative;
-        background-color: rgb(59, 90, 108);
+        /*background-color: rgb(59, 90, 108);*/
         /*background-color: wheat;*/
         min-height: 48px;
         max-height: 48px;
@@ -166,7 +166,7 @@
     }
 </style>
 
-<div id="layoutRightHeader-page col-xs-12" class="rm-pd" style="border-bottom: 5px solid orange;height:50px;">
+<div id="layoutRightHeader-page col-xs-12" class="rm-pd" style="height:50px;">
     @using (Ajax.BeginForm("", "", new AjaxOptions { HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "formSearchGr" }))
     {
         <div class="layoutRight-header-top col-xs-12  rm-pd">

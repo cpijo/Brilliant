@@ -25,8 +25,7 @@ namespace School.UI.Controllers
         [HttpGet]
         public ActionResult GetRecord()
         {
-            //List<Course> model = courseRepository.GetAll();
-            return PartialView("_ViewCourses");
+            return PartialView("_defaultDashboard");
         }
         #endregion
     }

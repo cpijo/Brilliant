@@ -59,6 +59,14 @@
             border: thin solid red;
         }
 
+
+        .PartialLayoutMenu {
+            border: 2px solid rgb(59, 90, 108);
+            border-top: 0px;
+            display: block;
+            background-color:rgb(214, 219, 233);
+        }
+
         .layout-wrapper {
             position: relative;
             /*height: calc(100vh - 2px);*/
@@ -76,7 +84,7 @@
             padding-top: 60px;
             /*overflow-x: hidden;*/
             /*overflow-y: hidden;*/
-            background-color: rgb(59, 90, 108);
+            /*background-color: rgb(59, 90, 108);*/
         }
 
         .layoutRight-wrapper {
@@ -93,7 +101,12 @@
         .layoutLeft-header {
             min-height: 50px;
             max-height: 50px;
-            background-color: rgb(59, 90, 108);
+            /*background-color: rgb(59, 90, 108);*/
+            /*background-color: rgb(205, 205, 205);*/
+            /*border-bottom: 5px solid orange;*/
+            background-color: rgb(214, 219, 233);
+            /*border-bottom: 5px solid rgb(232, 232, 232);*/
+            border-bottom: 5px solid rgb(59, 90, 108);
         }
 
         .layoutLeft-body {
@@ -104,7 +117,12 @@
         .layoutRight-header {
             min-height: 50px;
             max-height: 50px;
-            background-color: rgb(59, 90, 108);
+            /*background-color: rgb(59, 90, 108);*/
+            /*background-color: rgb(205, 205, 205);*/
+            background-color: rgb(214, 219, 233);
+            /*border-bottom: 5px solid rgb(232, 232, 232);*/
+            border-bottom: 5px solid rgb(59, 90, 108);
+            /*border-bottom: 5px solid orange;*/
         }
 
         .layoutRight-body {
@@ -114,13 +132,14 @@
 
         .layout-wrapper .logEasy24 {
             position: absolute;
-            box-shadow: 1px 1px 41px 1px red;
-            border-color: orangered;
+            box-shadow: 1px 1px 41px 1px silver;
+            border-color: wheat;
+            background-color: rgb(59, 90, 108);
             border-radius: 20px;
             max-width: 110px;
             min-width: 110px;
             /*top: 30px;*/
-            top: 10px;
+            top: 5px;
             left: 70px;
             text-align: center;
             line-height: 30px;
@@ -135,8 +154,8 @@
         .layout-addBoxShadow {
             display: inline-block;
             margin: 10px;
-            box-shadow: 0px 0px 3px 1px rgba(59, 90, 108,0.5);
-            background-color: rgb(59, 90, 108);
+            /*box-shadow: 0px 0px 3px 1px rgba(59, 90, 108,0.5);*/
+            /*background-color: rgb(59, 90, 108)*/;
             /*box-shadow: inset 0 -3em 3em rgba(0,0,0,0.1), 0 0 0 2px rgb(255,255,255), 0.3em 0.3em 1em rgba(0,0,0,0.3);*/
         }
 
@@ -144,8 +163,7 @@
             position: absolute;
             height: 10px;
             bottom: 0px;
-            background-color: rgb(59, 90, 108);
-            /*top: calc(100vh - 12px)*/
+            background-color: rgb(214, 219, 233);
         }
     </style>
 
@@ -160,7 +178,7 @@
             top: 0;
             left: 0;
             position: fixed;
-            background-color: black;
+            /*background-color: black;*/
             display: none;
         }
 
@@ -173,7 +191,7 @@
             top: 0;
             left: 0;
             position: fixed;
-            background-color: black;
+            /*background-color: black;*/
             display: none;
         }
 
@@ -186,7 +204,7 @@
             top: 0;
             left: 0;
             position: fixed;
-            background-color: black;
+            /*background-color: black;*/
             display: none;
         }
 
@@ -199,7 +217,7 @@
             top: 0;
             left: 0;
             position: fixed;
-            background-color: black;
+            /*background-color: black;*/
             display: none;
         }
 
@@ -212,7 +230,7 @@
             top: 0;
             left: 0;
             position: fixed;
-            background-color: black;
+            /*background-color: black;*/
             display: none;
         }
 
@@ -225,11 +243,11 @@
             top: 0;
             left: 0;
             position: fixed;
-            background-color: black;
+            /*background-color: black;*/
             display: none;
         }
 
-        .bd-primary {
+        /*.bd-primary {
             border: 1px solid rgb(0, 123, 255);
         }
 
@@ -329,7 +347,7 @@
         }
 
         .color-tb-ft {
-        }
+        }*/
     </style>
 
 
@@ -474,21 +492,21 @@
 </head>
 
 
-<body id="layoutBodyId" style="background-color:rgb(59, 90, 108);">
+<body id="layoutBodyId" style="">
     <div id="layout-page" class="layout-wrapper col-sm-12 rm-pd">
 
         <div id="layoutLeftId" class="layoutLeft-wrapper startEasy isOpen rm-pd" style="display: inline-block;overflow:hidden">
 
             <div class="layoutLeft-header rm-pd">
-                <span class="logEasy24" style="background-color:orange;color:white; min-height:30px;width:80px">mySchool</span>
+                <span class="logEasy24" style="color:white; min-height:30px;width:80px">mySchool</span>
             </div>
-            <div id="menuHolderId" class="PartialLayoutMenu layoutLeft-body desktopMenu rm-pd" style="border:0px solid red;">
-
+            <div id="menuHolderId" class="PartialLayoutMenu layoutLeft-body desktopMenu rm-pd">
+                @Html.Partial("_PartialLayoutMenu")
             </div>
 
         </div>
 
-        <div id="layoutRightId" class="layoutRight-wrapper noDelayCloseOpen rm-pd" style="border:0px solid red;">
+        <div id="layoutRightId" class="layoutRight-wrapper noDelayCloseOpen rm-pd">
             <div id="topMenuHolderId" class="layoutRight-header rm-pd">
                 @Html.Partial("_LayoutRightHeader")
             </div>
@@ -497,12 +515,12 @@
                 @RenderBody()
             </div>
 
-            <div id="popupMenuId" class="rm-pd" style="border:0px solid red;width:250px;height: calc(100vh - 60px);position:absolute;top:50px;z-index:100;display:none;background-color:rgb(59 90 108);">
+            <div id="popupMenuId" class="rm-pd" style="border:2px solid red;width:250px;height: calc(100vh - 60px);position:absolute;top:50px;z-index:100;display:none;">
                 @Html.Partial("_PartialLayoutMenu")
             </div>
         </div>
 
-        <div class="layout-footer col-sm-12" style="border:0px solid green;">
+        <div class="layout-footer col-sm-12">
         </div>
     </div>
 

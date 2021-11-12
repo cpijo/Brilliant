@@ -1187,7 +1187,7 @@
     <Content Include="Views\Shared\_PartialLayoutMenu.cshtml" />
     <Content Include="Views\Shared\_PartialMessageResponse.cshtml" />
     <Content Include="Views\Shared\_UserSignOutPartial.cshtml" />
-    <Content Include="Views\Dashboard\_ViewCourses.cshtml" />
+    <Content Include="Views\Dashboard\z_ViewCourses.cshtml" />
     <Content Include="Views\SubjectMarks\_AddSubject.cshtml" />
     <Content Include="Views\SubjectMarks\_TableCourse.cshtml" />
     <Content Include="Views\SubjectMarks\_TableSubject.cshtml" />
@@ -1198,7 +1198,7 @@
     <Content Include="Views\Student\old_ViewStudent.cshtml" />
     <Content Include="Views\StudentRegister\_StudentRegistered.cshtml" />
     <Content Include="Views\StudentAttendance\_ViewStudentAttendance.cshtml" />
-    <Content Include="Views\Dashboard\_ViewGradeInformation.cshtml" />
+    <Content Include="Views\Dashboard\z_ViewGradeInformation.cshtml" />
     <Content Include="Views\GradeInformation\_ViewGradeInformation.cshtml" />
     <Content Include="Views\Teacher\_ViewTeacher.cshtml" />
     <Content Include="Views\Teacher\_TableTeacher.cshtml" />
@@ -1271,6 +1271,7 @@
     <Content Include="Views\TeacherRegister\_ViewTeacherInfor.cshtml" />
     <Content Include="Views\TeacherRegister\_PartialDropbox.cshtml" />
     <Content Include="Views\StudentAttendance\_ViewStudentAttendance - Copy.cshtml" />
+    <Content Include="Views\Shared\_defaultDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,11 +1,8 @@
-﻿    .sidebar-menu{
-        background-color: rgb(23, 58, 134);
-        background-color :rgb(5, 29, 81);
- 
-   max-height: -webkit-calc(100% - 200px);    
-    max-height: -moz-calc(100% - 200px);    
-    max-height: calc(100% - 200px);    
-
-
+﻿.sidebar-menu {
+    background-color: rgb(23, 58, 134);
+    background-color: rgb(5, 29, 81);
+    /*max-height: -webkit-calc(100% - 200px);
+    max-height: -moz-calc(100% - 200px);
+    max-height: calc(100% - 200px);*/
     overflow-y: scroll;
-    }
+}

@@ -63,8 +63,8 @@ ul.sub {
 position:absolute ;
 border:thick solid red;
 display: block;    
-background-color :green;  
-background-color :white; 
+/*background-color :green;  
+background-color :white;*/ 
 left:36px; 
 top:0px;
 

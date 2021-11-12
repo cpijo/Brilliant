@@ -16,7 +16,7 @@ var classMenuEventsHelper = function () {
             event.preventDefault();
             event.stopImmediatePropagation();
 
-            if (event.target == event.currentTarget) {
+            if (event.target === event.currentTarget) {
                 var mytag = event.currentTarget;
             }
 

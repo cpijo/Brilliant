@@ -8,10 +8,10 @@
 
     .primary {
         margin-bottom: 1px;
-        -ms-scrollbar-highlight-color: rgb(77, 111, 131);
+        /*-ms-scrollbar-highlight-color: rgb(77, 111, 131);*/
         -ms-scrollbar-face-color: bisque;
-        -ms-scrollbar-arrow-color: rgb(51, 122, 183);
-        max-height: calc(100vh - 110px);
+        /*-ms-scrollbar-arrow-color: rgb(51, 122, 183);*/
+        /*max-height: calc(100vh - 110px);*/
     }
 
     .showSubMenu {
@@ -88,7 +88,7 @@
 
         .sidebar-submenu span, .sidebar-submenu a {
             font-size: 11px;
-            color: white;
+            color: black;
         }
 
     .sidebar-menu > li > a {
@@ -96,12 +96,29 @@
         display: block;
         border-left: 3px solid transparent;
         font-size: 11px;
-        color: white;
+        color: black;
+    }
+    .sidebar-menu > li > a span {
+        color: black;
     }
 
-    .treeview {
-        /*border: thin solid rgb(82, 109, 129);*/
-    }
+
+    /* 
+  <aside id="menuId" class="main-sidebar">
+    <section class="sidebar">
+        <ul class="sidebar-menu primary primary_ScrollBar" style="display:block;"> 
+        
+        <li class="treeview" id="menu-student" style="display:block;width:auto;">
+                <a href="#" class="aprovince">
+                    <i class="fa fa-home"></i>
+                    <span class="menu-header-name">Students Maintanance</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-down pull-right erroSign"></i>
+                    </span>
+                </a>*/
+
+
+
 
     .container-parent {
         display: inline-block; /* WRAP CHILD DIV*/
@@ -167,7 +184,7 @@
     }
 
     #SurbubId:hover, #a-SurbubId:hover {
-        background-color: orangered;
+        /*background-color: orangered;*/
     }
     .treeview {
         border: 2px solid black;
@@ -182,17 +199,17 @@
 </style>
 
 <aside id="menuId" class="main-sidebar">
-    <section class="sidebar" style="border:0px solid silver;">
-        <ul class="sidebar-menu primary primary_ScrollBar" style="display:none;">
+    <section class="sidebar">
+        <ul class="sidebar-menu primary primary_ScrollBar" style="display:block;">
 
             <li class="treeview" id="usr0" style="display:block">
-                <a class="centerChild" href="#" style="background-color: rgb(163 200 219);">
-                    <span class="menu-header-name" style="background-color: rgb(163 200 219); ">Menue</span>
+                <a class="centerChild" href="#" style="">
+                    <span class="menu-header-name" style="">Menue</span>
                 </a>
             </li>
-            <li class="treeview" id="menu-student" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+            <li class="treeview" id="menu-student" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
-                    <i class="fa fa-home"></i>
+                    <i class="fa fa-users"></i>
                     <span class="menu-header-name">Students Maintanance</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-down pull-right erroSign"></i>
@@ -204,9 +221,9 @@
                     <li id=student3 name="student" style="display:block" onclick="callController('/StudentAttendance/GetRecord','Student Attendance')"><a href="#"><i class="fa fa-circle-o"></i>Student Attendance</a></li>
                 </ul>
             </li>
-            <li class="treeview" id="menu-subject" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+            <li class="treeview" id="menu-subject" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
-                    <i class="fa fa-home"></i>
+                    <i class="fa fa-folder-open"></i>
                     <span class="menu-header-name">Students Registration</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-down pull-right erroSign"></i>
@@ -217,7 +234,7 @@
                     <li id=subjecte1 name="subject" style="display:block" onclick="callController('/Student/GetRecord','View Students')"><a href="#"><i class="fa fa-circle-o"></i>View Student</a></li>
                 </ul>
             </li>
-            <li class="treeview" id="me-teacher" style="display:none;width:auto;background-color:rgb(43, 67, 81)">
+            <li class="treeview" id="me-teacher" style="display:none;width:auto;">
                 <a href="#" class="aprovince">
                     <i class="fa fa-home"></i>
                     <span class="menu-header-name">Profile Teacher</span>
@@ -233,9 +250,9 @@
                     <li id=student3 name="student" style="display:block" onclick="callController('/StudentAttendance/GetRecord','Student Attendance')"><a href="#"><i class="fa fa-circle-o"></i>Student Attendance</a></li>
                 </ul>
             </li>
-            <li class="treeview" id="menu-course" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+            <li class="treeview" id="menu-course" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
-                    <i class="fa fa-home"></i>
+                    <i class="fa fa-book"></i>
                     <span class="menu-header-name">Grade/Courses</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-down pull-right erroSign"></i>
@@ -247,9 +264,9 @@
 
                 </ul>
             </li>
-            <li class="treeview" id="menu-subject" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+            <li class="treeview" id="menu-subject" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
-                    <i class="fa fa-home"></i>
+                    <i class="fa fa-bookmark"></i>
                     <span class="menu-header-name">Subjects</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-down pull-right erroSign"></i>
@@ -261,9 +278,9 @@
 
                 </ul>
             </li>
-            <li class="treeview" id="menu-teacher" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+            <li class="treeview" id="menu-teacher" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
-                    <i class="fa fa-home"></i>
+                    <i class="fa fa-pencil"></i>
                     <span class="menu-header-name">Teacher Registration</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-down pull-right erroSign"></i>
@@ -272,9 +289,9 @@
                 <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
                     <li id=student3 name="student" style="display:block" onclick="callController('/TeacherRegister/CreateRecord','Create Teacher')"><a href="#"><i class="fa fa-circle-o"></i>Create Teacher</a></li>
                     <li id=student1 name="student" style="display:block" onclick="callController('/TeacherRegister/GetRecord','View Teacher')"><a href="#"><i class="fa fa-circle-o"></i>View Teacher</a></li>
-
+                    <li id=student1 name="student" style="display:block" onclick="callController('/TeacherRoles/CreateRoles','Create Roles')"><a href="#"><i class="fa fa-circle-o"></i>Create Roles</a></li>
                     @*<li id=student3 name="student" style="display:block" onclick="callController('/Teacher/AddRecord','Create Teacher')"><a href="#"><i class="fa fa-circle-o"></i>Create Teacher</a></li>
-                    <li id=student1 name="student" style="display:block" onclick="callController('/Teacher/GetRecord','View Teacher')"><a href="#"><i class="fa fa-circle-o"></i>View Teacher</a></li>*@
+        <li id=student1 name="student" style="display:block" onclick="callController('/Teacher/GetRecord','View Teacher')"><a href="#"><i class="fa fa-circle-o"></i>View Teacher</a></li>*@
                 </ul>
             </li>
 
@@ -297,7 +314,7 @@
 
     $(document).ready(function () {
 
-        $('.byidminspijo').hide().css("display", "none")
+        //$('.byidminspijo').hide().css("display", "none")
 
         classMenuEventsHelper();
 
@@ -305,12 +322,12 @@
         var _listUserPermission = JSON.parse('@Html.Raw(Json.Encode(Session["ListUserPermission"]))');
         var _userInfor = JSON.parse('@Html.Raw(Json.Encode(Session["UserDetailsInfor"]))');
 
-        if (_userInfor !== null) {
-            $(".sign-container .pfl_user").append(_userInfor.fName + "  " + _userInfor.lName + "  " + _userInfor.isAdmin);
-            $(".sign-container .pfl_user1").append(_userInfor.fName + "  " + _userInfor.lName);
-            $(".sign-container .pf_user").append(_userInfor.usrName);
-            $(".sign-container .pl_user").append(_userInfor.telephoneNo);
-        }
+        //if (_userInfor !== null) {
+        //    $(".sign-container .pfl_user").append(_userInfor.fName + "  " + _userInfor.lName + "  " + _userInfor.isAdmin);
+        //    $(".sign-container .pfl_user1").append(_userInfor.fName + "  " + _userInfor.lName);
+        //    $(".sign-container .pf_user").append(_userInfor.usrName);
+        //    $(".sign-container .pl_user").append(_userInfor.telephoneNo);
+        //}
     });
 
     var selectedProvince = "";

@@ -77,7 +77,7 @@ namespace School.UI.Controllers
         [HttpPost]
         public ActionResult PreDradeInformation(Student model, string StudentId, string Firstname, string Surname)
         {            
-            return PartialView("_ViewGradeInformation", model);
+            return PartialView("_defaultDashboard", model);
         }
         #endregion
 
