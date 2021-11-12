@@ -7,10 +7,10 @@ var classPageConstant = {
     }
     ,
     galleryPage: {
-        basePartialHolder: "#Home-Container #HomeBodyGallery",
-        partialHolder: "#Home-Container #HomeBodyGallery #partialHolder",
-        divHeader: "#Home-Container #HomeBodyGallery .divHeader p.headerText",
-        button: "#Home-Container #HomeBodyGallery #btnCloseGeneric",
+        basePartialHolder: "#Home-Container #homePage",
+        partialHolder: "#Home-Container #homePage #partialHolder",
+        divHeader: "#Home-Container #homePage .divHeader p.headerText",
+        button: "#Home-Container #homePage #btnCloseGeneric",
         popupName: "partialHolder"
     }
     ,

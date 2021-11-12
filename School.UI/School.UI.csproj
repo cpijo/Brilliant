@@ -1195,7 +1195,6 @@
     <Content Include="Views\StudentResult\_StudentSubjectResult.cshtml" />
     <Content Include="Views\StudentResult\_TableSubjectResults.cshtml" />
     <Content Include="Views\SubjectResult\_UpdateSubjectResult.cshtml" />
-    <Content Include="Views\Student\old_ViewStudent.cshtml" />
     <Content Include="Views\StudentRegister\_StudentRegistered.cshtml" />
     <Content Include="Views\StudentAttendance\_ViewStudentAttendance.cshtml" />
     <Content Include="Views\Dashboard\z_ViewGradeInformation.cshtml" />
@@ -1270,7 +1269,6 @@
     <Content Include="Views\TeacherRegister\_ViewTeacher.cshtml" />
     <Content Include="Views\TeacherRegister\_ViewTeacherInfor.cshtml" />
     <Content Include="Views\TeacherRegister\_PartialDropbox.cshtml" />
-    <Content Include="Views\StudentAttendance\_ViewStudentAttendance - Copy.cshtml" />
     <Content Include="Views\Shared\_defaultDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>

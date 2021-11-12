@@ -15,25 +15,19 @@
         border: none;
         /*overflow-y: scroll;*/
         overflow-x: hidden;
-        /*border: thin solid rgb(86, 108, 127);*/
     }
 
-    #HomeBodyGallery {
+    #homePage {
+        display: block;
         position: absolute;
-        /*min-height: 2px;*/
+        border: 1px solid wheat;
+        padding-top: 30px;
         min-height: calc(100vh - 80px);
-        /*width: calc(100% - 40px);
-        left: 10px;*/
-        /*top: 1px;*/
         opacity: 1;
         z-index: 80;
-        /*border-top-left-radius: 5px;*/
-        /*overflow-y: auto;*/
-        /*height:656px;*/
     }
 
-        #HomeBodyGallery .divHeader {
-            /*width: 100%;*/
+        #homePage .divHeader {
             padding: 0;
             margin: 0;
             height: 0px;
@@ -41,7 +35,7 @@
             border-top-right-radius: 5px;
         }
 
-        #HomeBodyGallery #btnCloseGeneric {
+        #homePage #btnCloseGeneric {
             position: absolute;
             background: red;
             color: white;
@@ -55,7 +49,7 @@
             min-width: 28px;
         }
 
-        #HomeBodyGallery #partialHolder {
+        #homePage #partialHolder {
         }
 
     #popupChildOne, #popupChildTwo, #popupChildThree {
@@ -428,15 +422,7 @@
     .cardHeader{
         height:40px;
     }
-    /*
- <div class="divHeader1 col-xs-12" style="padding: 0px; margin: 0; background-color: rgb(93 107 153);">
-https://css-tricks.com/almanac/properties/b/box-shadow/
-https://getcssscan.com/css-box-shadow-examples
-https://getcssscan.com/css-box-shadow-examples
-box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
-box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 
-*/
     #basePartialHolder {
         /*width: calc(100% - 10px);
         left: 5px;*/
@@ -533,7 +519,7 @@ box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2
 
     <div id="PartialContainer" class="col-xs-12 rm-pd">
 
-        <div id="HomeBodyGallery" class="childBodyPage col-xs-12 rm-pd" style="display:block;border:1px solid wheat;padding-top:30px;">
+        <div id="homePage" class="childBodyPage col-xs-12 rm-pd">
             @Html.Partial("~/Views/Shared/_defaultDashboard.cshtml")
         </div>
 
