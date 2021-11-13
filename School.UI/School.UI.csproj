@@ -140,6 +140,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\DropboxController.cs" />
+    <Compile Include="Controllers\StudentMarksController.cs" />
     <Compile Include="Controllers\TeacherRegisterController.cs" />
     <Compile Include="Controllers\StudentRolesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -1275,6 +1276,9 @@
     <Content Include="Views\Shared\_defaultDashboard.cshtml" />
     <Content Include="Views\TeacherRegister\_TeacherRoles.cshtml" />
     <Content Include="Views\TeacherRegister\_TeacherRolesTable.cshtml" />
+    <Content Include="Views\StudentMarks\_PartialDropbox.cshtml" />
+    <Content Include="Views\StudentMarks\_TableRecordSubjectMarks.cshtml" />
+    <Content Include="Views\StudentMarks\_TableSubjectMarksOnly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

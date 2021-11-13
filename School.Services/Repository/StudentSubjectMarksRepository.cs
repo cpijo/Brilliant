@@ -203,6 +203,82 @@ namespace School.Services.Repository
 
         }
 
+        public override void sqlQueries(dynamic obj)
+        {
+            // _dynamic.type = "hasRecords";
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            dynamic _obj = JObject.Parse(json);
+            string jsonString = Convert.ToString(obj); //var obj = { StudentId = "StudentId", GradeId = "GradeI2", queryType = "searchByGrade" }
+            string SubjectId = _obj.SubjectId;
+            string GradeId = _obj.GradeId;
+            string TeacherId = _obj.TeacherId; TeacherId = "TC00000008";         
+            string isStart = _obj.isStart;
+            string type = _obj.type ?? "0";
+            string sql = "";
+            switch (type)
+            {
+                case "existingRecords":
+                    sql = "SELECT s.UserId,s.Firstname,s.LastName FROM  Student s " +
+                    "WHERE UserId in( " +
+                    "SELECT st.StudentId From StudentTeacher st " +
+                    "WHERE st.StudentId in( " +
+                    "SELECT StudentId from StudentMarks Where GradeId=@GradeId and SubjectId=@SubjectId " +
+                     ") " +
+                    "AND TeacherId=@TeacherId )";
+                    command.CommandText = sql;
+                    command.Parameters.AddWithValue("@TeacherId", TeacherId);
+                    command.Parameters.AddWithValue("@GradeId", GradeId);
+                    command.Parameters.AddWithValue("@SubjectId", SubjectId);
+
+                    break;
+                case "hasRecords":
+                    sql = "SELECT s.UserId,s.Firstname,s.LastName FROM  Student s " +
+                    "WHERE UserId in( " +
+                    "SELECT st.StudentId From StudentTeacher st " +
+                    "WHERE st.StudentId in( " +
+                    "SELECT StudentId from StudentMarks Where GradeId=@GradeId and SubjectId=@SubjectId " +
+                     ") " +
+                    "AND TeacherId=@TeacherId )";
+                    break;
+                case "3":
+                    sql = "SELECT s.UserId,s.Firstname,s.LastName FROM  Student s " +
+                    "WHERE UserId in( " +
+                    "SELECT st.StudentId From StudentTeacher st " +
+                    "WHERE st.StudentId in( " +
+                    "SELECT StudentId from StudentMarks Where GradeId=@GradeId and SubjectId=@SubjectId " +
+                     ") " +
+                    "AND TeacherId=@TeacherId )";
+
+                    break;
+                default:
+                    break;
+            }
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /*
 
             private static Dictionary<string, string> dictSQL()

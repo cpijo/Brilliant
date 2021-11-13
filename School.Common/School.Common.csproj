@@ -55,6 +55,8 @@
     <Compile Include="Common\ScoreSymbols.cs" />
     <Compile Include="Constants\CostantData.cs" />
     <Compile Include="Constants\memberData.cs" />
+    <Compile Include="DelegateHandler\delegateMvc.cs" />
+    <Compile Include="DelegateHandler\delegateSimple.cs" />
     <Compile Include="DelegateHandler\DelegateTestOne.cs" />
     <Compile Include="DelegateHandler\EventProgram.cs" />
     <Compile Include="DelegateHandler\PrintHelper.cs" />

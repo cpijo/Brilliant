@@ -44,12 +44,13 @@
 <script>
 
     function OnFailure(response) {
+        debugger;
         $('#div-busy-Icon').hide();
         showMessage(response.message, "error", response.title);
     }
 
     function OnSuccess(response) {
-        //debugger;
+
         $('#menuId .sidebar-menu').css("display", "block");
 
 
@@ -69,7 +70,7 @@
             //$('#Home-Container #basePageId').empty().show().html(response);          
         }
         else {
-            showMessage(response.message, "error", response.title);
+            classMessageResponse.showMessage({ message: response.message, type: "error", title: response.title, pageId: "" });
         }
 
 

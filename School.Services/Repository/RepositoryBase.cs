@@ -160,6 +160,13 @@ namespace School.Services.Repository
             command.ExecuteNonQuery();
         }
 
+        public virtual void sqlQueries(dynamic obj)
+        {
+           
+        }
+
+
+
         public virtual List<T> GetById(string id)
         {
             using (SqlConnection connection = new SqlConnection(DataBaseConnectorString.ConnectionString))

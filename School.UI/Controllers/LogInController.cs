@@ -1,6 +1,8 @@
 ﻿using School.Entities.Fields;
 using School.Services.Interface;
 using System;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.Web.Mvc;
 
 namespace School.UI.Controllers
@@ -30,14 +32,22 @@ namespace School.UI.Controllers
         {
             try
             {
-                if (model.EmailAddress == "sphiwe@brilliant.co.za" && model.Password == "Password1")
+                dynamic _dynamic = new ExpandoObject();
+                _dynamic.userName = model.Username= "TC00000008";
+                _dynamic.password = model.Password= "C69DA0293EBC7A8E9F5F4F8974B64809BD21F874";
+                //UserLogin _user = null;
+                List<UserLogin> _user = loginRepository.GetByAny(_dynamic);
+
+                if (_user == null)
+                {
+                    return Json(new { result = "false", message = "Invalid Username or Password!", title = "Invalid LogIn" }, JsonRequestBehavior.AllowGet);
+                }
+                else
                 {
                     appMenu menu = new appMenu();
                     menu.menuRequest.name = "login";
-
                     return PartialView("_PartialLayoutMenu");
                 }
-                return Json(new { result = "false", message = "Username or Password is incorrect", title = "Invalid LogIn" }, JsonRequestBehavior.AllowGet);
 
             }
             catch (Exception ex)
