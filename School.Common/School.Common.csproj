@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ScoreSymbols.cs" />
     <Compile Include="Constants\CostantData.cs" />
     <Compile Include="Constants\memberData.cs" />
     <Compile Include="JsonStringHelper\DeserialiseFromJson.cs" />

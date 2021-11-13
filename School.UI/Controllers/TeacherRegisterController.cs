@@ -2,6 +2,7 @@
 using School.Entities.Fields;
 using School.Services.Interface;
 using School.UI.ViewModels;
+using School.UI.ViewModels.TeacherVM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,8 +14,14 @@ using System.Web.Mvc;
 namespace School.UI.Controllers
 {
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-    public class TeacherRegisterController : Controller
+    public class TeacherRegisterController : BaseController
     {
+        //Select Words (Ctrl+Shift+Arrow)
+        //referrences (ALT+Enter)
+        //ALT+Arrow to select a line and move up or down
+        //ALT+Tab  Changing ot Tab from One Program to Another
+
+
         private ITeacherRepository tearcherRepository;
         private IStudentResultsRepository studentResultsRepository;
         private IStudentRepository studentRepository;
@@ -247,131 +254,96 @@ namespace School.UI.Controllers
         #endregion
 
 
-        private static List<SelectListItem> dropdownHelper(Dictionary<string, string> SurbubDictionary)
+        #region Teacher Information
+        [HttpPost]
+        public ActionResult TeacherRoles(string userId)
         {
-            return SurbubDictionary
-            .Select(item => new SelectListItem
+
+            Teacher teacher = null;
+            if (Session["teacher"] != null)
             {
-                Value = item.Key.ToString(),
-                Text = item.Value.ToString(),
-                Selected = true
-            })
-            .ToList();
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- /* 
-
-        #region Add New Record
-        [HttpPost]
-        public ActionResult GradeInformation(Student model, string StudentId, string Firstname, string Surname)
-        {
-            return PartialView("_GradeInformation", model);
-        }
-        #endregion
-
-
-        #region Get Student By Filter
-        [HttpPost]
-        public ActionResult SearchRecord(string selectedValue)
-        {
-            List<Student> _model = studentRepository.GetAll();
-            
-            return PartialView("_TableStudent", _model);
-        }
-        #endregion
-
-        #region Add New Record
-        [HttpPost]
-        public ActionResult PreUpdate(Student model, string StudentId, string Firstname, string Surname)
-        {            
-            return PartialView("_UpdateStudent", model);
-        }
-        #endregion
-
-        #region Save Student Results 
-        [HttpPost]
-        public ActionResult Update(Student model)
-        {
-            try
-            {
-                studentRepository.Save(model);
-                return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
+                List<Teacher> teachers = Session["teacher"] as List<Teacher>;
+                teacher = teachers.ToList().Where(x => x.TeacherId == userId).FirstOrDefault();
+                Session["selectedTeacher"] = teacher;
             }
-            catch (Exception ex)
+            else
             {
-                return Json(new { result = "false", message = ex.Message, title = "Request Failed" }, JsonRequestBehavior.AllowGet);
+                List<Teacher> students = tearcherRepository.GetAll();
+                teacher = students.ToList().Where(x => x.TeacherId == userId).FirstOrDefault();
+                Session["selectedTeacher"] = teacher;
             }
+
+            TeacherRoleSimpleViewModel model = new TeacherRoleSimpleViewModel();
+            model.TeacherViewModel.Teacher = teacher;
+            //TeacherViewModel model = new TeacherViewModel();
+            //model.Teacher = teacher;
+
+            Dictionary<string, string> GradeDictionary = CostantData.dictGrades();
+            List<SelectListItem> list = dropdownHelper(GradeDictionary);
+            model.TeacherViewModel.GradeDropboxItemList = new SelectList(list, "Value", "Text");
+
+            return PartialView("_TeacherRoles", model);
         }
         #endregion
 
-
-        
-        #region Get Student
+        #region Get Subjects
         [HttpPost]
-        public ActionResult GetStudentSubject(StudentResults studentResult, string Firstname)
+        public ActionResult GetSubjects(string grade)
         {
-            Student student = new Student();
-            student.StudentId = studentResult.StudentId;
-            student.Firstname = studentResult.Firstname;
-            student.LastName = studentResult.LastName;
-            student.Email = studentResult.Email;
-            StudentResultsModel model = new StudentResultsModel();
-            //List<Subject> subjects = subjectRepository.GetAll();
-            //List<Subject> subjects = subjectRepository.GetById(student.StudentId);
+            TeacherRoleSimpleViewModel model = new TeacherRoleSimpleViewModel();
+            //if (Session["selectedTeacher"] != null)
+            //{
+            //    Teacher teacher = Session["teacher"] as Teacher;
+            //    model.TeacherViewModel.Teacher = teacher;
+            //}
 
-            //List<SubjectResult> subjectResult = subjectResultRepository.GetById(student.StudentId);
+            Dictionary<string, string> dictionary = getSubjects(grade);
 
-            //model.StudentResults = studentResult;
-            //model.Student = student;
-            //model.Subjects = subjects;
-            return PartialView("_StudentResults", model);
+            foreach (KeyValuePair<string, string> item in dictionary)
+            {
+                model.TeacherRoles.Add(new TeacherRoleSimpleViewModel {GradeId=grade, SubjectId = item.Key, SubjectName = item.Value});
+            }
+            return PartialView("_TeacherRolesTable", model);
         }
         #endregion
-     */
+
+        #region Save Roles
+        [HttpPost]
+        public ActionResult SaveRoles(TeacherRoleSimpleViewModel _model, string grade)
+        {
+            TeacherRoleSimpleViewModel model = new TeacherRoleSimpleViewModel();
+            Dictionary<string, string> dictionary = getSubjects(grade);
+
+            foreach (KeyValuePair<string, string> item in dictionary)
+            {
+                model.TeacherRoles.Add(new TeacherRoleSimpleViewModel { SubjectId = item.Key, SubjectName = item.Value, Grade = grade });
+            }
+            return PartialView("_PartialDropBox", model);
+        }
+        #endregion
+
+        [HttpPost]
+        public ActionResult Edit_Include([Bind(Include = "StudentId, StudentName")] Student std)
+        {
+            var name = std.Firstname;
+
+            //@Html.Label("StudentId:")  
+            //@Html.TextBox("StudentName")
+
+            return RedirectToAction("TestIndex");
+        }
+
+        [HttpPost]
+        public ActionResult Edit_Exclude([Bind(Exclude = "StudentId, StudentName")] Student std)
+        {
+            var name = std.Firstname;
+
+            //@Html.Label("StudentId:")  
+            //@Html.TextBox("StudentName")
+
+            return RedirectToAction("TestIndex");
+        }
+
     }
 }
 

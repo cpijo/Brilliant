@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace School.Services.Repository
 {
-    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class, new()
+    public abstract class RepositoryBase<T>: IDisposable , IRepositoryBase<T> where T : class, new() 
     {
         public SqlCommand command = null;
         public DataTable table = null;
@@ -198,6 +198,26 @@ namespace School.Services.Repository
                 }
                 return modelList;
             }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    //context.Dispose();
+                }
+            }
+            this.disposed = true;
         }
 
     }

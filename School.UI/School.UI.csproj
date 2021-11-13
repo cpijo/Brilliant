@@ -139,6 +139,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
+    <Compile Include="Controllers\DropboxController.cs" />
     <Compile Include="Controllers\TeacherRegisterController.cs" />
     <Compile Include="Controllers\StudentRolesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -173,6 +174,8 @@
     <Compile Include="ViewModels\StudentResultsVM.cs" />
     <Compile Include="ViewModels\StudentViewModel.cs" />
     <Compile Include="ViewModels\TeacherViewModel.cs" />
+    <Compile Include="ViewModels\TeacherVM\TeacherRoleViewModel.cs" />
+    <Compile Include="ViewModels\TeacherVM\TeacherTimesheetViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppJs\common\autoClickEvent.js" />
@@ -1270,6 +1273,8 @@
     <Content Include="Views\TeacherRegister\_ViewTeacherInfor.cshtml" />
     <Content Include="Views\TeacherRegister\_PartialDropbox.cshtml" />
     <Content Include="Views\Shared\_defaultDashboard.cshtml" />
+    <Content Include="Views\TeacherRegister\_TeacherRoles.cshtml" />
+    <Content Include="Views\TeacherRegister\_TeacherRolesTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

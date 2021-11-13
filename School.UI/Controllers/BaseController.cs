@@ -1,4 +1,5 @@
-﻿using System;
+﻿using School.Common.Constants;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,6 +21,35 @@ namespace School.UI.Controllers
             })
             .ToList();
         }
+
+        public static Dictionary<string, string> getSubjects(string selectedValue)
+        {
+            Dictionary<string, string> dictionary;
+            switch (selectedValue)
+            {
+                case "Grade8":
+                    dictionary = CostantData.dictGrade8Subjects();
+                    break;
+                case "Grade9":
+                    dictionary = CostantData.dictGrade9Subjects();
+                    break;
+                case "Grade10":
+                    dictionary = CostantData.dictGrade10Subjects();
+                    break;
+                case "Grade11":
+                    dictionary = CostantData.dictGrade11Subjects();
+                    break;
+                case "Grade12":
+                    dictionary = CostantData.dictGrade12Subjects();
+                    break;
+                default:
+                    dictionary = CostantData.dictGrade8Subjects();
+                    break;
+            }
+
+            return dictionary;
+        }
+
 
         //public abstract ActionResult GetRecord();
 

@@ -77,37 +77,37 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.Gender)
                             </th>
-                            <th style="display:none;">
-                                View Report
+                            <th style="display:block;">
+                                User Details
                             </th>
                             <th>
-                                User Details
+                                View Report
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TeacherId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Firstname)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.LastName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Gender)
-                                </td>
-                                <td style="display:none;">
-                                    <button id="btnEdit" type="button" class="btnEdit btn btn-primary" style="width:100px;display:none;">View Report</button>
-                                </td>
-                                <td>
-                                    <button id="btnUserDetails" type="button" class="btnUserDetails btn btn-primary" style="width:100px;">User Details</button>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TeacherId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Firstname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Gender)
+                            </td>
+                            <td>
+                                <button id="btnUserDetails" type="button" class="btnUserDetails btn btn-primary" style="width:100px;">Details</button>
+                            </td>
+                            <td style="display:block;">
+                                <button id="btnRoles" type="button" class="btnEdit btn btn-primary" style="width:100px;display:block;">Roles</button>
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>
@@ -120,7 +120,7 @@
 
 <script>
 
-    $('#tableId #btnUserDetails').click(function (event) {
+    $('#tableId #btnUserDetails,#tableId #btnRoles').click(function (event) {
         event.preventDefault();
         event.stopPropagation();
         var userId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
@@ -134,6 +134,11 @@
 
         var header = 'Teacher Information';
         var url = '/TeacherRegister/TeacherInformation';
+        if (this.id === "btnRoles") {
+            header = 'Teacher\'s Roles';
+            url = '/TeacherRegister/TeacherRoles';
+        }
+
         var objPopup = classPageConstant.popupChildOne;
         var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
         classControllerHelper.callController(pageObj);

@@ -58,6 +58,8 @@
     <Compile Include="Fields\Grades.cs" />
     <Compile Include="Fields\TeacherClass.cs" />
     <Compile Include="Fields\User.cs" />
+    <Compile Include="myStoreModels\Class1.cs" />
+    <Compile Include="myStoreModels\ProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Fields\StudentResults.cs" />
     <Compile Include="Fields\Student.cs" />

@@ -1,0 +1,207 @@
+﻿@model School.UI.ViewModels.TeacherVM.TeacherRoleSimpleViewModel
+
+@{ 
+    string st = "test";
+}
+
+<style>
+    #childPage {
+        width: 800px;
+        left: calc(50% - 400px);
+        display: none;
+    }
+
+        #childPage #partialHolder {
+            /*height: calc(100% - 2px);*/
+            border: none;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            max-height: 260px;
+        }
+</style>
+
+<style>
+
+    .card_t {
+        border-radius: 2px;
+        display: inline-block;
+        min-height: 100px;
+        margin: 1rem;
+        position: relative;
+        width: calc(100% - 20px);
+        padding-top: 5px;
+    }
+
+    .card-s {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+        .card-s:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+        }
+
+    #Home-Container #popupChildOne #partialHolder{
+        background-color:white;
+    }
+</style>
+
+
+@using (Ajax.BeginForm("SaveRoles", "TeacherRegister", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
+{
+    <div id="popup-page" class="col-xs-12" style="border-color:rgb(241, 242, 247);border:0px solid red;">
+        <div class="card_t card-s">
+            <div class="form-horizontal" style="padding:10px;border:0px solid red;">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TeacherViewModel.Teacher.Firstname, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(m => m.TeacherViewModel.Teacher.Firstname, new { @class = " col-sm-12 form-control", @readonly = "readonly" })
+                    </div>
+
+                    @Html.LabelFor(model => model.TeacherViewModel.Teacher.LastName, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.TeacherViewModel.Teacher.LastName, new { @class = "form-control" , @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TeacherViewModel.Teacher.Language, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.TeacherViewModel.Teacher.Language, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                    @Html.LabelFor(model => model.TeacherViewModel.Teacher.Gender, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.TeacherViewModel.Teacher.Gender, new { @id = "genderId", @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <hr />
+
+
+                <div class="form-group">              
+                    @Html.LabelFor(model => model.TeacherViewModel.Grades.Grade, new { @class = "col-sm-4 control-label" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(m => m.TeacherViewModel.Grades.Grade, Model.TeacherViewModel.GradeDropboxItemList, new { @id = "GradeId", @class = "form-control selectedSearchId" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-12" style="border: 2px solid red; display: inline-block;">
+                    <div class="card_t card-s">
+                        <div id="tableHolderId" class="rm-pd" style="padding:15px;">
+                            <table id="tableId" class="table" style="border:1px solid silver;">
+                                <thead style="background-color:rgb(47, 71, 86);color:white;">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.GradeId)
+                                        </th>
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.SubjectId)
+                                        </th>
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.SubjectName)
+                                        </th>
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.IsSelected)
+                                        </th>
+
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>                                 
+                                        @foreach (var sub in Model.TeacherRoles)
+                                        {
+
+                                            <tr>
+
+                                                <td>
+                                                    @Html.DisplayFor(m => sub.GradeId)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(m => sub.SubjectId)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(m => sub.SubjectName)
+                                                </td>
+
+                                                <td>
+                                                    @Html.CheckBoxFor(m=>m.IsSelected,new { @id = "IsSelected" })
+                                                </td>
+                                                
+                                                <td>
+                                                    @Html.DisplayFor(m => sub.Status)
+                                                </td>
+
+                                            </tr>
+                                        }
+                                   
+                                </tbody>
+                            </table>
+                        </div>
+                    
+                        
+                        <div class="col-md-12"style="padding-bottom:5px;">
+                            <input id="btnSave" type="submit" value="Save" class="btn btn-primary" onclick='return validateInput()' />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+    function validateInput() {
+        return true;
+    }
+
+    function OnSuccess(response) {
+
+        classBusyIconHelper.hideBusyIcon();
+        if (response.result === "true") {
+            var msgObj = { message: response.message, type: "success", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+        else {
+            var msgObj = { message: response.message, type: "error", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+    }
+
+    function OnFailure(response) {
+        var msgObj = { message: "error", type: "error", title: "error", pageId: "" };
+        classMessageResponse.showMessage(msgObj);
+        $('.btnlogColor').prop('disabled', false);
+    }
+
+
+    $("#GradeId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var selectedValue = $("#GradeId option:selected").val();
+        var data = {
+            'GradeId': selectedValue.trim()
+        };
+
+        var _searchValue = selectedValue.trim().substring(0, 5);
+
+        var partialHolder = "#popup-page #tableHolderId";
+        var header = 'Update UserInfor';
+        var url = '/TeacherRegister/GetSubjects';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+</script>
+

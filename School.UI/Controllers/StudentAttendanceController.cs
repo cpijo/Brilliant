@@ -34,10 +34,8 @@ namespace School.UI.Controllers
             StudentAttendanceModel mod = new StudentAttendanceModel();
             //mod.StudentAttendance = new List<StudentAttendance>();
             mod.StudentAttendance = model;
-
-            List<SelectListItem> list = new List<SelectListItem>();
             Dictionary<string, string> dictionary = CostantData.dictGrades();
-            list = dropdownHelper(dictionary);
+            List<SelectListItem> list = dropdownHelper(dictionary);
             mod.GradeDropboxItemList = new SelectList(list, "Value", "Text");
 
             dictionary = new Dictionary<string, string>();
@@ -60,34 +58,15 @@ namespace School.UI.Controllers
         public ActionResult dropBoxUpdate(string selectedValue, string searchType)
         {
             StudentAttendanceModel model = new StudentAttendanceModel();
-            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-            switch (selectedValue)
-            {
-                case "Grade8":
-                    dictionary = CostantData.dictGrade8Subjects();
-                    break;
-                case "Grade9":
-                    dictionary = CostantData.dictGrade9Subjects();
-                    break;
-                case "Grade10":
-                    dictionary = CostantData.dictGrade10Subjects();
-                    break;
-                case "Grade11":
-                    dictionary = CostantData.dictGrade11Subjects();
-                    break;
-                case "Grade12":
-                    dictionary = CostantData.dictGrade12Subjects();
-                    break;
-                default:
-                    dictionary = CostantData.dictGrade8Subjects();
-                    break;
-            }
+            Dictionary<string, string>  dictionary = getSubjects(selectedValue);
 
             List<SelectListItem> list = dropdownHelper(dictionary);
             model.SubjectDropboxItemList = new SelectList(list, "Value", "Text");
 
             return PartialView("_PartialDropBox", model);
         }
+
+       
         #endregion
 
         #region Save Record

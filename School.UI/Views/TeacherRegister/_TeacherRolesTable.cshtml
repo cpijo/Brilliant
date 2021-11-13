@@ -1,0 +1,61 @@
+﻿@model School.UI.ViewModels.TeacherVM.TeacherRoleSimpleViewModel
+
+
+
+<table id="tableId" class="table" style="border:1px solid silver;">
+    <thead style="background-color:rgb(47, 71, 86);color:white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GradeId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.IsSelected)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var sub in Model.TeacherRoles)
+        {
+
+        <tr>
+            @Html.HiddenFor(x => sub.GradeId)
+            <td>
+                @Html.DisplayFor(m => sub.GradeId)
+            </td>
+
+            <td>
+                @Html.DisplayFor(m => sub.SubjectId)
+            </td>
+
+            <td>
+                @Html.DisplayFor(m => sub.SubjectName)
+            </td>
+
+            <td>
+                @Html.CheckBoxFor(m => m.IsSelected, new { @id = "IsSelected" })
+            </td>
+
+            <td>
+                @Html.DisplayFor(m => sub.Status)
+            </td>
+
+        </tr>
+        }
+
+    </tbody>
+</table>
+
