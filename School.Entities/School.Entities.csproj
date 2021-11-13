@@ -64,6 +64,9 @@
     <Compile Include="Fields\StudentResults.cs" />
     <Compile Include="Fields\Student.cs" />
     <Compile Include="Fields\UserLogin.cs" />
+    <Compile Include="ViewModels\ParentViewModel.cs" />
+    <Compile Include="ViewModels\StudentResultViewModel.cs" />
+    <Compile Include="ViewModels\TimesheetViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\School.Common\School.Common.csproj">
@@ -71,5 +74,6 @@
       <Name>School.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
