@@ -55,6 +55,10 @@
     <Compile Include="Common\ScoreSymbols.cs" />
     <Compile Include="Constants\CostantData.cs" />
     <Compile Include="Constants\memberData.cs" />
+    <Compile Include="DelegateHandler\DelegateTestOne.cs" />
+    <Compile Include="DelegateHandler\EventProgram.cs" />
+    <Compile Include="DelegateHandler\PrintHelper.cs" />
+    <Compile Include="DelegateHandler\ProcessBusinessLogic.cs" />
     <Compile Include="JsonStringHelper\DeserialiseFromJson.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -75,6 +79,7 @@
       <Private>True</Private>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <SsdtUnitTestVersion>3.1</SsdtUnitTestVersion>
