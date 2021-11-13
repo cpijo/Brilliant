@@ -28,11 +28,11 @@
     }
 
         #homePage .divHeader {
-            padding: 0;
+            /*padding: 0;
             margin: 0;
             height: 0px;
             border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
+            border-top-right-radius: 5px;*/
         }
 
         #homePage #btnCloseGeneric {
@@ -98,12 +98,14 @@
 
     #PopupBodyBusyIcon {
         position: absolute;
-        border: thin solid darkblue;
+        border: thin solid wheat;
         height: 170px;
         width: 170px;
         left: calc((100% - (170px + 2px)) / 2 );
         top: 160px;
-        background-color: rgb(77, 96, 130);
+        /*background-color: rgb(77, 96, 130);*/
+        background-color: rgba(0,0,0,0.22);
+        box-shadow: 0px 0px 3px 1px rgb(194, 195, 201);
         opacity: 1;
         z-index: 1001;
         border-radius: 50%;
@@ -228,11 +230,12 @@
 
     .myHeader {
         border-bottom: 2px solid orange;
-        background-color: rgb(59, 90, 108);
+        /*background-color: rgb(59, 90, 108);*/
         height: 28px;
-        color: white;
+        color: black;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
+        box-shadow: 0px 0px 3px 1px rgb(194, 195, 201);
     }
 
     .myPage {
@@ -272,14 +275,7 @@
         padding: 5px;
     }
 
-    #divParentId .divHeader {
-        padding: 0;
-        margin: 0;
-        height: 30px;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-        /*background-color: rgb(59, 90, 108);*/
-    }
+
 
     #divParentId #btnCloseGeneric {
         position: absolute;
@@ -336,7 +332,7 @@
         /*box-shadow*/
         box-shadow: 0px 0px 3px 1px rgba(59, 90, 108,0.5);
         /*background-color: rgb(43, 67, 81);*/
-        background-color: white;
+        /*background-color: white;*/
         /*margin-top: 5px;*/
         /*border-top-left-radius: 5px;
         border-top-right-radius: 5px;*/
@@ -344,11 +340,11 @@
 
         #basePartialHolder .divHeader {
             /*width: 100%;*/
-            padding: 0;
+            /*padding: 0;
             margin: 0;
             height: 0px;
             border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
+            border-top-right-radius: 5px;*/
           
         }
 
@@ -475,14 +471,14 @@
         #PopupBodyUserLogin .divHeader {
             padding: 0;
             margin: 0;
-            background-color:rgb(232, 232, 232);
+            /*background-color:rgb(232, 232, 232);*/
+            border-bottom:1px solid silver
         }
 
             #PopupBodyUserLogin .divHeader .headerText {
                 top: 4px;
                 min-height: 20px;
                 max-height: 20px;
-                color: white;
                 padding: 0;
                 margin: 0;
             }
@@ -512,6 +508,32 @@
         /*display:block;*/
     }
 
+    #basePartialHolder .divHeader {
+        padding: 0px;
+        margin: 0;
+        padding: 10px;
+        min-height: 50px;
+        max-height: 50px;
+        /*display: block;*/
+        /*background-color: rgb(240, 240, 240);*/
+        border-bottom: 1px solid silver;
+    }
+    #basePartialHolder .partialHolder {
+        padding: 20px;
+        min-height: 30px;
+        color:black;
+    }
+
+    #divParentId .divHeader {
+        height: 30px;
+        border-bottom: 1px solid silver;
+        /*padding: 0;   
+        margin: 0;
+
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;*/
+    }
+
 </style>
 
 
@@ -526,8 +548,8 @@
 
         <div id="basePartialHolder" class="row rm-pd" style="display:none;border: 1px solid silver;">
             <div class="divParent rd col-xs-12 rm-pd rd">
-                <div class="divHeader col-xs-12 rm-pd" style="padding: 0px; margin: 0;padding:10px; min-height: 40px; max-height: 40px; display: block; background-color: rgb(240, 240, 240); border: 1px solid rgb(240, 240, 240); ">
-                    <p class="col-xs-12 headerText login-box-msg text-center rm-pd" style="min-height:25px;max-height:25px; color:black;">Header Heading</p>
+                <div class="divHeader col-xs-12 rm-pd">
+                    <p class="col-xs-12 headerText login-box-msg text-center rm-pd">Header Heading</p>
                 </div>
 
                 <div id="partialHolder" class="partialHolder col-xs-12 rm-pd rd" style="padding:20px;min-height:30px;border:0px solid red;">

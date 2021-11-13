@@ -18,7 +18,7 @@
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.IsSelected)
+                <input type="checkbox" id="selectAllId" /> @Html.DisplayNameFor(model => model.IsSelected)
             </th>
 
             <th>
@@ -31,31 +31,131 @@
         @foreach (var sub in Model.TeacherRoles)
         {
 
-        <tr>
-            @Html.HiddenFor(x => sub.GradeId)
-            <td>
-                @Html.DisplayFor(m => sub.GradeId)
-            </td>
+            <tr>
+                @Html.HiddenFor(x => sub.GradeId)
+                <td>
+                    @Html.DisplayFor(m => sub.GradeId)
+                </td>
 
-            <td>
-                @Html.DisplayFor(m => sub.SubjectId)
-            </td>
+                <td>
+                    @Html.DisplayFor(m => sub.SubjectId)
+                </td>
 
-            <td>
-                @Html.DisplayFor(m => sub.SubjectName)
-            </td>
+                <td>
+                    @Html.DisplayFor(m => sub.SubjectName)
+                </td>
 
-            <td>
-                @Html.CheckBoxFor(m => m.IsSelected, new { @id = "IsSelected" })
-            </td>
+                <td>
+                    @Html.CheckBoxFor(m => m.IsSelected, new { @id = "IsSelected" })
+                </td>
 
-            <td>
-                @Html.DisplayFor(m => sub.Status)
-            </td>
+                <td>
+                    @Html.DisplayFor(m => sub.Status)
+                </td>
 
-        </tr>
+            </tr>
         }
 
     </tbody>
 </table>
+
+
+
+
+<script>
+
+
+    $("#btnSaveAttend").click(function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var _inputs = ['subjectId', 'pickdateId'];
+        ClassValidationHelper.preValidateDropbox(['gradeId']);
+        var isvalid = ClassValidationHelper.ValidateInput(_inputs)
+        if (isvalid === false) {
+            ClassValidationHelper.errorEmptyField();
+            return isvalid
+        }
+
+
+        var grade = $("#gradeId option:selected").val();
+        var subjectId = $("#subjectId").val();
+        var searchDate = $("#pickdateId").val();
+        var commonData = {
+            'StudentId': "",
+            'GradeId': grade.trim(),
+            'SubjectId': subjectId.trim(),
+            'AttendanceStatus': 0,
+            'ExamDate': searchDate.trim()
+        };
+
+        var data = {
+            'jsonString': JSON.stringify(tabledata(commonData))
+        };
+
+        var url = '/StudentAttendance/SaveRecord';
+        var pageObj = { function: "message", url: url, type: "Post", data: data, header: "", pageId: "", partialHolder: "" };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+
+    function tabledata(obj, ischecked) {
+        var countRows = $("#tableId>tbody>tr").length;
+        var allRows = [];
+        for (var i = 0; i < countRows; i++) {
+            //var _studentId = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(0)").text();
+            //var _attandance = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(5)").text();
+            //$('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3)").find('[type=checkbox]').prop('checked', true);
+            $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3)").find('[type=checkbox]').prop('checked', ischecked);
+
+            //var row = {
+            //    'StudentId': _studentId.trim(),
+            //    'GradeId': obj.GradeId,
+            //    'SubjectId': obj.SubjectId,
+            //    'AttendanceStatus': _attandance.trim(),
+            //    'ExamDate': obj.ExamDate
+            //};
+            //allRows.push(row);
+        }
+        //return allRows;
+    }
+
+
+    $(document).ready(function () {
+
+        $('#tableId #selectAllId').click(function () {
+            var ischecked = this.checked;
+            if (this.checked) {
+
+                tabledata({}, ischecked)
+
+            } else {
+                tabledata({}, ischecked)
+            }
+
+        });
+    });
+
+
+    function OnSuccess(response) {
+
+        classBusyIconHelper.hideBusyIcon();
+        if (response.result === "true") {
+            var msgObj = { message: response.message, type: "success", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+        else {
+            var msgObj = { message: response.message, type: "error", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+    }
+
+    function OnFailure(response) {
+        var msgObj = { message: "error", type: "error", title: "error", pageId: "" };
+        classMessageResponse.showMessage(msgObj);
+    }
+
+</script>
 

@@ -44,6 +44,15 @@
     #Home-Container #popupChildOne #partialHolder{
         background-color:white;
     }
+
+    .rm-form-control {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        border-radius: 0;
+        border-color: white;
+        border: 0px solid silver;
+        background-color: white;
+    }
 </style>
 
 
@@ -56,23 +65,23 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.TeacherViewModel.Teacher.Firstname, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
-                        @Html.TextBoxFor(m => m.TeacherViewModel.Teacher.Firstname, new { @class = " col-sm-12 form-control", @readonly = "readonly" })
+                        @Html.TextBoxFor(m => m.TeacherViewModel.Teacher.Firstname, new { @class = "form-control rm-form-control", @readonly = "readonly", @style = "-webkit-box-shadow: none;box-shadow: none;border-radius: 0;border-color: white;border: 0px solid silver;background-color: white;" })
                     </div>
 
-                    @Html.LabelFor(model => model.TeacherViewModel.Teacher.LastName, new { @class = "col-sm-2 control-label" })
+                    @Html.LabelFor(model => model.TeacherViewModel.Teacher.LastName, new { @class = "col-sm-2 control-label"})
                     <div class="col-md-4">
-                        @Html.TextBoxFor(model => model.TeacherViewModel.Teacher.LastName, new { @class = "form-control" , @readonly = "readonly" })
+                        @Html.TextBoxFor(model => model.TeacherViewModel.Teacher.LastName, new { @class = "form-control", @readonly = "readonly", @style = "-webkit-box-shadow: none;box-shadow: none;border-radius: 0;border-color: white;border: 0px solid silver;background-color: white;" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.TeacherViewModel.Teacher.Language, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
-                        @Html.TextBoxFor(model => model.TeacherViewModel.Teacher.Language, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.TextBoxFor(model => model.TeacherViewModel.Teacher.Language, new { @class = "form-control", @readonly = "readonly", @style = "-webkit-box-shadow: none;box-shadow: none;border-radius: 0;border-color: white;border: 0px solid silver;background-color: white;" })
                     </div>
                     @Html.LabelFor(model => model.TeacherViewModel.Teacher.Gender, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
-                        @Html.TextBoxFor(model => model.TeacherViewModel.Teacher.Gender, new { @id = "genderId", @class = "form-control", @readonly = "readonly" })
+                        @Html.TextBoxFor(model => model.TeacherViewModel.Teacher.Gender, new { @id = "genderId", @class = "form-control", @readonly = "readonly", @style = "-webkit-box-shadow: none;box-shadow: none;border-radius: 0;border-color: white;border: 0px solid silver;background-color: white;" })
                     </div>
                 </div>
 
@@ -86,7 +95,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-md-12" style="border: 2px solid red; display: inline-block;">
+                <div class="col-md-12 rm-pd" style="border: 0px solid red; display: inline-block;">
                     <div class="card_t card-s">
                         <div id="tableHolderId" class="rm-pd" style="padding:15px;">
                             <table id="tableId" class="table" style="border:1px solid silver;">
