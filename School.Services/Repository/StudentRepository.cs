@@ -47,7 +47,7 @@ namespace School.Services.Repository
             command.Parameters.AddWithValue("@Age", 20);
             command.Parameters.AddWithValue("@Gender", model.Gender);
             command.Parameters.AddWithValue("@Race", "not set");
-            command.Parameters.AddWithValue("@Languages", model.StudentId);
+            command.Parameters.AddWithValue("@Languages", model.Language);
             command.Parameters.AddWithValue("@CreatedDate", dateString);
             command.Parameters.AddWithValue("@UpdatedDate", dateString);
 
@@ -80,12 +80,13 @@ namespace School.Services.Repository
 
                 Student model = new Student();
                 model.StudentId = rows["UserID"].ToString();
+                model.UserName = rows["UserName"].ToString();
                 model.Firstname = rows["Firstname"].ToString();
                 model.LastName = rows["LastName"].ToString();
-                model.UserName = rows["UserName"].ToString();
                 model.Age = rows["Age"].ToString();
                 model.Gender = rows["Gender"].ToString();
                 model.Language = rows["Languages"].ToString();
+                model.UserType = rows["UserType"].ToString();
                 model.CreatedDate =DateTime.Parse(rows["CreatedDate"].ToString());
                 model.UpdatedDate = DateTime.Parse(rows["UpdatedDate"].ToString());
                 //model.EnrollmentDate = DateTime.Parse(rows["EnrollmentDate"].ToString());
@@ -95,17 +96,6 @@ namespace School.Services.Repository
             }
             catch (Exception ex)
             {
-                //string newFilenameExtension = Path.GetExtension("Sample".Trim());
-                //string extn = string.Empty;
-                //if (!String.IsNullOrWhiteSpace(newFilenameExtension))
-                //{
-                //    extn = newFilenameExtension.Substring(1);
-                //}
-
-                //if (!String.IsNullOrWhiteSpace(extn))
-                //{
-                //    // Use extn here
-                //}
                 throw;
             }
             //return base.PopulateRecord(reader);

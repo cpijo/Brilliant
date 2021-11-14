@@ -40,7 +40,9 @@
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
             <td>
-                <button id="btnEditTeacher" type="button" class="btnEditTeacher btn btn-primary" style="width:100px;">View More</button>
+                <button id="btnUserDetails" type="button" class="btnUserDetails btn btn-primary" style="width:100px;">Details</button>
+
+                @*<button id="btnEditTeacher" type="button" class="btnEditTeacher btn btn-primary" style="width:100px;">View More</button>*@
             </td>
             <td style="display:block;">
                 <button id="btnRoles" type="button" class="btnEdit btn btn-primary" style="width:100px;display:block;">Roles</button>
@@ -54,13 +56,36 @@
 
 <script>
 
-    $('#tableId .btnEditTeacher').click(function (event) {
+    //$('#tableId .btnEditTeacher').click(function (event) {
+    //    event.preventDefault();
+    //    event.stopPropagation();
+    //    var userId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
+    //    var Firstname = $(this).closest('td').parent('tr').find("td:eq(1)").text();
+    //    var LastName = $(this).closest('td').parent('tr').find("td:eq(2)").text();
+
+    //    var data = {
+    //        'userId': userId.trim(),
+    //        'Firstname': Firstname.trim(),
+    //        'LastName': LastName.trim()
+    //    };
+
+    //    var header = 'Teacher Information';
+    //    var url = '/Teacher/ViewTeacher';
+    //    var objPopup = classPageConstant.popupChildOne;
+    //    var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+    //    classControllerHelper.callController(pageObj);
+
+    //});
+
+
+
+
+    $('#tableId #btnUserDetails,#tableId #btnRoles').click(function (event) {
         event.preventDefault();
         event.stopPropagation();
         var userId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
         var Firstname = $(this).closest('td').parent('tr').find("td:eq(1)").text();
         var LastName = $(this).closest('td').parent('tr').find("td:eq(2)").text();
-
         var data = {
             'userId': userId.trim(),
             'Firstname': Firstname.trim(),
@@ -68,11 +93,15 @@
         };
 
         var header = 'Teacher Information';
-        var url = '/Teacher/ViewTeacher';
+        var url = '/TeacherRegister/TeacherInformation';
+        if (this.id === "btnRoles") {
+            header = 'Teacher\'s Roles';
+            url = '/TeacherRegister/TeacherRoles';
+        }
+
         var objPopup = classPageConstant.popupChildOne;
         var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
         classControllerHelper.callController(pageObj);
-
     });
 
 </script>

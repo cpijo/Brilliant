@@ -40,5 +40,17 @@ namespace School.UI.ViewModels
             ClassOrCourse = new ClassOrCourse();
             DropboxModel = new DropboxModel();
         }
+
+        public void getDefaults()
+        {
+            Teacher.TeacherId = Guid.NewGuid().ToString();
+            Teacher.CreatedDate = DateTime.Today;
+            Teacher.CreatedDate = DateTime.Today;
+            Address.StudentId = Teacher.TeacherId;
+            Address.CreatedDate = Teacher.CreatedDate;
+            Address.CreatedDate = Teacher.CreatedDate;
+        }
+
+
     }
 }

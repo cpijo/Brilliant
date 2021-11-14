@@ -13,7 +13,6 @@ namespace School.Services.Repository
 {
     public class TeacherRegisterRepository : RepositoryBase<Teacher>, ITeacherRegisterRepository
     {
-
         public override List<Teacher> GetAll()
         {
             command.CommandText = "SELECT * FROM Teacher";
@@ -22,14 +21,26 @@ namespace School.Services.Repository
 
         public override void Save(Teacher model)
         {
-            command.CommandText = "INSERT INTO Teacher(StudentId,Firstname,LastName,Email,DateOfBirth) values" +
-                                    "(@StudentId,@Firstname,@LastName,@Email,@DateOfBirth);";
+            //10/19/2021
+            string dateString = model.CreatedDate.ToString("dd/MM/yyyy");
+            dateString = model.CreatedDate.ToString("MM/dd/yyyy");
 
-            command.Parameters.AddWithValue("@TeacherId", model.TeacherId);
-            command.Parameters.AddWithValue("@Firstname", model.Firstname);
+            string sql = "INSERT INTO Teacher(UserId,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate," +
+                          "Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType) " +
+                        "values(@UserId,@UserName,@FirstName,@LastName,@Age,@Gender,@Race,@Languages,@CreatedDate,@UpdatedDate,'no password','no password',0,0,0,0,'','','','')";
+
+            command.CommandText = sql;
+            command.Parameters.AddWithValue("@UserId", model.TeacherId);
+            command.Parameters.AddWithValue("@UserName", model.TeacherId);
+            command.Parameters.AddWithValue("@FirstName", model.Firstname);
             command.Parameters.AddWithValue("@LastName", model.LastName ?? (object)DBNull.Value);
-            command.Parameters.AddWithValue("@Email", model.Email);
-            command.Parameters.AddWithValue("@DateOfBirth", model.DateOfBirth ?? (object)DBNull.Value);
+            command.Parameters.AddWithValue("@Age", 20);
+            command.Parameters.AddWithValue("@Gender", model.Gender);
+            command.Parameters.AddWithValue("@Race", "not set");
+            command.Parameters.AddWithValue("@Languages", model.Language);
+            command.Parameters.AddWithValue("@CreatedDate", dateString);
+            command.Parameters.AddWithValue("@UpdatedDate", dateString);
+
             base.Save(model);
         }
 
@@ -38,13 +49,14 @@ namespace School.Services.Repository
             try
             {
                 Teacher model = new Teacher();
-                model.TeacherId = rows["UserID"].ToString();
-                model.Firstname = rows["Firstname"].ToString();
-                model.LastName = rows["LastName"].ToString();
+                model.TeacherId = rows["UserId"].ToString();
                 model.UserName = rows["UserName"].ToString();
+                model.Firstname = rows["FirstName"].ToString();
+                model.LastName = rows["LastName"].ToString();
                 model.Age = rows["Age"].ToString();
                 model.Gender = rows["Gender"].ToString();
                 model.Language = rows["Languages"].ToString();
+                model.UserType = rows["UserType"].ToString();
                 model.CreatedDate = DateTime.Parse(rows["CreatedDate"].ToString());
                 model.UpdatedDate = DateTime.Parse(rows["UpdatedDate"].ToString());
 

@@ -96,22 +96,25 @@ namespace School.UI.Controllers
 
         #region Save Student 
         [HttpPost]
-        public ActionResult SaveRecord(StudentViewModel model)
+        public ActionResult SaveRecord(TeacherViewModel model)
         {
             try
             {
                 model.getDefaults();
-                StudentGrade sg = new StudentGrade();
-                sg = model.getStudentGrade();
-                sg.GradeId = CostantData.getFieldId(CostantData.dictGrades(), model.ClassOrCourse.ClassName);
+                //StudentGrade sg = new StudentGrade();
+                //sg = model.getStudentGrade();
+                //sg.GradeId = CostantData.getFieldId(CostantData.dictGrades(), model.ClassOrCourse.ClassName);
 
                 if (model.AssignTeacher.IsAssign == true)
                 {
                 }
-                model.Student.StudentId = Guid.NewGuid().ToString();
-                model.Student.UserName = model.Student.StudentId;
-                model.Student.UserId = model.Student.StudentId;
-                studentRepository.Save(model.Student);
+                model.Teacher.TeacherId = Guid.NewGuid().ToString();
+                model.Teacher.UserName = model.Teacher.TeacherId;
+                model.Teacher.UserId = model.Teacher.TeacherId;
+
+                teacherRegisterRepository.Save(model.Teacher);
+
+
                 return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

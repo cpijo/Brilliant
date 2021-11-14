@@ -18,9 +18,12 @@ namespace School.Entities.Fields
         public string UserName { get; set; }
         public string Age { get; set; }
         public string Gender { get; set; }
+        public string Race { get; set; }
         public string Language { get; set; }
+        public string Password { get; set; }
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
+        public string UserType { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public HttpPostedFileBase Photo { get; set; }
         public DateTime CreatedDate { get; set; }
