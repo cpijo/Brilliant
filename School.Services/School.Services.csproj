@@ -52,6 +52,7 @@
     <Compile Include="Interface\IClassTeacherRepository.cs" />
     <Compile Include="Interface\IGradeTeacherRepository.cs" />
     <Compile Include="Interface\IStudentAttendanceRepository.cs" />
+    <Compile Include="Interface\ITeacherRegisterRepository.cs" />
     <Compile Include="Interface\IStudentMarksRepository.cs" />
     <Compile Include="Interface\IStudentSubjectMarksRepository.cs" />
     <Compile Include="Interface\ISubjectTeacherRepository.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Repository\StudentSubjectMarksRepository.cs" />
     <Compile Include="Repository\GradeClassRepository.cs" />
     <Compile Include="Repository\SubjectTeacherRepository.cs" />
+    <Compile Include="Repository\TeacherRegisterRepository.cs" />
     <Compile Include="Repository\TeacherRepository.cs" />
     <Compile Include="Repository\SubjectResultRepository.cs" />
     <Compile Include="Repository\SubjectRepository.cs" />

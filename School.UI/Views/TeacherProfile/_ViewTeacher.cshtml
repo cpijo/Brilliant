@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<School.Entities.Fields.Teacher>
-
+@{ 
+    string test = "test1";
+}
 <style>
     button {
         border: none;
@@ -83,15 +85,15 @@
                                 <div class="divBody col-md-12" style="min-height:90px;border:1px solid wheat;">
                                     <div class="col-xs-12">
                                         <div class="col-md-3">
-                                            <select id="selectedSearchId" class="form-control">
-                                                <option value="0" selected>Name</option>
+                                            <select id="searchId" class="form-control">
+                                                <option value="0" selected>--Select--</option>
                                                 <option value="1">Surname</option>
                                                 <option value="2">Gender</option>
                                                 <option value="3">Grade</option>
                                             </select>
                                         </div>
-                                        <div class="col-md-7">
-                                            <input id="btnUploadFile" type="text" value="Sphiwe" class="col-md-12 form-control" />
+                                        <div id="inputHolderId" class="col-md-7">
+                                            <input id="textOrOptionId" type="text" placeholder="Search by textOrOptionId" class="col-md-12 form-control" />
                                         </div>
                                         <div class="col-md-2">
                                             <input id="btnSearch" type="button" value="Search" class="btn btn-default" />
@@ -159,28 +161,94 @@
     };
     var _teacher = new TeacherConstractor({});
 
-    $("#selectedSearchId").change(function (event) {
+    //$("#searchId").change(function (event) {
+    //    event.preventDefault();
+    //    event.stopPropagation();
+    //    var selectedValue = $("#searchId option:selected").val();
+    //    var data = {
+    //        'selectedValue': selectedValue.trim()
+    //    };
+
+    //    var partialHolder = "#viewStudent-Page #partialTableHolder";
+    //    var header = 'Update UserInfor';
+    //    url = '/Student/SearchRecord';
+    //    var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+    //    classControllerHelper.callController(pageObj);
+
+    //});
+
+    $("#searchId").change(function (event) {
         event.preventDefault();
         event.stopPropagation();
-        //debugger;
-        var selectedValue = $("#selectedSearchId option:selected").val();
+        debugger;
+        var selectedValue = $("#gradeId option:selected").val();
         var data = {
-            'selectedValue': selectedValue.trim()
+            'selectedValue': selectedValue.trim(),
+        };
+        var _searchValue = selectedValue.trim();
+
+        var partialHolder = "#partialTableSubjectHolder";
+        var url = '/TeacherRegister/dropBoxUpdateSimple';
+        var pageObj = {};
+        if (_searchValue === "Grade" || _searchValue === "Gender") {
+            header = 'Update UserInfor';
+            url = '/TeacherRegister/dropBoxUpdateSimple';
+            partialHolder = "#inputHolderId";
+            pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+            classControllerHelper.callController(pageObj);
+        }
+        else {
+            partialHolder = "#inputHolderId";
+            var response = '<input id="textOrOptionId" type="text" placeholder="search by name" class="textOrOptionId col-md-12 form-control" />'
+            pageObj = { function: "append", partialHolder: partialHolder };
+            classControllerHelper.appendPartial(response, pageObj);
+        }
+    });
+
+
+    $("#searchId22").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var selectedValue = $("#gradeId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim(),
         };
 
-        var partialHolder = "#viewStudent-Page #partialTableHolder";
-        var header = 'Update UserInfor';
-        url = '/Student/SearchRecord';
-        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        var partialHolder = "#tableHolderId";
+        var url = '/TeacherRegister/SearchResult';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: "", pageId: "", partialHolder: partialHolder };
         classControllerHelper.callController(pageObj);
 
+
+
+
+
+
+        //if (_searchValue === "Grade" || _searchValue === "Gender") {
+        //    header = 'Update UserInfor';
+        //    url = '/StudentSubjectMarks/dropBoxUpdateSimple';
+        //    partialHolder = "#inputHolderId";
+        //    pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        //    classControllerHelper.callController(pageObj);
+        //}
+        //else {
+        //    partialHolder = "#inputHolderId";
+        //    var response = '<input id="textOrOptionId" type="text" placeholder="search by name" class="textOrOptionId col-md-12 form-control" />'
+        //    pageObj = { function: "append", partialHolder: partialHolder };
+        //    classControllerHelper.appendPartial(response, pageObj);
+        //}
     });
+
+
+
+
+
 
     $('#btnSearch').click(function () {
         event.preventDefault();
         event.stopPropagation();
-        //debugger;
-        var selectedValue = $("#selectedSearchId option:selected").val();
+        debugger;
+        var selectedValue = $("#textOrOptionId").val();
         var data = {
             'selectedValue': selectedValue.trim()
         };

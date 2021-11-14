@@ -50,8 +50,37 @@ namespace School.UI.Controllers
             return dictionary;
         }
 
+        public SelectList dropBoxDictionary(string selectedValue, string searchType)
+        {
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
-        //public abstract ActionResult GetRecord();
 
+            switch (selectedValue)
+            {
+                case "Grade8":
+                    dictionary = CostantData.dictGrade8Subjects();
+                    break;
+                case "Grade9":
+                    dictionary = CostantData.dictGrade9Subjects();
+                    break;
+                case "Grade10":
+                    dictionary = CostantData.dictGrade10Subjects();
+                    break;
+                case "Grade11":
+                    dictionary = CostantData.dictGrade11Subjects();
+                    break;
+                case "Grade12":
+                    dictionary = CostantData.dictGrade12Subjects();
+                    break;
+                default:
+                    dictionary = CostantData.dictGrade8Subjects();
+                    break;
+            }
+
+            List<SelectListItem> list = dropdownHelper(dictionary);
+            SelectList selectList = new SelectList(list, "Value", "Text");
+            return selectList;
+
+        }
     }
 }

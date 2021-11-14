@@ -6,6 +6,7 @@ using School.UI.ViewModels.TeacherVM;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -25,12 +26,14 @@ namespace School.UI.Controllers
         private ITeacherRepository tearcherRepository;
         private IStudentResultsRepository studentResultsRepository;
         private IStudentRepository studentRepository;
-
-        public TeacherRegisterController(IStudentResultsRepository studentResultsRepository, IStudentRepository studentRepository, ITeacherRepository tearcherRepository)
+        private ITeacherRegisterRepository teacherRegisterRepository;
+        public TeacherRegisterController(IStudentResultsRepository studentResultsRepository, IStudentRepository studentRepository, 
+            ITeacherRepository tearcherRepository, ITeacherRegisterRepository teacherRegisterRepository)
         {
             this.studentResultsRepository = studentResultsRepository;
             this.studentRepository = studentRepository;
             this.tearcherRepository= tearcherRepository;
+            this.teacherRegisterRepository = teacherRegisterRepository;
         }
 
         #region Create Record
@@ -222,11 +225,47 @@ namespace School.UI.Controllers
         [HttpGet]
         public ActionResult GetRecord()
         {
-            List<Teacher> model = tearcherRepository.GetAll();
+            List<Teacher> model = teacherRegisterRepository.GetAll();
             Session["teacher"] = model;
             return PartialView("_ViewTeacher", model);
         }
         #endregion
+
+        #region Get Record
+        [HttpPost]
+        public ActionResult GetByAny(string selectedValue)
+        {
+            dynamic _dynamic = new ExpandoObject();
+            _dynamic.searchValue = selectedValue;
+            _dynamic.type = "byGrade";
+            List<Teacher> model = teacherRegisterRepository.GetByAny(_dynamic);
+
+            return PartialView("_TableTeacher", model);
+        }
+        #endregion
+
+
+        #region dropBox Update Simple
+        [HttpPost]
+        public ActionResult dropBoxUpdateSimple(string selectedValue, string searchType)
+        {
+            DropBoxViewModel model = new DropBoxViewModel();
+            model.dropboxType = "grade";
+            //model.GradeDropboxItemList = dropBoxDictionary(selectedValue, searchType);
+
+
+            Dictionary<string, string> GradeDictionary = CostantData.dictGrades();
+            List<SelectListItem> list = dropdownHelper(GradeDictionary);
+            model.GradeDropboxItemList = new SelectList(list, "Value", "Text");
+
+            return PartialView("_dropBoxOnly", model);
+        }
+        #endregion;
+
+
+
+
+
 
 
         #region Teacher Information

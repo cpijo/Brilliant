@@ -34,15 +34,15 @@
                 <div class="form-group">
                     <div class="col-xs-12">
                         <div class="col-md-3">
-                            <select id="selectedSearchId" class="form-control">
-                                <option value="0" selected>Filter</option>
-                                <option value="1">Grade</option>
-                                <option value="2">Gender</option>
-                                <option value="3">Surname</option>
+                            <select id="searchId" class="form-control">
+                                <option value="--Select--" selected>--Select--</option>
+                                <option value="Grade">Grade</option>
+                                <option value="Gender">Gender</option>
+                                <option value="Surname">Surname</option>
                             </select>
                         </div>
-                        <div class="col-md-7">
-                            <input id="txtName" type="text" value="Sphiwe" class="col-md-12 form-control" />
+                        <div id="inputHolderId" class="col-md-7">
+                            <input id="textOrOptionId" type="text" placeholder="Search by textOrOptionId" class="col-md-12 form-control" />
                         </div>
                         <div class="col-md-2">
                             <input id="btnSearch" type="button" value="Search" class="btn btn-default" />
@@ -60,7 +60,7 @@
 
         <div class="card_t card-s">
 
-            <div class="col-xs-12" style="padding:15px;">
+            <div id="tableHolderId" class="col-xs-12" style="padding:15px;">
 
                 <table id="tableId" class="table" style="background-color:white; border:1px solid silver;">
                     <thead style="background-color:rgb(240, 240, 240);">
@@ -78,7 +78,7 @@
                                 @Html.DisplayNameFor(model => model.Gender)
                             </th>
                             <th style="display:block;">
-                                User Details
+                                Details
                             </th>
                             <th>
                                 View Report
@@ -143,5 +143,59 @@
         var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
         classControllerHelper.callController(pageObj);
     });
+
+
+
+
+    $("#searchId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        //debugger;
+        var selectedValue = $("#searchId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim(),
+        };
+        var _searchValue = selectedValue.trim();
+
+        var partialHolder = "#partialTableSubjectHolder";
+        var url = '/TeacherRegister/dropBoxUpdateSimple';
+        var pageObj = {};
+        if (_searchValue === "Grade" || _searchValue === "Gender") {
+            header = 'Update UserInfor';
+            url = '/TeacherRegister/dropBoxUpdateSimple';
+            partialHolder = "#inputHolderId";
+            pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+            classControllerHelper.callController(pageObj);
+        }
+        else {
+            partialHolder = "#inputHolderId";
+            var response = '<input id="textOrOptionId" type="text" placeholder="search by name" class="textOrOptionId col-md-12 form-control" />'
+            pageObj = { function: "append", partialHolder: partialHolder };
+            classControllerHelper.appendPartial(response, pageObj);
+        }
+    });
+
+/*
+    $("#gradeId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        debugger;
+        var selectedValue = $("#gradeId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim(),
+        };
+
+        var partialHolder = "#tableHolderId";
+        var url = '/TeacherRegister/SearchResult';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: "", pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+    */
+
+
+
+
 
 </script>

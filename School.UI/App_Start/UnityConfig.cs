@@ -26,6 +26,7 @@ namespace School.UI
             container.RegisterType<IStudentAttendanceRepository, StudentAttendanceRepository>();
             container.RegisterType<IGradeClassRepository, GradeClassRepository>();
             container.RegisterType<IStudentMarksRepository, StudentMarksRepository>();
+            container.RegisterType<ITeacherRegisterRepository, TeacherRegisterRepository>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

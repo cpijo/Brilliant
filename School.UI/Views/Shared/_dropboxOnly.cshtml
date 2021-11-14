@@ -1,0 +1,42 @@
+﻿@model School.UI.ViewModels.DropBoxViewModel
+
+@{
+    switch (Model.dropboxType)
+    {
+        case "grade":
+            @Html.DropDownListFor(m => m.Grade, Model.GradeDropboxItemList, new { @id = "gradeId", @class = "form-control" })
+            break;
+        case "class":
+            @Html.DropDownListFor(m => m.Class, Model.ClassDropboxItemList, new { @id = "cityId", @class = "form-control" })
+            break;
+        case "subject":
+            @Html.DropDownListFor(m => m.Subject, Model.SubjectDropboxItemList, new { @id = "suburbId", @class = "form-control" })
+            break;
+        case "location":
+            @Html.DropDownListFor(model => model.Location, Model.LocationDropboxItemList, new { @id = "locationId", @class = "form-control" }) break;
+        default:
+            @*@Html.DropDownListFor(m => m.UnkownItem, Model.UnkownItemList, new { @id = "UnkownItem", @class = "form-control" })*@
+            break;
+    }
+}
+
+
+
+<script>
+    $("#gradeId,#cityId,#suburbId,#locationId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        //dropbox
+        //debugger;
+        var selectedValue = $("#gradeId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim(),
+        };
+
+        var partialHolder = "#tableHolderId";
+        var url = '/TeacherRegister/GetByAny';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: "", pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+    });
+
+</script>

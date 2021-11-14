@@ -167,6 +167,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentModel\StudentAttendanceModel.cs" />
+    <Compile Include="ViewModels\DropBoxViewModel.cs" />
     <Compile Include="ViewModels\StudentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Login.cs" />
@@ -1282,6 +1283,7 @@
     <Content Include="Views\StudentMarks\_TableSubjectMarksOnly.cshtml" />
     <Content Include="Views\StudentResult\_UpdateSubjectMarks.cshtml" />
     <Content Include="Views\Subject\_AddSubjectToClass.cshtml" />
+    <Content Include="Views\Shared\_dropboxOnly.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
