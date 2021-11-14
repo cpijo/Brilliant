@@ -1,5 +1,6 @@
 ﻿using School.Entities.Fields;
 using School.Services.Interface;
+using School.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,7 +20,7 @@ namespace School.UI.Controllers
             this.subjectRepository = courseRepository;
         }
 
-        #region Get Course
+        #region Get Record
         [HttpGet]
         public ActionResult GetRecord()
         {
@@ -45,6 +46,10 @@ namespace School.UI.Controllers
                 {
                     model.SubjectId = Guid.NewGuid().ToString();
                 }
+
+
+
+
                 subjectRepository.Save(model);
 
                 return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
@@ -60,6 +65,7 @@ namespace School.UI.Controllers
         [HttpPost]
         public ActionResult PreUpdate(Subject model)
         {
+            model.oldSubjectId = model.SubjectId;
             return PartialView("_UpdateSubject", model);
         }
         #endregion

@@ -14,13 +14,13 @@ namespace School.Services.Repository
     {
         public override List<Grades> GetAll()
         {
-            command.CommandText = "SELECT * FROM SchoolBasa.dbo.Grade";
+            command.CommandText = "SELECT * FROM Grade";
             return base.GetAll();
         }
         public override List<Grades> GetById(string id)
         {
             command.CommandText = "SELECT * " +
-            "FROM SchoolBasa.dbo.Grade " +
+            "FROM Grade " +
             "WHERE GradeId = @GradeId " +
             "Order By GradeName asc";
 
@@ -30,7 +30,7 @@ namespace School.Services.Repository
 
         public override void Save(Grades model)
         {
-            command.CommandText = "INSERT INTO SchoolBasa.dbo.Grade(GradeId,GradeName) values" +
+            command.CommandText = "INSERT INTO Grade(GradeId,GradeName) values" +
                                 "(@GradeId,@GradeName);";
 
             command.Parameters.AddWithValue("@GradeId", model.GradeId);
@@ -40,10 +40,19 @@ namespace School.Services.Repository
         public override void SaveMany(List<Grades> model)
         {
             Delete(model);
-            command.CommandText = "INSERT INTO SchoolBasa.dbo.Grade(GradeId,GradeName) values" +
+            command.CommandText = "INSERT INTO Grade(GradeId,GradeName) values" +
                                 "(@GradeId,@GradeName);";
             base.SaveMany(model);
         }
+        public override void Update(Grades model)
+        {
+            command.CommandText = "UPDATE Grade SET GradeId=@GradeId, GradeName=@GradeName " +
+                                    "WHERE GradeId = '" + model.oldGradeId + "'";
+            command.Parameters.AddWithValue("@GradeId", model.GradeId);
+            command.Parameters.AddWithValue("@GradeName", model.Grade);
+            base.Update(model);
+        }
+
         public override void Delete(List<Grades> model)
         {
             List<Grades> _model = model.GroupBy(x => x.StudentId).Select(x => x.First()).ToList();
@@ -52,7 +61,7 @@ namespace School.Services.Repository
                 userId += "'" + _model[i].StudentId + "',";
 
             userId = userId.Substring(0, userId.LastIndexOf(','));
-            command.CommandText = "DELETE FROM SchoolBasa.dbo.Grades WHERE GradeId IN (" + userId + ")";
+            command.CommandText = "DELETE FROM Grade WHERE GradeId IN (" + userId + ")";
             base.Delete(_model);
         }
 

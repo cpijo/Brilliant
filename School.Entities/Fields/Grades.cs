@@ -9,6 +9,7 @@ namespace School.Entities.Fields
         public string StudentId { get; set; }
         public string GradeId { get; set; }
         public string Grade { get; set; }
+        public string oldGradeId { get; set; }
     }
     public class StandardClass
     {

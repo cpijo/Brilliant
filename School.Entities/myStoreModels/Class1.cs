@@ -6,6 +6,23 @@ using System.Threading.Tasks;
 
 namespace School.Entities.myStoreModels
 {
+
+    //https://www.w3schools.com/sql/trysql.asp?filename=trysql_insert_into_select2
+    //https://www.w3schools.com/sql/trysql.asp?filename=trysql_insert_into_select2
+
+    /*Your Database:
+        Tablename	Records
+        Customers	120
+        Categories	8
+        Employees	10
+        OrderDetails	518
+        Orders	196
+        Products	77
+        Shippers	3
+        Suppliers	29
+        */
+
+
     //https://www.c-sharpcorner.com/UploadFile/abhikumarvatsa/ajax-actionlink-and-html-actionlink-in-mvc/
     //https://www.c-sharpcorner.com/UploadFile/abhikumarvatsa/ajax-actionlink-and-html-actionlink-in-mvc/
     //https://www.pluralsight.com/guides/asp.net-mvc-getting-default-data-binding-right-for-hierarchical-views

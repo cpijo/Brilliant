@@ -21,17 +21,18 @@
     <div id="register-page" class="col-xs-12">
         <div class="form-horizontal" style="padding-top:20px;">
 
+            @Html.HiddenFor(model => model.oldSubjectId)
             <div class="form-group">
                 @Html.LabelFor(model => model.SubjectId, new { @class = "col-sm-4 control-label" })
                 <div class="col-md-8">
-                    @Html.TextBoxFor(m => m.SubjectId, new {@id= "SubjectId", @class = "col-sm-12 form-control" })
+                    @Html.TextBoxFor(m => m.SubjectId, new { @id = "SubjectId", @class = "col-sm-12 form-control" })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.SubjectName, new { @class = "col-sm-4 control-label" })
                 <div class="col-md-8">
-                    @Html.TextBoxFor(model => model.SubjectName, new { @id = "SubjectName", @class = "form-control"})
+                    @Html.TextBoxFor(model => model.SubjectName, new { @id = "SubjectName", @class = "form-control" })
                 </div>
             </div>
 

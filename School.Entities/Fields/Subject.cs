@@ -10,6 +10,7 @@ namespace School.Entities.Fields
         public string SubjectId { get; set; }
         public string SubjectName { get; set; }
         public string Marks { get; set; }
+        public string oldSubjectId { get; set; }
     }
     public class SubjectResult
     {

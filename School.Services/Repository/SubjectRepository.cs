@@ -15,7 +15,7 @@ namespace School.Services.Repository
 
         public override List<Subject> GetAll()
         {
-            command.CommandText = "SELECT * FROM SchoolBasa.dbo.Subject";//GradeClass
+            command.CommandText = "SELECT * FROM Schooldb.dbo.Subject";
             return base.GetAll();
         }
 
@@ -35,7 +35,7 @@ namespace School.Services.Repository
         }
         public override void Save(Subject model)
         {
-            command.CommandText = "INSERT INTO SchoolBasa.dbo.Subject(SubjectId,SubjectName) values" +
+            command.CommandText = "INSERT INTO Schooldb.dbo.Subject(SubjectId,SubjectName) values" +
                                     "(@SubjectId,@SubjectName);";
 
             command.Parameters.AddWithValue("@SubjectId", model.SubjectId);
@@ -45,10 +45,20 @@ namespace School.Services.Repository
         public override void SaveMany(List<Subject> model)
         {
             Delete(model);
-            command.CommandText = "INSERT INTO schoolbd.dbo.Subject(SubjectId,SubjectName) values" +
+            command.CommandText = "INSERT INTO schooldb.dbo.Subject(SubjectId,SubjectName) values" +
                                     "(@SubjectId,@SubjectName);";
             base.SaveMany(model);
         }
+
+        public override void Update(Subject model)
+        {
+            command.CommandText = "UPDATE Subject SET SubjectId=@SubjectId, SubjectName=@SubjectName " +
+                                    "WHERE SubjectId = '"+ model.oldSubjectId + "'";
+            command.Parameters.AddWithValue("@SubjectId", model.SubjectId);
+            command.Parameters.AddWithValue("@SubjectName", model.SubjectName);
+            base.Update(model);
+        }
+
         public override void Delete(List<Subject> model)
         {
             List<Subject> _model = model.GroupBy(x => x.SubjectId).Select(x => x.First()).ToList();
@@ -57,7 +67,7 @@ namespace School.Services.Repository
                 coursId += "'" + _model[i].SubjectId + "',";
 
             coursId = coursId.Substring(0, coursId.LastIndexOf(','));
-            command.CommandText = "DELETE FROM SchoolBasa.dbo.Courses WHERE SubjectId IN (" + coursId + ")";
+            command.CommandText = "DELETE FROM schooldb.dbo.Subject WHERE SubjectId IN (" + coursId + ")";
             base.Delete(_model);
         }
 

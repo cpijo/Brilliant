@@ -12,8 +12,11 @@
                         <th>
                             @Html.DisplayNameFor(model => model.SubjectName)
                         </th>
-                        <th>
+                        <th style='min-width:60px;max-width:60px'>
                             Edit
+                        </th>
+                        <th style='min-width:60px;max-width:60px'>
+                            Delete
                         </th>
                     </tr>
                 </thead>
@@ -29,6 +32,9 @@
                         </td>
                         <td style='min-width:60px;max-width:60px'>
                             <button id="btnEdit" type="button" class="btn btn-primary">Edit</button>
+                        </td>
+                        <td style='min-width:60px;max-width:60px'>
+                            <button id="btnDelete" type="button" class="btnDelete btn btn-warning">Delete</button>
                         </td>
                     </tr>
                     }
@@ -61,6 +67,17 @@
                   
                 });
 
+
+                $(".btnDelete").click(function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    classMessageResponse.showMessage({ message: "Sorry, but this function is still under construction", type: "warning", title: "Under construction", pageId: "" });
+                });
+
+                //$("#btnDelete").click()
+                //{
+                //    classMessageResponse.showMessage({ message: "Sorry, but this function is still under construction", type: "warning", title: "Under construction", pageId: "" });          
+                //}
 
             </script>
 

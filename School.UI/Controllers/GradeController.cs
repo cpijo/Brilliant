@@ -63,6 +63,7 @@ namespace School.UI.Controllers
         [HttpPost]
         public ActionResult PreUpdate(Grades model)
         {
+            model.oldGradeId = model.GradeId;
             return PartialView("_UpdateGrade", model);
         }
         #endregion

@@ -22,6 +22,7 @@
         <div class="form-horizontal" style="padding-top:20px;">
 
             <div class="form-group">
+                @Html.HiddenFor(model => model.oldGradeId)
                 @Html.LabelFor(model => model.GradeId, new { @class = "col-sm-4 control-label" })
                 <div class="col-md-8">
                     @Html.TextBoxFor(m => m.GradeId, new { @id = "GradeId", @class = "col-sm-12 fileStyle form-control" })
