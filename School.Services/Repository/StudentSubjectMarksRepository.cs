@@ -342,3 +342,199 @@
 //        */
 //    }
 //}
+
+
+
+
+/***** Script for SelectTopNRows command from   
+ * 
+
+
+Use schooldb
+
+SELECT UserName
+      , FirstName
+      , LastName INTO #TempLocationCol FROM Student
+GO
+SELECT* FROM #TempLocationCol where FirstName LIKE 'All%'
+
+
+SELECT sub.*
+  FROM (
+        SELECT*
+          FROM student
+         WHERE UserType != 'Friday'
+
+
+        UNION
+                 SELECT *
+          FROM Teacher
+         WHERE UserType != 'Friday'
+       ) sub
+
+
+--https://mode.com/sql-tutorial/sql-sub-queries/
+
+SELECT sub.*
+  FROM (
+        SELECT FirstName 'Student Name',
+        CASE UserType
+
+        WHEN 'A' THEN 'Excellent'
+
+        WHEN 'B' THEN 'Good'
+
+        WHEN 'C' THEN 'Average'
+
+        WHEN 'D' THEN 'Poor'
+
+        WHEN 'F' THEN 'Fail'
+
+        ELSE 'ST'
+
+        END 'userType'
+          FROM student
+         WHERE UserType != 'Friday'
+
+
+        UNION
+            SELECT FirstName 'Student Name',
+        CASE UserType
+
+        WHEN 'A' THEN 'Excellent'
+
+        WHEN 'B' THEN 'Good'
+
+        WHEN 'C' THEN 'Average'
+
+        WHEN 'D' THEN 'Poor'
+
+        WHEN 'F' THEN 'Fail'
+
+        ELSE 'ST'
+
+        END 'userType'
+          FROM Teacher
+         WHERE UserType != 'Friday'
+       ) sub
+
+
+
+
+SELECT sub.*
+  FROM(
+        SELECT UserName, [Password], FirstName 'Student Name',
+        CASE UserType
+
+        WHEN 'A' THEN 'Excellent'
+
+        WHEN 'B' THEN 'Good'
+
+        WHEN 'C' THEN 'Average'
+
+        WHEN 'D' THEN 'Poor'
+
+        WHEN 'F' THEN 'Fail'
+
+        ELSE 'Student'
+
+        END 'userType'
+          FROM student
+         WHERE UserType != 'Friday'
+
+
+        UNION
+            SELECT UserName, [Password], FirstName 'Student Name',
+        CASE UserType
+
+        WHEN 'A' THEN 'Excellent'
+
+        WHEN 'B' THEN 'Good'
+
+        WHEN 'C' THEN 'Average'
+
+        WHEN 'D' THEN 'Poor'
+
+        WHEN 'F' THEN 'Fail'
+
+        ELSE 'Teacher'
+
+        END 'userType'
+          FROM Teacher
+         WHERE UserType != 'Friday'
+       ) sub
+
+       WHERE sub.userType='Teacher'
+	   AND sub.UserName='TC00000008'
+	   AND sub.Password= 'C69DA0293EBC7A8E9F5F4F8974B64809BD21F874'
+
+
+
+
+
+
+
+
+
+
+
+SELECT FirstName 'Student Name',
+CASE UserType
+WHEN 'A' THEN 'Excellent'
+WHEN 'B' THEN 'Good'
+WHEN 'C' THEN 'Average'
+WHEN 'D' THEN 'Poor'
+WHEN 'F' THEN 'Fail'
+ELSE 'ST'
+END 'userType'
+FROM student
+
+UNION ALL
+
+SELECT FirstName 'Student Name',
+CASE UserType
+WHEN 'A' THEN 'Excellent'
+WHEN 'B' THEN 'Good'
+WHEN 'C' THEN 'Average'
+WHEN 'D' THEN 'Poor'
+WHEN 'F' THEN 'Fail'
+ELSE 'TC'
+END 'userType'
+FROM Teacher
+
+
+
+
+
+SELECT FirstName 'Student Name',
+CASE UserType
+WHEN 'A' THEN 'Excellent'
+WHEN 'B' THEN 'Good'
+WHEN 'C' THEN 'Average'
+WHEN 'D' THEN 'Poor'
+WHEN 'F' THEN 'Fail'
+ELSE 'ST'
+END 'userType'
+FROM student
+
+UNION ALL
+
+SELECT FirstName 'Student Name',
+CASE UserType
+WHEN 'A' THEN 'Excellent'
+WHEN 'B' THEN 'Good'
+WHEN 'C' THEN 'Average'
+WHEN 'D' THEN 'Poor'
+WHEN 'F' THEN 'Fail'
+ELSE 'TC'
+END 'userType'
+FROM Teacher
+
+
+
+
+
+
+
+
+*/
