@@ -20,14 +20,16 @@ namespace School.UI.Controllers
         private IStudentResultsRepository studentResultsRepository;
         private ISubjectRepository subjectRepository;
         private ISubjectResultRepository subjectResultRepository;
+        private IStudentMarksRepository studentMarksRepository;
         public StudentResultController(IStudentResultsRepository studentResultsRepository, ISubjectRepository subjectRepository,
-            ISubjectResultRepository subjectResultRepository)
+            ISubjectResultRepository subjectResultRepository, IStudentMarksRepository studentMarksRepository)
         {
             this.studentResultsRepository = studentResultsRepository;
             this.subjectRepository = subjectRepository;
             this.subjectResultRepository = subjectResultRepository;
+            this.studentMarksRepository = studentMarksRepository;
         }
-        #region Get Student
+        #region Get Record
         [HttpGet]
         public ActionResult GetRecord()
         {
@@ -94,7 +96,8 @@ namespace School.UI.Controllers
             //List<Subject> subjects = subjectRepository.GetById(student.StudentId);
 
             List<SubjectResult> subjectResult = subjectResultRepository.GetById(student.StudentId);
-
+            studentResult.GradeName = studentResult.CourseId;
+            studentResult.GradeId = studentResult.CourseId;
             model.StudentResults = studentResult;
             model.Student = student;
             model.SubjectResult = subjectResult;
@@ -103,14 +106,6 @@ namespace School.UI.Controllers
         }
         #endregion
 
-        #region View Student Results Page
-        [HttpGet]
-        public ActionResult PreGetRecord()
-        {
-            List<StudentResults> studentList = studentResultsRepository.GetAll();
-            return PartialView("_BasePage", studentList);
-        }
-        #endregion
 
         #region Get Student
         [HttpGet]
@@ -121,5 +116,50 @@ namespace School.UI.Controllers
             //return PartialView("_TableStudentResults", _model);
         }
         #endregion
+
+
+
+
+
+        //#region View Student Results Page
+        //[HttpGet]
+        //public ActionResult PreGetRecord()
+        //{
+        //    ////List<StudentResults> studentList = studentResultsRepository.GetAll();
+        //    ////return PartialView("_BasePage", studentList);
+        //}
+        //#endregion
+
+        #region Pre Update
+        [HttpPost]
+        public ActionResult PreUpdate(StudentSubjectMarks model)
+        {
+            return PartialView("_UpdateSubjectMarks", model);
+        }
+        #endregion
+
+        #region Save Update
+        [HttpPost]
+        public ActionResult Update(StudentSubjectMarks model)
+        {
+            try
+            {
+                model.GradeId = CostantData.getFieldId(CostantData.dictGrades(), model.GradeId.Trim());
+                studentMarksRepository.Update(model);
+                return Json(new { result = "true", message = "Data updated Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "false", message = ex.Message, title = "Request Failed" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+
+
+
+
+
+
+
     }
 }

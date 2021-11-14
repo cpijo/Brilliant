@@ -114,7 +114,7 @@ namespace School.Entities.Fields
         public string SubjectName { get; set; }
         public string MarkValue { get; set; }
         public string ExamType { get; set; }
-        public string Symbol { get; set; }
+        public string Symbol { get; set; } = "none";
         public string ExamDate { get; set; }
     }
 

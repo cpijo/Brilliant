@@ -38,6 +38,168 @@ namespace School.Services.Repository
             return base.GetById("");
         }
 
+        public override void Save(StudentSubjectMarks model)
+        {
+            command.CommandText = "INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue,ExamDate) values" +
+                                "(@StudentId,@GradeId,@ExamType,@SubjectId,@MarkValue,@ExamDate) ";
+
+            command.Parameters.AddWithValue("StudentId", model.StudentId);
+            command.Parameters.AddWithValue("GradeId", model.GradeId);
+            command.Parameters.AddWithValue("ExamType", model.ExamType);
+            command.Parameters.AddWithValue("SubjectId", model.SubjectId);
+            command.Parameters.AddWithValue("MarkValue", model.MarkValue);
+            command.Parameters.AddWithValue("ExamDate", model.ExamDate);
+            base.Save(model);
+        }
+
+
+        public override void SaveMany(List<StudentSubjectMarks> model)
+        {
+            command.CommandText = "INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue,ExamDate) values" +
+                                "(@StudentId,@GradeId,@ExamType,@SubjectId,@MarkValue,@ExamDate) ";
+            base.SaveMany(model);
+        }
+
+        public override void Update(StudentSubjectMarks model)
+        {
+            command.CommandText = "UPDATE SubjectResult SET MarkValue=@MarkValue " +
+                    "Symbol=@Symbol WHERE StudentId = @StudentId AND GradeId = @GradeId AND SubjectId = @SubjectId  AND ExamDate = @ExamDate";
+
+            command.Parameters.AddWithValue("@StudentId", model.StudentId);
+            command.Parameters.AddWithValue("@GradeId", model.GradeId);
+            command.Parameters.AddWithValue("@SubjectId", model.SubjectId);
+            command.Parameters.AddWithValue("@MarkValue", model.MarkValue);
+            command.Parameters.AddWithValue("@ExamDate", model.ExamDate);
+
+            base.Update(model);
+        }
+
+
+        public override StudentSubjectMarks PopulateRecord(SqlDataReader rows)
+        {
+            try
+            {
+                StudentSubjectMarks model = new StudentSubjectMarks();
+                model.StudentId = rows["UserId"].ToString();
+                model.FirstName = rows["Firstname"].ToString();
+                model.LastName = rows["LastName"].ToString();
+                if (rows.FieldCount > 5)
+                {
+                    model.SubjectId = rows["SubjectId"].ToString();
+                    model.SubjectName = rows["SubjectName"].ToString();
+                    model.MarkValue = rows["MarkValue"].ToString();
+                }
+                return model;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public override void command_ExecuteNonQuery(List<StudentSubjectMarks> _model)
+        {
+            foreach (var model in _model)
+            {
+                try
+                {
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("StudentId", model.StudentId);
+                    command.Parameters.AddWithValue("GradeId", model.GradeId);
+                    command.Parameters.AddWithValue("ExamType", model.ExamType);
+                    command.Parameters.AddWithValue("SubjectId", model.SubjectId);
+                    command.Parameters.AddWithValue("MarkValue", model.MarkValue);
+                    command.Parameters.AddWithValue("ExamDate", model.ExamDate);
+                    command.Connection.Open();
+                    command.ExecuteNonQuery();
+                    command.Connection.Close();
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
+
+
+
+        public override void sqlQueries(dynamic obj)
+        {
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            dynamic _obj = JObject.Parse(json);
+            string jsonString = Convert.ToString(obj); //var obj = { StudentId = "StudentId", GradeId = "GradeI2", queryType = "searchByGrade" }
+            string gradeId = _obj.GradeId;
+            string subjectId = _obj.SubjectId ?? "0";
+            string examDate = _obj.ExamDate ?? "0";
+            examDate = examDate.Replace('/', '-');
+            string teacherId = _obj.TeacherId ?? "0";
+            string type = _obj.type ?? "0";
+            string sql = "";
+
+            switch (type)
+            {
+                case "start":
+                    //sql = "SELECT  s.UserId,s.Firstname,s.LastName,sm.GradeId,sm.SubjectId,sb.SubjectName,sm.MarkValue " +
+                    //"FROM  Student s " +
+                    //"INNER JOIN StudentMarks sm ON( sm.StudentId = s.UserId AND sm.GradeId=@GradeId AND sm.SubjectId=@SubjectId AND ExamDate=@ExamDate ) " +
+                    //"Left JOIN Subject sb ON sb.SubjectId = sm.SubjectId";
+
+                    sql = "SELECT s.UserId,s.Firstname,s.LastName FROM  Student s " +
+                    "WHERE UserId in( " +
+                    "SELECT st.StudentId From StudentTeacher st " +
+                    "WHERE st.StudentId in( " +
+                    "SELECT StudentId from StudentMarks Where GradeId=@GradeId and SubjectId=@SubjectId " +
+                     ") " +
+                    "AND TeacherId=@TeacherId )";
+
+                    command.CommandText = sql;
+                    command.Parameters.AddWithValue("@TeacherId", teacherId);
+                    command.Parameters.AddWithValue("@GradeId", gradeId);
+                    command.Parameters.AddWithValue("@SubjectId", subjectId);
+
+                    break;
+
+                case "existingRecords":
+                    sql = "SELECT  s.UserId,s.Firstname,s.LastName,sm.GradeId,sm.SubjectId,sb.SubjectName,sm.MarkValue " +
+                    "FROM  Student s " +
+                    "INNER JOIN StudentMarks sm ON( sm.StudentId = s.UserId AND sm.GradeId=@GradeId AND sm.SubjectId=@SubjectId AND ExamDate=@ExamDate ) " +
+                    "Left JOIN Subject sb ON sb.SubjectId = sm.SubjectId";
+
+                    command.CommandText = sql;
+                    command.Parameters.AddWithValue("@GradeId", gradeId);
+                    command.Parameters.AddWithValue("@SubjectId", subjectId);
+                    command.Parameters.AddWithValue("@ExamDate", examDate);
+                    break;
+                case "hasRecords":
+                    sql = "SELECT  s.UserId,s.Firstname,s.LastName,sm.GradeId,sm.SubjectId,sb.SubjectName,sm.MarkValue " +
+                    "FROM  Student s " +
+                    "INNER JOIN StudentMarks sm ON( sm.StudentId = s.UserId AND sm.GradeId=@GradeId AND sm.SubjectId=@SubjectId AND ExamDate=@ExamDate ) " +
+                    "Left JOIN Subject sb ON sb.SubjectId = sm.SubjectId";
+
+                    command.CommandText = sql;
+                    command.Parameters.AddWithValue("@GradeId", gradeId);
+                    command.Parameters.AddWithValue("@SubjectId", subjectId);
+                    command.Parameters.AddWithValue("@ExamDate", examDate);
+                    break;
+                case "noMarksButHasDate":
+                    sql = "SELECT  s.UserId,s.Firstname,s.LastName,sm.GradeId,sm.SubjectId,sb.SubjectName,sm.MarkValue " +
+                    "FROM  Student s " +
+                    "INNER JOIN StudentMarks sm ON( sm.StudentId = s.UserId AND sm.GradeId=@GradeId AND sm.SubjectId=@SubjectId AND ExamDate=@ExamDate AND sm.MarksValue='') " +
+                    "Left JOIN Subject sb ON sb.SubjectId = sm.SubjectId";
+
+                    command.CommandText = sql;
+                    command.Parameters.AddWithValue("@GradeId", gradeId);
+                    command.Parameters.AddWithValue("@SubjectId", subjectId);
+                    command.Parameters.AddWithValue("@ExamDate", examDate);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+
+        /*
         public override StudentSubjectMarks PopulateRecord(SqlDataReader rows)
         {
             try
@@ -78,57 +240,8 @@ namespace School.Services.Repository
                 }
             }
         }
+*/
 
-        public override void sqlQueries(dynamic obj)
-        {
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
-            dynamic _obj = JObject.Parse(json);
-            string jsonString = Convert.ToString(obj); //var obj = { StudentId = "StudentId", GradeId = "GradeI2", queryType = "searchByGrade" }
-            string gradeId = _obj.GradeId;
-            string subjectId = _obj.SubjectId ?? "0";
-            string examDate = _obj.ExamDate ?? "0";
-            examDate = examDate.Replace('/', '-');
-            string type = _obj.type ?? "0";
-            string sql = "";
 
-            switch (type)
-            {
-                case "existingRecords":
-                    sql = "SELECT  s.UserId,s.Firstname,s.LastName,sm.GradeId,sm.SubjectId,sb.SubjectName,sm.MarkValue " +
-                    "FROM  Student s " +
-                    "INNER JOIN StudentMarks sm ON( sm.StudentId = s.UserId AND sm.GradeId=@GradeId AND sm.SubjectId=@SubjectId AND ExamDate=@ExamDate ) " +
-                    "Left JOIN Subject sb ON sb.SubjectId = sm.SubjectId";
-
-                    command.CommandText = sql;
-                    command.Parameters.AddWithValue("@GradeId", gradeId);
-                    command.Parameters.AddWithValue("@SubjectId", subjectId);
-                    command.Parameters.AddWithValue("@ExamDate", examDate);
-                    break;
-                case "hasRecords":
-                    sql = "SELECT  s.UserId,s.Firstname,s.LastName,sm.GradeId,sm.SubjectId,sb.SubjectName,sm.MarkValue " +
-                    "FROM  Student s " +
-                    "INNER JOIN StudentMarks sm ON( sm.StudentId = s.UserId AND sm.GradeId=@GradeId AND sm.SubjectId=@SubjectId AND ExamDate=@ExamDate ) " +
-                    "Left JOIN Subject sb ON sb.SubjectId = sm.SubjectId";
-
-                    command.CommandText = sql;
-                    command.Parameters.AddWithValue("@GradeId", gradeId);
-                    command.Parameters.AddWithValue("@SubjectId", subjectId);
-                    command.Parameters.AddWithValue("@ExamDate", examDate);
-                    break;
-                case "noMarksButHasDate":
-                    sql = "SELECT  s.UserId,s.Firstname,s.LastName,sm.GradeId,sm.SubjectId,sb.SubjectName,sm.MarkValue " +
-                    "FROM  Student s " +
-                    "INNER JOIN StudentMarks sm ON( sm.StudentId = s.UserId AND sm.GradeId=@GradeId AND sm.SubjectId=@SubjectId AND ExamDate=@ExamDate AND sm.MarksValue='') " +
-                    "Left JOIN Subject sb ON sb.SubjectId = sm.SubjectId";
-
-                    command.CommandText = sql;
-                    command.Parameters.AddWithValue("@GradeId", gradeId);
-                    command.Parameters.AddWithValue("@SubjectId", subjectId);
-                    command.Parameters.AddWithValue("@ExamDate", examDate);
-                    break;
-                default:
-                    break;
-            }
-        }
     }
 }

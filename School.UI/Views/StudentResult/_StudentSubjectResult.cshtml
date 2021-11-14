@@ -1,8 +1,5 @@
 ﻿@model School.Entities.Fields.StudentResultsModel
 
-@{
-    string yoyo = "yoyo";
-}
 <style>
     #childPage {
         width: 800px;
@@ -45,9 +42,9 @@
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.StudentResults.CourseName, new { @class = "col-sm-4 control-label", @style = "color:white" })
+                @Html.LabelFor(model => model.StudentResults.GradeName, new { @class = "col-sm-4 control-label", @style = "color:white" })
                 <div class="col-md-8">
-                    @Html.TextBoxFor(model => model.StudentResults.CourseName, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.StudentResults.GradeName, new {@id="gradeId", @class = "form-control" })
                 </div>
             </div>
 

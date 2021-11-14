@@ -47,11 +47,18 @@ namespace School.Services.Repository
 
         public override void Update(SubjectResult model)
         {
-            command.CommandText = "UPDATE SubjectResult SET SubjectId=@SubjectId,SubjectName=@SubjectName,Marks=@Marks," +
-                                    "Symbol=@Symbol,StudentId=@StudentId WHERE StudentId = @StudentId AND  SubjectId = @SubjectId";
+            //command.CommandText = "UPDATE SubjectResult SET SubjectId=@SubjectId,SubjectName=@SubjectName,Marks=@Marks," +
+            //                        "Symbol=@Symbol,StudentId=@StudentId WHERE StudentId = @StudentId AND  SubjectId = @SubjectId";
+
+
+            model.Symbol = model.Symbol ?? "none";
 
             command.CommandText = "UPDATE SubjectResult SET SubjectName=@SubjectName,Marks=@Marks," +
                                 "Symbol=@Symbol WHERE StudentId = @StudentId AND SubjectId = @SubjectId";
+
+            //ex = { "Invalid object name 'SubjectResult'."}
+            //command.CommandText = "UPDATE SubjectResult SET SubjectName=@SubjectName,Marks=@Marks," +
+            //        "Symbol=@Symbol WHERE StudentId = @StudentId AND SubjectId = @SubjectId";
 
             command.Parameters.AddWithValue("@StudentId", model.StudentId);
             command.Parameters.AddWithValue("@SubjectId", model.SubjectId);

@@ -1,0 +1,85 @@
+﻿@model School.Entities.Fields.StudentSubjectMarks
+
+<style>
+    #childPage {
+        width: 800px;
+        left: calc(50% - 400px);
+        display: none;
+    }
+
+        #childPage #partialHolder {
+            /*height: calc(100% - 2px);*/
+            border: none;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            max-height: 260px;
+        }
+</style>
+
+@using (Ajax.BeginForm("Update", "StudentResult", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
+{
+    <div id="register-page" class="col-xs-12">
+        <div class="form-horizontal" style="padding-top:20px;">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubjectId, new { @class = "col-sm-4 control-label", @style = "color:white" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.SubjectId, new { @class = "col-sm-12 form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubjectName, new { @class = "col-sm-4 control-label", @style = "color:white" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.SubjectName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MarkValue, new { @class = "col-sm-4 control-label", @style = "color:white" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(m => m.MarkValue, new { @class = "col-sm-12 form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.GradeId, new { @class = "col-sm-4 control-label", @style = "color:white" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.GradeId, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.StudentId, new { @class = "col-sm-4 control-label", @style = "color:white" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.StudentId, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-4 col-md-10">
+                    <input id="btnSave" type="submit" value="Update" class="btn btn-success" onclick='return validateInput()' />
+                    <button type="button" id="btnClose" class="btn btn-danger btnWidth btnlogColor" onclick="closepopup(this)">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+
+    function validateInput() {
+        return true;
+    }
+
+    function OnFailure(response) {
+        var msgObj = { message: "something went wrong", type: "error", title: "something went wrong", pageId: "" };
+        classMessageResponse.showMessage(msgObj);
+    };
+    function OnSuccess(response) {
+        classBusyIconHelper.hideBusyIcon();
+
+        var pageObj = {
+            closePage: {
+                pageId: ['popupChildTwo']
+            }
+        };
+        classControllerHelper.getMessage(response, pageObj);
+    };
+
+</script>

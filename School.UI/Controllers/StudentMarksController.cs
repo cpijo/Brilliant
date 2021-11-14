@@ -17,12 +17,12 @@ namespace School.UI.Controllers
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
     public class StudentMarksController : BaseController
     {
-        private IStudentSubjectMarksRepository studentSubjectMarksRepository;
+        private IStudentMarksRepository studentSubjectMarksRepository;
         private ISubjectRepository subjectRepository;
         private IGradeClassRepository gradeClassRepository;
         private IStudentMarksRepository studentMarksRepository;
 
-        public StudentMarksController(IStudentSubjectMarksRepository studentSubjectMarksRepository, ISubjectRepository subjectRepository,
+        public StudentMarksController(IStudentMarksRepository studentSubjectMarksRepository, ISubjectRepository subjectRepository,
             IGradeClassRepository gradeClassRepository, IStudentMarksRepository studentMarksRepository)
         {
             this.studentSubjectMarksRepository = studentSubjectMarksRepository;
@@ -40,9 +40,10 @@ namespace School.UI.Controllers
                 dynamic _dynamic = new ExpandoObject();
                 _dynamic.GradeId = "Grade8";
                 _dynamic.SubjectId = "Eng008";
-                _dynamic.TeacherId = "";
-                //_dynamic.queryType = "default";
-                _dynamic.isStart = "yes";
+                _dynamic.TeacherId = "TC00000008";
+            //_dynamic.queryType = "default";
+            _dynamic.type = "start";
+           // _dynamic.isStart = "yes";
             //}
             List<StudentSubjectMarks> _StudentSubjectMarks = studentSubjectMarksRepository.GetByAny(_dynamic);
             StudentSubjectMarksVM model = new StudentSubjectMarksVM();

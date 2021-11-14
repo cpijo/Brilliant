@@ -56,24 +56,28 @@
     $('#tableId .btnEditSubjectReult').click(function () {
         event.preventDefault();
         event.stopPropagation();
-       // debugger;
+        debugger;
         var SubjectId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
         var SubjectName = $(this).closest('td').parent('tr').find("td:eq(1)").text();
         var Marks = $(this).closest('td').parent('tr').find("td:eq(2)").text();
         var Symbol = $(this).closest('td').parent('tr').find("td:eq(3)").text();
         var StudentId = $(this).closest('td').parent('tr').find("td:eq(4)").text();
 
+        var gradeId = $('#gradeId').val();
+
         var data = {
             'SubjectId': SubjectId.trim(),
             'SubjectName': SubjectName.trim(),
-            'Marks': Marks.trim(),
+            'MarkValue': Marks.trim(),
             'Symbol': Symbol.trim(),
-            'StudentId': StudentId.trim()
+            'StudentId': StudentId.trim(),
+            'GradeId': gradeId.trim()
         };
 
         var partialHolder = "#basePartialHolder #partialHolder";
         var header = 'Edit Subject';
         var url = '/SubjectResult/PreUpdate';
+        url = '/StudentResult/PreUpdate';
 
         var objPopup = classPageConstant.popupChildTwo;
         var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };

@@ -14,9 +14,11 @@ namespace School.UI.Controllers
     public class SubjectResultController : Controller
     {
         private ISubjectResultRepository repository;
-        public SubjectResultController(ISubjectResultRepository repository)
+        private IStudentMarksRepository studentMarksRepository;
+        public SubjectResultController(ISubjectResultRepository repository, IStudentMarksRepository studentMarksRepository)
         {
             this.repository = repository;
+            this.studentMarksRepository = studentMarksRepository;
         }
 
         #region Pre Update
@@ -34,8 +36,17 @@ namespace School.UI.Controllers
         {
             try
             {
-               //model.StudentId = "1111";
-                repository.Update(model);
+                //StudentSubjectMarks model = new StudentSubjectMarks()
+                //{
+                //    StudentId = _model.StudentId,
+                //    GradeId = _model.GradeId,
+                //    ExamType = _model.ExamType,
+                //    SubjectId = _model.SubjectId,
+                //    MarkValue = _model.Marks,
+                //    ExamDate = _model.ExamDate
+                //};
+         repository.Update(model);
+        //studentMarksRepository.Update(model);
                 return Json(new { result = "true", message = "Data updated Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

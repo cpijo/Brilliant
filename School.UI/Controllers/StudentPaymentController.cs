@@ -19,18 +19,12 @@ namespace School.UI.Controllers
 
         private IStudentResultsRepository studentResultsRepository;
         private IStudentRepository studentRepository;
-        private IStudentSubjectMarksRepository studentSubjectMarksRepository;
-        //private ICoursesRepository courseRepository;
-        //private IGradesRepository gradesRepository;
 
-        public StudentPaymentController(IStudentResultsRepository studentResultsRepository, IStudentRepository studentRepository,
-            IStudentSubjectMarksRepository studentSubjectMarksRepository)
+
+        public StudentPaymentController(IStudentResultsRepository studentResultsRepository, IStudentRepository studentRepository)
         {
             this.studentResultsRepository = studentResultsRepository;
             this.studentRepository = studentRepository;
-            this.studentSubjectMarksRepository = studentSubjectMarksRepository;
-            //this.courseRepository = courseRepository;
-            //this.gradesRepository = gradesRepository;
         }
 
         #region Get Student

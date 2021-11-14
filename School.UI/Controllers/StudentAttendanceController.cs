@@ -18,12 +18,12 @@ namespace School.UI.Controllers
     public class StudentAttendanceController : BaseController
     {
         private IStudentAttendanceRepository studentAttendanceRepository;
-        private IStudentSubjectMarksRepository studentSubjectMarksRepository;
+        //private IStudentSubjectMarksRepository studentSubjectMarksRepository;
 
-        public StudentAttendanceController(IStudentAttendanceRepository studentAttendanceRepository,IStudentSubjectMarksRepository studentSubjectMarksRepository)
+        public StudentAttendanceController(IStudentAttendanceRepository studentAttendanceRepository)
         {
             this.studentAttendanceRepository = studentAttendanceRepository;
-            this.studentSubjectMarksRepository = studentSubjectMarksRepository;
+            //this.studentSubjectMarksRepository = studentSubjectMarksRepository;
         }
 
         #region Get Record

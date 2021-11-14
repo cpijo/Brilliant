@@ -22,7 +22,7 @@ namespace School.UI
 
             container.RegisterType<IGradeTeacherRepository, GradeTeacherRepository>();
             container.RegisterType<ISubjectTeacherRepository, SubjectTeacherRepository>();
-            container.RegisterType<IStudentSubjectMarksRepository, StudentSubjectMarksRepository>();
+            //container.RegisterType<IStudentSubjectMarksRepository, StudentSubjectMarksRepository>();
             container.RegisterType<IStudentAttendanceRepository, StudentAttendanceRepository>();
             container.RegisterType<IGradeClassRepository, GradeClassRepository>();
             container.RegisterType<IStudentMarksRepository, StudentMarksRepository>();

@@ -1279,6 +1279,7 @@
     <Content Include="Views\StudentMarks\_PartialDropbox.cshtml" />
     <Content Include="Views\StudentMarks\_TableRecordSubjectMarks.cshtml" />
     <Content Include="Views\StudentMarks\_TableSubjectMarksOnly.cshtml" />
+    <Content Include="Views\StudentResult\_UpdateSubjectMarks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
