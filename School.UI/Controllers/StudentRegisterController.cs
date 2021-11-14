@@ -13,22 +13,20 @@ using System.Web.Mvc;
 namespace School.UI.Controllers
 {
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-    public class StudentRegisterController : Controller
+    public class StudentRegisterController : BaseController
     {
-        private IStudentResultsRepository studentResultsRepository;
-        private IStudentRepository studentRepository;
+        private IStudentRegisterRepository studentRegisterRepository;
 
-        public StudentRegisterController(IStudentResultsRepository studentResultsRepository, IStudentRepository studentRepository)
+
+        public StudentRegisterController(IStudentRegisterRepository studentRegisterRepository)
         {
-            this.studentResultsRepository = studentResultsRepository;
-            this.studentRepository = studentRepository;
+            this.studentRegisterRepository = studentRegisterRepository;
         }
 
         #region Create Record
         [HttpGet]
         public ActionResult CreateRecord(StudentViewModel model)
         {
-            //StudentModel _model = new StudentModel();
             Dictionary<string, string> genderDictionary = CostantData.dictGender();
             List<SelectListItem> list = new List<SelectListItem>();
             list = dropdownHelper(genderDictionary);
@@ -99,7 +97,8 @@ namespace School.UI.Controllers
                 model.Student.StudentId = Guid.NewGuid().ToString();
                 model.Student.UserName = model.Student.StudentId;
                 model.Student.UserId = model.Student.StudentId;
-                studentRepository.Save(model.Student);
+                studentRegisterRepository.Save(model.Student);
+
                 return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -110,195 +109,253 @@ namespace School.UI.Controllers
         #endregion
 
 
-        #region Get Student
-        [HttpGet]
-        public ActionResult GetRecord()
-        {
-            List<Student> students = studentRepository.GetAll();
-            Session["teacher"] = students;
-            return PartialView("_ViewStudent", students);
-        }
-        #endregion
-
-        #region Teacher Information
+        #region dropBox Update
         [HttpPost]
-        public ActionResult TeacherInformation(string userId)
+        public ActionResult dropBoxUpdate(string selectedValue, string searchType)
         {
-            Student student = null;
-            if (Session["teacher"] != null)
-            {
-                List<Student> students = Session["teacher"] as List<Student>;
-                student = students.ToList().Where(x => x.StudentId == userId).FirstOrDefault();
-            }
-            else
-            {
-                List<Student> students = studentRepository.GetAll();
-                student = students.ToList().Where(x => x.StudentId == userId).FirstOrDefault();
-            }
             StudentViewModel model = new StudentViewModel();
-            model.Student = student;
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+            List<string> selectedProvice = new List<string>();
+            List<string> location = new List<string>();
+            List<SelectListItem> list = new List<SelectListItem>();
 
-            return PartialView("_ViewTeacherInfor", model);
-        }
-        #endregion
-
-
-
-
-
-
-
-
-
-
-
-        #region Get Student
-        [HttpGet]
-        public ActionResult GetReport()
-        {
-            List<Student> _model = studentRepository.GetAll();
-
-            return PartialView("_StudentRegisteredReport", _model);
-        }
-        #endregion
-
-
-
-        #region Grade Information
-        [HttpPost]
-        public ActionResult GradeInformation(Student model, string StudentId, string Firstname, string Surname)
-        {
-            return PartialView("_GradeInformation", model);
-        }
-        #endregion
-
-
-        private static List<SelectListItem> dropdownHelper(Dictionary<string, string> SurbubDictionary)
-        {
-            return SurbubDictionary
-            .Select(item => new SelectListItem
+            switch (searchType)
             {
-                Value = item.Key.ToString(),
-                Text = item.Value.ToString(),
-                Selected = true
-            })
-            .ToList();
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        #region Get Student By Filter
-        [HttpPost]
-        public ActionResult SearchRecord(string selectedValue)
-        {
-            List<Student> _model = studentRepository.GetAll();
-            
-            return PartialView("_TableStudent", _model);
-        }
-        #endregion
-
-        #region Add New Record
-        [HttpPost]
-        public ActionResult PreUpdate(Student model, string StudentId, string Firstname, string Surname)
-        {            
-            return PartialView("_UpdateStudent", model);
-        }
-        #endregion
-
-        #region Save Student Results 
-        [HttpPost]
-        public ActionResult Update(Student model)
-        {
-            try
-            {
-                studentRepository.Save(model);
-                return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
+                case "grade":
+                    switch (selectedValue)
+                    {
+                        case "Grade8":
+                            dictionary = CostantData.dictGrade8Classes();
+                            break;
+                        case "Grade9":
+                            dictionary = CostantData.dictGrade9Classes();
+                            break;
+                        case "Grade10":
+                            dictionary = CostantData.dictGrade10Classes();
+                            break;
+                        case "Grade11":
+                            dictionary = CostantData.dictGrade11Classes();
+                            break;
+                        case "Grade12":
+                            dictionary = CostantData.dictGrade12Classes();
+                            break;
+                        default:
+                            dictionary = CostantData.dictGrade8Classes();
+                            break;
+                    }
+                    model.DropboxModel.name = "class";
+                    list = dropdownHelper(dictionary);
+                    model.ClassOrCourseDropboxItemList = new SelectList(list, "Value", "Text");
+                    break;
+                case "province":
+                    switch (selectedValue)
+                    {
+                        case "Gauteng":
+                            location = CostantData.Gauteng();
+                            break;
+                        case "Limpopo":
+                            location = CostantData.Limpopo();
+                            break;
+                        case "Kwazulu Natal":
+                            location = CostantData.KwazuluNatal();
+                            break;
+                        case "Mpumalanga":
+                            location = CostantData.Mpumalanga();
+                            break;
+                        case "North West":
+                            location = CostantData.NorthWest();
+                            break;
+                        case "FreeState":
+                            location = CostantData.FreeState();
+                            break;
+                        case "Eastern Cape":
+                            location = CostantData.EasternCape();
+                            break;
+                        case "Northern Cape":
+                            location = CostantData.NorthernCape();
+                            break;
+                        case "Western Cape":
+                            location = CostantData.WesternCape();
+                            break;
+                        default:
+                            break;
+                    }
+                    model.DropboxModel.name = "suburb";
+                    for (int i = 0; i < location.Count; i++)
+                    {
+                        dictionary.Add("sub_" + i, location[i]);
+                    }
+                    list = dropdownHelper(dictionary);
+                    model.SurbubDropboxItemList = new SelectList(list, "Value", "Text");
+                    break;
+                case "suburb":
+                    location = CostantData.Gauteng();
+                    model.DropboxModel.name = "location";
+                    for (int i = 0; i < location.Count; i++)
+                    {
+                        dictionary.Add("sub_" + i, location[i]);
+                    }
+                    list = dropdownHelper(dictionary);
+                    model.LocationDropboxItemList = new SelectList(list, "Value", "Text");
+                    break;
+                default:
+                    location = CostantData.Gauteng();
+                    break;
             }
-            catch (Exception ex)
-            {
-                return Json(new { result = "false", message = ex.Message, title = "Request Failed" }, JsonRequestBehavior.AllowGet);
-            }
+
+            return PartialView("_PartialDropBox", model);
         }
         #endregion
 
 
-        
-        #region Get Student
-        [HttpPost]
-        public ActionResult GetStudentSubject(StudentResults studentResult, string Firstname)
-        {
-            Student student = new Student();
-            student.StudentId = studentResult.StudentId;
-            student.Firstname = studentResult.Firstname;
-            student.LastName = studentResult.LastName;
-            student.Email = studentResult.Email;
-            StudentResultsModel model = new StudentResultsModel();
-            //List<Subject> subjects = subjectRepository.GetAll();
-            //List<Subject> subjects = subjectRepository.GetById(student.StudentId);
 
-            //List<SubjectResult> subjectResult = subjectResultRepository.GetById(student.StudentId);
 
-            //model.StudentResults = studentResult;
-            //model.Student = student;
-            //model.Subjects = subjects;
-            return PartialView("_StudentResults", model);
-        }
-        #endregion
-       /* */
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+
+               #region Get Student
+               [HttpGet]
+               public ActionResult GetRecord()
+               {
+                   List<Student> students = studentRepository.GetAll();
+                   Session["teacher"] = students;
+                   return PartialView("_ViewStudent", students);
+               }
+               #endregion
+
+               #region Teacher Information
+               [HttpPost]
+               public ActionResult TeacherInformation(string userId)
+               {
+                   Student student = null;
+                   if (Session["teacher"] != null)
+                   {
+                       List<Student> students = Session["teacher"] as List<Student>;
+                       student = students.ToList().Where(x => x.StudentId == userId).FirstOrDefault();
+                   }
+                   else
+                   {
+                       List<Student> students = studentRepository.GetAll();
+                       student = students.ToList().Where(x => x.StudentId == userId).FirstOrDefault();
+                   }
+                   StudentViewModel model = new StudentViewModel();
+                   model.Student = student;
+
+                   return PartialView("_ViewTeacherInfor", model);
+               }
+               #endregion
+
+
+
+               #region Get Student
+               [HttpGet]
+               public ActionResult GetReport()
+               {
+                   List<Student> _model = studentRepository.GetAll();
+
+                   return PartialView("_StudentRegisteredReport", _model);
+               }
+               #endregion
+
+
+
+               #region Grade Information
+               [HttpPost]
+               public ActionResult GradeInformation(Student model, string StudentId, string Firstname, string Surname)
+               {
+                   return PartialView("_GradeInformation", model);
+               }
+               #endregion
+
+
+               private static List<SelectListItem> dropdownHelper(Dictionary<string, string> SurbubDictionary)
+               {
+                   return SurbubDictionary
+                   .Select(item => new SelectListItem
+                   {
+                       Value = item.Key.ToString(),
+                       Text = item.Value.ToString(),
+                       Selected = true
+                   })
+                   .ToList();
+               }
+
+
+
+
+               #region Get Student By Filter
+               [HttpPost]
+               public ActionResult SearchRecord(string selectedValue)
+               {
+                   List<Student> _model = studentRepository.GetAll();
+
+                   return PartialView("_TableStudent", _model);
+               }
+               #endregion
+
+               #region Add New Record
+               [HttpPost]
+               public ActionResult PreUpdate(Student model, string StudentId, string Firstname, string Surname)
+               {            
+                   return PartialView("_UpdateStudent", model);
+               }
+               #endregion
+
+               #region Save Student Results 
+               [HttpPost]
+               public ActionResult Update(Student model)
+               {
+                   try
+                   {
+                       studentRepository.Save(model);
+                       return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
+                   }
+                   catch (Exception ex)
+                   {
+                       return Json(new { result = "false", message = ex.Message, title = "Request Failed" }, JsonRequestBehavior.AllowGet);
+                   }
+               }
+               #endregion
+
+
+
+               #region Get Student
+               [HttpPost]
+               public ActionResult GetStudentSubject(StudentResults studentResult, string Firstname)
+               {
+                   Student student = new Student();
+                   student.StudentId = studentResult.StudentId;
+                   student.Firstname = studentResult.Firstname;
+                   student.LastName = studentResult.LastName;
+                   student.Email = studentResult.Email;
+                   StudentResultsModel model = new StudentResultsModel();
+                   //List<Subject> subjects = subjectRepository.GetAll();
+                   //List<Subject> subjects = subjectRepository.GetById(student.StudentId);
+
+                   //List<SubjectResult> subjectResult = subjectResultRepository.GetById(student.StudentId);
+
+                   //model.StudentResults = studentResult;
+                   //model.Student = student;
+                   //model.Subjects = subjects;
+                   return PartialView("_StudentResults", model);
+               }
+               #endregion
+
+               */
+
+        /* */
     }
 }
 

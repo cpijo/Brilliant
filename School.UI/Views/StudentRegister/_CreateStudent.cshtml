@@ -62,13 +62,13 @@
                     <div class="col-md-4">
                         @Html.TextBoxFor(model => model.Student.DateOfBirth, new { @id = "DateOfBirth", @class = "form-control" })
                     </div>
-                    @Html.LabelFor(model => model.Student.Gender, new { @class = "col-sm-2 control-label" })
+                    @Html.LabelFor(model => model.Student.Gender, new { @id = "lbdGenderId", @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
-                        <label class="col-md-6">
+                        <label class="col-md-6"  id="lbrdmale">
                             <input type="radio" id="rdMale" name="gendar" />
                             Male
                         </label>
-                        <label class="col-md-6">
+                        <label class="col-md-6" id="lbrdfemale" >
                             <input type="radio" id="rdfemale" name="gendar" />
                             Female
                         </label>
@@ -82,9 +82,9 @@
                     <div class="col-md-4">
                         @Html.DropDownListFor(m => m.Student.Language, Model.LanguageDropboxItemList, new { @id = "languageId", @class = "form-control" })
                     </div>
-                    <label class="col-sm-2" for="assignTeachers">assign Teachers:</label>
+                    <label class="col-sm-2 control-label" for="assignTeachers">assign Teachers:</label>
                     <div class="col-md-4">
-                        @Html.CheckBoxFor(m => m.AssignTeacher.IsAssign, new { @id = "isAssign", @class = "form-control" })
+                        @Html.TextBoxFor(m => m.AssignTeacher.IsAssign, new { @id = "isAssign", @class = " col-sm-12 form-control", @readonly = "readonly" })
                     </div>
 
                 </div>
@@ -199,6 +199,23 @@
         });
     });
 
+    function isGenderChecked() {
+
+        var isChecked = false;
+        if ($('#rdMale').prop("checked") === true) {
+            isChecked = true;
+        }  
+        if ($('#rdfemale').prop("checked") === true) {
+            isChecked = true;
+        } 
+        if (isChecked===false) {
+            $('#lbrdmale,#lbrdfemale').css("border-bottom", "thin solid red")
+        }
+        else {
+            $('#lbrdmale,#lbrdfemale').css("border-bottom", "0px solid red")
+        }
+    };
+
     function validateInput() {
         var dropBox = ['languageId', 'provinceId', 'suburbId', 'locationId', 'className'];
         var _inputs = ['Firstname', 'LastName', 'DateOfBirth', 'genderId', 'languageId', 'gradeId', 'className', 'provinceId', 'cityId', 'suburbId', 'locationId', 'unitNumber', 'houseNumber', 'streetName', 'postalCode', 'phone1'];
@@ -208,6 +225,7 @@
         var isvalid = ClassValidationHelper.ValidateInput(_inputs)
         if (isvalid === false) {
             ClassValidationHelper.errorEmptyField();
+            isGenderChecked();
             return isvalid
         }
         return isvalid;
@@ -277,7 +295,7 @@
         }
 
         var header = 'Update UserInfor';
-        url = '/StudentMaintanance/dropBoxUpdate';
+        url = '/StudentRegister/dropBoxUpdate';
         var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
         classControllerHelper.callController(pageObj);
     });
@@ -296,7 +314,7 @@
 
 
         var header = 'Update UserInfor';
-        url = '/StudentMaintanance/dropBoxUpdate';
+        url = '/StudentRegister/dropBoxUpdate';
         var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
         classControllerHelper.callController(pageObj);
     });

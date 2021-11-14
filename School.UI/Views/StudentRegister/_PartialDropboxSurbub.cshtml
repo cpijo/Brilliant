@@ -1,0 +1,19 @@
+﻿
+<input type="text" id="txtSearchSurburb" placeholder="Search ..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search ...'" />
+<br />
+@{
+    List<string> selectedSurbubs = TempData["selectedSurbub"] as List<string>;
+    int idNumber = 1;
+    if (selectedSurbubs != null)
+    {
+        foreach (string surbub in selectedSurbubs)
+        {
+            <li id=@idNumber name="N3" style="display:block" onclick="getBySurburb('/ViewEscort/SearchBySurbub/?surbub=@surbub','@surbub')"><a href="#" class="menuA"><i class="fa fa-circle-o"></i>@surbub</a></li>
+            idNumber++;
+
+        }
+    }
+}
+
+
+

@@ -73,7 +73,7 @@ namespace School.UI.Controllers
         {
             gradeId = CostantData.getFieldId(CostantData.dictGrades(), gradeId);
             dynamic _dynamic = new ExpandoObject();
-            _dynamic.StudentId = "StudentId";
+            //_dynamic.StudentId = "StudentId";
             _dynamic.GradeId = gradeId;
             _dynamic.queryType = queryType;
             _dynamic.studentName = studentName;

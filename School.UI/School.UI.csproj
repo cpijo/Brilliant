@@ -1284,6 +1284,8 @@
     <Content Include="Views\StudentResult\_UpdateSubjectMarks.cshtml" />
     <Content Include="Views\Subject\_AddSubjectToClass.cshtml" />
     <Content Include="Views\Shared\_dropboxOnly.cshtml" />
+    <Content Include="Views\StudentRegister\_PartialDropbox.cshtml" />
+    <Content Include="Views\StudentRegister\_PartialDropboxSurbub.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -83,7 +83,7 @@ namespace School.Services.Repository
                 model.UserName = rows["UserName"].ToString();
                 model.Firstname = rows["Firstname"].ToString();
                 model.LastName = rows["LastName"].ToString();
-                model.Age = rows["Age"].ToString();
+                model.Age = int.Parse(rows["Age"].ToString());
                 model.Gender = rows["Gender"].ToString();
                 model.Language = rows["Languages"].ToString();
                 model.UserType = rows["UserType"].ToString();

@@ -11,28 +11,26 @@ using Newtonsoft.Json.Linq;
 
 namespace School.Services.Repository
 {
-    public class TeacherRegisterRepository : RepositoryBase<Teacher>, ITeacherRegisterRepository
+    public class StudentRegisterRepository : RepositoryBase<Student>, IStudentRegisterRepository
     {
-        public override List<Teacher> GetAll()
+        public override List<Student> GetAll()
         {
-            command.CommandText = "SELECT * FROM Teacher";
+            command.CommandText = "SELECT * FROM Student";
             return base.GetAll();
         }
 
-        public override void Save(Teacher model)
+        public override void Save(Student model)
         {
-            //10/19/2021
-            string dateString = model.CreatedDate.ToString("dd/MM/yyyy");
-            dateString = model.CreatedDate.ToString("MM/dd/yyyy");
+            string dateString = model.CreatedDate.ToString("MM/dd/yyyy");
             model.Age = model.Age ?? 0;
 
-            string sql = "INSERT INTO Teacher(UserId,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate," +
+            string sql = "INSERT INTO Student(UserId,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate," +
                           "Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType) " +
                         "values(@UserId,@UserName,@FirstName,@LastName,@Age,@Gender,@Race,@Languages,@CreatedDate,@UpdatedDate,'no password','no password',0,0,0,0,'','','','')";
 
             command.CommandText = sql;
-            command.Parameters.AddWithValue("@UserId", model.TeacherId);
-            command.Parameters.AddWithValue("@UserName", model.TeacherId);
+            command.Parameters.AddWithValue("@UserId", model.StudentId);
+            command.Parameters.AddWithValue("@UserName", model.StudentId);
             command.Parameters.AddWithValue("@FirstName", model.Firstname);
             command.Parameters.AddWithValue("@LastName", model.LastName ?? (object)DBNull.Value);
             command.Parameters.AddWithValue("@Age", model.Age);
@@ -45,12 +43,12 @@ namespace School.Services.Repository
             base.Save(model);
         }
 
-        public override Teacher PopulateRecord(SqlDataReader rows)
+        public override Student PopulateRecord(SqlDataReader rows)
         {
             try
             {
-                Teacher model = new Teacher();
-                model.TeacherId = rows["UserId"].ToString();
+                Student model = new Student();
+                model.StudentId = rows["UserId"].ToString();
                 model.UserName = rows["UserName"].ToString();
                 model.Firstname = rows["FirstName"].ToString();
                 model.LastName = rows["LastName"].ToString();
@@ -69,14 +67,14 @@ namespace School.Services.Repository
             }
         }
 
-        public override void command_ExecuteNonQuery(List<Teacher> _model)
+        public override void command_ExecuteNonQuery(List<Student> _model)
         {
             foreach (var model in _model)
             {
                 try
                 {
                     command.Parameters.Clear();
-                    command.Parameters.AddWithValue("@UserID", model.TeacherId);
+                    command.Parameters.AddWithValue("@UserID", model.StudentId);
                     command.Parameters.AddWithValue("@UserName", model.UserName);
                     command.Parameters.AddWithValue("@Firstname", model.Firstname);
                     command.Parameters.AddWithValue("@LastName", model.Surname);
@@ -93,7 +91,7 @@ namespace School.Services.Repository
             }
         }
 
-        public List<Teacher> GetByAny(dynamic obj)
+        public List<Student> GetByAny(dynamic obj)
         {
             sqlQueries(obj);
             return base.GetById("");
@@ -111,7 +109,7 @@ namespace School.Services.Repository
             switch (type)
             {
                 case "all":
-                    sql = "SELECT * FROM Teacher";
+                    sql = "SELECT * FROM Student";
                     break;
 
                 case "byGrade":
@@ -134,8 +132,6 @@ namespace School.Services.Repository
                     break;
             }
         }
-
-
 
     }
 }

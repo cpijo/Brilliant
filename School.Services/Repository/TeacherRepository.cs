@@ -69,7 +69,7 @@ namespace School.Services.Repository
                 model.Firstname = rows["Firstname"].ToString();
                 model.LastName = rows["LastName"].ToString();
                 model.UserName = rows["UserName"].ToString();
-                model.Age = rows["Age"].ToString();
+                model.Age = int.Parse(rows["Age"].ToString());
                 model.Gender = rows["Gender"].ToString();
                 model.Language = rows["Languages"].ToString();
                 model.CreatedDate = DateTime.Parse(rows["CreatedDate"].ToString());

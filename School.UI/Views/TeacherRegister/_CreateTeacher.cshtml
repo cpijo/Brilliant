@@ -73,11 +73,11 @@
                     </div>
                     @Html.LabelFor(model => model.Teacher.Gender, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
-                        <label class="col-md-6">
+                        <label class="col-md-6" id="lbrdmale">
                             <input type="radio" id="rdMale" name="gendar" />
                             Male
                         </label>
-                        <label class="col-md-6">
+                        <label class="col-md-6" id="lbrdfemale">
                             <input type="radio" id="rdfemale" name="gendar" />
                             Female
                         </label>
@@ -197,6 +197,23 @@
         });
     });
 
+    function isGenderChecked() {
+
+        var isChecked = false;
+        if ($('#rdMale').prop("checked") === true) {
+            isChecked = true;
+        }
+        if ($('#rdfemale').prop("checked") === true) {
+            isChecked = true;
+        }
+        if (isChecked === false) {
+            $('#lbrdmale,#lbrdfemale').css("border-bottom", "thin solid red")
+        }
+        else {
+            $('#lbrdmale,#lbrdfemale').css("border-bottom", "0px solid red")
+        }
+    };
+
     $("#phone1,#phone2").keyup(function (me) {
         ClassValidationHelper.formatPhoneNumber(me);
     });
@@ -209,6 +226,7 @@
         var isvalid = ClassValidationHelper.ValidateInput(_inputs)
         if (isvalid === false) {
             ClassValidationHelper.errorEmptyField();
+            isGenderChecked();
             return isvalid
         }
 
