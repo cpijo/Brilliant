@@ -44,7 +44,7 @@
 <script>
 
     function OnFailure(response) {
-        debugger;
+        
         $('#div-busy-Icon').hide();
         showMessage(response.message, "error", response.title);
     }
@@ -52,12 +52,7 @@
     function OnSuccess(response) {
 
         $('#menuId .sidebar-menu').css("display", "block");
-
-
-
         $("#Home-Container #PopupBodyUserLogin #btnCloseGeneric").trigger("click");
-
-
         //$("#Login-page #btnClose").trigger('click');
 
         $('#div-busy-Icon').hide();
@@ -72,7 +67,6 @@
         else {
             classMessageResponse.showMessage({ message: response.message, type: "error", title: response.title, pageId: "" });
         }
-
 
         (function () {
             //debugger;
