@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\HashingPassword.cs" />
     <Compile Include="Common\ScoreSymbols.cs" />
     <Compile Include="Constants\CostantData.cs" />
     <Compile Include="Constants\memberData.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SQL\SchooBD\some_new_user_roles.sql" />
     <Content Include="SQL\SchooBD\Final_Schooldb.sql" />
   </ItemGroup>
   <ItemGroup Condition="$(VisualStudioVersion) == '15.0'">

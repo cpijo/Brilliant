@@ -10,7 +10,7 @@ using School.Services.Interface;
 
 namespace School.Services.Repository
 {
-    public class SubjectResultRepository : RepositoryBase<SubjectResult>, ISubjectResultRepository
+    public class SubjectResultRepository : BaseRepository<SubjectResult>, ISubjectResultRepository
     {
 
         public override List<SubjectResult> GetAll()

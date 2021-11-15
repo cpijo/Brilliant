@@ -10,7 +10,7 @@ using School.Services.Interface;
 
 namespace School.Services.Repository
 {
-    public class GradeTeacherRepository : RepositoryBase<Grades>, IGradeTeacherRepository
+    public class GradeTeacherRepository : BaseRepository<Grades>, IGradeTeacherRepository
     {
         public override List<Grades> GetAll()
         {

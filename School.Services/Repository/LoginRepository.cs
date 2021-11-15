@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace School.Services.Repository
 {
-    public class LoginRepository : RepositoryBase<UserLogin>, ILoginRepository
+    public class LoginRepository : BaseRepository<UserLogin>, ILoginRepository
     {
         public override List<UserLogin> GetAll()
         {
@@ -92,7 +92,7 @@ SELECT sub.*
 
 	   WHERE sub.userType='Teacher'
 	   AND sub.UserName='TC00000008'
-	   AND sub.Password='C69DA0293EBC7A8E9F5F4F8974B64809BD21F874'*/
+	   AND sub.Password='7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD'*/
         }
 
         public override List<UserLogin> GetById(string id)

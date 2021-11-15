@@ -682,74 +682,74 @@ go
 	);
 
  INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST08000001','ST08000001','Sphiwe','Maluleke',20,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST08000001','ST08000001','Sphiwe','Maluleke',20,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
  INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST08000002','ST08000002','Ally','Manganyi',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST08000002','ST08000002','Ally','Manganyi',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST08000003','ST08000003','Ronny','Muvenda',18,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST08000003','ST08000003','Ronny','Muvenda',18,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST08000004','ST08000004','Tshepo','Moloi',21,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST08000004','ST08000004','Tshepo','Moloi',21,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST08000005','ST08000005','Noma','Kone',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST08000005','ST08000005','Noma','Kone',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST08000006','ST08000006','Cindy','Golden',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST08000006','ST08000006','Cindy','Golden',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
  
 
  INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST09000001','ST09000001','Sphiwe9','Maluleke9',20,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST09000001','ST09000001','Sphiwe9','Maluleke9',20,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
  INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST09000002','ST09000002','Ally9','Manganyi9',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST09000002','ST09000002','Ally9','Manganyi9',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST09000003','ST09000003','Ronny9','Muvenda9',18,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST09000003','ST09000003','Ronny9','Muvenda9',18,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST09000004','ST09000004','Tshepo9','Moloi9',21,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST09000004','ST09000004','Tshepo9','Moloi9',21,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST09000005','ST09000005','Noma9','Kone9',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST09000005','ST09000005','Noma9','Kone9',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST09000006','ST09000006','Cindy9','Golden9',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST09000006','ST09000006','Cindy9','Golden9',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 
 
 
   INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST10000001','ST10000001','Sphiwe10','Maluleke10',20,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST10000001','ST10000001','Sphiwe10','Maluleke10',20,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
  INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST10000002','ST10000002','Ally10','Manganyi10',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST10000002','ST10000002','Ally10','Manganyi10',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST10000003','ST10000003','Ronny10','Muvenda10',18,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST10000003','ST10000003','Ronny10','Muvenda10',18,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST10000004','ST10000004','Tshepo10','Moloi10',21,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST10000004','ST10000004','Tshepo10','Moloi10',21,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST10000005','ST10000005','Noma10','Kone10',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST10000005','ST10000005','Noma10','Kone10',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST10000006','ST10000006','Cindy10','Golden10',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST10000006','ST10000006','Cindy10','Golden10',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 
 
   INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST11000001','ST11000001','Sphiwe11','Maluleke11',20,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST11000001','ST11000001','Sphiwe11','Maluleke11',20,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
  INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST11000002','ST11000002','Ally11','Manganyi11',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST11000002','ST11000002','Ally11','Manganyi11',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST11000003','ST11000003','Ronny11','Muvenda11',18,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST11000003','ST11000003','Ronny11','Muvenda11',18,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST11000004','ST11000004','Tshepo11','Moloi11',21,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST11000004','ST11000004','Tshepo11','Moloi11',21,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST11000005','ST11000005','Noma11','Kone11',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST11000005','ST11000005','Noma11','Kone11',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST11000006','ST11000006','Cindy11','Golden11',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST11000006','ST11000006','Cindy11','Golden11',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 
 
   INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST12000001','ST12000001','Sphiwe12','Maluleke12',20,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST12000001','ST12000001','Sphiwe12','Maluleke12',20,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
  INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST12000002','ST12000002','Ally12','Manganyi12',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST12000002','ST12000002','Ally12','Manganyi12',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST12000003','ST12000003','Ronny12','Muvenda12',18,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST12000003','ST12000003','Ronny12','Muvenda12',18,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST12000004','ST12000004','Tshepo12','Moloi12',21,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST12000004','ST12000004','Tshepo12','Moloi12',21,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST12000005','ST12000005','Noma12','Kone12',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST12000005','ST12000005','Noma12','Kone12',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('ST12000006','ST12000006','Cindy12','Golden12',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('ST12000006','ST12000006','Cindy12','Golden12',19,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 
 
 
@@ -780,15 +780,63 @@ INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages
 	);
 
  INSERT INTO Teacher(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('TC00000008','TC00000008','Sphiwe','Maluleke',30,'Male','Race','Tsonga','10/19/2021','10/19/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('TC00000008','TC00000008','Sphiwe','Maluleke',30,'Male','Race','Tsonga','10/19/2021','10/19/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
  INSERT INTO Teacher(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('TC00000009','TC00000009','Ally','Manganyi',30,'Male','Race','Tsonga','10/19/2021','10/19/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('TC00000009','TC00000009','Ally','Manganyi',30,'Male','Race','Tsonga','10/19/2021','10/19/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Teacher(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('TC00000010','TC00000010','Ronny','Muvenda',30,'Male','Race','Tsonga','10/19/2021','10/19/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('TC00000010','TC00000010','Ronny','Muvenda',30,'Male','Race','Tsonga','10/19/2021','10/19/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Teacher(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('TC00000011','TC00000011','Tshepo','Moloi',30,'Male','Race','Tsonga','10/19/2021','10/19/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('TC00000011','TC00000011','Tshepo','Moloi',30,'Male','Race','Tsonga','10/19/2021','10/19/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
 INSERT INTO Teacher(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
- values('TC00000012','TC00000012','Noma','Kone',30,'Male','Race','Tsonga','10/19/2021','10/19/2021','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874','C69DA0293EBC7A8E9F5F4F8974B64809BD21F874',0,0,0,0,'','','','') ;
+ values('TC00000012','TC00000012','Noma','Kone',30,'Male','Race','Tsonga','10/19/2021','10/19/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','') ;
+
+
+
+ --Users with Roles
+ INSERT INTO Student(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
+ values('US12000006','US12000006','Sphiwe','Maluleke',40,'Male','Race','Tsonga','09/11/2021','09/11/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','user') ;
+
+ INSERT INTO Teacher(UserID,UserName,FirstName,LastName,Age,Gender,Race,Languages,CreatedDate,UpdatedDate,Password,PasswordResetCode,LockoutEnabled,AccessFailedCount,IsLockedOut,IsActive,LastLoginDate,LastLockoutDate,LastSeenDate,UserType)
+ values('AD00000012','AD00000012','Sphiwe','Maluleke',40,'Male','Race','Tsonga','10/19/2021','10/19/2021','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD','7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD',0,0,0,0,'','','','admin') ;
+
+
+create table UserRoles (
+    UserId  varchar(50)  NOT NULL,
+    RoleID int not null,
+    primary key(UserId, RoleID)
+)
+go
+
+create table Roles (
+   RoleID int not null primary key,
+   RoleName nvarchar(50)
+)
+go
+
+
+alter table UserRoles with check add constraint FK_UserRoles_Roles 
+foreign key (RoleID) references Roles (RoleID)
+
+alter table UserRoles with check add constraint FK_UserRoles_Teacher
+foreign key (UserId) references Teacher (UserId)
+
+alter table UserRoles with check add constraint FK_UserRoles_Student
+foreign key (UserId) references Student (UserId)
+
+
+
+INSERT INTO Roles VALUES
+  (10, 'Student'),
+  (100, 'Teacher'),
+  (200, 'User'),
+  (500, 'Admin'),
+  (1000, 'Owner');
+
+  INSERT INTO UserRoles VALUES
+
+  ('US00000012',200),
+  ('AD00000012',500);
+
 
 
    CREATE TABLE Address

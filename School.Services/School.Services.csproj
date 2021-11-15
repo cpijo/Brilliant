@@ -53,6 +53,7 @@
     <Compile Include="Interface\IGradeTeacherRepository.cs" />
     <Compile Include="Interface\IStudentAttendanceRepository.cs" />
     <Compile Include="Interface\IStudentRegisterRepository.cs" />
+    <Compile Include="Interface\IPermissionRepository.cs" />
     <Compile Include="Interface\ITeacherRegisterRepository.cs" />
     <Compile Include="Interface\IStudentMarksRepository.cs" />
     <Compile Include="Interface\IStudentSubjectMarksRepository.cs" />
@@ -65,7 +66,7 @@
     <Compile Include="Interface\ICoursesRepository.cs" />
     <Compile Include="Interface\ILoginRepository.cs" />
     <Compile Include="Interface\IGradesRepository.cs" />
-    <Compile Include="Interface\IRepositoryBase.cs" />
+    <Compile Include="Interface\IBaseRepository.cs" />
     <Compile Include="Interface\IStudentRepository.cs" />
     <Compile Include="Interface\IStudentResultsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Repository\StudentMarksRepository.cs" />
     <Compile Include="Repository\StudentSubjectMarksRepository.cs" />
     <Compile Include="Repository\GradeClassRepository.cs" />
+    <Compile Include="Repository\PermissionRepository.cs" />
     <Compile Include="Repository\SubjectTeacherRepository.cs" />
     <Compile Include="Repository\StudentRegisterRepository.cs" />
     <Compile Include="Repository\TeacherRegisterRepository.cs" />
@@ -83,7 +85,7 @@
     <Compile Include="Repository\CoursesRepository.cs" />
     <Compile Include="Repository\LoginRepository.cs" />
     <Compile Include="Repository\GradesRepository.cs" />
-    <Compile Include="Repository\RepositoryBase.cs" />
+    <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\StudentRepository.cs" />
     <Compile Include="Repository\StudentResultsRepository.cs" />
     <Compile Include="ServiceExample\UserService_Static.cs" />

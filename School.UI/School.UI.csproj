@@ -166,6 +166,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MySecurity\userPagePermissionAttribute.cs" />
+    <Compile Include="Models\MySecurity\CustomAuthorize.cs" />
+    <Compile Include="Models\MySecurity\MaxFileSizeAttribute.cs" />
     <Compile Include="Models\StudentModel\StudentAttendanceModel.cs" />
     <Compile Include="ViewModels\DropBoxViewModel.cs" />
     <Compile Include="ViewModels\StudentModel.cs" />

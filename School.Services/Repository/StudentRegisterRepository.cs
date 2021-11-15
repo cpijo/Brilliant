@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 
 namespace School.Services.Repository
 {
-    public class StudentRegisterRepository : RepositoryBase<Student>, IStudentRegisterRepository
+    public class StudentRegisterRepository : BaseRepository<Student>, IStudentRegisterRepository
     {
         public override List<Student> GetAll()
         {

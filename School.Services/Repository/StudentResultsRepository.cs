@@ -12,7 +12,7 @@ using Newtonsoft.Json.Linq;
 
 namespace School.Services.Repository
 {
-    public class StudentResultsRepository : RepositoryBase<StudentResults>, IStudentResultsRepository
+    public class StudentResultsRepository : BaseRepository<StudentResults>, IStudentResultsRepository
     {
         public override List<StudentResults> GetAll()
         {

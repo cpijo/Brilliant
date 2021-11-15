@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace School.Services.Repository
 {
-    public abstract class RepositoryBase<T>: IDisposable , IRepositoryBase<T> where T : class, new() 
+    public abstract class BaseRepository<T>: IDisposable , IBaseRepository<T> where T : class, new() 
     {
         public SqlCommand command = null;
         public DataTable table = null;
         bool _isSuccess = true;
-        public RepositoryBase()
+        public BaseRepository()
         {
             command = new SqlCommand();
             command.CommandText = "";

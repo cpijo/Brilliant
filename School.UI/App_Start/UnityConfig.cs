@@ -32,7 +32,10 @@ namespace School.UI
 
             container.RegisterType<ITeacherRepository, TeacherRepository>();
             container.RegisterType<ITeacherRegisterRepository, TeacherRegisterRepository>();
+            container.RegisterType<IPermissionRepository, PermissionRepository>();
 
+            //An error occurred when trying to create a controller of type 'School.UI.Controllers.LogInController'. 
+            //Make sure that the controller has a parameterless public constructor.
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

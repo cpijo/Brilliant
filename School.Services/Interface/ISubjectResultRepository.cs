@@ -2,7 +2,7 @@
 
 namespace School.Services.Interface
 {
-    public interface ISubjectResultRepository : IRepositoryBase<SubjectResult>
+    public interface ISubjectResultRepository : IBaseRepository<SubjectResult>
     {
     }
 }

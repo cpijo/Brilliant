@@ -2,7 +2,7 @@
 
 namespace School.Services.Interface
 {
-    public interface IRepositoryBase<T> where T : class
+    public interface IBaseRepository<T> where T : class
     {
         List<T> GetAll();
         List<T> GetById(string id);

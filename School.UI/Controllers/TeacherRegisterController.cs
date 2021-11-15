@@ -1,6 +1,7 @@
 ﻿using School.Common.Constants;
 using School.Entities.Fields;
 using School.Services.Interface;
+using School.UI.Models.MySecurity;
 using School.UI.ViewModels;
 using School.UI.ViewModels.TeacherVM;
 using System;
@@ -15,6 +16,7 @@ using System.Web.Mvc;
 namespace School.UI.Controllers
 {
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+    [userPagePermissionAttribute(permissionID = new int[] { 500 })]
     public class TeacherRegisterController : BaseController
     {
         //Select Words (Ctrl+Shift+Arrow)

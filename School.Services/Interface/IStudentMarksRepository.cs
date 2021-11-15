@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace School.Services.Interface
 {
-    public interface IStudentMarksRepository : IRepositoryBase<StudentSubjectMarks>
+    public interface IStudentMarksRepository : IBaseRepository<StudentSubjectMarks>
     {
         List<StudentSubjectMarks> GetByAny(dynamic dynamicObj);
     }

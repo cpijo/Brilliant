@@ -1,6 +1,7 @@
 ﻿using School.Common.Constants;
 using School.Entities.Fields;
 using School.Services.Interface;
+using School.UI.Models.MySecurity;
 using School.UI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Web.Mvc;
 namespace School.UI.Controllers
 {
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
+    [userPagePermissionAttribute(permissionID = new int[] { 500 })]
     public class StudentRegisterController : BaseController
     {
         private IStudentRegisterRepository studentRegisterRepository;
