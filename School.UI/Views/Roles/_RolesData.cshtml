@@ -1,0 +1,199 @@
+﻿@using School.UI.ViewModels
+@model RolesViewModel
+
+
+    <style>
+        .container {
+            display: flex;
+        }
+
+            .container > div {
+                flex: 1; /*grow*/
+            }
+    </style>
+    <head>
+
+
+
+        <style type="text/css">
+            html {
+                position: relative;
+                min-height: 100%;
+            }
+
+            body {
+                margin-bottom: 60px;
+            }
+
+            .footer {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                min-height: 60px;
+                height: 90px;
+            }
+
+                .footer img {
+                    margin-top: 20px;
+                }
+
+                .footer p {
+                    margin-top: 40px;
+                }
+
+            .container {
+                width: auto;
+                max-width: 800px;
+                padding: 0 15px;
+            }
+
+                .container .text-muted {
+                    margin: 20px 0;
+                }
+        </style>
+
+
+
+
+
+        <section class="view-container">
+
+            <div class="col-sm 12">
+                <div class="box-header-line" id="title"></div>
+            </div>
+
+
+            @using (Ajax.BeginForm("SaveUserRoles", "Account", new AjaxOptions { OnSuccess = "SaveRolesSuccess", OnFailure = "SaveRolesFailure", HttpMethod = "Post" }, new { @class = "form-horizontal", role = "form", uid = Model.SelectedUserId }))
+            {
+                <div class="col-sm-12">
+                    <div class="container" style="border:none">
+                        <div id="dual-list-box-employees" class="form-group row">
+                            <input type="text" name="SelectedUserId" value=@Model.SelectedUserId hidden />
+                            <input type="text" id="username" value=@Model.username hidden />
+
+
+                            <div class="col-sm-4">
+                                @Html.LabelFor(m => m.SelectedAvailableRole, new { @class = "control-label" })
+                                @Html.ListBoxFor(m => m.SelectedAvailableRole, Model.AvailableRoles_, new { @class = "selected form-control", style = "width:100%;", size = "15" })
+                            </div>
+                            <div class="col-sm-1 center-block" style="margin-top: 80px;">
+
+                                <button type="button" class="btn btn-default col-sm-8 col-sm-offset-2 " id="SearchBtn" onclick="addallItems()" style="margin-bottom: 10px;">
+                                    <span class="glyphicon glyphicon-list"></span>
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </button>
+
+                                <button type="button" class="btn btn-default col-sm-8 col-sm-offset-2 " onclick="addItem()" style="margin-bottom: 20px;">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </button>
+
+                                <button type="button" class="btn btn-default col-sm-8 col-sm-offset-2 " onclick="removeItem()" style="margin-bottom: 10px;">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                </button>
+
+                                <button type="button" class="btn btn-default col-sm-8 col-sm-offset-2 " onclick="removeallItems()" style="margin-bottom: 10px;">
+                                    <span class="glyphicon glyphicon-chevron-left"></span> <span class="glyphicon glyphicon-list"></span>
+                                </button>
+
+
+
+                            </div>
+
+
+                            <div class="col-sm-4">
+                                @Html.LabelFor(m => m.SelectedAssignedRole, new { @class = "control-label" })
+                                @Html.ListBoxFor(m => m.SelectedAssignedRole, Model.AssignedRoles_, new { @class = "selected form-control", style = "width:100%;", size = "15" })
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div>
+                        <br />
+
+                        <button type="button" id="SelectAll" class="btn btn-primary btnWidth pull-left">Save User Roles</button>
+                        <button type="Submit" id="SaveRoles" class="btn btn-primary btnWidth pull-left" style="display:none;">Save User Roles</button>
+                    </div>
+                </div>
+            }
+
+        </section>
+
+        <script type="text/javascript">
+
+
+
+            function addItem() {
+                $("#SelectedAvailableRole option:selected").appendTo("#SelectedAssignedRole");
+                $("#SelectedAssignedRole option").attr("selected", false);
+                SortList("#SelectedAssignedRole");
+            }
+            function addallItems() {
+                $("#SelectedAvailableRole option").appendTo("#SelectedAssignedRole");
+                $("#SelectedAssignedRole option").attr("selected", false);
+                SortList("#SelectedAssignedRole");
+            }
+            function removeItem() {
+                $("#SelectedAssignedRole option:selected").appendTo("#SelectedAvailableRole");
+                $("#SelectedAvailableRole option").attr("selected", false);
+                SortList("#SelectedAvailableRole");
+            }
+            function removeallItems() {
+                $("#SelectedAssignedRole option").appendTo("#SelectedAvailableRole");
+                $("#SelectedAvailableRole option").attr("selected", false);
+                SortList("#SelectedAvailableRole");
+            }
+
+            function assignAllClick(cb) {
+
+                if (cb.checked == true) {
+                    addallItems();
+                }
+                cb.checked = false;
+            }
+
+
+            function removeAllClick(cb) {
+
+                if (cb.checked == true) {
+                    removeallItems();
+                }
+                cb.checked = false;
+            }
+
+
+            function SortList(listname) {
+                var $r = $(listname + " option");
+                $r.sort(function (a, b) {
+                    return (a.text < b.text) ? -1 : (a.text > b.text) ? 1 : 0;
+                    // if you do not have value attribute for option use the text value. Replace the above line of code with the one below.
+                    //return (a.value < b.value) ? -1 : (a.value > b.value) ? 1 : 0;
+                });
+                $($r).remove();
+                $(listname).append($($r));
+            }
+
+
+            $("#SelectAll").on("click", function (event) {
+                $('#SelectedAssignedRole  option').prop('selected', true);
+                $("#SaveRoles").trigger("click");
+            })
+
+
+            $(".sweetalert-lg").css('background-color', '#b0dafc');
+
+
+        </script>
+
+
+
+
+
+
+
+
+
+
+
