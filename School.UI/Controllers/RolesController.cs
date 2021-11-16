@@ -93,15 +93,47 @@ namespace School.UI.Controllers
             assignedRole = dropdownHelper(rolePerUser);
             model.AssignedRoles_SelectList = new SelectList(assignedRole, "Value", "Text");
 
+            model.SelectedUserId = userId;
+
+            Session["assignedRole"] = assignedRole;
+
             return PartialView("_PartialRoles", model);
         }
         #endregion
         #region save Roles
         [HttpPost]
-        public ActionResult saveRoles(string userId, string Firstname, string LastName)
+        public ActionResult SaveRoles(string userId, string Firstname, string LastName, FormCollection formCollection)
         {
+
+            string SelectedUserId = formCollection["SelectedUserId"];
+            string _availableRole = formCollection["availableRole"];
+            string RolesObject = formCollection["assignedRole"];
+
+            List<int> ListRolesInts = new List<int>();
             List<UserRoles> roles = new List<UserRoles>();
-            userRolesRepository.SaveMany(roles);         
+            if (RolesObject != null)
+            {
+                string[] ArrayIds = RolesObject.Split(',');
+                foreach (var id in ArrayIds)
+                {
+                    ListRolesInts.Add(int.Parse(id));
+                    roles.Add(new UserRoles()
+                    {
+                        RoleID = int.Parse(id),
+                        UserId = SelectedUserId,
+                    });
+                }
+            }
+
+
+            if (Session["assignedRole"]!=null)
+            {
+
+            }
+
+
+            userRolesRepository.SaveMany(roles);   
+            
             return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
         }
         #endregion

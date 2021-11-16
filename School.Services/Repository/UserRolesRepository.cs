@@ -46,19 +46,37 @@ namespace School.Services.Repository
             {
                 try
                 {
+                    var _sos = model.RoleID;
                     command.Parameters.Clear();
-                    command.Parameters.AddWithValue("RoleID", model.RoleID);
                     command.Parameters.AddWithValue("@UserId", model.UserId);
+                    command.Parameters.AddWithValue("RoleID", model.RoleID);
                     command.Connection.Open();
                     command.ExecuteNonQuery();
                     command.Connection.Close();
                 }
                 catch (Exception ex)
                 {
+                    //ex = {"The connection was not closed. The connection's current state is open."}
                 }
             }
         }
 
+        public override void SaveMany(List<UserRoles> _model)
+        {
+            if (_model==null ||_model.Count > 0)
+            {
+              Delete(_model);
+            }
+            command.CommandText = "INSERT INTO UserRoles(UserId,RoleID) values(@UserId, @RoleID)";
+            base.SaveMany(_model);
+        }
+
+        public override void Delete(List<UserRoles> model)
+        {
+            string userId = model[0].UserId;
+            command.CommandText = "DELETE FROM UserRoles WHERE UserId='" + userId + "'";
+            base.Delete(model);
+        }
 
         public override void sqlQueries(dynamic obj)
         {

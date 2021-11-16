@@ -38,7 +38,7 @@
     <div class="col-md-12" style="height:400px;padding-top:15px;">
 
 
-        @using (Ajax.BeginForm("SaveUserRoles", "Roles", new AjaxOptions { OnSuccess = "SaveRolesSuccess", OnFailure = "SaveRolesFailure", HttpMethod = "Post" }, new { @class = "form-horizontal", role = "form", uid = Model.SelectedUserId }))
+        @using (Ajax.BeginForm("SaveRoles", "Roles", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "Post" }, new { @class = "form-horizontal", @id = "formRoleId", userId = Model.SelectedUserId }))
         {
             <div class="col-md-12 div-roles-parent">
 
@@ -82,8 +82,8 @@
 
             </div>
             <div class="col-md-12 div-btns">
-                <button type="button" id="SelectAll" class="btn btn-primary btnWidth pull-left">Save User Roles</button>
-                <button type="Submit" id="SaveRoles" class="btn btn-primary btnWidth pull-left" style="display:none;">Save User Roles</button>
+                @*<button type="button" id="SelectAll" class="btn btn-primary btnWidth pull-left">Save User Roles</button>*@
+                <button type="Submit" id="SaveRoles" class="btn btn-primary btnWidth pull-left"  onclick='return selectedRows()'  style="display:block;">Save User Roles</button>
             </div>
 
         }
@@ -92,6 +92,10 @@
 
         <script type="text/javascript">
 
+
+            function selectedRows() {
+                $('#assignedRole option').prop('selected', true);
+            }
 
 
             function addItem() {
@@ -151,7 +155,31 @@
             })
 
 
-            $(".sweetalert-lg").css('background-color', '#b0dafc');
+            //$(".sweetalert-lg").css('background-color', '#b0dafc');
+
+
+
+
+
+            function OnSuccess(response) {
+                
+                //classBusyIconHelper.hideBusyIcon();
+                //if (response.result === "true") {
+                //   var msgObj = { message: response.message, type: "success", title: response.title, pageId: "" };
+                //    classMessageResponse.showMessage(msgObj);
+                //    //clearInputs();
+                //}
+                //else {
+                //    var msgObj = { message: response.message, type: "error", title: response.title, pageId: "" };
+                //    classMessageResponse.showMessage(msgObj);
+                //}
+            }
+
+            function OnFailure(response) {
+                var msgObj = { message: "error", type: "error", title: "error", pageId: "" };
+                //classMessageResponse.showMessage(msgObj);
+                //$('.btnlogColor').prop('disabled', false);
+            }
 
 
         </script>

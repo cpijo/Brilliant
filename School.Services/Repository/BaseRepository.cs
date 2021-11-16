@@ -89,8 +89,17 @@ namespace School.Services.Repository
         {
             using (SqlConnection connection = new SqlConnection(DataBaseConnectorString.ConnectionString))
             {
-                command.Connection = connection;
+                //try
+                //{
+                //    command.Connection = connection;
+                //    connection.Open();
+                //    command_ExecuteNonQuery(model);
+                //    _isSuccess = true;
+                //}
 
+
+
+                command.Connection = connection;
                 try
                 {
                     //connection.Open();
