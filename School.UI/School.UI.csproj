@@ -141,6 +141,7 @@
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\DropboxController.cs" />
     <Compile Include="Controllers\StudentMarksController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\TeacherRegisterController.cs" />
     <Compile Include="Controllers\StudentRolesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Models\StudentModel\StudentAttendanceModel.cs" />
     <Compile Include="ViewModels\RolesViewModel.cs" />
     <Compile Include="ViewModels\DropBoxViewModel.cs" />
+    <Compile Include="ViewModels\SearchUserViewModel.cs" />
     <Compile Include="ViewModels\StudentModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Login.cs" />
@@ -1291,7 +1293,9 @@
     <Content Include="Views\StudentRegister\_PartialDropbox.cshtml" />
     <Content Include="Views\StudentRegister\_PartialDropboxSurbub.cshtml" />
     <Content Include="Views\Roles\_StudentRoles.cshtml" />
-    <Content Include="Views\Roles\_RolesData.cshtml" />
+    <Content Include="Views\Roles\_PartialRoles.cshtml" />
+    <Content Include="Views\Roles\_ViewUser.cshtml" />
+    <Content Include="Views\Roles\_PartialRoles - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

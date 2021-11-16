@@ -1,4 +1,5 @@
 ﻿using School.Common.Constants;
+using School.Entities.Fields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,28 @@ namespace School.UI.Controllers
 {
     public class BaseController : Controller
     {
+
+
+        public static List<SelectListItem> dropdownHelper(List<Roles> roles)
+        {
+
+            Dictionary<int, string> SurbubDictionary = new Dictionary<int, string>();
+            foreach (Roles role in roles)
+            {
+                SurbubDictionary.Add(role.RoleID, role.RoleName);
+            }
+
+            return  SurbubDictionary
+            .Select(item => new SelectListItem
+            {
+                Value = item.Key.ToString(),
+                Text = item.Value.ToString(),
+                Selected = true
+            })
+            .ToList();
+        }
+
+
 
         public static List<SelectListItem> dropdownHelper(Dictionary<string, string> SurbubDictionary)
         {

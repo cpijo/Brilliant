@@ -2,7 +2,7 @@
 
 namespace School.Services.Interface
 {
-    public interface IPermissionRepository : IBaseRepository<Roles>
+    public interface IRolesRepository : IBaseRepository<Roles>
     {
     }
 }

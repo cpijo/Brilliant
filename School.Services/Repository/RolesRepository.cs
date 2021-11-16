@@ -11,8 +11,17 @@ using Newtonsoft.Json.Linq;
 
 namespace School.Services.Repository
 {
-    public class PermissionRepository : BaseRepository<Roles>, IPermissionRepository
+    public class RolesRepository : BaseRepository<Roles>, IRolesRepository
     {
+
+
+        public override List<Roles> GetAll()
+        {
+            command.CommandText = "SELECT r.RoleID,r.RoleName FROM Roles r ";          
+            return base.GetById("");
+        }
+
+
 
         public override List<Roles> GetById(string userId)
         {
@@ -39,6 +48,27 @@ namespace School.Services.Repository
                 throw;
             }
         }
+
+        public override void command_ExecuteNonQuery(List<Roles> _model)
+        {
+            foreach (var model in _model)
+            {
+                try
+                {
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("RoleID", model.RoleID);
+                    command.Parameters.AddWithValue("@RoleName", model.RoleName);
+                    command.Connection.Open();
+                    command.ExecuteNonQuery();
+                    command.Connection.Close();
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+        }
+
+
         public override void sqlQueries(dynamic obj)
         {
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(obj);

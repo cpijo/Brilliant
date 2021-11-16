@@ -11,8 +11,8 @@ namespace School.UI.Controllers
     public class LogInController : Controller
     {
         private  ILoginRepository loginRepository;
-        private IPermissionRepository permissionRepository;
-        public LogInController(ILoginRepository loginRepository, IPermissionRepository permissionRepository)
+        private IRolesRepository permissionRepository;
+        public LogInController(ILoginRepository loginRepository, IRolesRepository permissionRepository)
         {
             this.loginRepository = loginRepository;
             this.permissionRepository = permissionRepository;

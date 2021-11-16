@@ -1,0 +1,168 @@
+﻿@using School.UI.ViewModels
+@model RolesViewModel
+
+
+    <style>
+        .div-roles-parent {
+            position: relative;
+            display:inline-block;
+        }
+        .div-center {
+            position: absolute;
+            width: 80px;
+            float: left;
+            left: calc(50% - 30px);
+        }
+        .div-left, .div-right {
+            position: absolute;
+            width: calc(50% - 60px);
+            float: left;
+        }
+
+        .div-right {
+            position: absolute;
+            left: calc(50% + 60px);
+        }
+        .div-btns {
+            /*position: relative;*/
+            /*float: left;*/
+            /*position: absolute;*/
+            top: 300px;
+        }
+
+
+    </style>
+
+
+
+    <div class="col-md-12">
+
+
+        @using (Ajax.BeginForm("SaveUserRoles", "Roles", new AjaxOptions { OnSuccess = "SaveRolesSuccess", OnFailure = "SaveRolesFailure", HttpMethod = "Post" }, new { @class = "form-horizontal", role = "form", uid = Model.SelectedUserId }))
+        {
+            <div class="col-md-12 div-roles-parent">
+
+
+                <input type="text" name="SelectedUserId" value=@Model.SelectedUserId hidden />
+                <input type="text" id="username" value=@Model.username hidden />
+
+
+                <div class="div-left" style="border:thin solid silver;">
+                    @Html.LabelFor(m => m.availableRole, new { @class = "control-label" })
+                    @Html.ListBoxFor(m => m.availableRole, Model.AvailableRoles_SelectList, new { @class = "selected form-control", style = "width:100%;", size = "15" })
+                </div>
+                <div class="div-center" style="border:thin solid wheat;">
+
+                    <button type="button" class="btn btn-default col-sm-12" id="SearchBtn" onclick="addallItems()" style="margin-bottom: 2px;">
+                        <span class="glyphicon glyphicon-list"></span>
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </button>
+
+                    <button type="button" class="btn btn-default col-sm-12" onclick="addItem()" style="margin-bottom: 2px;">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </button>
+
+                    <button type="button" class="btn btn-default col-sm-12" onclick="removeItem()" style="margin-bottom: 2px;">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </button>
+
+                    <button type="button" class="btn btn-default col-sm-12" onclick="removeallItems()" style="margin-bottom: 2px;">
+                        <span class="glyphicon glyphicon-chevron-left"></span> <span class="glyphicon glyphicon-list"></span>
+                    </button>
+
+                </div>
+
+
+                <div class="div-right" style="border:thin solid silver;">
+                    @Html.LabelFor(m => m.assignedRole, new { @class = "control-label" })
+                    @Html.ListBoxFor(m => m.assignedRole, Model.AssignedRoles_SelectList, new { @class = "selected form-control", style = "width:100%;", size = "15" })
+                </div>
+
+
+
+            </div>
+            <div class="col-md-12 div-btns">
+                <button type="button" id="SelectAll" class="btn btn-primary btnWidth pull-left">Save User Roles</button>
+                <button type="Submit" id="SaveRoles" class="btn btn-primary btnWidth pull-left" style="display:none;">Save User Roles</button>
+            </div>
+
+        }
+
+    </div>
+
+        <script type="text/javascript">
+
+
+
+            function addItem() {
+                $("#availableRole option:selected").appendTo("#assignedRole");
+                $("#assignedRole option").attr("selected", false);
+                SortList("#assignedRole");
+            }
+            function addallItems() {
+                $("#availableRole option").appendTo("#assignedRole");
+                $("#assignedRole option").attr("selected", false);
+                SortList("#assignedRole");
+            }
+            function removeItem() {
+                $("#assignedRole option:selected").appendTo("#availableRole");
+                $("#availableRole option").attr("selected", false);
+                SortList("#availableRole");
+            }
+            function removeallItems() {
+                $("#assignedRole option").appendTo("#availableRole");
+                $("#availableRole option").attr("selected", false);
+                SortList("#availableRole");
+            }
+
+            function assignAllClick(cb) {
+
+                if (cb.checked == true) {
+                    addallItems();
+                }
+                cb.checked = false;
+            }
+
+
+            function removeAllClick(cb) {
+
+                if (cb.checked == true) {
+                    removeallItems();
+                }
+                cb.checked = false;
+            }
+
+
+            function SortList(listname) {
+                var $r = $(listname + " option");
+                $r.sort(function (a, b) {
+                    return (a.text < b.text) ? -1 : (a.text > b.text) ? 1 : 0;
+                    // if you do not have value attribute for option use the text value. Replace the above line of code with the one below.
+                    //return (a.value < b.value) ? -1 : (a.value > b.value) ? 1 : 0;
+                });
+                $($r).remove();
+                $(listname).append($($r));
+            }
+
+
+            $("#SelectAll").on("click", function (event) {
+                $('#SelectedAssignedRole  option').prop('selected', true);
+                $("#SaveRoles").trigger("click");
+            })
+
+
+            $(".sweetalert-lg").css('background-color', '#b0dafc');
+
+
+        </script>
+
+
+
+
+
+
+
+
+
+
+
