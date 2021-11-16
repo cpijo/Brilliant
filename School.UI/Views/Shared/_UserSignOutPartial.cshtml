@@ -127,14 +127,12 @@ color:orange;
 <script>
 
     $(document).ready(function () {
-        alert("ttttttttttttttttttt");
     });
      function callingChangePassword(url) {
-         //debugger
+
             $.get('@Url.Action("ChangePassword","Manage")', { id: "spijo" }, function (result) {
-                //debugger;
-                $("#PopupLayoutBody").empty();
-                $("#PopupLayoutBody").html(result);
+
+                $("#PopupLayoutBody").empty().html(result);
                 $("#PopupLayoutOverlay").show();
                 $("#PopupLayoutBodyCover").show();
 

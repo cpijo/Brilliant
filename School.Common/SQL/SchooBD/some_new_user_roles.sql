@@ -45,10 +45,6 @@ foreign key (UserID) references Users (UserID)
 
 
 
-
-
-
-
 create table UserRoles (
     UserId  varchar(50)  NOT NULL,
     RoleID int not null,
@@ -217,3 +213,59 @@ CREATE TABLE `users_roles` (
 --Constraints in SQL Server 
 --What is SQL constraints - Great 
 --The purpose of constraints is to maintain the data integrity during an update/delete/insert into a table. 
+
+
+
+UPDATE
+    Table_A
+SET
+    Table_A.col1 = Table_B.col1,
+    Table_A.col2 = Table_B.col2
+FROM
+    Some_Table AS Table_A
+    INNER JOIN Other_Table AS Table_B
+        ON Table_A.id = Table_B.id
+WHERE
+    Table_A.col3 = 'cool'
+
+
+
+
+-- 1 Select update
+    update P1
+    set Name = P2.Name
+    from Product P1
+    inner join Product_Bak P2 on p1.id = P2.id
+    where p1.id = 2
+--2 Update with a common table expression
+    ; With CTE as
+    (
+        select id, name from Product_Bak where id = 2
+    )
+    update P
+    set Name = P2.name
+    from  product P  inner join CTE P2 on P.id = P2.id
+    where P2.id = 2
+--3 Merge
+    --Merge into product P1
+    --using Product_Bak P2 on P1.id = P2.id
+
+    --when matched then
+    --update set p1.[description] = p2.[description], p1.name = P2.Name;
+
+
+--https://blog.quest.com/how-to-use-update-from-select-in-sql-server/
+--UPDATE e set
+--e.City=A.City,
+--e.PostCode=A.PostCode
+--FROM Employee e
+--INNER JOIN [Address] a
+--ON e.EmpID = A.EmpID
+
+
+--UPDATE table1
+--SET table1.column = table2.expression1
+--FROM table1
+--INNER JOIN table2
+--ON (table1.column1 = table2.column1)
+--[WHERE conditions];

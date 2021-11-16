@@ -88,7 +88,10 @@
         transform: skew(-15deg);
         padding-left: 2px;
         /*color:wheat;*/
-        color:darkgreen;
+        /*color:darkgreen;*/
+    }
+    .logOff {
+        color: orangered;
     }
 
         .loIng-label:hover, .register-label:hover {
@@ -188,7 +191,7 @@
                 <span id="rightHeader-logInUserPageId" class="loIng-label" hidden onclick="callController('/EscortAccount/partialEscortLogin','Create Your Account')" href="#">my Name</span>
                 <span id="rightHeader-registerPageId" class="loIng-label" onclick="login('/RegisterEmail/RegisterEmail','Create Your Account')" href="#">Register</span>
                 <span id="rightHeader-logInPageId" class="register-label logInPageId" onclick="login('/LogIn/LoginPartial','Log In')" href="#">Login</span>
-                <span id="rightHeader-logOffPageId" class="register-label logOffPageId" hidden onclick="userLogOff()" href="#">LogOff</span>
+                <span id="rightHeader-logOffPageId" class="register-label logOff" hidden onclick="userLogOff()" href="#">LogOff</span>
             </div>
         </div>
     }
@@ -216,66 +219,6 @@
     });
 
     function userLogOff() {
-
-        //close menu  or toggle menu
-        $('.logInPageId').css({ "display": "block", "background-color": "rgb(59, 90, 108)" });
-        $('.logOffPageId').css("display", "none");
-
-        $('#rightHeader-registerPageId').css("display", "block");
-        $('#rightHeader-logInUserPageId').css("display", "none");
-
-        var permissionList = overrideUserSession.permissionList;
-        for (let i = 0; i < permissionList.length; i++) {
-
-            const id = permissionList[i];
-            const listItems = document.querySelector('#menuId #' + id);
-
-            if (listItems !== null) {
-                var vis = listItems.style;
-                vis.display = 'none';
-                //overrideClassLogIn.id = "null";
-
-                classLogin.setUserObj({ id: null, name: null, islogin: false })
-                //classLogin.setUserObj({ id: 1234, name: "sphiwe", islogin: true })
-                //var status = classLogin.status();
-
-                //$("#userPrifileImage").empty();
-            }
-        }
-
-        if (overrideUserSession.openPage !== null) {
-
-            var popupBodyID = overrideUserSession.openPage;
-
-            $('#' + popupBodyID).css("display", "none");
-            if (popupBodyID === "PopupBodyUserLogin") {
-                $('#PopupOverlayLogIn').css("display", "none");
-            }
-            else if (popupBodyID === "popupChildOne") {
-                $('#PopupOverlayChildOne').css("display", "none");
-            }
-            else if (popupBodyID === "popupChildTwo") {
-                $('#PopupOverlayChildTwo').css("display", "none");
-            }
-            else if (popupBodyID === "popupChildThree") {
-                $('#PopupOverlayChildThree').css("display", "none");
-            }
-            else if (popupBodyID === "popupChildChat") {
-                $('#PopupOverlayChildChat').css("display", "none");
-            }
-            else {
-                ;
-            }
-        }
-
-        $("#divloginCanvas").empty();
-        $("aside#menuId #userProfileImage").empty()
-        $("aside#menuId #myNameId").text("");
-        $("aside#menuId #myProvinceId").text("");
-        $("aside#menuId #myId").text("");
-        $("aside#menuId #userInforId").css("display", "none").hide;
-        $('#usr0 ul').hide();
-
         var msgObj =
         {
             title: "Logged Off!",
@@ -290,14 +233,10 @@
             }
         }
         classMessageResponse.showMessage(msgObj);
-
-        if (deviceSize.width < 620) {
-            classMenuHelper.closeMenuOnly();
-        }
-        else {
-            //classMenuHelper.openCloseMenu(deviceSize.width);
-        }
+        window.location.href = '@Url.Action("LogOff", "LogIn")';
     }
+
+
 
     function login(url, header) {
 
