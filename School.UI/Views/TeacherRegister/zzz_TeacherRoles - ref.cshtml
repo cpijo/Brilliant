@@ -68,7 +68,7 @@
                         @Html.TextBoxFor(m => m.TeacherViewModel.Teacher.Firstname, new { @class = "form-control rm-form-control", @readonly = "readonly", @style = "-webkit-box-shadow: none;box-shadow: none;border-radius: 0;border-color: white;border: 0px solid silver;background-color: white;" })
                     </div>
 
-                    @Html.LabelFor(model => model.TeacherViewModel.Teacher.LastName, new { @class = "col-sm-2 control-label" })
+                    @Html.LabelFor(model => model.TeacherViewModel.Teacher.LastName, new { @class = "col-sm-2 control-label"})
                     <div class="col-md-4">
                         @Html.TextBoxFor(model => model.TeacherViewModel.Teacher.LastName, new { @class = "form-control", @readonly = "readonly", @style = "-webkit-box-shadow: none;box-shadow: none;border-radius: 0;border-color: white;border: 0px solid silver;background-color: white;" })
                     </div>
@@ -88,22 +88,21 @@
                 <hr />
 
 
-                <div class="form-group">
+                <div class="form-group">              
                     @Html.LabelFor(model => model.TeacherViewModel.Grades.Grade, new { @class = "col-sm-4 control-label" })
                     <div class="col-md-8">
                         @Html.DropDownListFor(m => m.TeacherViewModel.Grades.Grade, Model.TeacherViewModel.GradeDropboxItemList, new { @id = "GradeId", @class = "form-control selectedSearchId" })
                     </div>
                 </div>
                 <input type="text" name="TeacherRolesId" value=@Model.TeacherRoles hidden />
-                <input type="hidden" name="hidInput" id="hidInput" value="" />
                 <div class="col-md-12 rm-pd" style="border: 0px solid red; display: inline-block;">
                     <div class="card_t card-s">
                         <div id="tableHolderId" class="rm-pd" style="padding:15px;">
                             <table id="tableId01" class="table" style="border:1px solid silver;">
-
+                                
                                 <thead style="background-color:rgb(47, 71, 86);color:white;">
                                     <tr>
-
+                                        
                                         <th>
                                             @Html.DisplayNameFor(model => model.GradeId)
                                         </th>
@@ -159,10 +158,10 @@
                                 </tbody>
                             </table>
                         </div>
-
-
-                        <div class="col-md-12" style="padding-bottom:5px;">
-                            <input id="btnSave" type="submit" value="Save" class="btn btn-primary" onclick='return validateInput()' />
+                    
+                        
+                        <div class="col-md-12"style="padding-bottom:5px;">
+                            <input id="btnSave" type="button" value="Save" class="btn btn-primary" onclick='return validateInput()' />
                         </div>
                     </div>
                 </div>
@@ -174,47 +173,103 @@
 
     <script>
 
-        function getDatas() {
-            var _v1 = getTableColumns("#tableId1");
-            var _v2 = getTableRows("#tableId1");
-            var columns = ["GradeId", "SubjectId", "SubjectName", "Assign", "Status"];
-            var _getTableData = getTableData(columns, "#tableId1");
-        }
-
-
         function validateInput() {
+            debugger;
+            var _v1 = getTableColumns("#tableId1");
+            debugger;
+            var _v2 = getTableRows("#tableId1");
+            debugger;
+
+            var columns = ["GradeId", "SubjectId", "SubjectName", "Assign", "Status"];
+            var _getTableData = getTableData(columns,"#tableId1");
+           
+
+            var _getTableDataBetter = getTableDataBetter("#tableId1");
+          
+            //var _v3 = getTableData("#tableId1");
+            //debugger;
+
+
+            var _tabledata = getTableDataSimple("#tableId1");
+
+
+          
+
+
+
+
+
+
+                // To Count all the columns in the table
+                // and get the count of the selected elements
+            //var colCount = document.getElementById("tableId").rows[0].cells.length;
+            //var colNumber = $("#tableId>thead>tr>th").length;
+            //var countRows = $("#tableId>tbody>tr").length;
+
+              
+            //var _tabledata = getTableData("tableId");
+
+            //debugger;
             //var obj = {}
             //var _hasSelected = hasSelected(obj)
-            var columns = ["GradeId", "SubjectId", "SubjectName", "Assign", "Status"];
-            var _getTableData = getTableData(columns, "#tableId1");
-            var $hidInput = $("#hidInput");
-            $hidInput.val(JSON.stringify(_getTableData));         
-
-            if (hasSelected===false) {
-                return false;
-            }
+       
             return true;
         }
 
 
+        //$('#tableId input[type="checkbox"]').click(function () {
+
+        //    var hh = this.name;
+        //    if (this.name == "present") {
+        //        if (this.checked) {
+
+        //            $(this).closest('td').parent('tr').find("td:eq(5)").text("present").css("color", "green");
+        //            $(this).closest('tr').find("td:eq(4)").find('[type=checkbox]').prop('checked', false);
+
+        //        } else {
+        //            $(this).closest('td').parent('tr').find("td:eq(5)").text("not set").css("color", "black");
+        //        }
+        //    }
+        //    else if (this.name == "absent") {
+        //        if (this.checked) {
+        //            $(this).closest('td').parent('tr').find("td:eq(5)").text("abset").css("color", "orange");
+        //            $(this).closest('tr').find("td:eq(3)").find('[type=checkbox]').prop('checked', false);
+
+        //        } else {
+        //            $(this).closest('td').parent('tr').find("td:eq(5)").text("not set").css("color", "black");
+        //        }
+        //    }
+        //    else {
+        //        console.log("signs"); // replace with logic
+        //    }
+
+        //});
+
         function hasSelected(obj) {
             var countRows = $("#tableId>tbody>tr").length;
+            var allRows = [];
             for (var i = 0; i < countRows; i++) {
 
+                debugger;
                 var GradeId = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(0)").text();
                 var SubjectId = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(1)").text();
                 var SubjectName = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(2)").text();
                 var IsSElected = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(0)").text();
                 var Status = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(4)").text();
+
                 var ischeked = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3) [type=checkbox]:eq(0)").prop('checked');
                 var IsSElected = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3) [type=checkbox]:eq(0)").prop('checked');
 
                 if (ischeked === true) {
-                    return true;
+                    // return true;
                 }
             }
-            return flase;
+
+            // return flase;
         }
+
+
+
 
 
         function OnSuccess(response) {
@@ -236,6 +291,7 @@
             $('.btnlogColor').prop('disabled', false);
         }
 
+
         $("#GradeId").change(function (event) {
             event.preventDefault();
             event.stopPropagation();
@@ -254,4 +310,72 @@
 
         });
 
-    </script>    
+
+
+
+
+
+        function getTableData_0(tablename) {
+            debugger;
+            var tableID = "tableId";
+            var tableElementById = document.getElementById("tableId");
+            debugger;
+            var thead = tableElementById.getElementsByTagName('thead')[0];
+            var tableColumn = thead.getElementsByTagName('th');
+            var countColumn = tableColumn.length;
+
+
+            
+
+
+
+            var tBody = tableElementById.getElementsByTagName('tbody')[0];
+            var tableRow = tBody.getElementsByTagName('tr');
+            var countRow = tableRow.length;
+
+            var TexBoxArray = [];
+            var allRows = [];
+            for (var i = 0; i < countRow; i++) {
+
+                var rowObject = {};
+
+                for (var j = 0; j < countColumn; j++) {
+
+                    //var GradeId = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(0)").text();
+                    //var SubjectId = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(1)").text();
+                    //var SubjectName = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(2)").text();
+                    //var IsSElected = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(0)").text();
+                    //var Status = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(4)").text();
+                    //var ischeked = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3) [type=checkbox]:eq(0)").prop('checked');
+                    //var IsSElected = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3) [type=checkbox]:eq(0)").prop('checked');
+
+
+                    //var isTextbox = $('#' + tableID + '>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ")").find(':input[type="text"]');
+                    var ischeked = $('#' + tableID + '>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ")").find(':input[type="checkbox"]');
+                    var cellValue = "";
+
+                    if (ischeked.length > 0) {
+                        //cellValue = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3) [type=checkbox]:eq(0)").prop('checked');
+                        cellValue = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ") [type=checkbox]:eq(0)").prop('checked');
+                    }
+                    else if (isTextbox.length > 0) {
+                        cellValue = $('#' + tableID + '>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ") input:eq(0)").val();
+                    }
+                    else {
+                        cellValue = $('#' + tableID + '>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ")").text();
+                    }
+                    //var getPropertyName = $('#tbMessage>thead').find("tr:eq(" + 0 + ")").find("th:eq(" + j + ")").text();
+                    var getPropertyName = $('#' + tableID + '>thead').find("tr:eq(" + 0 + ")").find("th:eq(" + j + ")").text();
+
+                    var propertyName = getPropertyName;
+                    rowObject[propertyName] = cellValue;
+                }
+
+                allRows.push(rowObject);
+            }
+
+
+            return allRows;
+        };
+
+    </script>

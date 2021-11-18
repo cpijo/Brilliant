@@ -32,7 +32,7 @@
         {
 
             <tr>
-                @Html.HiddenFor(x => sub.GradeId)
+                @*@Html.HiddenFor(x => sub.GradeId)*@
                 <td>
                     @Html.DisplayFor(m => sub.GradeId)
                 </td>
@@ -46,8 +46,10 @@
                 </td>
 
                 <td>
+
                     <input type="checkbox" name="ids" id="ids" value="@sub.IsSelected" />
                     @* @Html.CheckBoxFor(m => sub.IsSelected, new { @id = "IsSelected" })*@
+
                 </td>
 
                 <td>
@@ -65,8 +67,107 @@
 
 <script>
 
+    function getTableDataSimple(tablename) {
+
+        let headers = document.querySelectorAll("#tableId1 > thead > tr > th");
+        var tableColumnNamesList = [];
+        var tableColumnNames = {};
+        var dataTypeIs = null;
+        for (var j = 0; j < headers.length; j++) {
+
+            var inputs = headers[j].getElementsByTagName("input");
+            if (inputs.length > 0) {
+                //debugger;
+                for (var i in inputs) {
+
+                    if (inputs[i].type === 'text') {
+                        dataTypeIs = "textbox";
+                    }
+                    else if (inputs[i].type === 'checkbox') {
+                        inputs[i].checked = true;
+                        dataTypeIs = "checkbox";
+                    }
+                    else if (inputs[i].type === 'option') {
+                        dataTypeIs = "dropbox";
+                    }
+                    else {
+                        dataTypeIs = "text";
+                    }
+                }
+            }
+            else {
+
+                var t1 = headers[j].innerHTML.trim();
+                var t2 = headers[j].innerText.trim();
+            }
+            var _prop = headers[j].innerHTML;
+            tableColumnNames["column_" + j] = _prop.trim();
+
+            var col = {}
+            col["column_" + j] = j;
+            tableColumnNamesList.push(col);
+        }
+
+        let trs = document.querySelectorAll("#tableId1 > tbody > tr");
+        var trsValueList = [];
+        var trsValue = {};
+        var tRows = trs.length;
+
+        var tdsValue = {};
+        let tds = null;
+        var tdsValueList = [];
+        var cellValue = "";
+        var isType = null;
+        for (var k = 0; k < trs.length; k++) {
+            tdsValue = {};
+            tds = trs[k].querySelectorAll("td");
+            //let tds = document.querySelectorAll("#tableId1 > tbody > tr > td");
+            for (var x = 0; x < tds.length; x++) {
+                var inputs = tds[x].getElementsByTagName("input");
+                if (inputs.length <= 0) {
+
+                    cellValue = tds[x].innerText.trim();
+                    tdsValue["column_" + x] = cellValue;
+                }
+
+                else {
+
+                    for (var y = 0; y < inputs.length; y++) {
+                        isType = inputs[y].type;
+                        if (inputs[y].type === 'text') {
+                            dataTypeIs = "textbox";
+                            cellValue = inputs[y].text();
+                            tdsValue["column_" + x] = cellValue;
+                        }
+                        else if (inputs[y].type === 'checkbox') {
+                            //inputs[y].checked = true;
+                            dataTypeIs = "checkbox";
+                            cellValue = inputs[y].checked;
+                            tdsValue["column_" + x] = cellValue;
+                        }
+                        else if (inputs[y].type === 'option') {
+                            dataTypeIs = "dropbox";
+                            tdsValue["column_" + x] = cellValue;
+                        }
+                        else {
+
+                            dataTypeIs = "text";
+                            var _t = inputs[y].type;
+                            var _t = inputs[x].type;
+                            cellValue = inputs[y].innerText.trim();
+                            tdsValue["column_" + x] = cellValue;
+                        }
+                    }
+                }
+            }
+            tdsValueList.push(tdsValue);
+        }
+        debugger;
+    }
+
     function getTableColumns(tableId) {
 
+        let headerTR = document.querySelectorAll(tableId + " > thead > tr");
         let headers = document.querySelectorAll(tableId + " > thead > tr > th");
         var columnNameList = [];
         var columnName = {};
@@ -75,6 +176,7 @@
         for (var i = 0; i < headers.length; i++) {
             var col = {}
             columnName = {};
+           // debugger;
             var inputs = headers[i].getElementsByTagName("input");
             if (inputs.length > 0) {
                 for (var j in inputs) {
@@ -101,21 +203,27 @@
             else {
                 column = headers[i].innerText.trim();
             }
+            //debugger;
             columnName["column_" + i] = i;
             columnName["column_value_" + i] = column;
             columnNameList.push(columnName);
         }
+        //return columnName;
         return columnNameList;
     }
 
     function getTableRows(tableId) {
 
+        //(tableId + " > thead > tr");
+        //let headerTR = document.querySelectorAll(tableId + " > thead > tr");
+        //let trs0 = document.querySelectorAll(tableId + " > tbody > tr");
         let trs = document.querySelectorAll(tableId + " > tbody > tr");
         var rowDataList = [];
         var rowData = {};
         let tds = null;
         var cellValue = "";
         var isType = null;
+        ///tdsValue
         for (var k = 0; k < trs.length; k++) {
             rowData = {};
             tds = trs[k].querySelectorAll("td");
@@ -160,26 +268,50 @@
         return rowDataList;
     }
 
-    function getTableData(columns,tableId) {
+    function getTableData(tableId) {
 
-        //var columns = ["GradeId", "SubjectId", "SubjectName", "Assign", "Status"];
-        let trs = document.querySelectorAll(tableId + " > tbody > tr");
-        var colNameObj = {};
-        var colNameObjList = [];
-        var colValue = "";
+        var tableColums = getTableColumns("#tableId1");
+        var tableRows = getTableRows("#tableId1");
+
+        var tableData = [];
+        var originColums = {};
+        var newColums = {};
+        var _v3 = getTableData("#tableId1");
+        debugger;
+
+    }
+
+
+    function getTableDataBetter(tablename) {
+
+        //let headers = document.querySelectorAll("#tableId1 > thead > tr > th");
+        //var tableColumnNamesList = [];
+        //var tableColumnNames = {};
+        //var dataTypeIs = null;
+
+        var columns = ["GradeId", "SubjectId", "SubjectName", "Assign", "Status"];
+
+        let trs = document.querySelectorAll("#tableId1 > tbody > tr");
+        var trsValueList = [];
+        var trsValue = {};
+        var tRows = trs.length;
+
+        var tdsValue = {};
         let tds = null;
-
+        var tdsValueList = [];
+        var cellValue = "";
         var isType = null;
         for (var k = 0; k < trs.length; k++) {
-            colNameObj = {};
+            tdsValue = {};
             tds = trs[k].querySelectorAll("td");
+            //let tds = document.querySelectorAll("#tableId1 > tbody > tr > td");
             for (var x = 0; x < tds.length; x++) {
                 var inputs = tds[x].getElementsByTagName("input");
                 if (inputs.length <= 0) {
-                    
-                    //var _typ = tds.type;//= undefined
-                    colValue = tds[x].innerText.trim();
-                    colNameObj[columns[x]] = colValue;
+
+                    cellValue = tds[x].innerText.trim();
+                    //tdsValue["column_" + x] = cellValue;
+                    tdsValue[columns[x]] = cellValue;
                 }
 
                 else {
@@ -188,42 +320,40 @@
                         isType = inputs[y].type;
                         if (inputs[y].type === 'text') {
                             dataTypeIs = "textbox";
-                            colValue = inputs[y].text();
-                            colNameObj[columns[x]] = colValue;
+                            cellValue = inputs[y].text();
+                            //tdsValue["column_" + x] = cellValue;
+                            tdsValue[columns[x]] = cellValue;
                         }
                         else if (inputs[y].type === 'checkbox') {
+                            //inputs[y].checked = true;
                             dataTypeIs = "checkbox";
-                            colValue = inputs[y].checked;
-                            colNameObj[columns[x]] = colValue;
+                            cellValue = inputs[y].checked;
+                            //tdsValue["column_" + x] = cellValue;
+                            tdsValue[columns[x]] = cellValue;
                         }
                         else if (inputs[y].type === 'option') {
                             dataTypeIs = "dropbox";
-                            colNameObj[columns[x]] = colValue;
+                            //tdsValue["column_" + x] = cellValue;
+                            tdsValue[columns[x]] = cellValue;
                         }
                         else {
 
                             dataTypeIs = "text";
-                            colValue = inputs[y].innerText.trim();
-                            colNameObj[columns[x]] = colValue;
+                            var _t = inputs[y].type;
+                            var _t = inputs[x].type;
+                            cellValue = inputs[y].innerText.trim();
+                            //tdsValue["column_" + x] = cellValue;
+                            tdsValue[columns[x]] = cellValue;
                         }
                     }
                 }
             }
-            colNameObjList.push(colNameObj);
+            tdsValueList.push(tdsValue);
         }
-        return colNameObjList;
+        return tdsValueList;
     }
 
-    function hasSelected(obj) {
-        var countRows = $("#tableId>tbody>tr").length;
-        for (var i = 0; i < countRows; i++) {
-            var IsSElected = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3) [type=checkbox]:eq(0)").prop('checked');
-            if (ischeked === true) {
-               return true;
-            }
-        }
-        return flase;
-    }
+
 
 </script>
 

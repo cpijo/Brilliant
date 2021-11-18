@@ -1297,6 +1297,11 @@
     <Content Include="Views\Roles\_PartialRoles.cshtml" />
     <Content Include="Views\Roles\_ViewUser.cshtml" />
     <Content Include="Views\Roles\_PartialRoles - Copy.cshtml" />
+    <Content Include="Views\TeacherRegister\zzz__TeacherRolesTable - Copy.cshtml" />
+    <Content Include="Views\TeacherRegister\zzz__TeacherRolesTable - Copy %282%29.cshtml" />
+    <Content Include="Views\TeacherRegister\zzz__TeacherRolesTable - Notes.cshtml" />
+    <Content Include="Views\TeacherRegister\zzz__TeacherRolesTable_Ref.cshtml" />
+    <Content Include="Views\TeacherRegister\zzz_TeacherRoles - ref.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

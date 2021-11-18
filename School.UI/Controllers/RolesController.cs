@@ -104,10 +104,10 @@ namespace School.UI.Controllers
         [HttpPost]
         public ActionResult SaveRoles(string userId, string Firstname, string LastName, FormCollection formCollection)
         {
-
             string SelectedUserId = formCollection["SelectedUserId"];
             string _availableRole = formCollection["availableRole"];
             string RolesObject = formCollection["assignedRole"];
+
 
             List<int> ListRolesInts = new List<int>();
             List<UserRoles> roles = new List<UserRoles>();

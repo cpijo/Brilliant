@@ -1,4 +1,5 @@
 ﻿using School.Common.Constants;
+using School.Common.JsonStringHelper;
 using School.Entities.Fields;
 using School.Services.Interface;
 using School.UI.Models.MySecurity;
@@ -269,10 +270,6 @@ namespace School.UI.Controllers
 
 
 
-
-
-
-
         #region Teacher Information
         [HttpPost]
         public ActionResult TeacherInformation(string userId)
@@ -353,16 +350,27 @@ namespace School.UI.Controllers
 
         #region Save Roles
         [HttpPost]
-        public ActionResult SaveRoles(TeacherRoleSimpleViewModel _model, string grade)
+        public ActionResult SaveRoles(TeacherRoleSimpleViewModel _model, string grade, FormCollection formCollection)
         {
-            TeacherRoleSimpleViewModel model = new TeacherRoleSimpleViewModel();
-            Dictionary<string, string> dictionary = getSubjects(grade);
-
-            foreach (KeyValuePair<string, string> item in dictionary)
+            try
             {
-                model.TeacherRoles.Add(new TeacherRoleSimpleViewModel { SubjectId = item.Key, SubjectName = item.Value, Grade = grade });
+                string hidInput = formCollection["hidInput"];
+                List<TeacherRoleSimpleViewModel> modelList = myDeserialiseFromJson<List<TeacherRoleSimpleViewModel>>.Deserialise(hidInput);
+
+                var SelectedUserId = formCollection["TeacherRolesId"];// as List<TeacherRoleSimpleViewModel>();
+                TeacherRoleSimpleViewModel model = new TeacherRoleSimpleViewModel();
+                Dictionary<string, string> dictionary = getSubjects(grade);
+
+                foreach (KeyValuePair<string, string> item in dictionary)
+                {
+                    model.TeacherRoles.Add(new TeacherRoleSimpleViewModel { SubjectId = item.Key, SubjectName = item.Value, Grade = grade });
+                }
+                return PartialView("_PartialDropBox", model);
             }
-            return PartialView("_PartialDropBox", model);
+            catch (Exception ex)
+            {
+                return Json(new { result = "false", message = ex.Message, title = "Request Failed" }, JsonRequestBehavior.AllowGet);
+            }
         }
         #endregion
 

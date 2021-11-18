@@ -1,0 +1,527 @@
+﻿@model School.UI.ViewModels.TeacherVM.TeacherRoleSimpleViewModel
+
+
+
+<table id="tableId1" class="table" style="border:1px solid silver;">
+    <thead style="background-color:rgb(47, 71, 86);color:white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GradeId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectName)
+            </th>
+
+            <th>
+                <input type="checkbox" id="selectAllId" /> @*@Html.DisplayNameFor(model => model.IsSelected)*@
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody id="tbodyId">
+        @foreach (var sub in Model.TeacherRoles)
+        {
+
+            <tr>
+                @*@Html.HiddenFor(x => sub.GradeId)*@
+                <td>
+                    @Html.DisplayFor(m => sub.GradeId)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => sub.SubjectId)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => sub.SubjectName)
+                </td>
+
+                <td>
+
+                    <input type="checkbox" name="ids" id="ids" value="@sub.IsSelected" />
+                    @* @Html.CheckBoxFor(m => sub.IsSelected, new { @id = "IsSelected" })*@
+
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => sub.Status)
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+
+<script>
+
+    function getTableDataSimple(tablename) {
+
+        let headers = document.querySelectorAll("#tableId1 > thead > tr > th");
+        var tableColumnNamesList = [];
+        var tableColumnNames = {};
+        var dataTypeIs = null;
+        for (var j = 0; j < headers.length; j++) {
+
+            var inputs = headers[j].getElementsByTagName("input");
+            if (inputs.length > 0) {
+                //debugger;
+                for (var i in inputs) {
+
+                    if (inputs[i].type === 'text') {
+                        dataTypeIs = "textbox";
+                    }
+                    else if (inputs[i].type === 'checkbox') {
+                        inputs[i].checked = true;
+                        dataTypeIs = "checkbox";
+                    }
+                    else if (inputs[i].type === 'option') {
+                        dataTypeIs = "dropbox";
+                    }
+                    else {
+                        dataTypeIs = "text";
+                    }
+                }
+            }
+            else {
+
+                var t1 = headers[j].innerHTML.trim();
+                var t2 = headers[j].innerText.trim();
+            }
+            var _prop = headers[j].innerHTML;
+            tableColumnNames["column_" + j] = _prop.trim();
+
+            var col = {}
+            col["column_" + j] = j;
+            tableColumnNamesList.push(col);
+        }
+
+        let trs = document.querySelectorAll("#tableId1 > tbody > tr");
+        var trsValueList = [];
+        var trsValue = {};
+        var tRows = trs.length;
+
+        var tdsValue = {};
+        let tds = null;
+        var tdsValueList = [];
+        var cellValue = "";
+        var isType = null;
+        for (var k = 0; k < trs.length; k++) {
+            tdsValue = {};
+            tds = trs[k].querySelectorAll("td");
+            //let tds = document.querySelectorAll("#tableId1 > tbody > tr > td");
+            for (var x = 0; x < tds.length; x++) {              
+                var inputs = tds[x].getElementsByTagName("input");
+                if (inputs.length <= 0) {
+
+                    cellValue = tds[x].innerText.trim();
+                    tdsValue["column_" + x] = cellValue;
+                }
+
+                else {
+
+                    for (var y = 0; y < inputs.length; y++) {
+                        isType = inputs[y].type;
+                        if (inputs[y].type === 'text') {
+                            dataTypeIs = "textbox";
+                            cellValue = inputs[y].text();
+                            tdsValue["column_" + x] = cellValue;
+                        }
+                        else if (inputs[y].type === 'checkbox') {
+                            //inputs[y].checked = true;
+                            dataTypeIs = "checkbox";
+                            cellValue = inputs[y].checked;
+                            tdsValue["column_" + x] = cellValue;
+                        }
+                        else if (inputs[y].type === 'option') {
+                            dataTypeIs = "dropbox";
+                            tdsValue["column_" + x] = cellValue;
+                        }
+                        else {
+
+                            dataTypeIs = "text";
+                            var _t = inputs[y].type;
+                            var _t = inputs[x].type;
+                            cellValue = inputs[y].innerText.trim();
+                            tdsValue["column_" + x] = cellValue;
+                        }
+                    }
+                }              
+            }
+            tdsValueList.push(tdsValue);
+        }
+        debugger;
+  }
+
+
+    function getTableDataSimple_pp(tablename) {
+
+        let headers = document.querySelectorAll("#tableId1 > thead > tr > th");
+        var tableColumnNamesList = [];
+        var tableColumnNames = {};
+        var dataTypeIs = null;
+        for (var j = 0; j < headers.length; j++) {
+
+            var inputs = headers[j].getElementsByTagName("input");
+            if (inputs.length > 0) {
+                //debugger;
+                for (var i in inputs) {
+
+                    if (inputs[i].type === 'text') {
+                        dataTypeIs = "textbox";
+                    }
+                    else if (inputs[i].type === 'checkbox') {
+                        inputs[i].checked = true;
+                        dataTypeIs = "checkbox";
+                    }
+                    else if (inputs[i].type === 'option') {
+                        dataTypeIs = "dropbox";
+                    }
+                    else {
+                        dataTypeIs = "text";
+                    }
+                }
+            }
+            else {
+
+                var t1 = headers[j].innerHTML.trim();
+                var t2 = headers[j].innerText.trim();
+            }
+            var _prop = headers[j].innerHTML;
+            tableColumnNames["column_" + j] = _prop.trim();
+
+            var col = {}
+            col["column_" + j] = j;
+            tableColumnNamesList.push(col);
+        }
+
+
+        let tds = document.querySelectorAll("#tableId1 > tbody > tr > td");
+        var tdsValueList = [];
+        var tdsValue = {};
+        var isType = null;
+        tableColumnNamesList = [];
+        for (var j = 0; j < tds.length; j++) {
+            //debugger;
+            var colObj = {}
+            var cellValue = "";
+            var inputs = tds[j].getElementsByTagName("input");
+            if (inputs.length > 0) {
+
+                for (var i in inputs) {
+                    debugger;
+                    var _ttt = inputs[i].type;
+
+                    if (inputs[i].type === 'text') {
+                        dataTypeIs = "textbox";
+                        cellValue = inputs[i].text();
+
+                        colObj["column_" + j] = cellValue;
+                    }
+                    else if (inputs[i].type === 'checkbox') {
+                        inputs[i].checked = true;
+                        dataTypeIs = "checkbox";
+                        cellValue = inputs[i].checked;
+                        colObj["column_" + j] = cellValue;
+                    }
+                    else if (inputs[i].type === 'option') {
+                        dataTypeIs = "dropbox";
+                        // cellValue = inputs[i].find("input:eq(0)").prop('checked');
+                        colObj["column_" + j] = cellValue;
+                    }
+                    else {
+                        debugger;
+                        dataTypeIs = "text";
+
+                        var _t = inputs[i].type;
+                        var _t = inputs[j].type;
+                        cellValue = inputs[i].innerText.trim();
+                        colObj["column_" + j] = cellValue;
+                    }
+                }
+                break;
+            }
+            else {
+
+                cellValue = tds[j].innerText.trim();
+                colObj["column_" + j] = cellValue;
+
+
+
+                // var t2 = tds[j].innerHTML.trim();
+                //cellValue = inputs[i].text();
+                //var _prop = headers[j].innerHTML;
+                //tableColumnNames["column_" + j] = _prop.trim();
+            }
+
+            //colObj["column_" + j] = j;
+            tableColumnNamesList.push(colObj);
+        }
+
+
+        debugger;
+
+    }
+
+
+
+    function getTableData(tablename) {
+
+        debugger;
+
+        var tableID = "tableId1";
+        var tableElementById = document.getElementById("tableId1");
+
+        var thead = tableElementById.getElementsByTagName('thead')[0];
+        var tableColumn = thead.getElementsByTagName('th');
+        var countColumn = tableColumn.length;
+
+        var tBody = tableElementById.getElementsByTagName('tbody')[0];
+        var tableRow = tBody.getElementsByTagName('tr');
+        var countRow = tableRow.length;
+
+
+
+        debugger;
+        var table = document.getElementById("tbodyId"),
+            rows = table.rows[0],
+            rows = null,
+            cells = [];
+
+            var tableColumnNames = {};
+            for (var j = 0; j < countColumn; j++) {
+                var _prop = rows[i].cells[j].innerHTML;
+                var hasTextbox = rows[i].getElementsByTagName("input[type='text']");
+                var hascheckbox = rows[i].getElementsByTagName('input[type="checkbox"]');
+                var hasInputType = rows[i].getElementsByTagName("input");
+                if (hasInputType===true) {
+                   
+                }
+                tableColumnNames["column_" + j] = _prop.trim();
+            }
+            cells.push(tableColumnNames);
+   
+
+        var ischeked = $('#' + tableID + '>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ")").find(':input[type="checkbox"]');
+
+        //var attr = document.getElementById(elemId).attributes;
+
+        //if (attr[0].ownerElement.tagName === 'INPUT') {
+        //    document.getElementById(elemId).value = 'adding to value'
+        //} els
+
+
+
+
+
+        var table = document.getElementById("tableId1");
+        var tBoxRow = table.getElementsByTagName("input");
+       
+        var table = document.getElementById("tableId1");
+        var tBoxRow = table.getElementsByTagName("checkbox");
+
+        var tBoxRow = table.getElementsByTagName("tableId1");
+        if (tBoxRow.length > 0) {
+        }
+
+        var tBoxRow = table.getElementsByTagName("tableId1");
+        if (tBoxRow.length > 0) {
+        }
+
+
+        var tBoxRow6 = tableColumn.getElementsByTagName("[type=checkbox]");
+        if (tBoxRow6.length > 0) {
+        }
+
+        var tBoxRow64 = tBody.getElementsByTagName("[type=checkbox]");
+        if (tBoxRow64.length > 0) {
+
+
+
+            (function () {
+                $("#onpressofabutton").click(function () {
+                    var data1 = $(this).find("td:eq(0) input[type='text']").val();
+                    var data2 = $(this).find("td:eq(1) input[type='text']").val();
+                });
+            });
+
+
+
+
+        var TexBoxArray = [];
+        var allRows = [];
+        for (var i = 0; i < countRow; i++) {
+
+            var rowObject = {};
+            for (var j = 0; j < countColumn; j++) {
+
+                var cellValue = "";
+                var ischeked = $('#' + tableID + '>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ")").find(':input[type="checkbox"]');
+                if (ischeked.length > 0) {
+                    //cellValue = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3) [type=checkbox]:eq(0)").prop('checked');
+                    cellValue = $('#tableId1>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ") [type=checkbox]:eq(0)").prop('checked');
+                }
+                else if (isTextbox.length > 0) {
+                    cellValue = $('#' + tableID + '>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ") input:eq(0)").val();
+                }
+                else {
+                    cellValue = $('#' + tableID + '>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ")").text();
+                }
+
+                var propertyName = $('#' + tableID + '>thead').find("tr:eq(" + 0 + ")").find("th:eq(" + j + ")").text();
+                rowObject[propertyName] = cellValue;
+            }
+
+            allRows.push(rowObject);
+        }
+
+
+        return allRows;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        debugger;
+
+
+        var tableID = "tableId1";
+        var tableElementById = document.getElementById(tableID);
+
+        var thead = tableElementById.getElementsByTagName('thead')[0];
+        var tableColumn = thead.getElementsByTagName('th');
+        var countColumn = tableColumn.length;
+
+        var tBody = tableElementById.getElementsByTagName('tbody')[0];
+        var tableRow = tBody.getElementsByTagName('tr');
+        var countRow = tableRow.length;
+
+        //var myRow = document.getElementById("tableId1").rows[0];//.cells[0].innerHTML;
+        //var tableColumnNames = {};
+        //for (var j = 0; j < countColumn; j++) {
+        //    var _prop = myRow.cells[j].innerHTML;
+        //    tableColumnNames["column" + j] = _prop.trim();
+        //}
+
+
+
+
+
+
+
+        debugger;
+        tableColumnNames = {};
+        var table = document.getElementById("tbodyId"),
+            rows = table.rows[0],
+            rows = null,
+            cells = [];
+
+        for (var i = 0; i < rows.length; i++) {
+           // cells.push(rows[i].cells);
+            debugger;
+            tableColumnNames = {};
+            for (var j = 0; j < countColumn; j++) {
+                var _prop = rows[i].cells[j].innerHTML;
+                tableColumnNames["column_" + j] = _prop.trim();
+            }
+            cells.push(tableColumnNames);
+        }
+
+
+        function editRow(row) {
+
+
+            var table = document.getElementById("data");
+            var tBoxRow = table.getElementsByTagName("input");
+            if (tBoxRow.length > 0) {
+                tBoxRow = tBoxRow[0].parentNode.parentNode;
+                table.deleteRow(tBoxRow.rowIndex);
+            }
+
+        }
+
+
+
+
+
+
+
+    };
+
+
+
+
+        //the javascript
+        function checkAll() {
+            var checkboxes = new Array();
+            checkboxes = document.getElementsByTagName('input');
+
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].type == 'checkbox') {
+                    checkboxes[i].setAttribute('checked', true)
+                }
+            }
+        }
+
+        function unCheckAll() {
+            var uncheckboxes = new Array();
+            uncheckboxes = document.getElementsByTagName('input');
+
+            for (var i = 0; i < uncheckboxes.length; i++) {
+                if (uncheckboxes[i].type == 'checkbox') {
+                    uncheckboxes[i].setAttribute('unchecked', false)
+                }
+            }
+        }
+
+
+        function onlyCheckedOnes() {
+
+            var inputs = document.getElementsByTagName("input"); //or document.forms[0].elements;
+            var cbs = []; //will contain all checkboxes
+            var checked = []; //will contain all checked checkboxes
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].type == "checkbox") {
+                    cbs.push(inputs[i]);
+                    if (inputs[i].checked) {
+                        checked.push(inputs[i]);
+                    }
+                }
+            }
+            var nbCbs = cbs.length; //number of checkboxes
+            var nbChecked = checked.length; //number of checked checkboxes
+
+        }
+
+    }
+
+</script>

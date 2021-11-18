@@ -1,0 +1,774 @@
+﻿@model School.UI.ViewModels.TeacherVM.TeacherRoleSimpleViewModel
+
+
+
+<table id="tableId1" class="table" style="border:1px solid silver;">
+    <thead style="background-color:rgb(47, 71, 86);color:white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.GradeId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectId)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectName)
+            </th>
+
+            <th>
+                <input type="checkbox" id="selectAllId" /> @*@Html.DisplayNameFor(model => model.IsSelected)*@
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody id="tbodyId">
+        @foreach (var sub in Model.TeacherRoles)
+        {
+
+            <tr>
+                @Html.HiddenFor(x => sub.GradeId)
+                <td>
+                    @Html.DisplayFor(m => sub.GradeId)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => sub.SubjectId)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => sub.SubjectName)
+                </td>
+
+                <td>
+                    @Html.CheckBoxFor(m => m.IsSelected, new { @id = "IsSelected" })
+                </td>
+
+                <td>
+                    @Html.DisplayFor(m => sub.Status)
+                </td>
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+
+<script>
+
+    function changeContent(row, column, content) {
+        //row = prompt('Input row (0-2)', '0')
+        //column = prompt('Input column (0-1)', '0')
+        //content = prompt('Input content')
+
+        //row = parseInt(row)
+        //column = parseInt(column)
+
+        let myTbl = document.getElementById('myTable'),
+            trs = myTbl.getElementsByTagName('tr'),
+            cols = trs[0].getElementsByTagName('th'),
+            tds = trs[1].getElementsByTagName('td');
+
+        if (cols.length > tds.length || cols.length < tds.length) {
+            alert('Invalid number!')
+        }
+        else {
+            trs[row].getElementsByTagName('td')[column].innerHTML = content
+        }
+    }
+
+
+
+    function getTableData(tablename) {
+        debugger;
+
+        //var table = document.getElementById("tableId1"),
+        //    groups = table.tBodies,
+        //    rows = null,
+        //    cells = [];
+
+        //var _co = groups.length;
+
+        //for (var i = 0; i < groups.length; i++) {
+        //    rows = groups[i].rows;
+        //    for (var j = 0; j < rows.length; j++) {
+        //        cells.push(rows[j].cells[1]);
+        //    }
+        //}
+
+
+
+
+
+
+
+
+
+        debugger;
+
+        var tableID = "tableId1";
+        var tableElementById = document.getElementById(tableID);
+
+        var thead = tableElementById.getElementsByTagName('thead')[0];
+        var tableColumn = thead.getElementsByTagName('th');
+        var countColumn = tableColumn.length;
+
+        var tBody = tableElementById.getElementsByTagName('tbody')[0];
+        var tableRow = tBody.getElementsByTagName('tr');
+        var countRow = tableRow.length;
+
+        //var myRow = document.getElementById("tableId1").rows[0];//.cells[0].innerHTML;
+        //var tableColumnNames = {};
+        //for (var j = 0; j < countColumn; j++) {
+        //    var _prop = myRow.cells[j].innerHTML;
+        //    tableColumnNames["column" + j] = _prop.trim();
+        //}
+
+
+        debugger;
+        tableColumnNames = {};
+        var table = document.getElementById("tbodyId"),
+            rows = table.rows[0],
+            rows = null,
+            cells = [];
+
+        for (var i = 0; i < rows.length; i++) {
+           // cells.push(rows[i].cells);
+            debugger;
+            tableColumnNames = {};
+            for (var j = 0; j < countColumn; j++) {
+                var _prop = rows[i].cells[j].innerHTML;
+                tableColumnNames["column_" + j] = _prop.trim();
+            }
+            cells.push(tableColumnNames);
+        }
+
+
+
+        debugger;
+
+
+
+
+
+        //let myTbl = document.getElementById('tableId1'),
+        //    trs = myTbl.getElementsByTagName('tr'),
+
+        //    tds = trs[0].getElementsByTagName('td');
+
+        //var countRows = $("#tableId>tbody>tr").length;
+        //var myRow = document.getElementById("tbodyId").rows[0];//.cells[0].innerHTML;
+        //for (var i = 1; i < countRow + 1; i++) {
+
+
+        //}
+
+
+        // const refs = [...document.querySelectorAll(`[class*="funnel-chart-percent"]`)];
+        // const refs = [...document.querySelectorAll(`[class^="funnel-chart-percent"]`)];
+        // const refs = [...document.querySelectorAll(`[class$="funnel-chart-percent"]`)];
+        // const refs = [...document.querySelectorAll(`[class~="funnel-chart-percent"]`)];
+
+
+        var TexBoxArray = [];
+        var allRows = [];
+        for (var i = 0; i < countRow; i++) {
+
+            var rowObject = {};
+
+            var thisRow = cellValue = $('#tableId1>tbody').find("tr:eq(" + i + ")");
+
+            var myRow = document.getElementById("tableId1").rows[i];//.cells[0].innerHTML;
+
+            for (var j = 0; j < countColumn; j++) {
+
+
+                var _myRow0 = myRow.cells[j].innerHTML;
+                var _myRow1 = myRow.cells[1].innerHTML;
+                var _myRow2 = myRow.cells[2].innerHTML;
+                var tableId_0 = document.getElementById("tableId1").rows[0].cells[0].innerHTML;
+
+                var v1 = document.getElementById("tbodyId").rows[0].cells.namedItem("GradeId").innerHTML;
+                var v2 = document.getElementById("tbodyId").rows[0].cells.namedItem("SubjectId").innerHTML;
+                var v3 = document.getElementById("tbodyId").rows[0].cells.namedItem("SubjectName").innerHTML;
+                var v4 = document.getElementById("tbodyId").rows[0].cells.namedItem("IsSElected").innerHTML;
+                var v5 = document.getElementById("tbodyId").rows[0].cells.namedItem("Status").innerHTML;
+
+                var td = $($thisRow).find("td:eq(" + j + ")").text();
+                //var GradeId = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(0)").text();
+                //var SubjectId = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(1)").text();
+                //var SubjectName = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(2)").text();
+                //var IsSElected = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(0)").text();
+                //var Status = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(4)").text();
+                //var ischeked = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3) [type=checkbox]:eq(0)").prop('checked');
+                //var IsSElected = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3) [type=checkbox]:eq(0)").prop('checked');
+
+
+                //var isTextbox = $('#' + tableID + '>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ")").find(':input[type="text"]');
+
+                var cellValue = "";
+                var ischeked = $('#' + tableID + '>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ")").find(':input[type="checkbox"]');
+                if (ischeked.length > 0) {
+                    //cellValue = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3) [type=checkbox]:eq(0)").prop('checked');
+                    cellValue = $('#tableId1>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ") [type=checkbox]:eq(0)").prop('checked');
+                }
+                else if (isTextbox.length > 0) {
+                    cellValue = $('#' + tableID + '>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ") input:eq(0)").val();
+                }
+                else {
+                    cellValue = $('#' + tableID + '>tbody').find("tr:eq(" + i + ")").find("td:eq(" + j + ")").text();
+                }
+
+                var propertyName = $('#' + tableID + '>thead').find("tr:eq(" + 0 + ")").find("th:eq(" + j + ")").text();
+                rowObject[propertyName] = cellValue;
+            }
+
+            allRows.push(rowObject);
+        }
+
+
+        return allRows;
+    };
+
+
+
+
+
+    //$("#btnSaveAttend").click(function (event) {
+
+    //    event.preventDefault();
+    //    event.stopPropagation();
+
+    //    var _inputs = ['subjectId', 'pickdateId'];
+    //    ClassValidationHelper.preValidateDropbox(['gradeId']);
+    //    var isvalid = ClassValidationHelper.ValidateInput(_inputs)
+    //    if (isvalid === false) {
+    //        ClassValidationHelper.errorEmptyField();
+    //        return isvalid
+    //    }
+
+
+    //    var grade = $("#gradeId option:selected").val();
+    //    var subjectId = $("#subjectId").val();
+    //    var searchDate = $("#pickdateId").val();
+    //    var commonData = {
+    //        'StudentId': "",
+    //        'GradeId': grade.trim(),
+    //        'SubjectId': subjectId.trim(),
+    //        'AttendanceStatus': 0,
+    //        'ExamDate': searchDate.trim()
+    //    };
+
+    //    var data = {
+    //        'jsonString': JSON.stringify(tabledata(commonData))
+    //    };
+
+    //    var url = '/StudentAttendance/SaveRecord';
+    //    var pageObj = { function: "message", url: url, type: "Post", data: data, header: "", pageId: "", partialHolder: "" };
+    //    classControllerHelper.callController(pageObj);
+
+    //});
+
+
+    function tabledata(obj, ischecked) {
+        var countRows = $("#tableId>tbody>tr").length;
+        var allRows = [];
+        for (var i = 0; i < countRows; i++) {
+            //var _studentId = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(0)").text();
+            //var _attandance = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(5)").text();
+            //$('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3)").find('[type=checkbox]').prop('checked', true);
+            $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3)").find('[type=checkbox]').prop('checked', ischecked);
+
+            //var row = {
+            //    'StudentId': _studentId.trim(),
+            //    'GradeId': obj.GradeId,
+            //    'SubjectId': obj.SubjectId,
+            //    'AttendanceStatus': _attandance.trim(),
+            //    'ExamDate': obj.ExamDate
+            //};
+            //allRows.push(row);
+        }
+        //return allRows;
+    }
+
+
+    $(document).ready(function () {
+
+        $('#tableId #selectAllId').click(function () {
+            var ischecked = this.checked;
+            if (this.checked) {
+
+                tabledata({}, ischecked)
+
+            } else {
+                tabledata({}, ischecked)
+            }
+
+        });
+    });
+
+
+    function OnSuccess(response) {
+
+        classBusyIconHelper.hideBusyIcon();
+        if (response.result === "true") {
+            var msgObj = { message: response.message, type: "success", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+        else {
+            var msgObj = { message: response.message, type: "error", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+    }
+
+    function OnFailure(response) {
+        var msgObj = { message: "error", type: "error", title: "error", pageId: "" };
+        classMessageResponse.showMessage(msgObj);
+    }
+
+</script>
+
+
+
+<script>
+
+    function myfunction000() {
+        function main() {
+
+            let yesterdaysOrders = [
+
+                {
+                    id: 1,
+                    orderLines: [{
+                        itemName: "Item 01",
+                        quantity: 1
+                    },
+                    {
+                        itemName: "Item 02",
+                        quantity: 3
+                    },
+                    {
+                        itemName: "Item 03",
+                        quantity: 25
+                    },
+                    {
+                        itemName: "Item 04",
+                        quantity: 12
+                    },
+                    ],
+                },
+                {
+                    id: 2,
+                    orderLines: [{
+                        itemName: "Item 01",
+                        quantity: 1
+                    },
+                    {
+                        itemName: "Item 08",
+                        quantity: 42
+                    },
+                    {
+                        itemName: "Item 09",
+                        quantity: 13
+                    },
+                    {
+                        itemName: "Item 12",
+                        quantity: 37
+                    },
+                    ],
+                },
+                {
+                    id: 3,
+                    orderLines: [{
+                        itemName: "Item 12",
+                        quantity: 16
+                    },],
+                },
+                {
+                    id: 4,
+                    orderLines: [{
+                        itemName: "Item 10",
+                        quantity: 11
+                    },
+                    {
+                        itemName: "Item 11",
+                        quantity: 10
+                    },
+                    ],
+                },
+                {
+                    id: 5,
+                    orderLines: [{
+                        itemName: "Item 06",
+                        quantity: 7
+                    },
+                    {
+                        itemName: "Item 07",
+                        quantity: 2
+                    },
+                    {
+                        itemName: "Item 12",
+                        quantity: 14
+                    },
+                    ],
+                },
+                {
+                    id: 6,
+                    orderLines: [{
+                        itemName: "Item 05",
+                        quantity: 17
+                    },],
+                },
+                {
+                    id: 7,
+                    orderLines: [{
+                        itemName: "Item 03",
+                        quantity: 5
+                    },
+                    {
+                        itemName: "Item 07",
+                        quantity: 2
+                    },
+                    ],
+                },
+                {
+                    id: 8,
+                    orderLines: [{
+                        itemName: "Item 02",
+                        quantity: 13
+                    },
+                    {
+                        itemName: "Item 07",
+                        quantity: 7
+                    },
+                    {
+                        itemName: "Item 09",
+                        quantity: 2
+                    },
+                    ],
+                },
+                {
+                    id: 9,
+                    orderLines: [{
+                        itemName: "Item 01",
+                        quantity: 4
+                    },
+                    {
+                        itemName: "Item 06",
+                        quantity: 17
+                    },
+                    {
+                        itemName: "Item 07",
+                        quantity: 3
+                    },
+                    ],
+                },
+                {
+                    id: 10,
+                    orderLines: [{
+                        itemName: "Item 11",
+                        quantity: 12
+                    },
+                    {
+                        itemName: "Item 12",
+                        quantity: 1
+                    },
+                    ],
+                }
+            ],
+                result = Array.from(
+                    yesterdaysOrders.reduce((acc, {
+                        orderLines
+                    }) => {
+                        orderLines.forEach(({
+                            itemName,
+                            quantity
+                        }) => acc.set(itemName, (acc.get(itemName) || 0) + quantity));
+                        return acc;
+                    }, new Map), ([itemName, quantity]) => ({
+                        itemName,
+                        quantity
+                    }));
+
+
+
+            result.sort((a, b) => {
+                if (a.quantity > b.quantity) {
+                    return -1;
+                } else if (a.quantity < b.quantity) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+
+            });
+
+            function displayShelfItemPairs() {
+
+                let table = document.createElement('table');
+
+                document.body.appendChild(table);
+                table.innerHTML = "<tr><th>ShelfName</th><th>itemName (w/quantity)</th></tr>"
+
+                let shelf = 1;
+                for (let r of result) {
+
+                    let tr = document.createElement('tr');
+                    table.appendChild(tr); // Append to <table> node
+                    tr.innerHTML = "<td>" + shelf + "</td><td>" + r.itemName + ": " + r.quantity + "</td>";
+                    shelf++
+
+                }
+            }
+            displayShelfItemPairs()
+
+        }
+
+        main();
+    }
+
+
+
+    function displayShelfItemPair_555(shelfName, itemName) {
+
+        let table = document.createElement('table');
+
+
+        for (let i = 0; i < 3; i++) {
+            let tr = document.createElement('tr');
+
+
+            for (let j = 0; j < 3; j++) {
+                let tdElement = document.createElement('td');
+                tdElement.innerHTML = result[i][j];
+                tr.appendChild(tdElement);
+
+            }
+            table.appendChild(tr); // Append to <table> node AFTER it is filled
+
+
+        }
+        document.body.appendChild(table); //append table to body AFTER it is filled
+        console.log(displayShelfItemPair(shelfName, itemName));
+    }
+
+
+
+
+    function myfunction00() {
+        var table;
+
+        metestd = function () {
+            table = document.getElementById("test");
+            nrOfRows = 3;//document.getElementById("myId").value; //get nrOfRows from input
+            var i;
+            var row;
+            var cell1;
+            var cell2;
+            var cell3;
+
+            for (i = 0; i < nrOfRows; i++) {
+
+                row = table.insertRow(i); //table is defined earlier
+                cell1 = row.insertCell(0);
+                cell2 = row.insertCell(1);
+                cell3 = row.insertCell(2);
+                cell1.innerHTML = "some text"; //Put "some text" in all column1 fields
+                cell2.innerHTML = '<input type="text" class="form-control" size="5" maxlength="4" />'; //Make all fields in column2 input fields.
+
+            }
+        }
+
+        function GetValue() {
+            for (var r = 0; r < nrOfRows; r++) {
+                table.rows[r].cells[2].innerHTML = table.rows[r].cells[1].children[0].value;
+            }
+        }
+    }
+
+</script>
+
+
+<script>
+    function start() {
+        var mybody = document.getElementsByTagName("body")[0];
+        mytable = document.createElement("table");
+        mytablebody = document.createElement("tbody");
+
+        for (var row = 0; row < 2; row++) {
+            mycurrent_row = document.createElement("tr");
+            for (var col = 0; col < 2; col++) {
+                mycurrent_cell = document.createElement("td");
+                currenttext = document.createTextNode("cell is: " + row + col);
+                mycurrent_cell.appendChild(currenttext);
+                mycurrent_row.appendChild(mycurrent_cell);
+                // set the cell background color
+                // if the column is 0. If the column is 1 hide the cell
+                if (col === 0) {
+                    mycurrent_cell.style.background = "rgb(255,0,0)";
+                } else {
+                    mycurrent_cell.style.display = "none";
+                }
+            }
+            mytablebody.appendChild(mycurrent_row);
+        }
+        mytable.appendChild(mytablebody);
+        mybody.appendChild(mytable);
+
+
+
+
+
+
+
+
+
+
+        $("table tr td:first-child")
+            .css("text-decoration", "underline")
+            .hover(function () {
+                $(this).addClass("gogreen");
+            }, function () {
+                $(this).removeClass("gogreen");
+            });
+
+        var theFirstChilds = document.querySelectorAll('table tr td:first-child');
+
+        console.log(theFirstChilds[0]);
+        console.log(theFirstChilds[1]);
+        console.log(theFirstChilds[2]);
+
+    }
+
+
+
+    function updateElement(elemId) {
+        var attr = document.getElementById(elemId).attributes;
+
+        if (attr[0].ownerElement.tagName === 'INPUT') {
+            document.getElementById(elemId).value = 'adding to value'
+        } else {
+            document.getElementById(elemId).innerHTML = 'added in inner html'
+        }
+
+    }
+
+
+</script>
+
+
+<script>
+
+    function myfunction999() {
+
+        let menu = document.getElementById('menu');
+
+        // create new li element
+        let li = document.createElement('li');
+        li.textContent = 'About Us';
+        // add it to the ul element
+        menu.appendChild(li);
+
+        console.log(menu.innerHTML);
+    }
+
+
+
+    function myfunction777() {
+         //data:
+    var first_names = ['Jacob','Mark','Noé'];
+    var last_names = ['Thornton','Otto', 'Melo'];
+    @*var handle_names = ['@fat','@mdo','@noemelolocumber'];*@
+
+    //get table body:
+    var tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+
+    for (let index = 0; index < first_names.length; index++){
+        //insert Row
+        tableRef.insertRow().innerHTML = 
+        "<th scope='row'>" + (index + 2).toString()+ "</th>" + 
+        "<td>" +first_names[index]+ "</td>"+
+        "<td>" +last_names[index]+ "</td>"+
+        "<td>" +handle_names[index]+ "</td>";
+        }
+
+
+
+
+
+ //data:
+    var first_names = ['Jacob','Mark','Noé'];
+    var last_names = ['Thornton','Otto', 'Melo'];
+    @*var handle_names = ['@fat','@mdo','@noemelolocumber'];*@
+
+    //get table body:
+    var tableRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+
+    for (let index = 0; index < first_names.length; index++){
+        //insert Row
+        tableRef.insertRow().innerHTML = 
+        "<th scope='row'>" + (index + 2).toString()+ "</th>" + 
+        "<td>" +first_names[index]+ "</td>"+
+        "<td>" +last_names[index]+ "</td>"+
+        "<td>" +handle_names[index]+ "</td>";
+        }
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+    //https://www.valentinog.com/blog/html-table/
+
+    let mountains = [
+        { name: "Monte Falco", height: 1658, place: "Parco Foreste Casentinesi" },
+        { name: "Monte Falterona", height: 1654, place: "Parco Foreste Casentinesi" },
+        { name: "Poggio Scali", height: 1520, place: "Parco Foreste Casentinesi" },
+        { name: "Pratomagno", height: 1592, place: "Parco Foreste Casentinesi" },
+        { name: "Monte Amiata", height: 1738, place: "Siena" }
+    ];
+
+    function generateTableHead(table, data) {
+        let thead = table.createTHead();
+        let row = thead.insertRow();
+        for (let key of data) {
+            let th = document.createElement("th");
+            let text = document.createTextNode(key);
+            th.appendChild(text);
+            row.appendChild(th);
+        }
+    }
+
+    generateTable(table, mountains);
+
+
+    function generateTable(table, data) {
+        for (let element of data) {
+            let row = table.insertRow();
+            for (key in element) {
+                let cell = row.insertCell();
+                let text = document.createTextNode(element[key]);
+                cell.appendChild(text);
+            }
+        }
+    }
+
+
+
+</script>
