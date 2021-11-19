@@ -8,8 +8,48 @@ using System.Web.Mvc;
 
 namespace School.UI.Controllers
 {
-    public class BaseController : Controller
+    public class BaseController_Ref : Controller
     {
+        public string partialName { get; set; } = "placeHolder";
+        public virtual ActionResult _GetRecord<T>(T model)
+        {
+            return PartialView(partialName, model);
+        }
+        public virtual ActionResult _SearchRecord<T>(T model)
+        {
+            return PartialView(partialName, model);
+        }
+        public virtual ActionResult _SaveRecord<T>(T model)
+        {
+            return PartialView(partialName, model);
+        }
+        public virtual ActionResult _SaveRecordMany<T>(T model)
+        {
+            return PartialView(partialName, model);
+        }
+
+
+
+
+
+        public virtual ActionResult _SearchData<T>(T model)
+        {
+            return PartialView(partialName, model);
+        }
+        public virtual ActionResult _CreateData<T>(T model)
+        {
+            return PartialView(partialName, model);
+        }
+        public virtual ActionResult _UpdateData<T>(T model)
+        {
+            return PartialView(partialName, model);
+        }
+        public virtual ActionResult _DeleteData<T>(T model)
+        {
+            return PartialView(partialName, model);
+        }
+
+
 
         public static List<SelectListItem> dropdownHelper(List<Roles> roles)
         {

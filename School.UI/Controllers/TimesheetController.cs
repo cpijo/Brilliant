@@ -13,19 +13,14 @@ using System.Web.Mvc;
 namespace School.UI.Controllers
 {
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-    public class TimesheetController : Controller
+    public class TimesheetController : BaseController
     {
         private IStudentResultsRepository studentResultsRepository;
         private IStudentRepository studentRepository;
-        //private ICoursesRepository courseRepository;
-        //private IGradesRepository gradesRepository;
-
         public TimesheetController(IStudentResultsRepository studentResultsRepository, IStudentRepository studentRepository)
         {
             this.studentResultsRepository = studentResultsRepository;
             this.studentRepository = studentRepository;
-            //this.courseRepository = courseRepository;
-            //this.gradesRepository = gradesRepository;
         }
 
         #region Get Timesheet
@@ -48,17 +43,6 @@ namespace School.UI.Controllers
         }
         #endregion
 
-        private static List<SelectListItem> dropdownHelper(Dictionary<string, string> SurbubDictionary)
-        {
-            return SurbubDictionary
-            .Select(item => new SelectListItem
-            {
-                Value = item.Key.ToString(),
-                Text = item.Value.ToString(),
-                Selected = true
-            })
-            .ToList();
-        }
     }
 }
 
