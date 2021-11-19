@@ -143,6 +143,7 @@
     <Compile Include="Controllers\NotifyController.cs" />
     <Compile Include="Controllers\StudentMarksController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\TimesheetController.cs" />
     <Compile Include="Controllers\z_TeachingRolesController.cs" />
     <Compile Include="Controllers\TeachingRolesController.cs" />
     <Compile Include="Controllers\TeacherRegisterController.cs" />
@@ -1309,6 +1310,10 @@
     <Content Include="Views\TeacherRegister\zzz_TeacherRoles - ref.cshtml" />
     <Content Include="Views\TeachingRoles\GetSubjects.cshtml" />
     <Content Include="Views\TeachingRoles\_TeacherRolesTable.cshtml" />
+    <Content Include="Views\StudentPayment\_StudentPayment.cshtml" />
+    <Content Include="Views\StudentPayment\_ViewStudentPayment.cshtml" />
+    <Content Include="Views\Timesheet\Customer_tbl.cshtml" />
+    <Content Include="Views\Timesheet\_ViewTimesheet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

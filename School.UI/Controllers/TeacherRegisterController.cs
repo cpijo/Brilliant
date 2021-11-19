@@ -323,26 +323,26 @@ namespace School.UI.Controllers
         }
         #endregion
 
-        #region Get Subjects
-        [HttpPost]
-        public ActionResult GetSubjects(string grade)
-        {
-            TeacherRoleSimpleViewModel model = new TeacherRoleSimpleViewModel();
-            //if (Session["selectedTeacher"] != null)
-            //{
-            //    Teacher teacher = Session["teacher"] as Teacher;
-            //    model.TeacherViewModel.Teacher = teacher;
-            //}
+        //#region Get Subjects
+        //[HttpPost]
+        //public ActionResult GetSubjects(string grade)
+        //{
+        //    TeacherRoleSimpleViewModel model = new TeacherRoleSimpleViewModel();
+        //    //if (Session["selectedTeacher"] != null)
+        //    //{
+        //    //    Teacher teacher = Session["teacher"] as Teacher;
+        //    //    model.TeacherViewModel.Teacher = teacher;
+        //    //}
 
-            Dictionary<string, string> dictionary = getSubjects(grade);
+        //    Dictionary<string, string> dictionary = getSubjects(grade);
 
-            foreach (KeyValuePair<string, string> item in dictionary)
-            {
-                model.TeacherRoles.Add(new TeacherRoleSimpleViewModel {GradeId=grade, SubjectId = item.Key, SubjectName = item.Value});
-            }
-            return PartialView("_TeacherRolesTable", model);
-        }
-        #endregion
+        //    foreach (KeyValuePair<string, string> item in dictionary)
+        //    {
+        //        model.TeacherRoles.Add(new TeacherRoleSimpleViewModel {GradeId=grade, SubjectId = item.Key, SubjectName = item.Value});
+        //    }
+        //    return PartialView("_TeacherRolesTable", model);
+        //}
+        //#endregion
   /*
         #region Save Roles
         [HttpPost]
