@@ -56,7 +56,7 @@
 </style>
 
 
-@using (Ajax.BeginForm("SaveRoles", "TeacherRegister", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
+@using (Ajax.BeginForm("SaveRoles", "TeachingRoles", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal",id = "addNewForm22" }))
 {
     <div id="popup-page" class="col-xs-12" style="border-color:rgb(241, 242, 247);border:0px solid red;">
         <div class="card_t card-s">
@@ -89,13 +89,20 @@
 
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.TeacherViewModel.Grades.Grade, new { @class = "col-sm-4 control-label" })
-                    <div class="col-md-8">
+                    @Html.LabelFor(model => model.TeacherViewModel.Grades.Grade, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
                         @Html.DropDownListFor(m => m.TeacherViewModel.Grades.Grade, Model.TeacherViewModel.GradeDropboxItemList, new { @id = "GradeId", @class = "form-control selectedSearchId" })
                     </div>
+                    @Html.LabelFor(model => model.TeacherViewModel.ClassOrCourse.ClassName, new { @class = "col-sm-2 control-label" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(m => m.TeacherViewModel.ClassOrCourse.ClassName, Model.TeacherViewModel.ClassOrCourseDropboxItemList, new { @id = "classId", @class = "form-control" })
+                    </div>
                 </div>
-                <input type="text" name="TeacherRolesId" value=@Model.TeacherRoles hidden />
+                <input type="hidden" name="TeacherRolesId" id="TeacherRolesId" value=@Model.TeacherRoles hidden />
                 <input type="hidden" name="hidInput" id="hidInput" value="" />
+                <input type="hidden" name="hiddenGrade" id="hiddenGrade" value="" />
+                <input type="hidden" name="hiddenClass" id="hiddenClass" value="" />
+                <input type="hidden" name="hiddenTeacherId" id="hiddenTeacherId" value=@Model.TeacherViewModel.Teacher.TeacherId hidden /> 
                 <div class="col-md-12 rm-pd" style="border: 0px solid red; display: inline-block;">
                     <div class="card_t card-s">
                         <div id="tableHolderId" class="rm-pd" style="padding:15px;">
@@ -130,9 +137,7 @@
 
                                     @foreach (var sub in Model.TeacherRoles)
                                     {
-
                                         <tr>
-
                                             <td>
                                                 @Html.DisplayFor(m => sub.GradeId)
                                             </td>
@@ -152,7 +157,6 @@
                                             <td>
                                                 @Html.DisplayFor(m => sub.Status)
                                             </td>
-
                                         </tr>
                                     }
 
@@ -162,7 +166,7 @@
 
 
                         <div class="col-md-12" style="padding-bottom:5px;">
-                            <input id="btnSave" type="submit" value="Save" class="btn btn-primary" onclick='return validateInput()' />
+                            <input id="btnSave" type="button" value="Save" class="btn btn-primary" onclick='return validateInput()' />
                         </div>
                     </div>
                 </div>
@@ -173,6 +177,13 @@
 }
 
     <script>
+
+        var teachingRoles = {
+            'TeacherId': "",
+            'GradeId': "",
+            'SubjectId': "",
+            'ClassId': ""
+        };
 
         function getDatas() {
             var _v1 = getTableColumns("#tableId1");
@@ -188,12 +199,23 @@
             var columns = ["GradeId", "SubjectId", "SubjectName", "Assign", "Status"];
             var _getTableData = getTableData(columns, "#tableId1");
             var $hidInput = $("#hidInput");
-            $hidInput.val(JSON.stringify(_getTableData));         
+            $hidInput.val(JSON.stringify(_getTableData));  
 
             if (hasSelected===false) {
                 return false;
             }
-            return true;
+
+            //teachingRoles.StudentId = hiddenTeacherId.trim();
+               
+            var data = {
+                'jsonStringSubject': JSON.stringify(_getTableData),
+                'jsonStringRoles': JSON.stringify(teachingRoles)
+            };
+
+            var url = '/TeachingRoles/SaveRoles';
+            var pageObj = { function: "message", url: url, type: "Post", data: data, header: "", pageId: "", partialHolder: "" };
+            classControllerHelper.callController(pageObj);
+
         }
 
 
@@ -244,13 +266,31 @@
                 'GradeId': selectedValue.trim()
             };
 
+            teachingRoles.GradeId = selectedValue.trim();
+
             var _searchValue = selectedValue.trim().substring(0, 5);
 
             var partialHolder = "#popup-page #tableHolderId";
             var header = 'Update UserInfor';
             var url = '/TeacherRegister/GetSubjects';
+            url = '/TeachingRoles/GetSubjects';
             var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
             classControllerHelper.callController(pageObj);
+
+        });
+
+        $("#classId").change(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var selectedValue = $("#classId option:selected").val();
+
+            var $hiddenClass = $("#hiddenClass");
+            $hiddenClass.val(selectedValue.trim());  
+
+
+            var hiddenTeacherId = $("#hiddenTeacherId").val();
+            teachingRoles.ClassId = selectedValue.trim();
+            teachingRoles.TeacherId = hiddenTeacherId.trim();
 
         });
 

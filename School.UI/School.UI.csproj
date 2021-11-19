@@ -143,6 +143,8 @@
     <Compile Include="Controllers\NotifyController.cs" />
     <Compile Include="Controllers\StudentMarksController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Controllers\z_TeachingRolesController.cs" />
+    <Compile Include="Controllers\TeachingRolesController.cs" />
     <Compile Include="Controllers\TeacherRegisterController.cs" />
     <Compile Include="Controllers\StudentRolesController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -168,6 +170,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Common\SelectListHelper.cs" />
     <Compile Include="Models\MySecurity\userPagePermissionAttribute.cs" />
     <Compile Include="Models\MySecurity\CustomAuthorize.cs" />
     <Compile Include="Models\MySecurity\MaxFileSizeAttribute.cs" />
@@ -183,9 +186,11 @@
     <Compile Include="ViewModels\StudentResultsVM.cs" />
     <Compile Include="ViewModels\StudentViewModel.cs" />
     <Compile Include="ViewModels\SubjectViewModel.cs" />
+    <Compile Include="ViewModels\z_TeacherViewModel.cs" />
     <Compile Include="ViewModels\TeacherViewModel.cs" />
     <Compile Include="ViewModels\TeacherVM\TeacherRoleViewModel.cs" />
     <Compile Include="ViewModels\TeacherVM\TeacherTimesheetViewModel.cs" />
+    <Compile Include="ViewModels\TeacherVM\TeachingRolesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="AppJs\common\autoClickEvent.js" />
@@ -1302,6 +1307,8 @@
     <Content Include="Views\TeacherRegister\zzz__TeacherRolesTable - Notes.cshtml" />
     <Content Include="Views\TeacherRegister\zzz__TeacherRolesTable_Ref.cshtml" />
     <Content Include="Views\TeacherRegister\zzz_TeacherRoles - ref.cshtml" />
+    <Content Include="Views\TeachingRoles\GetSubjects.cshtml" />
+    <Content Include="Views\TeachingRoles\_TeacherRolesTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

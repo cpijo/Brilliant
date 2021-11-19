@@ -127,7 +127,6 @@ namespace School.UI.Controllers
         }
         #endregion
 
-
         #region  Update dropBox
         [HttpPost]
         public ActionResult dropBoxUpdate(string selectedValue, string searchType)
@@ -226,7 +225,6 @@ namespace School.UI.Controllers
         }
         #endregion
 
-
         #region Get Record
         [HttpGet]
         public ActionResult GetRecord()
@@ -268,8 +266,6 @@ namespace School.UI.Controllers
         }
         #endregion;
 
-
-
         #region Teacher Information
         [HttpPost]
         public ActionResult TeacherInformation(string userId)
@@ -294,12 +290,12 @@ namespace School.UI.Controllers
         }
         #endregion
 
-
         #region Teacher Information
         [HttpPost]
         public ActionResult TeacherRoles(string userId)
         {
-
+            TempData["roles.TeacherId"] = userId;
+            Session["roles.TeacherId"] = userId;
             Teacher teacher = null;
             if (Session["teacher"] != null)
             {
@@ -347,25 +343,41 @@ namespace School.UI.Controllers
             return PartialView("_TeacherRolesTable", model);
         }
         #endregion
-
+  /*
         #region Save Roles
         [HttpPost]
-        public ActionResult SaveRoles(TeacherRoleSimpleViewModel _model, string grade, FormCollection formCollection)
+        public ActionResult SaveRoles(string teacherId ,TeacherRoleSimpleViewModel _model, string grade, FormCollection formCollection)
         {
             try
             {
                 string hidInput = formCollection["hidInput"];
-                List<TeacherRoleSimpleViewModel> modelList = myDeserialiseFromJson<List<TeacherRoleSimpleViewModel>>.Deserialise(hidInput);
-
-                var SelectedUserId = formCollection["TeacherRolesId"];// as List<TeacherRoleSimpleViewModel>();
-                TeacherRoleSimpleViewModel model = new TeacherRoleSimpleViewModel();
-                Dictionary<string, string> dictionary = getSubjects(grade);
-
-                foreach (KeyValuePair<string, string> item in dictionary)
+                //List<TeacherRoleSimpleViewModel> modelList = myDeserialiseFromJson<List<TeacherRoleSimpleViewModel>>.Deserialise(hidInput);
+                List<TeachingRoles> teachingRoles = myDeserialiseFromJson<List<TeachingRoles>>.Deserialise(hidInput);
+                foreach (TeachingRoles cust in teachingRoles)
                 {
-                    model.TeacherRoles.Add(new TeacherRoleSimpleViewModel { SubjectId = item.Key, SubjectName = item.Value, Grade = grade });
+                    cust.TeacherId = "TC00000008999";
                 }
-                return PartialView("_PartialDropBox", model);
+
+
+
+                return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
+
+
+                //var SelectedUserId = formCollection["TeacherRolesId"];// as List<TeacherRoleSimpleViewModel>();
+                //TeacherRoleSimpleViewModel model = new TeacherRoleSimpleViewModel();
+
+                //Dictionary<string, string> dictionary = getSubjects(grade);
+                //foreach (KeyValuePair<string, string> item in dictionary)
+                //{
+                //    model.TeacherRoles.Add(new TeacherRoleSimpleViewModel { SubjectId = item.Key, SubjectName = item.Value, Grade = grade });
+                //}
+
+
+
+              
+
+               
+                // return PartialView("_PartialDropBox", model);
             }
             catch (Exception ex)
             {
@@ -373,7 +385,7 @@ namespace School.UI.Controllers
             }
         }
         #endregion
-
+ */
         [HttpPost]
         public ActionResult Edit_Include([Bind(Include = "StudentId, StudentName")] Student std)
         {

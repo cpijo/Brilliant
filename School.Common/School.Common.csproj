@@ -60,6 +60,7 @@
     <Compile Include="DelegateHandler\delegateSimple.cs" />
     <Compile Include="DelegateHandler\DelegateTestOne.cs" />
     <Compile Include="DelegateHandler\EventProgram.cs" />
+    <Compile Include="DelegateHandler\linq_test.cs" />
     <Compile Include="DelegateHandler\PrintHelper.cs" />
     <Compile Include="DelegateHandler\ProcessBusinessLogic.cs" />
     <Compile Include="JsonStringHelper\DeserialiseFromJson.cs" />

@@ -33,6 +33,8 @@ namespace School.UI.ViewModels.TeacherVM
         [Display(Name = "Grade Id")]
         public string GradeId { get; set; }
         public string Grade { get; set; }
+        public string ClassId { get; set; }
+        public string ClassName { get; set; }
         [Display(Name = "Subject Id")]
         public string SubjectId { get; set; }
         [Display(Name = "Subject Name")]

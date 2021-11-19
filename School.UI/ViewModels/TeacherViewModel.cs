@@ -1,6 +1,7 @@
 ﻿using School.Entities.Fields;
 using School.UI.Models.StudentModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -39,6 +40,7 @@ namespace School.UI.ViewModels
             Grades = new Grades();
             ClassOrCourse = new ClassOrCourse();
             DropboxModel = new DropboxModel();
+            ClassOrCourseDropboxItemList = mySelectList();
         }
 
         public void getDefaults()
@@ -51,6 +53,23 @@ namespace School.UI.ViewModels
             Address.CreatedDate = Teacher.CreatedDate;
         }
 
+        public SelectList mySelectList()
+        {
+            IEnumerable items = new[]
+            {
+                new { Value = "Select", Text = "--Select--", Group = "Grade8" },
+                new { Value = "ClassSie008", Text = "Physics Sience 8", Group = "Grade8" },
+                new { Value = "ClassBus008", Text = "Business 8", Group = "Grade8" },
+                new { Value = "ClassAcc008", Text = "Accounting 8", Group = "Grade8" },
+            };
 
+            SelectList selectList = new SelectList(items,
+                                                    "Value",
+                                                    "Text",
+                                                    "Group"
+                                                    );
+
+            return selectList;
+        }
     }
 }
