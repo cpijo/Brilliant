@@ -271,7 +271,7 @@
             <!--Timesheet-->
             <li class="treeview" id="menu-student" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
                 <a href="#" class="aprovince">
-                    <i class="fa fa-home"></i>
+                    <i class="fa fa-calendar"></i>
                     <span class="menu-header-name">Timesheet</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-down pull-right erroSign"></i>
@@ -280,32 +280,20 @@
                 <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
                     <li id=student1 name="student" style="display:block" onclick="callController('/Timesheet/GetRecord','View Timesheet')"><a href="#"><i class="fa fa-circle-o"></i>View Timesheets(Admin)</a></li>
                     <li id=student3 name="student" style="display:block" onclick="callController('/Timesheet/AddRecord','Create Timesheet')"><a href="#"><i class="fa fa-circle-o"></i>Create Timesheet(Admin)</a></li>
-                    <li id=student2 name="student" style="display:block" onclick="callController('/Timesheet/GetRecord','View Timesheet')"><a href="#"><i class="fa fa-circle-o"></i>Teacher Timesheet(LogIn)</a></li>
                 </ul>
-            </li>
-
-            <!--Payment(Student)-->
-            <li class="treeview SurbubsId" id="N3" style="display:block;width:auto;">
-                <a id="a-SurbubId" href="#" onclick="callController('/StudentPayment/GetRecord')">
-                    <i class="fa fa-home"></i>
-                    <span id="span-SurbubId" class="menu-header-name">Payment(Student)</span>
-                    <span class="pull-right-container">
-                        <i class="fa pull-right"></i>
-                    </span>
-                </a>
             </li>
 
             <!--Payment(Admin)-->
             <li class="treeview" id="menu-subject" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
                 <a href="#" class="aprovince">
-                    <i class="fa fa-home"></i>
+                    <i class="fa fa-money"></i>
                     <span class="menu-header-name">Payment(Admin)</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-down pull-right erroSign"></i>
                     </span>
                 </a>
                 <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=subjecte1 name="subject" style="display:block" onclick="callController('/StudentPayment/viewStudentPayment','View Payment')"><a href="#"><i class="fa fa-circle-o"></i>View Payment</a></li>
+                    <li id=subjecte1 name="subject" style="display:block" onclick="callController('/StudentPayment/viewStudentPayment','View All Payment')"><a href="#"><i class="fa fa-circle-o"></i>View All Payment</a></li>
                     <li id=subjecte3 name="subject" style="display:block" onclick="callController('/StudentPayment/GetRecord','Make Payment')"><a href="#"><i class="fa fa-circle-o"></i>Make Payment</a></li>
                 </ul>
             </li>
