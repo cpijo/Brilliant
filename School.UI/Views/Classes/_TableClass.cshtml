@@ -1,0 +1,63 @@
+﻿@model IEnumerable<School.Entities.Fields.Classes>
+
+@{
+    string test = "test";
+}
+<div class="myContainer col-lg-offset-10 col-xs-2 rm-pd ">
+    <input class="tablink active" id="btnAddNewRecord" type="button" value="Add New Record" style="width:130px;margin-top:5px;margin-bottom:5px;border-right:1px solid orange;" />
+</div>
+
+<table id="tableId" class="table" style="border:1px solid silver;">
+    <thead style="background-color:rgb(240, 240, 240);">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClassName)
+            </th>
+            <th>
+                Edit
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClassName)
+                </td>
+                <td>
+                    <button id="btnEditGrade" type="button" class="btnEditGrade btn btn-primary">Edit</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script>
+
+    $('#btnAddNewRecord').click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        debugger;
+        var data = {
+            'SubjectId':"",
+            'SubjectName': ""
+        };
+
+        var header = 'Add New Record';
+        var url = '/Classes/AddRecord';
+
+        var objPopup = classPageConstant.popupChildOne;
+        var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+</script>

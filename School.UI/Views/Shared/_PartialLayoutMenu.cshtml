@@ -207,7 +207,7 @@
             <li class="treeview" id="menu-grade" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
                     <i class="fa fa-book"></i>
-                    <span class="menu-header-name">Grades/Classes</span>
+                    <span class="menu-header-name">Grades/Classes/Subjects</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-down pull-right erroSign"></i>
                     </span>
@@ -215,9 +215,22 @@
                 <ul id="ul-gradeId" class="sidebar-submenu treeview-menu" style="width:auto;">
                     <li id=course3 name="course" style="display:block" onclick="callController('/Grade/AddRecord','Add Grade')"><a href="#"><i class="fa fa-circle-o"></i>Add Grade</a></li>
                     <li id=course1 name="course" style="display:block" onclick="callController('/Grade/GetRecord','View Grade')"><a href="#"><i class="fa fa-circle-o"></i>View Grade</a></li>
-
                 </ul>
             </li>
+            <li class="treeview" id="menu-grade" style="display:block;width:auto;">
+                <a href="#" class="aprovince">
+                    <i class="fa fa-book"></i>
+                    <span class="menu-header-name">Classes</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-down pull-right erroSign"></i>
+                    </span>
+                </a>
+                <ul id="ul-gradeId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id=course1 name="course" style="display:block" onclick="callController('/Classes/GetRecord','View Classes')"><a href="#"><i class="fa fa-circle-o"></i>View Classes</a></li>
+                    <li id=course3 name="course" style="display:block" onclick="callController('/Classes/AddRecord','Add Classes')"><a href="#"><i class="fa fa-circle-o"></i>Add Classes</a></li>
+                </ul>
+            </li>
+
             <li class="treeview" id="menu-subject" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
                     <i class="fa fa-bookmark"></i>

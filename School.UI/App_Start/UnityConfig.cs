@@ -19,6 +19,8 @@ namespace School.UI
             container.RegisterType<IGradeTeacherRepository, GradeTeacherRepository>();
             container.RegisterType<IGradeClassRepository, GradeClassRepository>();
 
+            container.RegisterType<IClassesRepository, ClassesRepository>();
+
             container.RegisterType<ISubjectResultRepository, SubjectResultRepository>();
             container.RegisterType<ISubjectRepository, SubjectRepository>();
             container.RegisterType<ISubjectTeacherRepository, SubjectTeacherRepository>();

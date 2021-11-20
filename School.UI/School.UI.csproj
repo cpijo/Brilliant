@@ -139,8 +139,10 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\BaseController_Ref.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GradeClassController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\DropboxController.cs" />
+    <Compile Include="Controllers\ClassesController.cs" />
     <Compile Include="Controllers\NotifyController.cs" />
     <Compile Include="Controllers\StudentMarksController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
@@ -1315,6 +1317,14 @@
     <Content Include="Views\StudentPayment\_ViewStudentPayment.cshtml" />
     <Content Include="Views\Timesheet\Customer_tbl.cshtml" />
     <Content Include="Views\Timesheet\_ViewTimesheet.cshtml" />
+    <Content Include="Views\Classes\_TableClass.cshtml" />
+    <Content Include="Views\GradeClass\_GetRecord.cshtml" />
+    <Content Include="Views\Classes\_GetRecord.cshtml" />
+    <Content Include="Views\Classes\_AddClass.cshtml" />
+    <Content Include="Views\Classes\_UpdateClass.cshtml" />
+    <Content Include="Views\GradeClass\_AddGradeClass.cshtml" />
+    <Content Include="Views\GradeClass\_TableGradeClass.cshtml" />
+    <Content Include="Views\GradeClass\_UpdateGradeClass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

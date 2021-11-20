@@ -57,7 +57,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-4 col-md-10">
-                    <input id="btnSave" type="button" value="Save" class="btn btn-primary" onclick='return validateInput()' />
+                    <input id="btnSave" type="button" value="Save" class="btn btn-primary"/>
                 </div>
             </div>
         </div>
@@ -92,7 +92,7 @@
         };
 
         var header = 'Update Student';
-        var url = '/Grade/Save';
+        var url = '/Grade/SaveRecord';
         var objPopup = classPageConstant.popupChildOne;
         var pageObj = {
             function: "message", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: {} };

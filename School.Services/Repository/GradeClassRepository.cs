@@ -10,22 +10,26 @@ using School.Services.Interface;
 
 namespace School.Services.Repository
 {
-    public class GradeClassRepository : BaseRepository<Subject>, IGradeClassRepository
+    public class GradeClassRepository : BaseRepository<GradeClass>, IGradeClassRepository
     {
 
-        public override List<Subject> GetAll()
+        public override List<GradeClass> GetAll()
         {
-            command.CommandText = "SELECT * FROM Studentdb.dbo.GradeClass";//GradeClass
+            command.CommandText = "SELECT * FROM GradeClass";
+            command.CommandText = "Select g.GradeId,g.ClassId,g.GradeName,c.ClassName From GradeClass g " + 
+                                    "LEFT JOIN Class c ON c.ClassId =g.ClassId";
             return base.GetAll();
         }
 
-        public override Subject PopulateRecord(SqlDataReader rows)
+        public override GradeClass PopulateRecord(SqlDataReader rows)
         {
             try
             {
-                Subject model = new Subject();
-                model.SubjectId = rows["SubjectId"].ToString();
-                model.SubjectName = rows["SubjectName"].ToString();
+                GradeClass model = new GradeClass();
+                model.GradeId = rows["GradeId"].ToString();
+                model.ClassId = rows["ClassId"].ToString();
+                model.GradeName = rows["GradeName"].ToString();
+                model.ClassName = rows["ClassName"].ToString();
                 return model;
             }
             catch (Exception ex)

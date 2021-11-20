@@ -19,15 +19,13 @@ namespace School.UI.Controllers
     {
         private IStudentMarksRepository studentSubjectMarksRepository;
         private ISubjectRepository subjectRepository;
-        private IGradeClassRepository gradeClassRepository;
         private IStudentMarksRepository studentMarksRepository;
 
         public StudentMarksController(IStudentMarksRepository studentSubjectMarksRepository, ISubjectRepository subjectRepository,
-            IGradeClassRepository gradeClassRepository, IStudentMarksRepository studentMarksRepository)
+            IStudentMarksRepository studentMarksRepository)
         {
             this.studentSubjectMarksRepository = studentSubjectMarksRepository;
             this.subjectRepository = subjectRepository;
-            this.gradeClassRepository = gradeClassRepository;
             this.studentMarksRepository = studentMarksRepository;
         }
 
@@ -176,75 +174,6 @@ namespace School.UI.Controllers
             return subjects;
         }
         #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-
-
-        #region PreRecordMark
-        [HttpGet]
-        public ActionResult GetRecord_GetRecord()
-        {
-            List<StudentSubjectMarks> _model = studentSubjectMarksRepository.GetAll();
-
-            StudentSubjectMarks model = new StudentSubjectMarks();
-            return PartialView("_TableSubject", model);
-        }
-        #endregion
-
-        
-        #region Pre AddMark
-        [HttpGet]
-        public ActionResult PreAddMark(string teacherId , string GradeId, string examType )
-        {
-            StudentSubjectMarks _model = new StudentSubjectMarks();
-            List<StudentSubjectMarks> model = studentSubjectMarksRepository.GetById("");
-            return PartialView("_TableSubjectMarks", model);
-        }
-        #endregion
-
-        #region Pre Record Marks
-        [HttpGet]
-        public ActionResult PreRecordMark(string teacherId, string GradeId, string examType)
-        {
-            StudentSubjectMarks _model = new StudentSubjectMarks();
-            List<StudentSubjectMarks> model = studentSubjectMarksRepository.GetById("");
-            return PartialView("_TableRecordSubjectMarks", model);
-        }
-        #endregion
-
-
-        */
 
     }
 }

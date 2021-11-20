@@ -1,6 +1,5 @@
 ﻿using School.Entities.Fields;
 using School.Services.Interface;
-using School.UI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,42 +11,53 @@ using System.Web.Mvc;
 namespace School.UI.Controllers
 {
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-    public class SubjectController : Controller
+    public class GradeClassController : Controller
     {
-        private ISubjectRepository subjectRepository;
-        public SubjectController(ISubjectRepository courseRepository)
+        private IGradeClassRepository gradesRepository;
+        public GradeClassController(IGradeClassRepository gradesRepository)
         {
-            this.subjectRepository = courseRepository;
+            this.gradesRepository = gradesRepository;
         }
 
-        #region Get Record
+        #region Get Grades
         [HttpGet]
         public ActionResult GetRecord()
         {
-            List<Subject> model = subjectRepository.GetAll();
-            return PartialView("_TableSubject", model);
+            List<GradeClass> model = gradesRepository.GetAll();
+            return PartialView("_TableGradeClass", model);
+        }
+        #endregion
+
+        #region Get Grades
+        [HttpGet]
+        public ActionResult SearchRecord()
+        {
+            List<GradeClass> model = gradesRepository.GetAll();
+            return PartialView("_TableGradeClass", model);
         }
         #endregion
 
         #region Add New Record
-        [HttpGet]
-        public ActionResult AddRecord(Subject model)
+        [HttpPost]
+        public ActionResult AddRecord(GradeClass model)
         {
-            return PartialView("_AddSubject", model);
+            return PartialView("_AddGradeClass", model);
         }
         #endregion
-        #region Save Subject Results 
+
+
+        #region Save Student Results 
         [HttpPost]
-        public ActionResult SaveRecord(Subject model)
+        public ActionResult SaveRecord(GradeClass model)
         {
             try
             {
-                if (string.IsNullOrEmpty(model.SubjectId))
+                if (string.IsNullOrEmpty(model.GradeId))
                 {
-                    model.SubjectId = Guid.NewGuid().ToString();
+                    model.GradeId = Guid.NewGuid().ToString();
                 }
 
-                subjectRepository.Save(model);
+                gradesRepository.Save(model);
 
                 return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
             }
@@ -58,22 +68,22 @@ namespace School.UI.Controllers
         }
         #endregion
 
-        #region Pre Update Record
+        #region Add New Record
         [HttpPost]
-        public ActionResult UpdateView(Subject model)//UpdateView
+        public ActionResult UpdateView(GradeClass model)
         {
-            model.oldSubjectId = model.SubjectId;
-            return PartialView("_UpdateSubject", model);
+           // model.oldGradeId = model.GradeId;
+            return PartialView("_UpdateGrade", model);
         }
         #endregion
 
-        #region Update Record
+        #region Save Student Results 
         [HttpPost]
-        public ActionResult Update(Subject model)//UpdateRecord
+        public ActionResult Update(GradeClass model)
         {
             try
             {
-                subjectRepository.Update(model);
+                gradesRepository.Update(model);
                 return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -82,5 +92,6 @@ namespace School.UI.Controllers
             }
         }
         #endregion
+
     }
 }

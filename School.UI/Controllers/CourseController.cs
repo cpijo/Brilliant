@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 
 
-/*
+
 namespace School.UI.Controllers
 {
     
@@ -100,4 +100,4 @@ namespace School.UI.Controllers
     }
 }
 
- */
+ /**/

@@ -39,7 +39,7 @@ namespace School.UI.Controllers
 
         #region Save Student Results 
         [HttpPost]
-        public ActionResult Save(Grades model)
+        public ActionResult SaveRecord(Grades model)
         {
             try
             {
@@ -83,15 +83,6 @@ namespace School.UI.Controllers
             }
         }
         #endregion
-
-        //#region Get Record By Id
-        //[HttpPost]
-        //public ActionResult GetRecordById(string userId,string Firstname)
-        //{
-        //    List<Grades> model = gradesRepository.GetById(userId);
-        //    return PartialView("_TableGrade", model);
-        //}
-        //#endregion
 
     }
 }

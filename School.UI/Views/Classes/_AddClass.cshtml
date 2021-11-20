@@ -1,4 +1,4 @@
-﻿@model School.Entities.Fields.Subject
+﻿@model School.Entities.Fields.Classes
 
 <style>
     #childPage {
@@ -14,8 +14,7 @@
             overflow-x: hidden;
             max-height: 260px;
         }
-</style>
-<style>
+
 
     .card_t {
         border-radius: 2px;
@@ -37,23 +36,23 @@
         }
 </style>
 
-@using (Ajax.BeginForm("SaveRecord", "Subject", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
+@using (Ajax.BeginForm("SaveRecord", "Classes", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
 {
 <div id="addSubject-page" class="col-xs-12">
     <div class="card_t card-s">
         <div class="form-horizontal" style="padding:15px;">
 
             <div class="form-group">
-                @Html.LabelFor(model => model.SubjectId, new { @class = "col-sm-4 control-label" })
+                @Html.LabelFor(model => model.ClassId, new { @class = "col-sm-4 control-label" })
                 <div class="col-md-8">
-                    @Html.TextBoxFor(m => m.SubjectId, new { @id = "SubjectId", @class = "col-sm-12 form-control" })
+                    @Html.TextBoxFor(m => m.ClassId, new { @id = "ClassId", @class = "col-sm-12 form-control" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.SubjectName, new { @class = "col-sm-4 control-label" })
+                @Html.LabelFor(model => model.ClassName, new { @class = "col-sm-4 control-label" })
                 <div class="col-md-8">
-                    @Html.TextBoxFor(model => model.SubjectName, new {@id= "SubjectName", @class = "form-control" })
+                    @Html.TextBoxFor(model => model.ClassName, new {@id= "ClassName", @class = "form-control" })
                 </div>
             </div>
 
@@ -71,7 +70,7 @@
 
     <script>
 
-
+        
         $('#addSubject-page #btnSave').click(function (event) {
             event.preventDefault();
             event.stopPropagation();
@@ -81,8 +80,8 @@
             }
 
             var data = {
-                SubjectId: $('#SubjectId').val(),
-                SubjectName: $('#SubjectName').val()
+                ClassId: $('#ClassId').val(),
+                ClassName: $('#ClassName').val()
             };
 
             var header = 'Update Subject';
@@ -95,19 +94,20 @@
         });
 
         function clearInputs() {
-            $('#SubjectId').val("");
-            $('#SubjectName').val("");
+            $('#ClassId').val("");
+            $('#ClassName').val("");
         }
 
         function validateInput() {
 
-            var _inputs = ['SubjectId', 'SubjectName'];
+            var _inputs = ['ClassId', 'ClassName'];
             var isvalid = ClassValidationHelper.ValidateInput(_inputs)
             if (isvalid === false) {
                 ClassValidationHelper.errorEmptyField();
                 return isvalid;
             }
         }
+   
 
         function OnSuccess(response) {
 

@@ -1,0 +1,161 @@
+﻿@model IEnumerable<School.Entities.Fields.Classes>
+
+<style>
+
+    .card_t {
+        border-radius: 2px;
+        display: inline-block;
+        min-height: 50px;
+        margin: 1rem;
+        position: relative;
+        width: calc(100% - 20px);
+        padding-top: 5px;
+    }
+
+    .card-s {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+        .card-s:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+        }
+
+
+    .tablink {
+        /*background-color: #555;*/
+        background-color: rgb(59, 90, 108);
+        color: white;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 5px 5px;
+        /*padding: 12px 14px;*/
+        font-size: 17px;
+        width: 25%;
+    }
+
+        .tablink:hover {
+            /*background-color: #777;*/
+            background-color: orange;
+        }
+</style>
+
+<div id="studentSubjectMarks-page" class="col-md-12" style="border: 0px solid white; display: inline-block;">
+
+    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+        <div class="card_t card-s">
+            <div class="col-xs-12 form-horizontal">
+
+                <div class="myParent col-xs-12 rm-pd " style="padding-left:10px; padding-right:10px;border:0px solid orange;">
+                    <div class="myContainer col-xs-12 rm-pd ">
+                        <input class="tablink active" id="btnViewClassId" type="button" value="View Classes" style="width:130px;margin-top:5px;margin-bottom:5px;border-right:1px solid orange;" />
+                        <input class="tablink active" id="btnViewGradeClassId" type="button" value="View GradeClasses" style="width:130px;margin-top:5px;margin-bottom:5px;border-right:1px solid orange;" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+        <div class="card_t card-s">
+            <div  id="tableHolderId" style="padding:15px;">
+
+                <div class="myContainer col-lg-offset-10 col-xs-2 rm-pd ">
+                    <input class="tablink active" id="btnAddNewRecord" type="button" value="Add New Record" style="width:130px;margin-top:5px;margin-bottom:5px;border-right:1px solid orange;" />
+                </div>
+
+                <table id="tableId" class="table" style="border:1px solid silver;">
+                    <thead style="background-color:rgb(240, 240, 240);">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ClassId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ClassName)
+                            </th>
+                            <th>
+                                Edit
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ClassId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ClassName)
+                                </td>
+                                <td>
+                                    <button id="btnEditGrade" type="button" class="btnEditGrade btn btn-primary">Edit</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div> 
+
+</div>
+
+<script>
+
+    $('#btnViewClassId').click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        //var objPage = {};// controllerHelper.objPage;
+        //objPage.partialHolder = "#basePartialHolder #partialHolder";
+        //objPage.divHeader = "#basePartialHolder .divHeader p.headerText";
+        //objPage.header = 'View Classes';
+        //objPage.type = 'Get';
+        //objPage.url = '/Classes/SearchRecord';
+
+        var url = '/Classes/SearchRecord';
+        var header = 'View Classes';
+        var partialHolder = "#tableHolderId";
+        var pageObj = { function: "append", url: url, type: "Get", data: "", header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+    $('#btnViewGradeClassId').click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var url = '/GradeClass/SearchRecord';
+        var header = 'View Grade Classes';
+        var partialHolder = "#tableHolderId";
+        var pageObj = { function: "append", url: url, type: "Get", data: "", header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+    $('#btnAddNewRecord').click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var data = {
+            'ClassId': "",
+            'ClassName': ""
+        };
+
+        var header = 'Add New Record';
+        var url = '/Classes/AddRecord';
+
+        var objPopup = classPageConstant.popupChildOne;
+        var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+</script>

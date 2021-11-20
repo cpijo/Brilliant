@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fields\appMenu.cs" />
+    <Compile Include="Fields\Classes.cs" />
     <Compile Include="Fields\ClassOrCourse.cs" />
     <Compile Include="Fields\lc_Class.cs" />
     <Compile Include="Fields\Roles.cs" />
