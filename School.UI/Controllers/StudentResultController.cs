@@ -29,6 +29,7 @@ namespace School.UI.Controllers
             this.subjectResultRepository = subjectResultRepository;
             this.studentMarksRepository = studentMarksRepository;
         }
+
         #region Get Record
         [HttpGet]
         public ActionResult GetRecord()
@@ -43,6 +44,44 @@ namespace School.UI.Controllers
             return PartialView("_ViewStudent", model);
         }
         #endregion
+
+
+        #region Get Record
+        [HttpGet]
+        public ActionResult SearchRecord()
+        {
+            return PartialView("_ViewStudent");
+        }
+        #endregion
+
+
+        #region Pre UpdateRecord
+        [HttpPost]
+        public ActionResult PreUpdate(StudentSubjectMarks model)
+        {
+            return PartialView("_UpdateSubjectMarks", model);
+        }
+        #endregion
+
+        #region Save UpdateRecord
+        [HttpPost]
+        public ActionResult Update(StudentSubjectMarks model)
+        {
+            try
+            {
+                model.GradeId = CostantData.getFieldId(CostantData.dictGrades(), model.GradeId.Trim());
+                studentMarksRepository.Update(model);
+                return Json(new { result = "true", message = "Data updated Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "false", message = ex.Message, title = "Request Failed" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+
+
+
 
 
 
@@ -119,30 +158,7 @@ namespace School.UI.Controllers
 
 
 
-        #region Pre Update
-        [HttpPost]
-        public ActionResult PreUpdate(StudentSubjectMarks model)
-        {
-            return PartialView("_UpdateSubjectMarks", model);
-        }
-        #endregion
 
-        #region Save Update
-        [HttpPost]
-        public ActionResult Update(StudentSubjectMarks model)
-        {
-            try
-            {
-                model.GradeId = CostantData.getFieldId(CostantData.dictGrades(), model.GradeId.Trim());
-                studentMarksRepository.Update(model);
-                return Json(new { result = "true", message = "Data updated Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { result = "false", message = ex.Message, title = "Request Failed" }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        #endregion
 
 
 

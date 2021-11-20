@@ -31,20 +31,16 @@ namespace School.UI.Controllers
             this.studentMarksRepository = studentMarksRepository;
         }
 
-        #region Pre Record Marks
+        #region Get Record
         [HttpGet]
         public ActionResult GetRecord(string teacherId, string GradeId, string examType)
         {
-            //if (String.IsNullOrEmpty(teacherId))
-            //{
                 dynamic _dynamic = new ExpandoObject();
                 _dynamic.GradeId = "Grade8";
                 _dynamic.SubjectId = "Eng008";
                 _dynamic.TeacherId = "TC00000008";
-            //_dynamic.queryType = "default";
-            _dynamic.type = "start";
-           // _dynamic.isStart = "yes";
-            //}
+                _dynamic.type = "start";
+
             List<StudentSubjectMarks> _StudentSubjectMarks = studentSubjectMarksRepository.GetByAny(_dynamic);
             StudentSubjectMarksVM model = new StudentSubjectMarksVM();
             model.StudentSubjectMarksList = _StudentSubjectMarks;
@@ -56,13 +52,66 @@ namespace School.UI.Controllers
         }
         #endregion
 
+        #region Search By Filter
+        [HttpPost]
+        public ActionResult SearchRecord(string searchDate, string subjectId, string GradeId, string queryType = "searchByGrade")
+        {
+            GradeId = CostantData.getFieldId(CostantData.dictGrades(), GradeId);
+            dynamic _dynamic = new ExpandoObject();
+            _dynamic.GradeId = GradeId;
+            _dynamic.SubjectId = subjectId;
+            _dynamic.ExamDate = searchDate;
+            _dynamic.type = "existingRecords";
+
+            List<StudentSubjectMarks> _StudentSubjectMarks = studentMarksRepository.GetByAny(_dynamic);
+            StudentSubjectMarksVM model = new StudentSubjectMarksVM();
+            model.StudentSubjectMarksList = _StudentSubjectMarks;
+            //StudentSubjectMarksList
+            if (_StudentSubjectMarks.Count == 0)
+            {
+                return Json(new { result = "false", message = "No records found 0n " + searchDate, title = "Empty Records" }, JsonRequestBehavior.AllowGet);
+            }
+
+            return PartialView("_TableSubjectMarksOnly", model);
+        }
+        #endregion
 
 
+        #region Search By Filter
+        [HttpPost]
+        public ActionResult SaveRecord(string jsonString, string tabledata, string searchDate, string subjectId, string GradeId, string queryType = "searchByGrade")
+        {
+            try
+            {
+                GradeId = CostantData.getFieldId(CostantData.dictGrades(), GradeId);
+                dynamic _dynamic = new ExpandoObject();
+                _dynamic.GradeId = GradeId;
+                _dynamic.SubjectId = subjectId;
+                _dynamic.ExamDate = searchDate;
+                _dynamic.type = "hasRecords";
+
+                List<StudentSubjectMarks> _StudentSubjectMarks = studentMarksRepository.GetByAny(_dynamic);
+
+                if (_StudentSubjectMarks != null)
+                {
+                    return Json(new { result = "false", message = $"This date {searchDate} is alread recorded in the database", title = "The date has Records" }, JsonRequestBehavior.AllowGet);
+                }
+
+                List<StudentSubjectMarks> modelList = myDeserialiseFromJson<List<StudentSubjectMarks>>.Deserialise(jsonString);
+                studentSubjectMarksRepository.SaveMany(modelList);
+                return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "false", message = ex.Message, title = "Request Failed" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
 
 
         #region dropBox Update
         [HttpPost]
-        public ActionResult dropBoxUpdate(string selectedValue, string searchType)
+        public ActionResult UpdateDropBox(string selectedValue, string searchType)
         {
             #region using database still working on it
             /*
@@ -88,7 +137,6 @@ namespace School.UI.Controllers
                      switch (selectedValue)
                     {
                 case "Grade8":
-                    //subjects = getSubjectByGrade(selectedValue, dictionary);
                     dictionary = CostantData.dictGrade8Subjects();
                     break;
                 case "Grade9":
@@ -114,6 +162,8 @@ namespace School.UI.Controllers
             return PartialView("_PartialDropBox", model);
         }
 
+
+
         private List<Subject> getSubjectByGrade(string selectedValue, Dictionary<string, string> dictionary)
         {
             List<Subject> subjects = Session["subjects"] as List<Subject>;
@@ -128,76 +178,6 @@ namespace School.UI.Controllers
         #endregion
 
 
-        #region Search By Filter
-        [HttpPost]
-        public ActionResult SearchResult(string searchDate, string subjectId, string GradeId, string queryType = "searchByGrade")
-        {
-            GradeId = CostantData.getFieldId(CostantData.dictGrades(), GradeId);
-            dynamic _dynamic = new ExpandoObject();
-            _dynamic.GradeId = GradeId;
-            _dynamic.SubjectId = subjectId;
-            _dynamic.ExamDate = searchDate;
-            _dynamic.type = "existingRecords";
-
-
-            List<StudentSubjectMarks> _StudentSubjectMarks = studentMarksRepository.GetByAny(_dynamic);
-            StudentSubjectMarksVM model = new StudentSubjectMarksVM();
-            model.StudentSubjectMarksList = _StudentSubjectMarks;
-            //StudentSubjectMarksList
-            if (_StudentSubjectMarks.Count==0)
-            {
-                return Json(new { result = "false", message = "No records found 0n "+ searchDate, title = "Empty Records" }, JsonRequestBehavior.AllowGet);
-            }
-
-            return PartialView("_TableSubjectMarksOnly", model);
-        }
-        #endregion
-
-
-        #region Search By Filter
-        [HttpPost]
-        public ActionResult SaveResults(string jsonString, string tabledata,string searchDate, string subjectId, string GradeId, string queryType = "searchByGrade")
-        {
-            try
-            {
-                //dynamic _dynamic = new ExpandoObject();
-                //_dynamic.GradeId = GradeId;
-                //_dynamic.userName = subjectId;
-                //_dynamic.password = searchDate;
-                GradeId = CostantData.getFieldId(CostantData.dictGrades(), GradeId);
-                dynamic _dynamic = new ExpandoObject();
-                _dynamic.GradeId = GradeId;
-                _dynamic.SubjectId = subjectId;
-                _dynamic.ExamDate = searchDate;
-                _dynamic.type = "hasRecords";
-
-                List<StudentSubjectMarks> _StudentSubjectMarks = studentMarksRepository.GetByAny(_dynamic);
-
-                if (_StudentSubjectMarks !=null)
-                {
-                    return Json(new { result = "false", message = $"This date {searchDate} is alread recorded in the database", title = "The date has Records" }, JsonRequestBehavior.AllowGet);
-                }
-
-                List<StudentSubjectMarks> modelList = myDeserialiseFromJson<List<StudentSubjectMarks>>.Deserialise(jsonString);
-                studentSubjectMarksRepository.SaveMany(modelList);
-                return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { result = "false", message = ex.Message, title = "Request Failed" }, JsonRequestBehavior.AllowGet);
-            }
-
-            //GradeId = CostantData.getFieldId(CostantData.dictGrades(), GradeId);
-            //dynamic _dynamic = new ExpandoObject();
-            //_dynamic.GradeId = GradeId;
-            //_dynamic.SubjectId = subjectId;
-            //_dynamic.ExamDate = searchDate;
-            //List<StudentSubjectMarks> _StudentSubjectMarks = studentMarksRepository.SaveMany(modelList);
-            //StudentSubjectMarksVM model = new StudentSubjectMarksVM();
-            //model.StudentSubjectMarksList = _StudentSubjectMarks;            
-            //return PartialView("_TableSubjectMarksOnly", model);
-        }
-        #endregion
 
 
 
@@ -228,9 +208,7 @@ namespace School.UI.Controllers
 
 
 
-
-
-
+        /*
 
 
         #region PreRecordMark
@@ -266,7 +244,7 @@ namespace School.UI.Controllers
         #endregion
 
 
-
+        */
 
     }
 }

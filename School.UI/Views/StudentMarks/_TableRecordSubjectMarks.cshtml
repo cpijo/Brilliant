@@ -140,20 +140,11 @@
 
         var partialHolder = "#tableHolderId";
         var header = 'Update UserInfor';
-        //var url = button-clicked.closest-page-id/SearchResult
-        var url = '/StudentMarks/SearchResult';
         var pageObj = {};
         if (_searchValue === "Grade") {
             header = 'Update UserInfor';
-            url = '/StudentMarks/dropBoxUpdate';
+            var url = '/StudentMarks/UpdateDropBox';
             partialHolder = "#inputHolderId66";
-            pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
-            classControllerHelper.callController(pageObj);
-        }
-        else if (_searchValue === "filterGrade") {
-            header = 'Update UserInfor';
-            url = '/StudentMarks/dropBoxUpdate8888';
-            partialHolder = "#studentSubjectMarks-page #inputHolderId";
             pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
             classControllerHelper.callController(pageObj);
         }
@@ -209,7 +200,7 @@
             'searchDate': searchDate.trim(),
         };
 
-        var url = '/StudentMarks/SaveResults';
+        var url = '/StudentMarks/SaveRecord';
         var pageObj = { function: "message", url: url, type: "Post", data: data, header: "", pageId: "", partialHolder: "" };
         classControllerHelper.callController(pageObj);
 
@@ -239,7 +230,7 @@
         };
         var partialHolder = "#studentSubjectMarks-page #tableHolderId";
         var header = 'Update UserInfor';
-        var url = '/StudentMarks/SearchResult';
+        var url = '/StudentMarks/SearchRecord';
         var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
         classControllerHelper.callController(pageObj);
 

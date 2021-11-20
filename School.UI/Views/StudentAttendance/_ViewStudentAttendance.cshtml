@@ -180,19 +180,10 @@
 
         var partialHolder = "#attendance-page #inputHolderId";
         var header = 'Update UserInfor';
-        //var url = button-clicked.closest-page-id/SearchResult
-        var url = '/StudentAttendance/SearchResult';
         var pageObj = {};
         if (_searchValue === "Grade") {
             header = 'Update UserInfor';
-            url = '/StudentAttendance/dropBoxUpdate';
-            partialHolder = "#attendance-page #inputHolderId";
-            pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
-            classControllerHelper.callController(pageObj);
-        }
-        else if (_searchValue === "filterGrade") {
-            header = 'Update UserInfor';
-            url = '/StudentAttendance/dropBoxUpdate8888';
+            var url = '/StudentAttendance/UpdateDropBox';
             partialHolder = "#attendance-page #inputHolderId";
             pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
             classControllerHelper.callController(pageObj);

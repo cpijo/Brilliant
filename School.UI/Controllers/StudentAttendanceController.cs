@@ -74,7 +74,7 @@ namespace School.UI.Controllers
 
         #region dropBox Update
         [HttpPost]
-        public ActionResult dropBoxUpdate(string selectedValue, string searchType)
+        public ActionResult UpdateDropBox(string selectedValue, string searchType)
         {
             StudentAttendanceModel model = new StudentAttendanceModel();
             Dictionary<string, string> dictionary = getSubjects(selectedValue);

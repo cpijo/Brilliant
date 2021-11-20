@@ -121,7 +121,6 @@
     $("#GradeId").change(function (event) {
         event.preventDefault();
         event.stopPropagation();
-       // debugger;
         var selectedValue = $("#GradeId option:selected").val();
         var data = {
             'selectedValue': selectedValue.trim(),
@@ -132,12 +131,11 @@
         var _searchValue =  selectedValue.trim().substring(0, 5);
        
         var partialHolder = "#name-page #tableHolderId";
-        var header = 'Update UserInfor';
-        var url = '/StudentResult/SearchResult';
+        var header = 'Update UserInfor';     
         var pageObj = {};
         if (_searchValue==="Grade") {
             header = 'Update UserInfor';
-            url = '/StudentResult/SearchByDropBox';
+           var url = '/StudentResult/SearchByDropBox';
             partialHolder = "#name-page #tableHolderId";
             pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
             classControllerHelper.callController(pageObj);
