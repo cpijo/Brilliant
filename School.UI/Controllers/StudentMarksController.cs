@@ -57,6 +57,9 @@ namespace School.UI.Controllers
         #endregion
 
 
+
+
+
         #region dropBox Update
         [HttpPost]
         public ActionResult dropBoxUpdate(string selectedValue, string searchType)
@@ -261,6 +264,8 @@ namespace School.UI.Controllers
             return PartialView("_TableRecordSubjectMarks", model);
         }
         #endregion
+
+
 
 
     }

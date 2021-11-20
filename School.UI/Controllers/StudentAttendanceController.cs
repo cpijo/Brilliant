@@ -20,12 +20,9 @@ namespace School.UI.Controllers
     public class StudentAttendanceController : BaseController
     {
         private IStudentAttendanceRepository studentAttendanceRepository;
-        //private IStudentSubjectMarksRepository studentSubjectMarksRepository;
-
         public StudentAttendanceController(IStudentAttendanceRepository studentAttendanceRepository)
         {
             this.studentAttendanceRepository = studentAttendanceRepository;
-            //this.studentSubjectMarksRepository = studentSubjectMarksRepository;
         }
 
         #region Get Record
@@ -34,7 +31,6 @@ namespace School.UI.Controllers
         {
             List<StudentAttendance> model = studentAttendanceRepository.GetById("");
             StudentAttendanceModel mod = new StudentAttendanceModel();
-            //mod.StudentAttendance = new List<StudentAttendance>();
             mod.StudentAttendance = model;
             Dictionary<string, string> dictionary = CostantData.dictGrades();
             List<SelectListItem> list = dropdownHelper(dictionary);
@@ -53,22 +49,6 @@ namespace School.UI.Controllers
 
             return PartialView("_ViewStudentAttendance", mod);
         }
-        #endregion
-
-        #region dropBox Update
-        [HttpPost]
-        public ActionResult dropBoxUpdate(string selectedValue, string searchType)
-        {
-            StudentAttendanceModel model = new StudentAttendanceModel();
-            Dictionary<string, string>  dictionary = getSubjects(selectedValue);
-
-            List<SelectListItem> list = dropdownHelper(dictionary);
-            model.SubjectDropboxItemList = new SelectList(list, "Value", "Text");
-
-            return PartialView("_PartialDropBox", model);
-        }
-
-       
         #endregion
 
         #region Save Record
@@ -92,8 +72,19 @@ namespace School.UI.Controllers
         }
         #endregion
 
+        #region dropBox Update
+        [HttpPost]
+        public ActionResult dropBoxUpdate(string selectedValue, string searchType)
+        {
+            StudentAttendanceModel model = new StudentAttendanceModel();
+            Dictionary<string, string> dictionary = getSubjects(selectedValue);
 
+            List<SelectListItem> list = dropdownHelper(dictionary);
+            model.SubjectDropboxItemList = new SelectList(list, "Value", "Text");
 
+            return PartialView("_PartialDropBox", model);
+        }
+        #endregion
 
 
 
@@ -146,107 +137,6 @@ namespace School.UI.Controllers
             }
         }
 
-
-
-
-
-/*
-
-        public ActionResult Create([Bind(Include = "CourseID,Title,Credits,DepartmentID")]Course course)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    //db.Courses.Add(course);
-                    //db.SaveChanges();
-                    //return RedirectToAction("Index");
-                }
-            }
-            catch (Exception ex)
-            {
-                //Log the error (uncomment dex variable name and add a line here to write a log.)
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-            }
-
-            return View(course);
-        }
-
-   
-        [HttpPost]
-        public ActionResult Save_simpler(List<string> rows, FormCollection collection)
-        {
-            //model = "{"_data":{"DateOfAttendance":"2021/10/12","attandance":"weekly","Grade":"Grade10","SubjectName":"ven008"}}"
-
-
-            int totalRows = Convert.ToInt32(collection["TotalRows"]);
-
-            rows.ForEach(x =>
-            {
-                var row = x.Split('-');
-                var id = row[0];
-                var name = row[1];
-                var family = row[2];
-            });
-            return null;
-        }
-
-
-
-
-
-
-
-
-
-        #region Add New Record
-        [HttpPost]
-        public ActionResult PreUpdate(Student model, string StudentId, string Firstname, string Surname)
-        {            
-            return PartialView("_UpdateStudent", model);
-        }
-        #endregion
-
-        #region Save Student Results 
-        [HttpPost]
-        public ActionResult Update(Student model)
-        {
-            try
-            {
-                //studentRepository.Save(model);
-                return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { result = "false", message = ex.Message, title = "Request Failed" }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        #endregion
-
-
-        #region Get Student
-        [HttpPost]
-        public ActionResult GetStudentSubject(StudentResults studentResult, string Firstname)
-        {
-            Student student = new Student();
-            student.StudentId = studentResult.StudentId;
-            student.Firstname = studentResult.Firstname;
-            student.LastName = studentResult.LastName;
-            student.Email = studentResult.Email;
-            StudentResultsModel model = new StudentResultsModel();
-            //List<Subject> subjects = subjectRepository.GetAll();
-            //List<Subject> subjects = subjectRepository.GetById(student.StudentId);
-
-            //List<SubjectResult> subjectResult = subjectResultRepository.GetById(student.StudentId);
-
-            //model.StudentResults = studentResult;
-            //model.Student = student;
-            //model.Subjects = subjects;
-            return PartialView("_StudentResults", model);
-        }
-        #endregion
-
-         */
     }
 }
 

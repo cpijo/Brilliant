@@ -9,6 +9,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+/*
+
 namespace School.UI.Controllers
 {
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
@@ -91,3 +93,5 @@ namespace School.UI.Controllers
 
     }
 }
+
+*/

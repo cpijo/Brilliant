@@ -43,6 +43,17 @@ namespace School.UI.Controllers
             return PartialView("_ViewStudent", model);
         }
         #endregion
+
+
+
+
+
+
+
+
+
+
+
         #region Search By Dropbox
         [HttpPost]
         public ActionResult SearchByDropBox(string selectedValue, string StudentId, string GradeId, string queryType = "searchByGrade")
@@ -55,17 +66,6 @@ namespace School.UI.Controllers
         }
         #endregion
 
-        #region Search By Dropbox
-        [HttpPost]
-        public ActionResult SearchByDropBox_Delete(string selectedValue,string StudentId ,string GradeId ,string queryType = "searchByGrade")
-        {
-            GradeId = CostantData.getFieldId(CostantData.dictGrades(), GradeId);
-            dynamic _dynamic = new ExpandoObject();
-            _dynamic.StudentId = "StudentId"; _dynamic.GradeId = GradeId; _dynamic.queryType = queryType;
-            List<StudentResults> _model = studentResultsRepository.GetByAny(_dynamic);
-            return PartialView("_TableStudentSeachResult", _model);
-        }
-        #endregion
 
         #region Search By Lastname
         [HttpPost]
@@ -118,17 +118,6 @@ namespace School.UI.Controllers
         #endregion
 
 
-
-
-
-        //#region View Student Results Page
-        //[HttpGet]
-        //public ActionResult PreGetRecord()
-        //{
-        //    ////List<StudentResults> studentList = studentResultsRepository.GetAll();
-        //    ////return PartialView("_BasePage", studentList);
-        //}
-        //#endregion
 
         #region Pre Update
         [HttpPost]
