@@ -89,7 +89,7 @@ namespace School.UI.Controllers
 
         #region Add New Record
         [HttpPost]
-        public ActionResult PreUpdate(Subject model)
+        public ActionResult UpdateView(Subject model)
         {
             return PartialView("_UpdateSubject", model);
         }

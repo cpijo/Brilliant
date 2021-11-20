@@ -23,7 +23,7 @@ namespace School.UI.Controllers
 
         #region Pre Update
         [HttpPost]
-        public ActionResult PreUpdate(SubjectResult model)
+        public ActionResult UpdateView(SubjectResult model)
         {
             return PartialView("_UpdateSubjectResult", model);
         }

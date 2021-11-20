@@ -57,7 +57,7 @@ namespace School.UI.Controllers
 
         #region Pre UpdateRecord
         [HttpPost]
-        public ActionResult PreUpdate(StudentSubjectMarks model)
+        public ActionResult UpdateView(StudentSubjectMarks model)
         {
             return PartialView("_UpdateSubjectMarks", model);
         }

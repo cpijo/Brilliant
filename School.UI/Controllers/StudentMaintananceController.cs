@@ -273,7 +273,7 @@ namespace School.UI.Controllers
 
         #region Add New Record
         [HttpPost]
-        public ActionResult PreUpdate(Student model, string StudentId, string Firstname, string Surname)
+        public ActionResult UpdateView(Student model, string StudentId, string Firstname, string Surname)
         {            
             return PartialView("_UpdateStudent", model);
         }

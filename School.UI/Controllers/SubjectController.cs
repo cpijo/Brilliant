@@ -63,7 +63,7 @@ namespace School.UI.Controllers
 
         #region Pre Update Record
         [HttpPost]
-        public ActionResult PreUpdate(Subject model)
+        public ActionResult UpdateView(Subject model)//UpdateView
         {
             model.oldSubjectId = model.SubjectId;
             return PartialView("_UpdateSubject", model);
@@ -72,7 +72,7 @@ namespace School.UI.Controllers
 
         #region Update Record
         [HttpPost]
-        public ActionResult Update(Subject model)
+        public ActionResult Update(Subject model)//UpdateRecord
         {
             try
             {
@@ -86,23 +86,6 @@ namespace School.UI.Controllers
         }
         #endregion
 
-        
-        //#region Get Course
-        //[HttpGet]
-        //public ActionResult GetSubject()
-        //{
-        //    List<Subject> model = subjectRepository.GetAll();
-        //    return PartialView("_TableSubject", model);
-        //}
-        //#endregion
 
-        //#region Get Subject Teacher By Id
-        //[HttpPost]
-        //public ActionResult GetGradeTeacherById(string userId, string Firstname)
-        //{
-        //    List<Subject> model = subjectRepository.GetById(userId);
-        //    return PartialView("_TableGradeTeacher", model);
-        //}
-        //#endregion   
     }
 }

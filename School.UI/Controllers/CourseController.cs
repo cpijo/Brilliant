@@ -8,8 +8,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
+/*
 namespace School.UI.Controllers
 {
+    
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
     public class CourseController : Controller
     {
@@ -68,9 +71,9 @@ namespace School.UI.Controllers
         }
         #endregion
 
-        #region Add New PreUpdate
+        #region Add New UpdateView
         [HttpPost]
-        public ActionResult PreUpdate(Course model)
+        public ActionResult UpdateView(Course model)
         {
             return PartialView("_UpdateCourse", model);
         }
@@ -92,5 +95,9 @@ namespace School.UI.Controllers
         }
         #endregion
 
+        
+
     }
 }
+
+ */
