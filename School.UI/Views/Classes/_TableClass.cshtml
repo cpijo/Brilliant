@@ -32,7 +32,7 @@
                     @Html.DisplayFor(modelItem => item.ClassName)
                 </td>
                 <td>
-                    <button id="btnEditGrade" type="button" class="btnEditGrade btn btn-primary">Edit</button>
+                    <button id="btnRowEdit" type="button" class="btnRowEdit btn btn-primary">Edit</button>
                 </td>
             </tr>
         }
@@ -45,7 +45,7 @@
     $('#btnAddNewRecord').click(function (event) {
         event.preventDefault();
         event.stopPropagation();
-        debugger;
+        //debugger;
         var data = {
             'SubjectId':"",
             'SubjectName': ""
@@ -53,6 +53,28 @@
 
         var header = 'Add New Record';
         var url = '/Classes/AddRecord';
+
+        var objPopup = classPageConstant.popupChildOne;
+        var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+
+    $('#btnRowEdit').click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var ClassId = $(this).closest('td').parent('tr').find("td:eq(0)").text().trim();
+        var ClassName = $(this).closest('td').parent('tr').find("td:eq(1)").text().trim();
+
+        var data = {
+            'ClassId': ClassId.trim(),
+            'ClassName': ClassName.trim()
+        };
+
+        var header = 'Edit Drade';
+        var url = '/Classes/UpdateView';
 
         var objPopup = classPageConstant.popupChildOne;
         var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };

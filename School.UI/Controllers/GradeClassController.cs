@@ -73,7 +73,7 @@ namespace School.UI.Controllers
         public ActionResult UpdateView(GradeClass model)
         {
            // model.oldGradeId = model.GradeId;
-            return PartialView("_UpdateGrade", model);
+            return PartialView("_UpdateGradeClass", model);
         }
         #endregion
 

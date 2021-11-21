@@ -75,7 +75,7 @@ namespace School.UI.Controllers
         public ActionResult UpdateView(Classes model)
         {
             //model.oldClassId = model.ClassId;
-            return PartialView("_UpdateGrade", model);
+            return PartialView("_UpdateClass", model);
         }
         #endregion
 
@@ -97,6 +97,11 @@ namespace School.UI.Controllers
 
     }
 }
+
+
+//convert min js to js online
+//https://unminify.com/
+
 
 //https://preview.themeforest.net/item/akkhor-school-management-admin-template/full_screen_preview/23687250?_ga=2.259416202.1022491944.1637416188-650806703.1637414851
 

@@ -79,8 +79,8 @@
                             <th style="display:none;">
                                 View Report
                             </th>
-                            <th>
-                               User Details
+                            <th style="width:220px;">
+                               Process
                             </th>
                         </tr>
                     </thead>
@@ -101,10 +101,12 @@
                                 @Html.DisplayFor(modelItem => item.Gender)
                             </td>
                             <td style="display:none;">
-                                <button id="btnEdit" type="button" class="btnEdit btn btn-primary" style="width:100px;display:none;">View Report</button>
+                                <button id="btnEdit" type="button" class="btnEdit btn btn-primary" style="width:100px;display:none;">Edit</button>
                             </td>
                             <td>
-                                <button id="btnUserDetails" type="button" class="btnUserDetails btn btn-primary" style="width:100px;">User Details</button>
+                                <button id="btnView" type="button" class="btnView btn btn-primary" style="width:60px;">View</button>
+                                <button id="btnEdit" type="button" class="btnEdit btn btn-warning" style="width:60px;">Edit</button>
+                                <button id="btnDelete" type="button" class="btnDelete btn btn-danger" style="width:60px;">Delete</button>
                             </td>
                         </tr>
                         }
@@ -118,9 +120,48 @@
 </div>
 <script>
 
-    $('#tableId #btnUserDetails').click(function (event) {
+
+    function registeredUserToDo(_name) {
+        this.name = _name;
+        this.button = 'view1';
+        this.toDo = 'view1';
+    };
+
+    registeredUserToDo.prototype.toDoRequest = function () {
+        var obj = { name: this.name, button: "viewButton", toDo: "viewUser" };
+        return obj;
+    };
+
+
+    $('#tableId #btnView,#tableId #btnEdit,#tableId #btnDelete').click(function (event) {
         event.preventDefault();
         event.stopPropagation();
+
+        var myId = $(this).attr("id");
+
+        if (myId === "btnView") {
+            registeredUserToDo.prototype.toDoRequest = function () {
+                var obj = { name: "view", button: "viewButton", toDo: "viewUser" };
+                return obj;
+            };
+        }
+        else if (myId === "btnEdit") {
+            registeredUserToDo.prototype.toDoRequest = function () {
+                this.name = "edit";
+                this.button = "editButton_sp";
+                this.toDo = "editUser_sp";
+                var obj = { name: this.name, button: "editButton", toDo: "editUser" };
+                return obj;
+            };
+        }
+        else if (myId === "btnDelete") {
+            registeredUserToDo.prototype.toDoRequest = function () {
+                this.name = "delete";
+                var obj = { name: this.name, button: "deleteButton", toDo: "deleteUser" };
+                return obj;
+            };
+        }
+
         var userId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
         var Firstname = $(this).closest('td').parent('tr').find("td:eq(1)").text();
         var LastName = $(this).closest('td').parent('tr').find("td:eq(2)").text();

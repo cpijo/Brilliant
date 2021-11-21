@@ -38,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.ClassName)
             </td>
             <td>
-                <button id="btnEditGrade" type="button" class="btnEditGrade btn btn-primary">Edit</button>
+                <button id="btnRowEdit" type="button" class="btnRowEdit btn btn-primary">Edit</button>
             </td>
         </tr>
         }
@@ -58,6 +58,29 @@
 
         var header = 'Add New Record';
         var url = '/GradeClass/AddRecord';
+
+        var objPopup = classPageConstant.popupChildOne;
+        var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+    $('#btnRowEdit').click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var GradeId = $(this).closest('td').parent('tr').find("td:eq(0)").text().trim();
+        var ClassId = $(this).closest('td').parent('tr').find("td:eq(1)").text().trim();
+        var ClassName = $(this).closest('td').parent('tr').find("td:eq(2)").text().trim();
+
+        var data = {
+            'GradeId': GradeId.trim(),
+            'ClassId': ClassId.trim(),
+            'ClassName': ClassName.trim()
+        };
+
+        var header = 'Edit Drade';
+        var url = '/GradeClass/UpdateView';
 
         var objPopup = classPageConstant.popupChildOne;
         var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };

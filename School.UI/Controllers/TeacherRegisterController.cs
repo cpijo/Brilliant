@@ -25,7 +25,6 @@ namespace School.UI.Controllers
         //ALT+Arrow to select a line and move up or down
         //ALT+Tab  Changing ot Tab from One Program to Another
 
-
         private ITeacherRepository tearcherRepository;
         private IStudentResultsRepository studentResultsRepository;
         private IStudentRepository studentRepository;
@@ -225,6 +224,24 @@ namespace School.UI.Controllers
         }
         #endregion
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         #region Get Record
         [HttpGet]
         public ActionResult GetRecord()
@@ -322,91 +339,6 @@ namespace School.UI.Controllers
             return PartialView("_TeacherRoles", model);
         }
         #endregion
-
-        //#region Get Subjects
-        //[HttpPost]
-        //public ActionResult GetSubjects(string grade)
-        //{
-        //    TeacherRoleSimpleViewModel model = new TeacherRoleSimpleViewModel();
-        //    //if (Session["selectedTeacher"] != null)
-        //    //{
-        //    //    Teacher teacher = Session["teacher"] as Teacher;
-        //    //    model.TeacherViewModel.Teacher = teacher;
-        //    //}
-
-        //    Dictionary<string, string> dictionary = getSubjects(grade);
-
-        //    foreach (KeyValuePair<string, string> item in dictionary)
-        //    {
-        //        model.TeacherRoles.Add(new TeacherRoleSimpleViewModel {GradeId=grade, SubjectId = item.Key, SubjectName = item.Value});
-        //    }
-        //    return PartialView("_TeacherRolesTable", model);
-        //}
-        //#endregion
-  /*
-        #region Save Roles
-        [HttpPost]
-        public ActionResult SaveRoles(string teacherId ,TeacherRoleSimpleViewModel _model, string grade, FormCollection formCollection)
-        {
-            try
-            {
-                string hidInput = formCollection["hidInput"];
-                //List<TeacherRoleSimpleViewModel> modelList = myDeserialiseFromJson<List<TeacherRoleSimpleViewModel>>.Deserialise(hidInput);
-                List<TeachingRoles> teachingRoles = myDeserialiseFromJson<List<TeachingRoles>>.Deserialise(hidInput);
-                foreach (TeachingRoles cust in teachingRoles)
-                {
-                    cust.TeacherId = "TC00000008999";
-                }
-
-
-
-                return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
-
-
-                //var SelectedUserId = formCollection["TeacherRolesId"];// as List<TeacherRoleSimpleViewModel>();
-                //TeacherRoleSimpleViewModel model = new TeacherRoleSimpleViewModel();
-
-                //Dictionary<string, string> dictionary = getSubjects(grade);
-                //foreach (KeyValuePair<string, string> item in dictionary)
-                //{
-                //    model.TeacherRoles.Add(new TeacherRoleSimpleViewModel { SubjectId = item.Key, SubjectName = item.Value, Grade = grade });
-                //}
-
-
-
-              
-
-               
-                // return PartialView("_PartialDropBox", model);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { result = "false", message = ex.Message, title = "Request Failed" }, JsonRequestBehavior.AllowGet);
-            }
-        }
-        #endregion
- */
-        [HttpPost]
-        public ActionResult Edit_Include([Bind(Include = "StudentId, StudentName")] Student std)
-        {
-            var name = std.Firstname;
-
-            //@Html.Label("StudentId:")  
-            //@Html.TextBox("StudentName")
-
-            return RedirectToAction("TestIndex");
-        }
-
-        [HttpPost]
-        public ActionResult Edit_Exclude([Bind(Exclude = "StudentId, StudentName")] Student std)
-        {
-            var name = std.Firstname;
-
-            //@Html.Label("StudentId:")  
-            //@Html.TextBox("StudentName")
-
-            return RedirectToAction("TestIndex");
-        }
 
     }
 }

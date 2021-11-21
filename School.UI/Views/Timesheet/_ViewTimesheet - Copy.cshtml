@@ -98,7 +98,8 @@
                                 {
                                     <tr>
                                         <td>
-                                            school portal
+                                            bheboo portal
+                                            @*<input type='text' value="" style='width:60px' />*@
                                         </td>
                                         <td>
                                             <input type='text' value="" style='width:60px' />
@@ -209,6 +210,48 @@
 <script>
 
 
+    $(document).ready(function () {
+
+        $("#list2").jqGrid({
+            url: 'https://localhost:49765/MVCJQGrid/getEmployees',
+            datatype: "json",
+            contentType: "application/json; charset-utf-8",
+            mtype: 'GET',
+            colNames: ['ID', 'Employee Name', 'Designation',
+                'Gender', 'Salary', 'City', 'State', 'Zip'],
+            colModel: [
+                { name: 'id', index: 'id', width: 55, sorttype: "int" },
+                { name: 'Name', index: 'Name', width: 90 },
+                { name: 'Designation', index: 'Designation', width: 100 },
+                { name: 'Gender', index: 'Gender', width: 80 },
+                {
+                    name: 'Salary', index: 'Salary', width: 80,
+                    align: "right", sorttype: "float"
+                },
+                { name: 'City', index: 'City', width: 80 },
+                { name: 'State', index: 'State', width: 150 },
+                { name: 'Zip', index: 'Zip', width: 150 }
+            ],
+            rowNum: 5,
+            rowList: [5, 10, 15],
+            pager: '#pager2',
+            sortname: 'id',
+            viewrecords: true,
+            sortorder: "asc",
+            caption: "JSON Example"
+        });
+        jQuery("#list2").jqGrid('navGrid', '#pager2',
+            { edit: false, add: false, del: false });
+    });
+
+
+
+
+
+
+
+
+
 
 
     var notWorkig = function () {
@@ -243,6 +286,61 @@
         jQuery("#list2").jqGrid('navGrid', '#pager2',
             { edit: false, add: false, del: false });
     };
+</script>
+
+
+<script>
+
+    $('#tableId .btnEdit').click(function (e) {
+        // debugger;
+        event.preventDefault();
+        event.stopPropagation();
+        var getID = $(this);
+
+        var StudentId = $(this).closest('td').parent('tr').find("td:eq(0)").text();
+        var Firstname = $(this).closest('td').parent('tr').find("td:eq(1)").text();
+        var LastName = $(this).closest('td').parent('tr').find("td:eq(2)").text();
+
+        var CourseId = $(this).closest('td').parent('tr').find("td:eq(3)").text();
+        var CourseName = $(this).closest('td').parent('tr').find("td:eq(4)").text();
+        //var Email = $(this).closest('td').parent('tr').find("td:eq(5").text();
+
+        var data = {
+            'StudentId': StudentId.trim(),
+            'Firstname': Firstname.trim(),
+            'LastName': LastName.trim(),
+            'CourseId': CourseId.trim(),
+            'CourseName': CourseName.trim()
+            //'Email': Email.trim()
+        };
+
+        //var _data= JSON.stringify({ jsonString: data}),
+
+        //var objPage = controllerHelper.objPage;
+        //objPage.partialHolder = "#Home-Container #childPage #partialHolder"
+        //objPage.header = 'Upload File';
+        //objPage.type = 'Post';
+        //objPage.url = '/Student/UpdateView';
+        //objPage.data = data;
+
+        //controllerHelper.requestController({ pageType: "popup", pageData: objPage });
+
+
+        var header = 'Update Student';
+        var url = '/StudentResult/GetStudentResults';
+        var objPopup = classPageConstant.popupChildOne;
+        var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+        classControllerHelper.callController(pageObj);
+
+
+        /* alert(data.surbub);*/
+        //var url = '/Product/EditProduct';
+        //var header = "Edit Product";
+        //var objPopup = constantPages.popupChildOne;
+        //var pageObj = { function: "popup", url: url, data: data, header: header, pageId: "", objPopup: objPopup };
+        //classControllerHelper.callController(pageObj);
+    });
+
 
 
     function loadProducts() {
