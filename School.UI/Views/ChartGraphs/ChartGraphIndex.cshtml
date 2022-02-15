@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Draw Graphs";
+}
+   
+<section class="view-container">
+
+    <div class="col-sm 12">
+        <h2 class="box-title title"><strong>@ViewBag.Title</strong></h2>
+        <div class="box-header-line" id="title"></div>
+    </div>
+
+    <div>
+        <canvas id="myCanvas" width="600" height="200" style="border:solid 1px #000000;"></canvas>
+        <div>
+            <button onclick="VerticalRed()">Vertical 2px Red line</button>
+            <button onclick="Horizontal_2px_Green();return true;">Horizontal 2px Green line</button>
+            <button onclick="Clear_line();return true;">Erase Everything</button>
+        </div>
+    </div>
+
+</section>
+
+
+<script>
+    //https://www.w3schools.com/tags/canvas_rect.asp
+    //$(document).ready(function () {
+
+        var canvas = document.getElementById("myCanvas");
+        var canvas2d = canvas.getContext("2d");
+    //colors: ["#a55ca5", "#67b6c7", "#bccd7a", "#eb9743"]
+    colors= "#a55ca5";
+        function VerticalRed() {
+            canvas2d.beginPath();
+            canvas2d.moveTo(20, 10);
+            canvas2d.lineTo(20, 190);
+            canvas2d.strokeStyle = "Red";
+            canvas2d.stroke();
+
+            canvas2d.fillText("20 -", 0, 180);
+            canvas2d.fillText("40 -", 0, 160);
+            canvas2d.fillText("60 -", 0, 140);
+            canvas2d.fillText("80 -", 0, 120);
+            canvas2d.fillText("100 -", 0, 100);
+
+
+            //canvas2d.fillStyle = colors;
+
+            canvas2d.fillRect(30, 20, 20, 170);
+            canvas2d.fillStyle = "Red";
+            canvas2d.fillRect(52, 20, 2, 100);
+
+            canvas2d.fillStyle = "Green";
+            canvas2d.fillRect(60, 20, 20, 170);
+            canvas2d.fillStyle = "Red";
+            canvas2d.fillRect(82, 20, 2, 100);
+
+            canvas2d.fillStyle = "Blue";
+            canvas2d.fillRect(90, 20, 20, 170);
+            canvas2d.fillStyle = "Red";
+            canvas2d.fillRect(112, 20, 2, 100);
+
+            canvas2d.fillStyle = "Yellow";
+            canvas2d.fillRect(120, 20, 20, 170);
+            canvas2d.fillStyle = "Red";
+            canvas2d.fillRect(142, 20, 2, 100);
+
+            canvas2d.fillStyle = "Green";
+            canvas2d.fillRect(150, 20, 20, 170);
+            canvas2d.fillStyle = "Red";
+            canvas2d.fillRect(172, 20, 2, 100);
+            //canvas2d.fillRect(upperLeftCornerX, upperLeftCornerY, width, height);
+
+
+            //canvas2d.fillStyle = colors;
+            //canvas2d.font = "bold 14px Arial";
+            //canvas2d.fillRect(upperLeftCornerX, upperLeftCornerY, width, height);
+        }
+
+        function Horizontal_2px_Green() {
+            canvas2d.beginPath();
+            canvas2d.moveTo(10, 190);
+            canvas2d.lineTo(500, 190);
+            canvas2d.strokeStyle = "Green";
+            canvas2d.stroke();
+        }
+
+        function Clear_line() {
+            canvas2d.clearRect(1, 1, 600, 190);
+        }
+    //});
+</script>

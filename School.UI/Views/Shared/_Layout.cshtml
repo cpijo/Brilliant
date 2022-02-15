@@ -107,6 +107,7 @@
             background-color: rgb(214, 219, 233);
             /*border-bottom: 5px solid rgb(232, 232, 232);*/
             border-bottom: 5px solid rgb(59, 90, 108);
+            background-color: orange;
         }
 
         .layoutLeft-body {
@@ -123,6 +124,7 @@
             /*border-bottom: 5px solid rgb(232, 232, 232);*/
             border-bottom: 5px solid rgb(59, 90, 108);
             /*border-bottom: 5px solid orange;*/
+            background-color: orange;
         }
 
         .layoutRight-body {
@@ -392,20 +394,38 @@
         #tableId {
             background-color: white;
         }
+
+
+
+
+        .layoutLeftId{
+            /*background-color:rgb(128, 82, 0);*/
+        }
+
+        .PartialLayoutMenu {
+            /*background-color: rgb(128, 82, 0);*/
+            background-color:rgb(173, 128, 73);
+        }
+        .layoutRight-header {
+            /*background-color: rgb(128, 82, 0);*/
+        }
+
     </style>
 
 </head>
 
 
 <body id="layoutBodyId" style="">
+
     <div id="layout-page" class="layout-wrapper col-sm-12 rm-pd">
 
-        <div id="layoutLeftId" class="layoutLeft-wrapper startEasy isOpen rm-pd" style="display: inline-block;overflow:hidden">
+        <div id="layoutLeftId" class="layoutLeft-wrapper startEasy isOpen rm-pd" style="display: inline-block;overflow:hidden;background-color:orange">
 
             <div class="layoutLeft-header rm-pd">
                 <span class="logEasy24" style="color:white; min-height:30px;width:80px">mySchool</span>
             </div>
             <div id="menuHolderId" class="PartialLayoutMenu layoutLeft-body desktopMenu rm-pd">
+
                 @*@Html.Partial("_PartialLayoutMenu")*@
             </div>
 
@@ -428,6 +448,10 @@
         <div class="layout-footer col-sm-12">
         </div>
     </div>
+
+
+
+
 
     <div class="popupOverlay" id="PopupOverlayLogIn" style="display:none;border: 1px solid rgb(43, 67, 81);"></div>
     <div class="popupOverlay" id="PopupOverlayChildOne" style="display:none;border: 1px solid rgb(43, 67, 81);"></div>

@@ -455,7 +455,7 @@
     #PopupBodyUserLogin {
         position: absolute;
         border: 1px solid rgb(240, 240, 240);
-        min-height: 300px;
+        min-height: 250px;
         width: 360px;
         left: calc(50% - 180px);
         top: 2px;
@@ -534,15 +534,46 @@
         border-top-right-radius: 5px;*/
     }
 
+    #Home-Container .div-advert {
+        position: absolute;
+        top: 60px;
+        color: white;
+        width: 500px;
+        height: 60px;
+        left: 5px;
+        opacity: 1;
+        font-size: 30px;
+        line-height: 60px;
+    }
+
+        #Home-Container .div-advert span {
+            height: 60px;
+            background-color: orange;
+        }
+
+
 </style>
 
 
-<div id="Home-Container" class="col-xs-12 rm-pd">
+<div id="Home-Container" class="col-xs-12 rm-pd" style="border:0px solid red;">
 
     <div id="PartialContainer" class="col-xs-12 rm-pd">
 
-        <div id="homePage" class="childBodyPage col-xs-12 rm-pd">
-            @Html.Partial("~/Views/Shared/_defaultDashboard.cshtml")
+        <div id="homePage" class="childBodyPage col-xs-12 rm-pd" style="border:0px solid green;padding-top:0px;">
+
+            <div class="col-xs-12 rm-pd" style="border:0px solid orange; ">
+
+                <div class="col-md-12 rm-pd" style="border:0px solid orange;">
+                    <img class="homeImage col-xs-12 menu-top-header-icon rm-pd" src="~/images/school_img.jpg" />
+                </div>
+                <div class="col-md-12 rm-pd div-advert text-center" style="border:0px solid orange;">
+                    <span>BRINGING THE POVERTY DOWN</span>
+                    <span>I SEE BRIGHT FAETURE IN YOU</span>
+                    <span>HANG IN THERE</span>
+                </div>
+
+            </div>
+            @*@Html.Partial("~/Views/Shared/_defaultDashboard.cshtml")*@
         </div>
 
 
@@ -559,22 +590,18 @@
 
         </div>
 
-        <div id="PopupBodyUserLogin" class="childBodyPage home-boxShadow_not_used slide-messagePopup">
-            <div id="divParentId" class="divParent col-xs-12">
-                <button id="btnCloseGeneric" class="btnClosePopup">
-                    X
-                </button>
+        <div id="PopupBodyUserLogin" class="childBodyPage home-boxShadow_not_used slide-messagePopup" style="border:thin solid orange;">
+            <div id="divParentId" class="divParent col-xs-12" style="padding:0;margin:0;position: relative;border:0px solid orange;">
 
-                <div class="divHeader col-xs-12">
-                    <p class="col-xs-12 headerText login-box-msg text-center"></p>
+                <div class="divHeader col-xs-12" style="padding:0px;margin:0;background-color:orange;height:40px;">
+                    <p class="col-xs-12 headerText login-box-msg text-center rm-pd" style="top:4px;min-height:30px;max-height:30px; color:white"></p>
                 </div>
 
-                <div id="partialHolder" class="partialHolder col-xs-12">
+                <div id="partialHolder" class="partialHolder col-xs-12" style="padding:0;min-height:30px;border:0px solid red;">
                 </div>
 
-                <div class="divSpaceAfterBody col-xs-12 rm-pd">
+                <div class="divSpaceAfterBody col-xs-12 rm-pd" style="min-height:5px;max-height:5px;background-color:orange;border:0px solid red;">
                 </div>
-
             </div>
         </div>
 

@@ -1,0 +1,42 @@
+﻿
+<style>
+    .my-container{    
+          width:680px;
+          margin-left:auto;
+          margin-right:auto;
+         /*border:thin solid blue;*/
+
+    }
+    .btnpartDownload > input{
+        padding-left:100px;
+        margin-left:100px;
+        border:thin solid blue;
+    }
+
+</style>
+
+<div class="my-container">
+
+    <h5><strong>Please click on the detail file link below to download...</strong> </h5><br />
+
+    @using (Ajax.BeginForm("", "", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form" }))
+    {
+
+        for (int i = 0; i < 6; i++)
+        {
+            string bookName = "Maths " + i;
+            string File = "File Name";
+
+            <div class="form-group">
+
+                <div class="col-sm-push-3 col-sm-7 btnpartDownload">
+                    @Html.ActionLink("Download " + bookName, "DownloadFile_ActionName", "Boocks_ControllerName", new { fileName = File.ToString(), @class = "col-sm-12 btnpartDownload" }, null)
+                </div>
+            </div>
+        }
+
+    }
+</div>
+
+
+

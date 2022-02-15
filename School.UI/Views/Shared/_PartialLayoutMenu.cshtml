@@ -161,6 +161,8 @@
                     <span class="menu-header-name" style="">Menue</span>
                 </a>
             </li>
+
+
             <li class="treeview" id="menu-studentResult" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
                     <i class="fa fa-users"></i>
@@ -281,6 +283,32 @@
                 </a>
             </li>
 
+            <!--Payment(Admin)-->
+            <li class="treeview" id="menu-subject" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+                <a href="#" class="aprovince">
+                    <i class="fa fa-money"></i>
+                    <span class="menu-header-name">Student Profile</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-down pull-right erroSign"></i>
+                    </span>
+                </a>
+                <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id=subjecte3 name="subject" style="display:block" onclick="callController('/Books/DownloadBooks','Download Books')"><a href="#"><i class="fa fa-circle-o"></i>Download Books</a></li>
+                    <li id=subjecte3 name="subject" style="display:block" onclick="callController('/QuestionPaper/DownloadQuestionPaper','Download Question Paper')"><a href="#"><i class="fa fa-circle-o"></i>Download Question Paper</a></li>
+                    <li id=subjecte1 name="subject" style="display:block" onclick="callController('/Exams/UploadExams','Upload Exams')"><a href="#"><i class="fa fa-circle-o"></i>Upload Exams</a></li>
+
+
+                    @*<hr />
+                <li id=subjecte1 name="subject" style="display:block" onclick="callController('/Exams/UploadExams','Upload Exams')"><a href="#"><i class="fa fa-circle-o"></i>Upload Exams</a></li>
+                <li id=subjecte3 name="subject" style="display:block" onclick="callController('/Exams/DownloadExams','Download Exams')"><a href="#"><i class="fa fa-circle-o"></i>Download Exams</a></li>
+                <li id=subjecte3 name="subject" style="display:block" onclick="callController('/StudyMaterial/Books','Books')"><a href="#"><i class="fa fa-circle-o"></i>Books</a></li>
+                <li id=subjecte1 name="subject" style="display:block" onclick="callController('/StudyMaterial/Questions','Questions')"><a href="#"><i class="fa fa-circle-o"></i>Questions</a></li>
+                <li id=subjecte1 name="subject" style="display:block" onclick="callController('/StudentPayment/viewStudentPayment','View All Payment')"><a href="#"><i class="fa fa-circle-o"></i>View All Payment</a></li>
+                <li id=subjecte3 name="subject" style="display:block" onclick="callController('/StudentPayment/GetRecord','Make Payment')"><a href="#"><i class="fa fa-circle-o"></i>Make Payment</a></li>*@
+                </ul>
+            </li>
+
+
             <!--Timesheet-->
             <li class="treeview" id="menu-student" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
                 <a href="#" class="aprovince">
@@ -312,6 +340,20 @@
             </li>
 
 
+            <!--Upload Study materials)-->
+            <li class="treeview" id="menu-subject" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+                <a href="#" class="aprovince">
+                    <i class="fa fa-money"></i>
+                    <span class="menu-header-name">Upload Study materials</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-down pull-right erroSign"></i>
+                    </span>
+                </a>
+                <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id=subjecte3 name="subject" style="display:block" onclick="callController('/UploadBooks/DownloadBooks','Upload Books')"><a href="#"><i class="fa fa-circle-o"></i>Upload Books</a></li>
+                    <li id=subjecte3 name="subject" style="display:block" onclick="callController('/UploadQuestionPaper/DownloadQuestionPaper','Upload Question Paper')"><a href="#"><i class="fa fa-circle-o"></i>Upload Question Paper</a></li>
+                </ul>
+            </li>
 
         </ul>
     </section>

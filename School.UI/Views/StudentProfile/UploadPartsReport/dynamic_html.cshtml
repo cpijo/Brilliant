@@ -1,0 +1,339 @@
+﻿
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Dynamic Markup with JavaScript Example</title>
+    <script language="javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>
+</head>
+<script id="demo" type="text/javascript">
+    $(document).ready(function () {
+        // our array of objects for some data to play with
+        var arr = [
+            { fname: "Bart", lname: "Simpson", email: "bsimpson@somedomain.com" },
+            { fname: "Alfred E", lname: "Newman", email: "aenewman@somedomain.com" },
+            { fname: "Steve", lname: "Austin", email: "saustin@somedomain.com" }
+        ]
+
+        var i = 0,
+            arrLen = arr.length - 1
+        str = "";
+        // loop through all elements in the array, building a form for each object
+        for (; i <= arrLen; i++) {
+            str = str + '<form>'
+                + '<label for="fname"><b>First Name:</b></label> <input type="text" name="fname" size="20" value="' + arr[i].fname + '" />'
+                + '<label for="lname"><b>Last Name:</b></label> <input type="text" name="lname" size="20" value="' + arr[i].lname + '" />'
+                + '<label for="email"><b>Email:</b></label> <input type="text" name="email" size="20" value="' + arr[i].email + '" />'
+                + '<button type="submit">Submit</button>'
+                + "</form>";
+        };
+        //append the markup to the DOM
+        $("#foo").html(str);
+    });
+</script>
+<body>
+    <div id="foo"></div>
+
+    <script language="javascript">
+        var dynamicHTML;
+        dynamicHTML = "<p>Creating an unordered list with JavaScript:</p>";
+        dynamicHTML += "<ul>";
+        dynamicHTML += "<li>HTML</li>"
+        dynamicHTML += "<li>ASP</li>"
+        dynamicHTML += "<li>CSS</li>"
+        dynamicHTML += "<li>Dreamweaver</li>"
+        dynamicHTML += "<li>JavaScript</li>"
+        dynamicHTML += "<li>Scripting tools</li>"
+        dynamicHTML += "<li>XHTML</li>"
+        dynamicHTML += "<li>XML</li>"
+        dynamicHTML += "</ul>"
+        document.write(dynamicHTML);
+    </script>
+
+
+    <script>
+        function aload() {
+
+
+            var data = [
+                { "name": "John Doe", "email": "john@doe.com" },
+                { "name": "Jane Doe", "email": "jane@doe.com" },
+                { "name": "Josh Doe", "email": "josh@doe.com" },
+                { "name": "Juliet Doe", "email": "juliet@doe.com" },
+                { "name": "Joy Doe", "email": "joy@doe.com" }
+            ]
+            // (B1) AJAX LOAD JSON DATA
+            fetch("4B-dummy.json")
+                .then(res => res.json())
+                .then((data) => {
+                    // (B2) BUILD HTML TABLE WITH THE GIVEN DATA
+                    var table = "<table>";
+                    for (let person of data) {
+                        table += "<tr>";
+                        table += "<td>" + person.name + "</td>";
+                        table += "<td>" + person.email + "</td>";
+                        table += "</tr>";
+                    }
+                    table += "</table>";
+                    document.getElementById("container").innerHTML = table;
+                });
+        }
+    </script>
+
+
+</body>
+</html>
+
+
+
+<script language="javascript">
+    var dynamicHTML;
+    dynamicHTML = "<p>Creating an unordered list with JavaScript:</p>";
+    dynamicHTML += "<ul>";
+    dynamicHTML += "<li>HTML</li>"
+    dynamicHTML += "<li>ASP</li>"
+    dynamicHTML += "<li>CSS</li>"
+    dynamicHTML += "<li>Dreamweaver</li>"
+    dynamicHTML += "<li>JavaScript</li>"
+    dynamicHTML += "<li>Scripting tools</li>"
+    dynamicHTML += "<li>XHTML</li>"
+    dynamicHTML += "<li>XML</li>"
+    dynamicHTML += "</ul>"
+    document.write(dynamicHTML);
+</script>
+
+
+<script>
+    function aload() {
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        link.href = "5B-style.css";
+        document.head.appendChild(link);
+    }
+</script>
+
+<script>
+    (function () {
+        // Change 'script' to whatever element you want to create, e.g. 'img' or 'input'.
+        var el = document.createElement('script');
+
+        // Add any standard attributes you need, e.g. 'src', 'width', 'type', 'name'.
+        // The syntax is el.setAttribute(attribute_name, attribute_value).
+        el.setAttribute('src', '/myScript.js');
+
+        // Add any non-standard attributes with the same method.
+        el.setAttribute('data-simo-script', 'My Script');
+
+        // Finally, inject the element to the end of <body>
+        document.body.appendChild(el);
+    })();
+</script>
+
+
+
+
+<body>
+    <h3>Natural Hairstyles Website</h3>
+    <div class="card">
+        <h4>
+            <a href="https://therighthairstyles.com/20-most-inspiring-  natural-hairstyles-for-short-hair/">
+                Flat-Twist With Twist Out
+            </a>
+        </h4>
+        <img src="https://i0.wp.com/therighthairstyles.com/wp-content/uploads/2014/03/13-flat-twist-with-twist-out-2.jpg?w=500&ssl=1" />
+    </div>
+</body>
+
+<script>
+    const buildHairstyleCard = function (hairstyle) {
+        // Create elements needed to build a card
+        const div = document.createElement('div')
+        const h4 = document.createElement('h4')
+        const a = document.createElement('a')
+        const img = document.createElement('img')
+        // Append newly created elements into the DOM
+        const body = document.querySelector('body');
+        body.append(div)
+        h4.append(a)
+        div.append(h4)
+        div.append(img)
+        // Set content and attributes
+        a.innerHTML = hairstyle.name
+        a.setAttribute('href', hairstyle.info)
+        img.setAttribute('src', hairstyle.pic)
+        div.setAttribute('class', 'card')
+    }
+</script>
+
+
+
+
+<button type="submit" name="formBtn"> Submit</button>
+
+<script>
+
+    function myfunction_button() {
+        let btn = document.createElement("button");
+        btn.innerHTML = "Submit";
+        btn.type = "submit";
+        btn.name = "formBtn";
+        document.body.appendChild(btn);
+    }
+
+
+    function myfunction_button1() {
+        let btn = document.createElement("button");
+        btn.innerHTML = "Save";
+        btn.onclick = function () {
+            alert("Button is clicked");
+        };
+        document.body.appendChild(btn);
+    }
+
+    function myfunction_button2() {
+        let btn = document.createElement("button");
+        btn.innerHTML = "Save";
+        btn.addEventListener("click", function () {
+            alert("Button is clicked");
+        });
+        document.body.appendChild(btn);
+    }
+
+
+</script>
+
+
+
+<HTML>
+<HEAD>
+    <TITLE>Test Input</TITLE>
+    <SCRIPT LANGUAGE="JavaScript">
+        function testResults(form) {
+            var TestVar = form.inputbox.value;
+            alert("You typed: " + TestVar);
+        }
+    </SCRIPT>
+</HEAD>
+<BODY>
+    <FORM NAME="myform" ACTION="" METHOD="GET">
+        Enter something in the box: <BR>
+        <INPUT TYPE="text" NAME="inputbox" VALUE=""><P>
+            <INPUT TYPE="button" NAME="button" Value="Click" onClick="testResults(this.form)">
+    </FORM>
+</BODY>
+</HTML>
+
+
+
+
+
+
+
+
+<TITLE>Radio Button Test</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+    function testButton(form) {
+        for (Count = 0; Count < 3; Count++) {
+            if (form.rad[Count].checked)
+                break;
+        }
+        alert("Button " + Count + " is selected");
+    }
+</SCRIPT>
+
+<FORM NAME="testform">
+    <INPUT TYPE="button" NAME="button" Value="Click"
+           onClick="testButton(this.form)"> <BR>
+    <INPUT TYPE="radio" NAME="rad" Value="rad_button1" onClick=0><BR>
+    <INPUT TYPE="radio" NAME="rad" Value="rad_button2" onClick=0><BR>
+    <INPUT TYPE="radio" NAME="rad" Value="rad_button3" onClick=0><BR>
+</FORM>
+
+
+
+
+
+
+<TITLE>Checkbox Test</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+    function testButton(form) {
+        alert(form.check1.checked);
+    }
+</SCRIPT>
+
+<FORM NAME="testform">
+    <INPUT TYPE="button" NAME="button" Value="Click"
+           onClick="testButton(this.form)"><BR>
+    <INPUT TYPE="checkbox" NAME="check1" Value="Check1">Checkbox 1<BR>
+    <INPUT TYPE="checkbox" NAME="check2" Value="Check2">Checkbox 2<BR>
+    <INPUT TYPE="checkbox" NAME="check3" Value="Check3">Checkbox 3<BR>
+</FORM>
+
+
+
+
+
+<HTML>
+<HEAD>
+    <TITLE>Test Input Validation</TITLE>
+    <SCRIPT LANGUAGE="JavaScript">
+        function testResults(form) {
+            TestVar = isNumberString(form.inputbox.value)
+            if (TestVar == 1)
+                alert("Congratulations! You entered only numbers");
+            else
+                alert("Boo! You entered a string with non-numbers characters");
+        }
+        function isNumberString(InString) {
+            if (InString.length == 0) return (false);
+            var RefString = "1234567890";
+            for (Count = 0; Count < InString.length; Count++) {
+                TempChar = InString.substring(Count, Count + 1);
+                if (RefString.indexOf(TempChar, 0) == -1)
+                    return (false);
+            }
+            return (true);
+        }
+    </SCRIPT>
+</HEAD>
+<BODY>
+    <FORM NAME="myform">
+        Enter a string with numbers only:
+        <INPUT TYPE="text" NAME="inputbox" VALUE="">
+        <INPUT TYPE="button" NAME="button" Value="Click" onClick="testResults(this.form)">
+    </FORM>
+</BODY>
+</HTML>
+
+
+
+
+
+<HTML>
+<HEAD>
+    <TITLE>test</TITLE>
+    <SCRIPT LANGUAGE="JavaScript">
+        function mailMe(form) {
+            Subject = document.testform.inputbox1.value
+            CC = document.testform.inputbox2.value
+            BCC = document.testform.inputbox3.value
+            location = "/javaworld/cgi-bin/jw-mailto.cgi?jwedit@javaworld.com?subject=" + Subject + "&Bcc=" +
+                BCC + "&cc=" + CC
+            document.testform.submit();
+        }
+    </SCRIPT>
+</HEAD>
+<BODY>
+    <FORM NAME="testform">
+        Subject of message: <BR>
+        <INPUT TYPE="text" NAME="inputbox1" VALUE="This is such a great form!" SIZE=50><P>
+            Send cc to: <BR><INPUT TYPE="text" NAME="inputbox2" VALUE="" SIZE=50>
+        <P>
+            Send blind cc to: <BR><INPUT TYPE="text" NAME="inputbox3" VALUE="" SIZE=50>
+        <P>
+            <INPUT TYPE="button" VALUE="Send Mail" onClick="mailMe()"><BR>
+    </FORM>
+</BODY>
+</HTML>
+
+@*https://www.infoworld.com/article/2077176/using-javascript-and-forms.html?page=2*@

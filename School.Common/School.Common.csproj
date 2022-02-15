@@ -54,8 +54,17 @@
   <ItemGroup>
     <Compile Include="Common\HashingPassword.cs" />
     <Compile Include="Common\ScoreSymbols.cs" />
+    <Compile Include="Constants\Messages.cs" />
     <Compile Include="Constants\CostantData.cs" />
     <Compile Include="Constants\memberData.cs" />
+    <Compile Include="CreateClassFromDatabase\Class1.cs" />
+    <Compile Include="CreateClassFromDatabase\Class2.cs" />
+    <Compile Include="CreateClassFromDatabase\class_Creator.cs" />
+    <Compile Include="CreateClassFromDatabase\CreateCustomersTableCreateCustomersTable.cs" />
+    <Compile Include="CreateClassFromDatabase\CSharpProvider_Class_AsString.cs" />
+    <Compile Include="CreateClassFromDatabase\DynamicClass_ByReflactors.cs" />
+    <Compile Include="CreateClassFromDatabase\GenerateSQL_exp1.cs" />
+    <Compile Include="CreateClassFromDatabase\getDataType_exp1.cs" />
     <Compile Include="DelegateHandler\delegateMvc.cs" />
     <Compile Include="DelegateHandler\delegateSimple.cs" />
     <Compile Include="DelegateHandler\DelegateTestOne.cs" />
@@ -64,6 +73,7 @@
     <Compile Include="DelegateHandler\PrintHelper.cs" />
     <Compile Include="DelegateHandler\ProcessBusinessLogic.cs" />
     <Compile Include="JsonStringHelper\DeserialiseFromJson.cs" />
+    <Compile Include="notes\notes_payrol.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

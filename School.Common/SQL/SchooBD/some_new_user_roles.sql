@@ -1,4 +1,178 @@
 ﻿
+-- complete database
+--https://www.sqlservertutorial.net/sql-server-basics/sql-server-left-join/
+--https://sql.queryexamples.com/sql-query-examples-with-answers
+
+--SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME ='books'
+--use schooldb;
+--SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME ='Teaching'
+
+--For instance, decimal (4,2) indicates that the number will have 2 digits before the decimal point and 2 digits after the decimal point, 
+--something like this has to be the number value- ##.##.
+CREATE TABLE dbo.Patients
+( Name varchar(10),
+  Gender varchar(2),
+  Height decimal (3,2),
+  Weight decimal (5,2)
+)
+INSERT INTO PATIENTS VALUES('John','M',6.1,80.4)
+INSERT INTO PATIENTS VALUES('Bred','M',5.8,73.7)
+INSERT INTO PATIENTS VALUES('Leslie','F',5.3,66.9)
+INSERT INTO PATIENTS VALUES('Rebecca','F',5.7,50.2)
+INSERT INTO PATIENTS VALUES('Shermas','M',6.5,190.6)
+
+
+CREATE TABLE dbo.MyTable  
+(  
+  MyDecimalColumn DECIMAL(5,2)  
+,MyNumericColumn NUMERIC(10,5)
+  
+);  
+  
+GO  
+INSERT INTO dbo.MyTable VALUES (123, 12345.12);  
+GO  
+SELECT MyDecimalColumn, MyNumericColumn  
+FROM dbo.MyTable;  
+
+--MyDecimalColumn                         MyNumericColumn  
+--------------------------------------- ---------------------------------------  
+--123.00                                  12345.12000    
+--(1 row(s) affected)  
+
+
+
+ 
+  use schooldb;
+	  --https://sql.queryexamples.com/sql-query-examples-with-answers
+  use schooldb;
+	CREATE TABLE Books
+	(
+	ISBN varchar(50)  NOT NULL,
+    BookId varchar(50)  NOT NULL,
+	BookName varchar(100) NOT NULL,
+	BookEdition int null ,
+	AuthorId varchar(50) NULL,
+	Author varchar(100) NULL,
+	PublishedDate DATETIME NULL,
+	BookType varchar(50) NOT NULL,
+	Rating DECIMAL(5, 2) NULL, --1.00  10.00  100.00    1.10  10.25  100.75
+    GradeId varchar(50)  NOT NULL,
+	GradeName varchar(50)  NOT NULL,
+	FilePath varchar(255) NULL,
+	FileType varchar(10)  NOT NULL,
+	CreatedDate  DATETIME  NULL,
+	UpdatedDate  DATETIME  NULL,
+	PRIMARY KEY (BookId),
+	UNIQUE (ISBN)
+	)
+
+	CREATE TABLE QuestionPaper
+	(
+	ISBN varchar(50)  NOT NULL,
+    QuestionPaperId varchar(50)  NOT NULL,
+	QuestionPaperName varchar(100) NOT NULL,
+	AuthorId varchar(100) NULL,
+	Author varchar(100) NULL,
+	PublishedDate DATETIME NULL,
+	QuestionPaperType varchar(50) NOT NULL,
+    GradeId varchar(50)  NOT NULL,
+	GradeName varchar(50) NULL,
+	FilePath varchar(100) NULL,
+	FileType varchar(10)  NOT NULL,
+	CreatedDate  DATETIME NULL,
+	UpdatedDate  DATETIME NULL,
+	PRIMARY KEY (QuestionPaperId),
+	UNIQUE (ISBN)
+	)
+
+INSERT INTO Books(ISBN,BookId,BookName,BookEdition,AuthorId,Author,PublishedDate,BookType,Rating,
+GradeId,GradeName,FilePath,FileType,CreatedDate,UpdatedDate)
+ values('ISBN0000000008','BK0000000008','English Little Sister 8',1,'AUT0000000008','Sphiwe The Writter','09/11/2021',
+ 'Novel',1.10,'Grade8','Grade 8','~/books/','pdf','09/11/2021','09/11/2021') ;
+
+INSERT INTO Books(ISBN,BookId,BookName,BookEdition,AuthorId,Author,PublishedDate,BookType,Rating,
+GradeId,GradeName,FilePath,FileType,CreatedDate,UpdatedDate)
+ values('ISBN0000000009','BK0000000009','English Little Sister 9',1,'AUT0000000009','Sphiwe The Writter','09/11/2021',
+ 'Novel',55.75,'Grade9','Grade 9','~/books/','pdf','09/11/2021','09/11/2021') ;
+
+INSERT INTO Books(ISBN,BookId,BookName,BookEdition,AuthorId,Author,PublishedDate,BookType,Rating,
+GradeId,GradeName,FilePath,FileType,CreatedDate,UpdatedDate)
+ values('ISBN0000000010','BK0000000010','English Little Sister 10',1,'AUT0000000010','Sphiwe The Writter','09/11/2021',
+ 'Novel',75.15,'Grade10','Grade 10','~/books/','pdf','09/11/2021','09/11/2021') ;
+
+INSERT INTO Books(ISBN,BookId,BookName,BookEdition,AuthorId,Author,PublishedDate,BookType,Rating,
+GradeId,GradeName,FilePath,FileType,CreatedDate,UpdatedDate)
+ values('ISBN0000000011','BK0000000011','English Little Sister 11',1,'AUT0000000011','Sphiwe The Writter','09/11/2021',
+ 'Novel',95.75,'Grade11','Grade 11','~/books/','pdf','09/11/2021','09/11/2021') ;
+
+INSERT INTO Books(ISBN,BookId,BookName,BookEdition,AuthorId,Author,PublishedDate,BookType,Rating,
+GradeId,GradeName,FilePath,FileType,CreatedDate,UpdatedDate)
+ values('ISBN0000000012','BK0000000012','English Little Sister 12',1,'AUT0000000012','Sphiwe The Writter','09/11/2021',
+ 'Novel',85.15,'Grade12','Grade 12','~/books/','pdf','09/11/2021','09/11/2021') ;
+
+ --########################################################
+
+INSERT INTO Books(ISBN,BookId,BookName,BookEdition,AuthorId,Author,PublishedDate,BookType,Rating,
+GradeId,GradeName,FilePath,FileType,CreatedDate,UpdatedDate)
+ values('ISBN0000000108','BK0000000108','Maths 8',1,'AUT0000000108','Sphiwe The Writter','09/11/2021',
+ 'Novel',7,'Grade8','Grade 8','~/books/','pdf','09/11/2021','09/11/2021') ;
+
+INSERT INTO Books(ISBN,BookId,BookName,BookEdition,AuthorId,Author,PublishedDate,BookType,Rating,
+GradeId,GradeName,FilePath,FileType,CreatedDate,UpdatedDate)
+ values('ISBN0000000109','BK0000000109','Maths 9',1,'AUT0000000109','Sphiwe The Writter','09/11/2021',
+ 'Novel',7,'Grade9','Grade 9','~/books/','pdf','09/11/2021','09/11/2021') ;
+
+INSERT INTO Books(ISBN,BookId,BookName,BookEdition,AuthorId,Author,PublishedDate,BookType,Rating,
+GradeId,GradeName,FilePath,FileType,CreatedDate,UpdatedDate)
+ values('ISBN0000000110','BK0000000110','Maths 10',1,'AUT0000000110','Sphiwe The Writter','09/11/2021',
+ 'Novel',66,'Grade10','Grade 10','~/books/','pdf','09/11/2021','09/11/2021') ;
+
+INSERT INTO Books(ISBN,BookId,BookName,BookEdition,AuthorId,Author,PublishedDate,BookType,Rating,
+GradeId,GradeName,FilePath,FileType,CreatedDate,UpdatedDate)
+ values('ISBN0000000111','BK0000000111','Maths 11',1,'AUT0000000111','Sphiwe The Writter','09/11/2021',
+ 'Novel',77,'Grade11','Grade 11','~/books/','pdf','09/11/2021','09/11/2021') ;
+
+INSERT INTO Books(ISBN,BookId,BookName,BookEdition,AuthorId,Author,PublishedDate,BookType,Rating,
+GradeId,GradeName,FilePath,FileType,CreatedDate,UpdatedDate)
+ values('ISBN0000000112','BK0000000112','Maths 12',1,'AUT0000000112','Sphiwe The Writter','09/11/2021',
+ 'Novel',89,'Grade12','Grade 12','~/books/','pdf','09/11/2021','09/11/2021') ;
+
+
+
+CREATE TABLE BookCheckouts (
+  id  int NOT NULL,
+  user_id int NOT NULL,
+  book_id int NOT NULL,
+  checkout_date timestamp,
+  return_date timestamp,
+  PRIMARY KEY (id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+                        ON DELETE CASCADE,
+  FOREIGN KEY (book_id) REFERENCES books(id)
+                        ON DELETE CASCADE
+);
+
+
+--ImageID
+--ImagePath
+--UserID
+--ImageType
+--IsProfilePicture
+--CreatededDate
+--UpdatedDate
+--IsNudity
+
+
+
+--https://www.queryexamples.com/sql/table/get-column-names-from-table-sql/
+
+Select * from students where birthdate = 
+(Select min(birthdate) from students)
+
+
+
+
 --Database Constraints - What they are and How to use them
 --https://www.youtube.com/watch?v=8czTg7Jw8No
 
@@ -269,3 +443,68 @@ WHERE
 --INNER JOIN table2
 --ON (table1.column1 = table2.column1)
 --[WHERE conditions];
+
+
+
+use schooldb;
+    
+DELETE FROM Teaching   
+WHERE TeacherId IN   
+    (SELECT TeacherId   
+     FROM Teaching   
+     WHERE TeacherId ='TC0000000888'
+	 AND GradeId='Grade008'
+	 );  
+GO  
+
+
+
+
+
+/*
+
+
+CREATE TABLE books(
+  book_id        INT GENERATED BY DEFAULT AS IDENTITY NOT NULL, 
+  title          VARCHAR(255) NOT NULL, 
+  total_pages    INT NULL, 
+  rating         DECIMAL(4, 2) NULL, 
+  isbn           VARCHAR(13) NULL, 
+  published_date DATE NULL, 
+  publisher_id   INT NULL, 
+  PRIMARY KEY(book_id),
+  CONSTRAINT fk_publisher 
+    FOREIGN KEY(publisher_id) 
+    REFERENCES publishers(publisher_id)
+);
+
+CREATE TABLE authors( 
+  author_id   INT GENERATED BY DEFAULT AS IDENTITY NOT NULL,
+  first_name  VARCHAR(100) NOT NULL, 
+  middle_name VARCHAR(50) NULL, 
+  last_name   VARCHAR(100) NULL,
+  PRIMARY KEY(author_id)
+);
+
+CREATE TABLE book_authors (
+  book_id   INT NOT NULL, 
+  author_id INT NOT NULL, 
+  PRIMARY KEY(book_id, author_id), 
+  CONSTRAINT fk_book 
+    FOREIGN KEY(book_id) 
+    REFERENCES books(book_id) ON DELETE CASCADE, 
+  CONSTRAINT fk_author 
+    FOREIGN KEY(author_id) 
+    REFERENCES authors(author_id) ON DELETE CASCADE
+);
+
+CREATE TABLE genres (
+  genre_id  INT GENERATED BY DEFAULT AS IDENTITY NOT NULL,
+  genre     VARCHAR(255) NOT NULL, 
+  parent_id INT NULL, 
+  PRIMARY KEY(genre_id),
+  CONSTRAINT fk_parent 
+    FOREIGN KEY(parent_id) REFERENCES genres(genre_id)
+);
+
+*/

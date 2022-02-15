@@ -101,6 +101,13 @@ namespace School.UI.Controllers
             {
                 model.StudentId = Guid.NewGuid().ToString();
                 studentRepository.Save(model);
+
+                //Learn from acumatica action.pressSave();
+                // command.CommandText = "SELECT * FROM [schooldb].dbo.Student";
+                //entity<Student>();
+                //data<Student>.dataParameter = model;
+                //action.Save();
+
                 return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
                 //return RedirectToAction("GetStudentResults", "Student");
             }

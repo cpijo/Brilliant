@@ -863,3 +863,37 @@ INSERT INTO Roles VALUES
   ALTER TABLE [schooldb].[dbo].[StudentMarks]
     ADD 
      ExamDate DATETIME NOT NULL DEFAULT '09/11/2021';
+
+
+
+
+	CREATE TABLE Books
+	(
+	ISBN varchar(50)  NOT NULL,
+    BookId varchar(50)  NOT NULL,
+	Title varchar(100) NOT NULL,
+	Author varchar(100) NULL,
+	PublishedDate DATETIME NULL,
+    GradeId varchar(50)  NOT NULL,
+	GradeName varchar(50)  NOT NULL,
+	CreatedDate  DATETIME  NULL,
+	UpdatedDate  DATETIME  NULL,
+	PRIMARY KEY (BookId),
+	UNIQUE (ISBN)
+	)
+
+	CREATE TABLE QuestionPaper
+	(
+	ISBN varchar(50)  NOT NULL,
+    QuestionPaperId varchar(50)  NOT NULL,
+	Title varchar(100) NOT NULL,
+	Author varchar(100) NULL,
+	PublishedDate DATETIME NULL,
+	QuestionPaperType varchar(50) NOT NULL,
+    GradeId varchar(50)  NOT NULL,
+	GradeName varchar(50)  NOT NULL,
+	CreatedDate  DATETIME NULL,
+	UpdatedDate  DATETIME NULL,
+	PRIMARY KEY (QuestionPaperId),
+	UNIQUE (ISBN)
+	)

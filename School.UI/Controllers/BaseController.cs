@@ -11,6 +11,18 @@ namespace School.UI.Controllers
     public class BaseController : Controller
     {
 
+        //public virtual ActionResult Download(string Filelocation, string Filename)
+        //{
+        //    //string Filename = TempData["fileName"] as string;
+        //    var type = System.Net.Mime.MediaTypeNames.Application.Octet;
+        //    Filename = Filename.Replace(",", ",");
+        //    byte[] fileBytes = System.IO.File.ReadAllBytes(Filelocation + Filename);
+        //    string myfileName = Filename;
+        //    Response.AppendHeader("Content-Disposition", "attachment; filename=" + Filename);
+
+        //    return File(fileBytes, type, Filename);
+        //}
+
         public static List<SelectListItem> dropdownHelper(List<Roles> roles)
         {
 

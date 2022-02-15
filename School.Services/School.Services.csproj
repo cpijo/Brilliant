@@ -53,6 +53,7 @@
     <Compile Include="Interface\Class1.cs" />
     <Compile Include="Interface\IClassTeacherRepository.cs" />
     <Compile Include="Interface\IClassesRepository.cs" />
+    <Compile Include="Interface\IBooksRepository.cs" />
     <Compile Include="Interface\IGradeTeacherRepository.cs" />
     <Compile Include="Interface\ITeachingRolesRepository.cs" />
     <Compile Include="Interface\IUserRolesRepository.cs" />
@@ -75,7 +76,10 @@
     <Compile Include="Interface\IStudentRepository.cs" />
     <Compile Include="Interface\IStudentResultsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RepositorySqlQueries\ISqlQueryHelper.cs" />
+    <Compile Include="RepositorySqlQueries\SqlQueryHelper.cs" />
     <Compile Include="Repository\ClassesRepository.cs" />
+    <Compile Include="Repository\BooksRepository.cs" />
     <Compile Include="Repository\GradeTeacherRepository.cs" />
     <Compile Include="Repository\TeachingRolesRepository.cs" />
     <Compile Include="Repository\UserRolesRepository.cs" />
@@ -112,5 +116,6 @@
       <Name>School.Entities</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

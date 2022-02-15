@@ -224,24 +224,6 @@ namespace School.UI.Controllers
         }
         #endregion
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         #region Get Record
         [HttpGet]
         public ActionResult GetRecord()

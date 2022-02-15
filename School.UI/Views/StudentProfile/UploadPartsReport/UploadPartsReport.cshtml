@@ -1,0 +1,1961 @@
+﻿@using School.Entities.Fields;
+
+<head>
+
+    <style>
+        .bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form {
+            font-family: Arial, Helvetica, sans-serif;
+            color: black;
+        }
+
+            .bootstrap-iso form button, .bootstrap-iso form button:hover {
+                color: white !important;
+            }
+
+        .asteriskField {
+            color: red;
+        }
+    </style>
+
+    <style>
+        .reg_name {
+            max-width: 200px;
+        }
+
+        .movecotronls {
+            float: left;
+            width: 150px;
+          
+        }
+
+        .resultLoadingDiv{
+            position:absolute;
+            top: 150px;
+            z-index:1;
+           left: calc(50% - 2px);
+           display:none;
+        }
+    </style>
+
+    <link href="~/Content/Testing/form.css" rel="stylesheet" />
+
+</head>
+
+<section id="section_UploadParts_ID">
+
+    <section class="view-container">
+
+        <div class="col-sm 12">
+            <h2 class="box-title title"><strong>@ViewBag.Title</strong></h2>
+            <div class="box-header-line" id="title"></div>
+        </div>
+        @using (Ajax.BeginForm("SaveReportsFiles", "UploadPartsReport", null, new AjaxOptions { HttpMethod = "POST", LoadingElementId = "", UpdateTargetId = "", OnSuccess = "OnSuccess" }, new { enctype = "multipart/form-data", @id = "frmUploadReports", @name = "frmUploadReports", @class = "form-horizontal" }))
+        {
+            <div class="col-sm 12">
+                <div class="form-group">
+                    @Html.Label("Distributor:", new { @class = "control-label col-sm-2" })
+                    @*<div class="col-sm-10">@Html.DropDownListFor(model => model.SelectedDistributorId, Model.DistributorSelectionOptions, new { @id = "distributor_id", @name = "DistributoR", @class = "form-control"})</div>*@
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="txtfrom">Report Category:</label>
+                    <div class="col-sm-4">
+                       @* @Html.DropDownListFor(model => model.SelectedCategory, Model.ReportCategorySelectionOptions, new { @id = "catreport_id", @class = "form-control"})*@
+                    </div>
+                    <label class="control-label col-sm-2" for="txtfrom">Report Type:</label>
+                    <div class="col-sm-4">
+                        @*@Html.DropDownListFor(model => model.SelectedReportType, Model.ReportTypeSelectionOptions, new { @id = "typereport_id", @class = "form-control"})*@
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="txtfrom">Report Date:</label>
+                    <div class="col-sm-10">
+                        @*@Html.TextBoxFor(m => m.reportDate_Search, new { @class = "form-control", @id = "datefrom_Search", name = "date", @placeholder = "yyyy/mm/dd", @type = "text"})
+                        @Html.ValidationMessageFor(model => model.reportDate_Search)*@
+                    </div>
+                </div>
+
+
+
+                <div id="resultLoadingDiv" class="form-group resultLoadingDiv"  style="width: 300px; height: 300px;">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-4"  style="width: 300px; height: 300px;">
+                            <img src="~/Content/Logo/UploadSplash.gif" class="imgLoad col-sm-12" />
+                        </div>
+                        <div class="col-sm-4"></div>
+                    </div>
+                </div>
+
+                <div id="Holder" class="form-horizontal" style=margin-left:3px; border:solid; border-color:red">
+                </div>
+            </div>
+        }
+
+    </section>
+
+
+    <!--1. Getting the selected category and load its report type: this prevents post back 2. Loading dynamic controls onLoad 3. Building dynamic controls-->
+    <script type="text/javascript">
+
+
+        //"<a class='btn btn-default btnDownload' href='" + Url.Action("DownloadIndex", "DownloadDcDrNotes", null, "https") + "?dcID=#= dcID#'" + ">Download</a>
+
+        function CreateInputTypeElement1(labelName1, inputID) {
+
+            var div = document.createElement('div');
+            const cls = ["form-group", "noClass"];
+            div.className = "form-group";
+            //div.classList.add(cls);
+            div.innerHTML = '<label  class="col-sm-2 control-label">' + labelName1 + "</label>"
+            + '<div class="col-sm-10">'
+            + '<input class="form-control col-sm-4" accept=".pdf,.xlsx,.txt,.zip" type="file" name=' + inputID + ' id=' + inputID + '/>'
+            + '</div>'
+
+            document.getElementById('Holder').appendChild(div);
+
+        }
+
+        function CreateButtonInputElement(labelName1, inputID) {
+
+            var div = document.createElement('div');
+            const cls = ["form-group", "noClass"];
+            div.className = "form-group";
+
+            div.innerHTML = '<label  class="col-sm-2 control-label">' + labelName1 + "</label>"
+            + '<div class="col-sm-10">'
+            + '<button type="submit" class="btn btn-primary btnWidth" name=' + inputID + ' id=' + inputID + ' >Upload</button>'
+            + '</div>'
+            document.getElementById('Holder').appendChild(div);
+
+        }
+
+        function CreateCommentInputElement(labelName1, inputID) {
+
+            var div = document.createElement('div');
+            const cls = ["form-group", "noClass"];
+            div.className = "form-group";
+            //div.classList.add(cls);
+            div.innerHTML = '<label  class="col-sm-2 control-label">' + labelName1 + "</label>"
+            + '<div class="col-sm-10">'
+            + '<textarea id=' + inputID + '" type="text" class="form-control col-sm-12" cols="50" rows="4" name=' + inputID + '></textarea>'
+            + '</div>'
+
+            document.getElementById('Holder').appendChild(div);
+
+        }
+
+        function CreateTextBoxInputElement(labelName1, inputID) {
+
+            var div = document.createElement('div');
+            const cls = ["form-group", "noClass"];
+            div.className = "form-group";
+            //div.classList.add(cls);
+            div.innerHTML = '<label  class="col-sm-2 control-label">' + labelName1 + "</label>"
+            + '<div class="col-sm-10">'
+            + '<input id=' + inputID + '" type="text" class="form-control col-sm-12" name=' + inputID + '>'
+            + '</div>'
+
+            document.getElementById('Holder').appendChild(div);
+
+        }
+
+        function CreateComboBoxInputElement(labelName1, inputID) {
+
+            var div = document.createElement('div');
+            const cls = ["form-group", "noClass"];
+            div.className = "form-group";
+            //div.classList.add(cls);
+            div.innerHTML = '<label  class="col-sm-2 control-label">' + labelName1 + "</label>"
+            + '<div class="col-sm-10">'
+            + "<select class='dropdown form-control col-sm-12' id=" + inputID + " name=" + inputID + "> <option></option> </select>"
+            + '</div>'
+
+            document.getElementById('Holder').appendChild(div);
+
+        }
+
+        function CreateInputTypeElement(labelName1, labelName2, inputID1, inputID2) {
+
+            var div = document.createElement('div');
+            const cls = ["form-group", "noClass"];
+            div.className = "form-group";
+            //div.classList.add(cls);
+            div.innerHTML = '<label  class="col-sm-2 control-label" style="text-align:left;">' + labelName1 + "</label>"
+            + '<div class="col-sm-4">'
+            + '<input class="form-control col-sm-4" accept=".pdf,.xlsx,.txt,.zip" type="file" name="fileUploadPrimary"  id="fileUploadPrimary"/>'
+            + '</div>'
+
+            + '<label class="col-sm-2 control-label" style="text-align:left;">' + labelName2 + "</label>"
+              + '<div class="col-sm-4">'
+            + '<input class="form-control col-sm-4" accept=".pdf,.xlsx,.txt,.zip" type="file" name="fileUploadSecondary" id="fileUploadSecondary" />'
+              + '</div>'
+            document.getElementById('Holder').appendChild(div);
+        }
+
+
+        function CreateInputTypeElement44444(labelName1, labelName2, inputID1, inputID2) {
+
+            var div = document.createElement('div');
+            const cls = ["form-group", "noClass"];
+            div.className = "form-group";
+            //div.classList.add(cls);
+            div.innerHTML = '<label  class="col-sm-2 control-label" style="text-align:left;">' + labelName1 + "</label>"
+            + '<div class="col-sm-4">'
+            + '<input class="form-control col-sm-4" accept=".pdf,.xlsx,.txt,.zip" type="file" name=' + inputID1 + " id=" + inputID1 + '/>'
+            + '</div>'
+
+            + '<label class="col-sm-2 control-label" style="text-align:left;">' + labelName2 + "</label>"
+              + '<div class="col-sm-4">'
+            + '<input class="form-control col-sm-4" accept=".pdf,.xlsx,.txt,.zip" type="file" name=' + inputID2 + " id=" + inputID2 + '/>'
+              + '</div>'
+            document.getElementById('Holder').appendChild(div);
+        }
+
+
+
+
+
+        function CreateDatePickerElement(labelName1, inputID) {
+
+            var div = document.createElement('div');
+            const cls = ["form-group", "noClass"];
+            div.className = "form-group";
+            //div.classList.add(cls);
+            div.innerHTML = '<label  class="col-sm-2 control-label">' + labelName1 + "</label>"
+            + '<div class="col-sm-10">'
+            + '<input id=' + inputID + ' type="text" class="form-control" name=' + inputID + ' placeholder = "dd/mm/yyyy"/>'
+            + '</div>'
+    
+            document.getElementById('Holder').appendChild(div);
+
+            var dateRangeFrom;
+            var container;
+
+            container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+            dateRangeFrom = $('input[id$=' + inputID + ']').datepicker({
+                format: 'dd/mm/yyyy',
+                container: container,
+                todayHighlight: true,
+                autoclose: true
+            });
+
+        }
+
+
+
+
+
+
+
+        var obj = null;
+        var reportTypeID = null;
+        var defaultReportTypeID = null; //this is for first id on reportype ddl which will set the id and load controls onload
+        var strdropdown = "dropdown";
+        var distributorId = null;
+
+        //var reportTypeID = $("#typereport_id option:selected").val();
+        $(document).ready(function () {
+            //on change for the distributor
+            $("#distributor_id").change(function () {
+                distributorId = $("#distributor_id option:selected").val();
+                var reportCategoryID = $("#catreport_id option:selected").val();
+                var obj = { reportCategoryID: reportCategoryID, distributorId: distributorId }
+
+                $.ajax({
+                    url: '@Url.Action("UploadReportTypesPerCategory", "UploadPartsReport")',
+                    data: obj,
+                    type: "Post",
+                    crossDomain: true,
+                    async: true,
+                    cache: true,
+
+                    success: function (data) {
+
+                    }
+                });
+            })
+
+            //on change for report
+            $("#catreport_id").change(function () {
+                distributorId = $("#distributor_id option:selected").val();
+                var reportCategoryID = $("#catreport_id option:selected").val();
+                var obj = { reportCategoryID: reportCategoryID, distributorId: distributorId }
+
+
+                $.ajax({
+                    url: '@Url.Action("UploadReportTypesPerCategory", "UploadPartsReport")',
+                    data: obj,
+                    type: "Post",
+                    crossDomain: true,
+                    async: true,
+                    cache: true,
+
+                    //on success we filling report types based on what report category was selected
+                    success: function (data) {
+                        $('#typereport_id').empty();
+                        for (i in data) {
+                            var select = document.getElementById('typereport_id');
+                            select.innerHTML += "<option value=\"" + data[i].reportTypeID + "\">" + data[i].reportTypeName + "</option>";
+
+                        }
+                        LoadingControls();
+                    }
+
+                });
+            })
+        });
+
+
+        //this functions is ONLY for onload for the first time. we got the Id of report type and pass it so that it load with the default dynamic controls.
+        function LoadingControls() {
+
+            var resertDiv = document.getElementById("Holder");
+            resertDiv.innerHTML = "";
+
+            //getting the value/id for report type dropdown o
+            reportTypeID = $('#typereport_id').val();
+            var _url = '@Url.Action("GetReportTypebyId", "UploadPartsReport")';
+            var urlStringList = '@Url.Action("GetDropdownStringList", "UploadPartsReport")';
+
+            $.ajax({
+                url: _url + "?reportTypeID=" + reportTypeID,
+                type: "POST",
+                dataType: "text",
+                synce: true,
+                cache: false,
+                success: function (data) {
+                    obj = JSON.parse(data);
+                    document.getElementById('Holder').innerHTML = "";
+
+                    var labelName1 = "Primary Report File:";
+                    var inputID1 = "fileUploadPrimary";
+                    var labelName2 = "Secondary Report File:";
+                    var inputID2 = "fileUploadSecondary";
+
+                    CreateInputTypeElement(labelName1, labelName2, inputID1, inputID2)
+
+
+                    // at this stage the model javascript variable represents the JSON encoded
+                    // value of your server side model so that you can access all it's properties:
+                    if (obj != null) {
+
+                        if (!String.prototype.startsWith) {
+                            String.prototype.startsWith = function (searchString, position) {
+                                position = position || 0;
+                                return this.substr(position, searchString.length) === searchString;
+                            };
+                        }
+
+                        ///MetadataName1
+                        if (obj.metadataName1 != null) {
+                            //Building Textbox cotrol
+                            if (obj.metadataType1 == "string") {
+
+                                var labelName1 = obj.metadataName1;
+                                var inputID = "metadataName1";
+                                CreateTextBoxInputElement(labelName1, inputID);
+
+                            }
+
+                                // Building Date control
+                            else if (obj.metadataType1 == "date") {
+
+                                var returnedType = obj.metadataName1;
+                                var labelName1 = obj.metadataName1;
+                                var inputID = "metadataName1";
+                                CreateDatePickerElement(labelName1, inputID);
+
+                            }
+
+                                //Building Dropdown control
+                            else (obj.metadataName1 != null)
+                            {
+                                if (!String.prototype.startsWith) {
+                                    String.prototype.startsWith = function (searchString, position) {
+                                        position = position || 0;
+                                        return this.substr(position, searchString.length) === searchString;
+                                    };
+                                }
+
+                                var returnedType = obj.metadataType1;
+                                var returnedTypeIndex = obj.metadataType1.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName1;
+                                    var inputID = "metadataName1";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName1");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+                                }
+                            }
+                        }
+
+                        ///Metadataname2
+                        if (obj.metadataName2 != null) {
+                            //Building Textbox cotrol
+                            if (obj.metadataType2 == "string") {
+                                var labelName1 = obj.metadataName2;
+                                var inputID = "metadataName2";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                // Building Date control
+                            else if (obj.metadataType2 == "date") {
+
+                                var returnedType = obj.metadataName2;
+                                var labelName1 = obj.metadataName2;
+                                var inputID = "metadataName2";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building Dropdown control
+                            else (obj.metadataName2 != null)
+                            {
+                                if (!String.prototype.startsWith) {
+                                    String.prototype.startsWith = function (searchString, position) {
+                                        position = position || 0;
+                                        return this.substr(position, searchString.length) === searchString;
+                                    };
+                                }
+
+                                var returnedType = obj.metadataType2;
+                                var returnedTypeIndex = obj.metadataType2.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName2;
+                                    var inputID = "metadataName2";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName2");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+                                }
+                            }
+                        }
+
+                        ////metadataName3
+                        if (obj.metadataName3 != null) {
+                            //Building Textbox cotrol
+                            if (obj.metadataType3 == "string") {
+                                var labelName1 = obj.metadataName3;
+                                var inputID = "metadataName3";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                // Building Date control
+                            else if (obj.metadataType3 == "date") {
+                                var returnedType = obj.metadataName3;
+                                var labelName1 = obj.metadataName3;
+                                var inputID = "metadataName3";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building Dropdown control
+                            else (obj.metadataName3 != null)
+                            {
+                                if (!String.prototype.startsWith) {
+                                    String.prototype.startsWith = function (searchString, position) {
+                                        position = position || 0;
+                                        return this.substr(position, searchString.length) === searchString;
+                                    };
+                                }
+
+                                var returnedType = obj.metadataType3;
+                                var returnedTypeIndex = obj.metadataType3.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName3;
+                                    var inputID = "metadataName3";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName3");
+                                                var opt = document.createElement('option');
+                                                opt.value = item;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+                                }
+                            }
+                        }
+
+                        ////metadataName4
+                        if (obj.metadataName4 != null) {
+                            //Building Textbox cotrol
+                            if (obj.metadataType4 == "string") {
+                                var labelName1 = obj.metadataName4;
+                                var inputID = "metadataName4";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                // Building Date control
+                            else if (obj.metadataType4 == "date") {
+                                var returnedType = obj.metadataName4;
+                                var labelName1 = obj.metadataName4;
+                                var inputID = "metadataName4";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                // Building dropdown control
+                            else (obj.metadataName4 != null)
+                            {
+                                var returnedType = obj.metadataType4;
+                                var returnedTypeIndex = obj.metadataType4.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName4;
+                                    var inputID = "metadataName4";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName4");
+                                                var opt = document.createElement('option');
+                                                opt.value = item;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+                                }
+                            }
+                        }
+
+                        ////metadataName5
+                        if (obj.metadataName5 != null) {
+                            //Building textbox control
+                            if (obj.metadataType5 == "string") {
+                                var labelName1 = obj.metadataName5;
+                                var inputID = "metadataName5";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                //Building date control
+                            else if (obj.metadataType5 == "date") {
+                                var returnedType = obj.metadataName5;
+                                var labelName1 = obj.metadataName5;
+                                var inputID = "metadataName5";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building dropdown control
+                            else (obj.metadataName5 != null)
+                            {
+                                var returnedType = obj.metadataType5;
+                                var returnedTypeIndex = obj.metadataType5.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName5;
+                                    var inputID = "metadataName5";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName5");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+
+                                    document.getElementById("metadataName5").selectedindex = 1;
+                                }
+                            }
+                        }
+
+                        ////metadataName6
+                        if (obj.metadataName6 != null) {
+                            //Building textbox control
+                            if (obj.metadataType6 == "string") {
+                                var labelName1 = obj.metadataName6;
+                                var inputID = "metadataName6";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                //Building date control
+                            else if (obj.metadataType6 == "date") {
+                                var returnedType = obj.metadataName6;
+                                var labelName1 = obj.metadataName6;
+                                var inputID = "metadataName6";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building dropdown control
+                            else (obj.metadataName6 != null)
+                            {
+                                var returnedType = obj.metadataType6;
+                                var returnedTypeIndex = obj.metadataType6.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName6;
+                                    var inputID = "metadataName6";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName6");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+
+                                    document.getElementById("metadataName6").selectedindex = 1;
+                                }
+                            }
+                        }
+
+                        ////metadataName7
+                        if (obj.metadataName7 != null) {
+                            //Building textbox control
+                            if (obj.metadataType7 == "string") {
+                                var labelName1 = obj.metadataName7;
+                                var inputID = "metadataName7";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                //Building date control
+                            else if (obj.metadataType7 == "date") {
+                                var returnedType = obj.metadataName7;
+                                var labelName1 = obj.metadataName7;
+                                var inputID = "metadataName7";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building dropdown control
+                            else (obj.metadataName7 != null)
+                            {
+                                var returnedType = obj.metadataType7;
+                                var returnedTypeIndex = obj.metadataType7.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName7;
+                                    var inputID = "metadataName7";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName7");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+
+                                    document.getElementById("metadataName7").selectedindex = 1;
+                                }
+                            }
+                        }
+
+                        ////metadataName8
+                        if (obj.metadataName8 != null) {
+                            //Building textbox control
+                            if (obj.metadataType8 == "string") {
+                                var labelName1 = obj.metadataName8;
+                                var inputID = "metadataName8";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                //Building date control
+                            else if (obj.metadataType8 == "date") {
+                                var returnedType = obj.metadataName8;
+                                var labelName1 = obj.metadataName8;
+                                var inputID = "metadataName8";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building dropdown control
+                            else (obj.metadataName8 != null)
+                            {
+                                var returnedType = obj.metadataType8;
+                                var returnedTypeIndex = obj.metadataType8.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName8;
+                                    var inputID = "metadataName8";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName8");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+
+                                    document.getElementById("metadataName8").selectedindex = 1;
+                                }
+                            }
+                        }
+
+                        ////metadataName9
+                        if (obj.metadataName9 != null) {
+                            //Building textbox control
+                            if (obj.metadataType9 == "string") {
+                                var labelName1 = obj.metadataName9;
+                                var inputID = "metadataName9";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                //Building date control
+                            else if (obj.metadataType9 == "date") {
+                                var returnedType = obj.metadataName9;
+                                var labelName1 = obj.metadataName9;
+                                var inputID = "metadataName9";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building dropdown control
+                            else (obj.metadataName9 != null)
+                            {
+                                var returnedType = obj.metadataType9;
+                                var returnedTypeIndex = obj.metadataType9.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName9;
+                                    var inputID = "metadataName9";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName9");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+
+                                    document.getElementById("metadataName9").selectedindex = 1;
+                                }
+                            }
+                        }
+
+                        ////metadataName10
+                        if (obj.metadataName10 != null) {
+                            //Building textbox control
+                            if (obj.metadataType10 == "string") {
+                                var labelName1 = obj.metadataName10;
+                                var inputID = "metadataName10";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                //Building date control
+                            else if (obj.metadataType10 == "date") {
+                                var returnedType = obj.metadataName10;
+                                var labelName1 = obj.metadataName10;
+                                var inputID = "metadataName10";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building dropdown control
+                            else (obj.metadataName10 != null)
+                            {
+                                var returnedType = obj.metadataType10;
+                                var returnedTypeIndex = obj.metadataType10.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName10;
+                                    var inputID = "metadataName10";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName10");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+
+                                    document.getElementById("metadataName10").selectedindex = 1;
+                                }
+                            }
+                        }
+
+                        var labelName1 = "Comment";
+                        var inputID = "commentField";
+                        CreateCommentInputElement(labelName1, inputID)
+
+                        var labelName1 = "";
+                        var inputID = "Upload";
+                        CreateButtonInputElement(labelName1, inputID)
+
+
+                        ///Comments field
+                        //var div = document.createElement('div');
+                        //div.innerHTML = '<label class="col-sm-2">Comment:</label><textarea id="commentField" maxlength="5000" cols="50" rows="4" class="col-sm-5 form-control" style="width:50%;" name="commentField"></textarea><br/></br></br>';
+                        //document.getElementById('Holder').appendChild(div);
+
+                        ///Upload button
+                        //var div = document.createElement('div');
+                        //div.innerHTML = '<input type="submit" name="Upload" id="Upload" class="btn btn-primary btnWidth" style="margin-left: 10px;" value="Upload" onclick="return  Validation();"/>';
+                        //document.getElementById('Holder').appendChild(div);
+                    }
+                },
+                error: function (data) {
+                }
+            });
+            //document.getElementById("resultLoadingDiv").style.display = 'none';
+
+        }
+        $(document).ready(function () {
+            LoadingControls();
+            //$("#resultLoadingDiv").hide();
+        })
+
+
+        //this is where am creating dynamic fields:
+        //When you select report type, it will look check metadatacount and build dynamic fields
+        //function CreatDynamicFields()
+        //{
+        //passing the selected reportypeid to get the metadata and build dynamic fields
+        $("#typereport_id").change(function reportfunction() {
+
+            reportTypeID = $('#typereport_id').val();
+            var selectedCatID = $("#catreport_id option:selected").val();
+            //reportTypeID = $("#typereport_id option:selected").val();
+
+            var _url = '@Url.Action("GetReportTypebyId", "UploadPartsReport")';
+            var urlStringList = '@Url.Action("GetDropdownStringList", "UploadPartsReport")';
+
+            $.ajax({
+                url: _url + "?reportTypeID=" + reportTypeID,// + "&defaultReportTypeID=" + defaultReportTypeID,
+                type: "POST",
+                dataType: "text",
+                async: false,
+                //cache: false,
+                success: function (data) {
+                    obj = JSON.parse(data);
+                    document.getElementById('Holder').innerHTML = "";
+
+                    var labelName1 = "Primary Report File:";
+                    var inputID1 = "fileUploadPrimary";
+                    var labelName2 = "Secondary Report File:";
+                    var inputID2 = "fileUploadSecondary";
+
+                    CreateInputTypeElement(labelName1, labelName2, inputID1, inputID2)
+
+
+                    // at this stage the model javascript variable represents the JSON encoded
+                    // value of your server side model so that you can access all it's properties:
+                    if (obj != null) {
+
+                        if (!String.prototype.startsWith) {
+                            String.prototype.startsWith = function (searchString, position) {
+                                position = position || 0;
+                                return this.substr(position, searchString.length) === searchString;
+                            };
+                        }
+
+                        ///MetadataName1
+                        if (obj.metadataName1 != null) {
+                            //Building Textbox cotrol
+                            if (obj.metadataType1 == "string") {
+
+                                var labelName1 = obj.metadataName1;
+                                var inputID = "metadataName1";
+                                CreateTextBoxInputElement(labelName1, inputID);
+
+                            }
+
+                                // Building Date control
+                            else if (obj.metadataType1 == "date") {
+
+                                var returnedType = obj.metadataName1;
+                                var labelName1 = obj.metadataName1;
+                                var inputID = "metadataName1";
+                                CreateDatePickerElement(labelName1, inputID);
+
+                            }
+
+                                //Building Dropdown control
+                            else (obj.metadataName1 != null)
+                            {
+                                if (!String.prototype.startsWith) {
+                                    String.prototype.startsWith = function (searchString, position) {
+                                        position = position || 0;
+                                        return this.substr(position, searchString.length) === searchString;
+                                    };
+                                }
+
+                                var returnedType = obj.metadataType1;
+                                var returnedTypeIndex = obj.metadataType1.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName1;
+                                    var inputID = "metadataName1";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName1");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+                                }
+                            }
+                        }
+
+                        ///Metadataname2
+                        if (obj.metadataName2 != null) {
+                            //Building Textbox cotrol
+                            if (obj.metadataType2 == "string") {
+                                var labelName1 = obj.metadataName2;
+                                var inputID = "metadataName2";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                // Building Date control
+                            else if (obj.metadataType2 == "date") {
+
+                                var returnedType = obj.metadataName2;
+                                var labelName1 = obj.metadataName2;
+                                var inputID = "metadataName2";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building Dropdown control
+                            else (obj.metadataName2 != null)
+                            {
+                                if (!String.prototype.startsWith) {
+                                    String.prototype.startsWith = function (searchString, position) {
+                                        position = position || 0;
+                                        return this.substr(position, searchString.length) === searchString;
+                                    };
+                                }
+
+                                var returnedType = obj.metadataType2;
+                                var returnedTypeIndex = obj.metadataType2.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName2;
+                                    var inputID = "metadataName2";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName2");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+                                }
+                            }
+                        }
+
+                        ////metadataName3
+                        if (obj.metadataName3 != null) {
+                            //Building Textbox cotrol
+                            if (obj.metadataType3 == "string") {
+                                var labelName1 = obj.metadataName3;
+                                var inputID = "metadataName3";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                // Building Date control
+                            else if (obj.metadataType3 == "date") {
+                                var returnedType = obj.metadataName3;
+                                var labelName1 = obj.metadataName3;
+                                var inputID = "metadataName3";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building Dropdown control
+                            else (obj.metadataName3 != null)
+                            {
+                                if (!String.prototype.startsWith) {
+                                    String.prototype.startsWith = function (searchString, position) {
+                                        position = position || 0;
+                                        return this.substr(position, searchString.length) === searchString;
+                                    };
+                                }
+
+                                var returnedType = obj.metadataType3;
+                                var returnedTypeIndex = obj.metadataType3.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName3;
+                                    var inputID = "metadataName3";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName3");
+                                                var opt = document.createElement('option');
+                                                opt.value = item;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+                                }
+                            }
+                        }
+
+                        ////metadataName4
+                        if (obj.metadataName4 != null) {
+                            //Building Textbox cotrol
+                            if (obj.metadataType4 == "string") {
+                                var labelName1 = obj.metadataName4;
+                                var inputID = "metadataName4";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                // Building Date control
+                            else if (obj.metadataType4 == "date") {
+                                var returnedType = obj.metadataName4;
+                                var labelName1 = obj.metadataName4;
+                                var inputID = "metadataName4";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                // Building dropdown control
+                            else (obj.metadataName4 != null)
+                            {
+                                var returnedType = obj.metadataType4;
+                                var returnedTypeIndex = obj.metadataType4.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName4;
+                                    var inputID = "metadataName4";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName4");
+                                                var opt = document.createElement('option');
+                                                opt.value = item;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+                                }
+                            }
+                        }
+
+                        ////metadataName5
+                        if (obj.metadataName5 != null) {
+                            //Building textbox control
+                            if (obj.metadataType5 == "string") {
+                                var labelName1 = obj.metadataName5;
+                                var inputID = "metadataName5";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                //Building date control
+                            else if (obj.metadataType5 == "date") {
+                                var returnedType = obj.metadataName5;
+                                var labelName1 = obj.metadataName5;
+                                var inputID = "metadataName5";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building dropdown control
+                            else (obj.metadataName5 != null)
+                            {
+                                var returnedType = obj.metadataType5;
+                                var returnedTypeIndex = obj.metadataType5.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName5;
+                                    var inputID = "metadataName5";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName5");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+
+                                    document.getElementById("metadataName5").selectedindex = 1;
+                                }
+                            }
+                        }
+
+                        ////metadataName6
+                        if (obj.metadataName6 != null) {
+                            //Building textbox control
+                            if (obj.metadataType6 == "string") {
+                                var labelName1 = obj.metadataName6;
+                                var inputID = "metadataName6";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                //Building date control
+                            else if (obj.metadataType6 == "date") {
+                                var returnedType = obj.metadataName6;
+                                var labelName1 = obj.metadataName6;
+                                var inputID = "metadataName6";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building dropdown control
+                            else (obj.metadataName6 != null)
+                            {
+                                var returnedType = obj.metadataType6;
+                                var returnedTypeIndex = obj.metadataType6.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName6;
+                                    var inputID = "metadataName6";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName6");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+
+                                    document.getElementById("metadataName6").selectedindex = 1;
+                                }
+                            }
+                        }
+
+                        ////metadataName7
+                        if (obj.metadataName7 != null) {
+                            //Building textbox control
+                            if (obj.metadataType7 == "string") {
+                                var labelName1 = obj.metadataName7;
+                                var inputID = "metadataName7";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                //Building date control
+                            else if (obj.metadataType7 == "date") {
+                                var returnedType = obj.metadataName7;
+                                var labelName1 = obj.metadataName7;
+                                var inputID = "metadataName7";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building dropdown control
+                            else (obj.metadataName7 != null)
+                            {
+                                var returnedType = obj.metadataType7;
+                                var returnedTypeIndex = obj.metadataType7.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName7;
+                                    var inputID = "metadataName7";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName7");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+
+                                    document.getElementById("metadataName7").selectedindex = 1;
+                                }
+                            }
+                        }
+
+                        ////metadataName8
+                        if (obj.metadataName8 != null) {
+                            //Building textbox control
+                            if (obj.metadataType8 == "string") {
+                                var labelName1 = obj.metadataName8;
+                                var inputID = "metadataName8";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                //Building date control
+                            else if (obj.metadataType8 == "date") {
+                                var returnedType = obj.metadataName8;
+                                var labelName1 = obj.metadataName8;
+                                var inputID = "metadataName8";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building dropdown control
+                            else (obj.metadataName8 != null)
+                            {
+                                var returnedType = obj.metadataType8;
+                                var returnedTypeIndex = obj.metadataType8.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName8;
+                                    var inputID = "metadataName8";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName8");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+
+                                    document.getElementById("metadataName8").selectedindex = 1;
+                                }
+                            }
+                        }
+
+                        ////metadataName9
+                        if (obj.metadataName9 != null) {
+                            //Building textbox control
+                            if (obj.metadataType9 == "string") {
+                                var labelName1 = obj.metadataName9;
+                                var inputID = "metadataName9";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                //Building date control
+                            else if (obj.metadataType9 == "date") {
+                                var returnedType = obj.metadataName9;
+                                var labelName1 = obj.metadataName9;
+                                var inputID = "metadataName9";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building dropdown control
+                            else (obj.metadataName9 != null)
+                            {
+                                var returnedType = obj.metadataType9;
+                                var returnedTypeIndex = obj.metadataType9.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName9;
+                                    var inputID = "metadataName9";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName9");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+
+                                    document.getElementById("metadataName9").selectedindex = 1;
+                                }
+                            }
+                        }
+
+                        ////metadataName10
+                        if (obj.metadataName10 != null) {
+                            //Building textbox control
+                            if (obj.metadataType10 == "string") {
+                                var labelName1 = obj.metadataName10;
+                                var inputID = "metadataName10";
+                                CreateTextBoxInputElement(labelName1, inputID);
+                            }
+                                //Building date control
+                            else if (obj.metadataType10 == "date") {
+                                var returnedType = obj.metadataName10;
+                                var labelName1 = obj.metadataName10;
+                                var inputID = "metadataName10";
+                                CreateDatePickerElement(labelName1, inputID);
+                            }
+                                //Building dropdown control
+                            else (obj.metadataName10 != null)
+                            {
+                                var returnedType = obj.metadataType10;
+                                var returnedTypeIndex = obj.metadataType10.startsWith("dropdown");
+
+                                if (returnedTypeIndex == true) {
+                                    var methodName = returnedType.substring(9, returnedType.length);
+
+                                    var labelName1 = obj.metadataName10;
+                                    var inputID = "metadataName10";
+                                    CreateComboBoxInputElement(labelName1, inputID);
+
+                                    $.get(urlStringList, { methodName: methodName },
+                                        function (returnedData) {
+                                            $.each(returnedData, function (index, item) {
+                                                var select = document.getElementById("metadataName10");
+                                                var opt = document.createElement('option');
+                                                opt.value = index;
+                                                opt.innerHTML = item;
+                                                select.selectedIndex = 1;
+                                                select.appendChild(opt);
+                                            });
+                                        }, 'json');
+
+                                    document.getElementById("metadataName10").selectedindex = 1;
+                                }
+                            }
+                        }
+
+
+                        var labelName1 = "Comment";
+                        var inputID = "commentField";
+                        CreateCommentInputElement(labelName1, inputID)
+
+                        var labelName1 = "";
+                        var inputID = "Upload";
+                        CreateButtonInputElement(labelName1, inputID)
+
+                    }
+                },
+                error: function (data) {
+                    //document.getElementById("resultLoadingDiv").style.display = 'none';
+                }
+            });
+        })
+
+        //}
+
+    </script>
+    <!--End-->
+    <!--This is for Date-->
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //From Date
+            $(document).ready(function () {
+                var date_input;
+                var container;
+
+                date_input = $('input[name="reportDate_Search"]');
+                container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+                date_input.datepicker({
+                    format: 'yyyy/mm/dd',
+                    container: container,
+                    todayHighlight: true,
+                    autoclose: true,
+                })
+            })
+
+        });
+    </script>
+
+    <!--Validations for file extesion for both primary and secondary-->
+    <script type="text/javascript">
+
+
+        function GetFileSize(fileid) {
+            try {
+                var fileSize = 0;
+                var isIE = !!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g);
+                if (isIE) {
+                    //before making an object of ActiveXObject,
+                    //please make sure ActiveX is enabled in your IE browser
+                    var objFSO = new ActiveXObject("Scripting.FileSystemObject"); var filePath = $("#" + fileid)[0].value;
+                    var objFile = objFSO.getFile(filePath);
+                    var fileSize = objFile.size; //size in kb
+                    fileSize = fileSize / 1048576; //size in mb
+                }
+                    //for FF, Safari, Opeara and Others
+                else {
+                    fileSize = $("#" + fileid)[0].files[0].size //size in kb
+                    fileSize = fileSize / 1048576; //size in mb
+                }
+
+                return fileSize;
+            }
+            catch (e) {
+
+            }
+        }
+
+        //get file path from client system
+        function getNameFromPath(strFilepath) {
+
+            try {
+                var objRE = new RegExp(/([^\/\\]+)$/);
+                var strName = objRE.exec(strFilepath);
+
+                if (strName == null) {
+                    return null;
+                }
+                else {
+                    return strName[0];
+                }
+            }
+            catch (errr)
+            { return null }
+        }
+
+        $(function () {
+            $("#fileUploadPrimary").change(function () {
+                var file = getNameFromPath($(this).val());
+
+                if (file != null) {
+                    var extension = file.substr((file.lastIndexOf('.') + 1));
+                    switch (extension) {
+                        case 'pdf':
+                        case 'xlsx':
+                        case 'txt':
+                            flag = true;
+                            break;
+                        default:
+                            flag = false;
+                    }
+                }
+                if (flag == false) {
+                    $("#fileUploadPrimary").text("You can upload only txt,xlsx,pdf extension file!");
+                    document.getElementById('fileUploadPrimary').value = '';
+                    return false;
+                }
+                else {
+
+                    var isIE = false;
+                    if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
+                        isIE = true;
+                    }
+
+                    if (isIE) {
+
+                        //The browser is IE.
+                    } else {
+                        //The browser is NOT IE.
+
+                        var size = GetFileSize('file');
+                        if (size > 3) {
+                            $("#fileUploadPrimary").text("You can upload File up to 3 MB");
+                        }
+                        else {
+                            $("#fileUploadPrimary").text("");
+                        }
+
+                    }
+
+                    var size = GetFileSize('file');
+                    if (size > 3) {
+                        $("#fileUploadPrimary").text("You can upload File up to 3 MB");
+                    }
+                    else {
+                        $("#fileUploadPrimary").text("");
+                    }
+                }
+            });
+        });
+
+    </script>
+
+    <!--This is for form validations for dynamic controlls-->
+    <script type="text/javascript">
+
+
+        function Validation() {
+            var returnValue = true;
+            var errormsg = "";
+            var Message = " Field is required\n";
+
+            var metadataName1 = document.getElementById("metadataName1");
+            var metadataName2 = document.getElementById("metadataName2");
+            var metadataName3 = document.getElementById("metadataName3");
+            var metadataName4 = document.getElementById("metadataName4");
+            var metadataName5 = document.getElementById("metadataName5");
+
+            var metadataName6 = document.getElementById("metadataName6");
+            var metadataName7 = document.getElementById("metadataName7");
+            var metadataName8 = document.getElementById("metadataName8");
+            var metadataName9 = document.getElementById("metadataName9");
+            var metadataName10 = document.getElementById("metadataName10");
+
+            var fileUploadPrimary = document.getElementById("fileUploadPrimary");
+
+            var ReportDate = document.getElementById("datefrom_Search");
+
+            if (metadataName1 != null) {
+                if (metadataName1.value == "") {
+                    errormsg = errormsg + obj.metadataName1 + Message;
+                    metadataName1.focus();
+                    returnValue = false;
+                }
+            }
+
+            if (metadataName2 != null) {
+                if (metadataName2.value == "") {
+                    errormsg = errormsg + obj.metadataName2 + Message;
+                    metadataName2.focus();
+                    returnValue = false;
+                }
+            }
+
+            if (metadataName3 != null) {
+                if (metadataName3.value == "") {
+                    errormsg = errormsg + obj.metadataName3 + Message;
+                    metadataName3.focus();
+                    returnValue = false;
+                }
+            }
+
+            if (metadataName4 != null) {
+                if (metadataName4.value == "") {
+                    errormsg = errormsg + obj.metadataName4 + Message;
+                    metadataName4.focus();
+                    returnValue = false;
+                }
+            }
+
+            if (metadataName5 != null) {
+                if (metadataName5.value == "") {
+                    errormsg = errormsg + obj.metadataName5 + Message;
+                    metadataName5.focus();
+                    returnValue = false;
+                }
+            }
+
+            if (metadataName6 != null) {
+                if (metadataName6.value == "") {
+                    errormsg = errormsg + obj.metadataName6 + Message;
+                    metadataName6.focus();
+                    returnValue = false;
+                }
+            }
+
+            if (metadataName7 != null) {
+                if (metadataName7.value == "") {
+                    errormsg = errormsg + obj.metadataName7 + Message;
+                    metadataName7.focus();
+                    returnValue = false;
+                }
+            }
+
+            if (metadataName8 != null) {
+                if (metadataName8.value == "") {
+                    errormsg = errormsg + obj.metadataName8 + Message;
+                    metadataName8.focus();
+                    returnValue = false;
+                }
+            }
+
+            if (metadataName9 != null) {
+                if (metadataName9.value == "") {
+                    errormsg = errormsg + obj.metadataName9 + Message;
+                    metadataName9.focus();
+                    returnValue = false;
+                }
+            }
+
+            if (metadataName10 != null) {
+                if (metadataName10.value == "") {
+                    errormsg = errormsg + obj.metadataName10 + Message;
+                    metadataName10.focus();
+                    returnValue = false;
+                }
+            }
+
+            if (fileUploadPrimary != null) {
+                $(function () {
+                    $("#fileUploadPrimary").change(function () {
+                        var file = getNameFromPath($(this).val());
+
+                        if (file != null) {
+                            var extension = file.substr((file.lastIndexOf('.') + 1));
+                            switch (extension) {
+                                case 'pdf':
+                                case 'xlsx':
+                                case 'txt':
+                                case 'zip':
+                                    flag = true;
+                                    break;
+                                default:
+                                    flag = false;
+                            }
+                        }
+                        if (flag == false) {
+
+                            showErrrorMessage("Invalid File Format", "error", "Validation Errors");
+                            document.getElementById('fileUploadPrimary').value = '';
+                            return false;
+                        }
+                    });
+                });
+                if (fileUploadPrimary.value == "") {
+                    errormsg = errormsg + "Primary Report File" + Message;
+                    returnValue = false;
+                }
+            }
+
+            if (ReportDate != null) {
+                if (ReportDate.value == "") {
+                    errormsg = errormsg + "Report Date" + Message;
+                    returnValue = false;
+                }
+            }
+
+            if (returnValue == false) {
+                showErrrorMessage(errormsg, "error", "Validation Errors");
+            }
+            return returnValue;
+
+            if (returnValue == true) {
+
+                function showMessage() {
+                    var err = null;
+                    var titlee = null;
+                    var typee = null;
+
+                    @if (ViewBag.Message != null)
+            {
+                <text>err = "@ViewBag.Message";</text>
+                <text>typee = "@ViewBag.MessageType";</text>
+                <text>titlee = "@ViewBag.MessageTitle";</text>
+            }
+                    if (err != null) {
+                        swal({
+                            title: titlee,
+                            text: err,
+                            type: typee,
+                            showCancelButton: false,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "OK!",
+                            closeOnConfirm: false,
+                            customClass: 'sweetalert-lg',
+                            confirmButtonColor: '#294FA0',
+                        });
+                    }
+                }
+                showMessage();
+            }
+        }
+
+
+        function showMessage(message, MessageType, MessageTitle) {
+
+
+            var message = "Your file has been successfully uploaded!";
+            var MessageType = "success";
+            var MessageTitle = "Uploaded!";
+
+            swal({
+                title: MessageTitle,
+                text: message,
+                type: MessageType,
+                showCancelButton: false,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "OK!",
+                closeOnConfirm: false,
+                customClass: 'sweetalert-lg',
+                confirmButtonColor: '#294FA0',
+
+            });
+
+        }
+
+        function showErrrorMessage(message, MessageType, MessageTitle) {
+
+
+            swal({
+                title: MessageTitle,
+                text: message,
+                type: MessageType,
+                showCancelButton: false,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "OK!",
+                closeOnConfirm: false,
+                customClass: 'sweetalert-lg',
+                confirmButtonColor: '#294FA0',
+
+            });
+
+        }
+
+
+    </script>
+    <!--End-->
+    <!--message-->
+    <script type="text/javascript">
+
+        function showMessage() {
+            var err = null;
+            var titlee = null;
+            var typee = null;
+
+            @if (ViewBag.Message != null)
+        {
+
+            <text>err = "@ViewBag.Message";</text>
+            <text>typee = "@ViewBag.MessageType";</text>
+            <text>titlee = "@ViewBag.MessageTitle";</text>
+        }
+
+            if (err != null) {
+
+                swal({
+                    title: titlee,
+                    text: err,
+                    type: typee,
+                    showCancelButton: false,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "OK!",
+                    closeOnConfirm: false,
+                    customClass: 'sweetalert-lg',
+                    confirmButtonColor: '#294FA0',
+
+                });
+            }
+        }
+        showMessage();
+
+    </script>
+    <!--End-->
+    <!--On load, we getting the default selected distributorID value-->
+    <script>
+        distributorId = $("#distributor_id option:selected").val();
+
+
+
+        //window.addEventListener("submit", function (e) {
+        //    var form = e.target;
+        //    if (form.getAttribute("enctype") === "multipart/form-data") {
+        //        if (form.dataset.ajax) {
+        //            e.preventDefault();
+        //            e.stopImmediatePropagation();
+        //            var xhr = new XMLHttpRequest();
+        //            xhr.open(form.method, form.action);
+        //            xhr.onreadystatechange = function () {
+
+        //                if (xhr.readyState == 4 && xhr.status == 200) {
+        //                    if (form.dataset.ajaxUpdate) {
+
+        //                        var ResponcObject = JSON.parse(xhr.responseText);
+
+        //                        if (ResponcObject.result == true)
+        //                        {
+        //                            showMessage(ResponcObject.Message, "success", "Uploaded");
+        //                        }
+        //                        else
+        //                        {
+
+        //                            showMessage("Error Encountered whilst Uploading files", "error", "Error");
+        //                        }
+        //                    }
+        //                }
+
+        //            };
+        //            xhr.send(new FormData(form));
+        //        }
+        //    }
+        //}, true);
+
+
+        function showMessage(Message, MessageType, MessageTitle) {
+
+            swal({
+                title: MessageTitle,
+                text: Message,
+                type: MessageType,
+                showCancelButton: false,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "OK!",
+                closeOnConfirm: false,
+                customClass: 'sweetalert-lg',
+                confirmButtonColor: '#294FA0',
+
+            });
+        }
+
+    </script>
+
+    <!--Uploading file using ajax-->
+    <script type="text/javascript">
+
+        distributorId = $("#distributor_id option:selected").val();
+
+        $(document).ready(function () {
+
+            document.getElementById("section_UploadParts_ID").addEventListener("submit", function (e) {
+                //window.addEventListener("submit", function (e) {
+
+                if (document.getElementById("fileUploadPrimary").value == "") {
+                    return false;
+                }
+                else {
+                    var form = e.target;
+                    if (form.getAttribute("enctype") === "multipart/form-data") {
+                        if (form.dataset.ajax) {
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+                            var xhr = new XMLHttpRequest();
+
+                            $('#resultLoadingDiv').css("display:block");
+                            $('#resultLoadingDiv').show();
+
+                            xhr.open(form.method, form.action);
+                            xhr.onreadystatechange = function () {
+                                if (xhr.readyState == 4 && xhr.status == 200) {
+
+                                    var obj = JSON.parse(xhr.responseText)
+
+                                    if (obj.result == true) {
+                                        //$('#resultLoadingDiv').hide();
+                                        var ObjResults =
+                                        {
+                                            guidPrimaryExtensionName: obj.guidPrimaryExtensionName,
+                                            guidSecondaryExtensionName: obj.guidSecondaryExtensionName,
+                                            commentField: obj.commentField,
+                                            metadataName1: obj.metadataName1,
+                                            metadataName2: obj.metadataName2,
+                                            metadataName3: obj.metadataName3,
+                                            metadataName4: obj.metadataName4,
+                                            metadataName5: obj.metadataName5,
+                                            metadataName6: obj.metadataName6,
+                                            metadataName7: obj.metadataName7,
+                                            metadataName8: obj.metadataName8,
+                                            metadataName9: obj.metadataName9,
+                                            metadataName10: obj.metadataName10,
+                                            SelectedReportType: obj.SelectedReportType,
+                                            reportDate: obj.reportDate,
+                                            SelectedDistributorId: obj.SelectedDistributorId
+                                        }
+                                        $.ajax({
+                                            url: '@Url.Action("UploadingFile", "UploadPartsReport")',
+                                            data: ObjResults,
+                                            type: "Post",
+                                            crossDomain: true,
+                                            async: true,
+                                            cache: true,
+
+                                            success: function (data) {
+                                                if (data.result == true) {
+                                                    $('#resultLoadingDiv').hide();
+                                                    $(':input[type="submit"]').prop('disabled', false);
+
+                                                    var message = "Your file has been successfully uploaded!";
+                                                    var MessageType = "success";
+                                                    var MessageTitle = "Uploaded!";
+                                               
+                                                    showMessage(message, MessageType, MessageTitle);
+                                                    GettingSelectedValue();
+
+                                                    document.getElementById("#commentField").value = "";
+                                                    document.getElementById("#fileUploadPrimary").value = "";
+                                                    document.getElementById("#fileUploadSecondary").value = "";
+                                                }
+                                                else {
+                                                    $('#resultLoadingDiv').hide();
+                                                    $(':input[type="submit"]').prop('disabled', false);
+                                                    swal({
+                                                        title: " Error!",
+                                                        text: "your File is not Uploaded because of Following Error" + data.errormsg,
+                                                        type: "error",
+                                                        showCancelButton: false,
+                                                        confirmButtonColor: "#DD6B55",
+                                                        confirmButtonText: "OK!",
+                                                        closeOnConfirm: false,
+                                                        customClass: 'sweetalert-lg',
+                                                        confirmButtonColor: '#294FA0'
+                                                    });
+                                                }
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        var message = obj.errormsg;
+                                        var MessageType = "error";
+                                        var MessageTitle = "Failed!";
+                                        showErrrorMessage(message, MessageType, MessageTitle);
+                                    }
+                                }
+                            };
+                            xhr.send(new FormData(form));
+                        }
+                    }
+                }
+            }, true);
+        });
+
+    </script>
+    <!--End-->
+    <!--This function keeps selected catergory after submit.-->
+    <script>
+
+
+        $(document).ready(function () {
+            function GettingSelectedValue() {
+                var CatergoryValue = $("#catreport_id").val(SelectedCatergory);
+                CatergoryValue = '@ViewData["CatergoryValue"]';
+                if (SelectedCatergory != "") {
+                    $('select[name="DistributoR"]').find('option[value="' + SelectedCatergory + '"]').attr("selected", "selected");
+                }
+            }
+
+        })
+
+
+    </script>
+    <!--End-->
+
+
+    </section>

@@ -49,6 +49,8 @@
     <Compile Include="Fields\ClassOrCourse.cs" />
     <Compile Include="Fields\lc_Class.cs" />
     <Compile Include="Fields\Roles.cs" />
+    <Compile Include="Fields\StudyMaterial\Books.cs" />
+    <Compile Include="Fields\StudyMaterial\QuestionPaper.cs" />
     <Compile Include="Fields\Teacher.cs" />
     <Compile Include="Fields\StudentClass.cs" />
     <Compile Include="Fields\ClassTeacher.cs" />

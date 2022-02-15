@@ -120,9 +120,6 @@ namespace School.Services.Repository
             }
         }
 
-
-
-
         public override void sqlQueries(dynamic obj)
         {
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
