@@ -43,6 +43,23 @@
 
 <script>
 
+
+    $('#Login-page button#btnClose').click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        var _this = this;
+
+        //var pageId = $(_this).siblings("#partialHolder").children('div').attr("id");
+        //var popupBodyID = $(_this).parent('div').parent('div .childBodyPage').attr('id');
+        //var partialHolderId = $(_this).siblings('div .partialHolder').attr('id');
+
+        $('#PopupBodyUserLogin').css("display", "none");  
+        $('#PopupOverlayLogIn').css("display", "none");
+        //PopupOverlayLogIn
+        //classIndexPage.closePopup(_this);
+    });
+
+
     function OnFailure(response) {
         
         $('#div-busy-Icon').hide();
@@ -50,7 +67,7 @@
     }
 
     function OnSuccess(response) {
-
+       // debugger;
         $('#div-busy-Icon').hide();
         if (response.result === "false") {
             classMessageResponse.showMessage({ message: response.message, type: "error", title: response.title, pageId: "" });
@@ -65,7 +82,8 @@
         else {
 
             $('#menuId .sidebar-menu').css("display", "block");
-            $("#Home-Container #PopupBodyUserLogin #btnCloseGeneric").trigger("click");
+            //$("#Home-Container #PopupBodyUserLogin #btnCloseGeneric").trigger("click");
+            $("#Login-page button#btnClose").trigger("click");
             var partialHolder = "#basePartialHolder #partialHolder";
             var header = 'View Desktop';
             var url = '/Dashboard/GetRecord';

@@ -255,6 +255,11 @@
         for (var i = 0; i < countRows; i++) {
             var _studentId = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(0)").text();
             var _markValue = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(3) input:eq(0)").val();
+            debugger;
+            if (_markValue === undefined) {
+                continue;
+            }
+
             var row = {
                 'StudentId': _studentId.trim(),
                 'GradeId': obj.GradeId,

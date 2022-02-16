@@ -15,6 +15,7 @@ namespace School.UI.Controllers
         private IRolesRepository permissionRepository;
         public LogInController(ILoginRepository loginRepository, IRolesRepository permissionRepository)
         {
+            //File:Ghana school under the trees.jpg
             this.loginRepository = loginRepository;
             this.permissionRepository = permissionRepository;
         }

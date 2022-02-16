@@ -1140,6 +1140,7 @@
     <Content Include="MediaFiles\books\Download\book-08.pdf" />
     <Content Include="MediaFiles\books\Download\book-09.pdf" />
     <Content Include="MediaFiles\books\Download\book-10.pdf" />
+    <None Include="Properties\PublishProfiles\Spijo - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
