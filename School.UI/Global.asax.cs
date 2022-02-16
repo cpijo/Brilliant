@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,26 @@ namespace School.UI
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+
+        private static HttpRequest initialRequest;
+
+        static MvcApplication()
+        {
+            initialRequest = HttpContext.Current.Request;
+            string host = HttpContext.Current.Request.Url.Host.ToLower();
+            var IsLocal = HttpContext.Current.Request.Url.AbsoluteUri.StartsWith("http://localhost:");
+
+            if (host == "localhost" || host == "127.0.0.1")
+            {
+                string visitors = ConfigurationManager.AppSettings["urlHost"];
+                ConfigurationManager.AppSettings["urlHost"] = "isLocalHost";
+            }
+            else
+            {
+                ConfigurationManager.AppSettings["urlHost"] = "notLocalHost";
+            }
+        }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -18,6 +39,8 @@ namespace School.UI
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             //BundleTable.EnableOptimizations = false;
             UnityConfig.RegisterComponents();
+
+           // HostFinder.OnTestingServer();
         }
 
 
@@ -108,6 +131,9 @@ namespace School.UI
             //HttpContext.Current.Session["userProfileList"] = null;
             //HttpContext.Current.Session["usersPerPage"] = null;
 
+            string host = HttpContext.Current.Request.Url.Host.ToLower();
+            var IsLocal = HttpContext.Current.Request.Url.AbsoluteUri.StartsWith("http://localhost:");
+
             if (SelectedCookie != null && SelectedCookie.Value != null)
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(SelectedCookie.Value);
@@ -121,3 +147,26 @@ namespace School.UI
         }
     }
 }
+
+
+
+/*
+ * 
+ https://andrewlock.net/5-ways-to-set-the-urls-for-an-aspnetcore-app/
+    public class Program
+{
+    public static void Main(string[] args)
+    {
+        CreateHostBuilder(args).Build().Run();
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+                webBuilder.UseUrls("http://localhost:5003", "https://localhost:5004");
+            });
+}
+ * 
+ */

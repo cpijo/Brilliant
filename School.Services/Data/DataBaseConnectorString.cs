@@ -9,6 +9,22 @@ namespace NetcarePortal.Models.Data
 {
     public class DataBaseConnectorString
     {
-        public static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+        public static string urlHost = ConfigurationManager.AppSettings["urlHost"];
+        public static string connectionString = ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+        public static readonly string connectionStringAzure = ConfigurationManager.ConnectionStrings["connectionStringAzure"].ConnectionString;
+        public static string ConnectionString
+        {
+            get
+            {
+                if (urlHost == "isLocalHost")
+                {
+                    return ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString;
+                }
+                else
+                {
+                    return ConfigurationManager.ConnectionStrings["connectionStringAzure"].ConnectionString;
+                }
+            }
+        }
     }
 }
