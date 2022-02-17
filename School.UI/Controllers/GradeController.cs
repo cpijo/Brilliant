@@ -36,7 +36,6 @@ namespace School.UI.Controllers
         }
         #endregion
 
-
         #region Save Student Results 
         [HttpPost]
         public ActionResult SaveRecord(Grades model)

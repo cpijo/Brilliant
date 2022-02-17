@@ -3,4 +3,29 @@
 
 
 
+<script>
+        $("#subjectId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+         //debugger;
+        var _gradeId = $("#gradeId option:selected").val();
+        var _subjectId = $("#subjectId option:selected").val();
+        var data = {
+            'gradeId': _gradeId.trim(),
+            'subjectId': _subjectId.trim()
+        };
+
+        var partialHolder = "#tableHolderId";
+        var header = 'Update UserInfor';
+        var url = '/StudentMarks/UpdateTable';
+        var  pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+
+</script>
+
+
+
 

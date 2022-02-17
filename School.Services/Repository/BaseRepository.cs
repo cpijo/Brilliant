@@ -10,8 +10,11 @@ using System.Threading.Tasks;
 
 namespace School.Services.Repository
 {
+    public delegate bool DelEventHandler();
     public abstract class BaseRepository<T>: IDisposable , IBaseRepository<T> where T : class, new() 
     {
+        public static event DelEventHandler Status;
+
         public SqlCommand command = null;
         public DataTable table = null;
         bool _isSuccess = true;
@@ -77,10 +80,13 @@ namespace School.Services.Repository
                 catch (Exception ex)
                 {
                     _isSuccess = false;
+
                 }
                 finally
                 {
-                    connection.Close(); ;
+                    Status += new DelEventHandler(IsSuccess);
+                    Status.Invoke();
+                    connection.Close();
                 }
             }
         }
@@ -112,7 +118,7 @@ namespace School.Services.Repository
                 }
                 finally
                 {
-                    connection.Close(); ;
+                    connection.Close();
                 }
             }
         }
@@ -126,6 +132,7 @@ namespace School.Services.Repository
                 command.Connection = connection;
                     connection.Open();
                     command.ExecuteNonQuery();
+                    connection.Close();
                 }
                 catch (Exception ex)
                 {
@@ -133,7 +140,9 @@ namespace School.Services.Repository
                 }
                 finally
                 {
-                    connection.Close(); ;
+                    Status += new DelEventHandler(IsSuccess);
+                    Status.Invoke();
+                    connection.Close();
                 }
             }
         }
@@ -234,6 +243,12 @@ namespace School.Services.Repository
                 }
             }
             this.disposed = true;
+        }
+
+
+        public virtual bool IsSuccess()
+        {
+            return _isSuccess;
         }
 
     }

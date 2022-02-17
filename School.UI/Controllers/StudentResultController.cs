@@ -69,7 +69,7 @@ namespace School.UI.Controllers
         {
             try
             {
-                model.GradeId = CostantData.getFieldId(CostantData.dictGrades(), model.GradeId.Trim());
+                model.GradeId = CostantData.getFieldId(CostantData.dictGrades(), model.GradeId.Trim().Replace(" ",""));
                 studentMarksRepository.Update(model);
                 return Json(new { result = "true", message = "Data updated Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
             }
@@ -81,7 +81,7 @@ namespace School.UI.Controllers
         #endregion
 
 
-
+  
 
 
 

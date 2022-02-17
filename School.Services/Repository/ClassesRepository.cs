@@ -33,8 +33,8 @@ namespace School.Services.Repository
             command.CommandText = "INSERT INTO Class(ClassId,ClassName) values" +
                                 "(@ClassId,@ClassName);";
 
-            //command.Parameters.AddWithValue("@GradeId", model.GradeId);
-            //command.Parameters.AddWithValue("@GradeName", model.Grade);
+            command.Parameters.AddWithValue("@ClassId", model.ClassId);
+            command.Parameters.AddWithValue("@ClassName", model.ClassName);
             base.Save(model);
         }
         public override void SaveMany(List<Classes> model)
@@ -46,10 +46,11 @@ namespace School.Services.Repository
         }
         public override void Update(Classes model)
         {
-            //command.CommandText = "UPDATE Grade SET GradeId=@ClassId, ClassName=@ClassName " +
-            //                        "WHERE ClassId = '" + model.oldGradeId + "'";
-            //command.Parameters.AddWithValue("@ClassId", model.ClassId);
-            //command.Parameters.AddWithValue("@ClassName", model.ClassName);
+            command.CommandText = "UPDATE Class SET ClassId=@ClassId, ClassName=@ClassName " +
+                                    "WHERE ClassId =@OldClassId";
+            command.Parameters.AddWithValue("@ClassId", model.ClassId);
+            command.Parameters.AddWithValue("@ClassName", model.ClassName);
+            command.Parameters.AddWithValue("@OldClassId", model.OldClassId);
             base.Update(model);
         }
 

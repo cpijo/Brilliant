@@ -163,7 +163,7 @@
             </li>
 
 
-            <li class="treeview" id="menu-studentResult" style="display:block;width:auto;">
+            <li class="treeview" id="menu-student-maint" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
                     <i class="fa fa-users"></i>
                     <span class="menu-header-name">Students Maintanance</span>
@@ -172,12 +172,12 @@
                     </span>
                 </a>
                 <ul id="ul-studentResultId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=student2 name="student" style="display:block" onclick="callController('/StudentResult/GetRecord','Student Report')"><a href="#"><i class="fa fa-circle-o"></i>Student Report</a></li>
-                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentMarks/GetRecord','Record Marks')"><a href="#"><i class="fa fa-circle-o"></i>Record Marks</a></li>
-                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentAttendance/GetRecord','Student Attendance')"><a href="#"><i class="fa fa-circle-o"></i>Student Attendance</a></li>
+                    <li id="li-student_maint1" name="student" style="display:block" onclick="callController('/StudentResult/GetRecord','Student Report')"><a href="#"><i class="fa fa-circle-o"></i>Student Report</a></li>
+                    <li id="li-student_maint2" name="student" style="display:block" onclick="callController('/StudentMarks/GetRecord','Record Marks')"><a href="#"><i class="fa fa-circle-o"></i>Record Marks</a></li>
+                    <li id="li-student_maint3" name="student" style="display:block" onclick="callController('/StudentAttendance/GetRecord','Student Attendance')"><a href="#"><i class="fa fa-circle-o"></i>Student Attendance</a></li>
                 </ul>
             </li>
-            <li class="treeview" id="menu-studentsReg" style="display:block;width:auto;">
+            <li class="treeview" id="menu-student-reg" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
                     <i class="fa fa-folder-open"></i>
                     <span class="menu-header-name">Students Registration</span>
@@ -185,9 +185,9 @@
                         <i class="fa fa-angle-down pull-right erroSign"></i>
                     </span>
                 </a>
-                <ul id="ul-studentsRegId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')"><a href="#"><i class="fa fa-circle-o"></i>Create Stundent</a></li>
-                    <li id=subjecte1 name="subject" style="display:block" onclick="callController('/Student/GetRecord','View Students')"><a href="#"><i class="fa fa-circle-o"></i>View Student</a></li>
+                <ul id="ul-student-reg" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id="li-student-reg1" name="student" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')"><a href="#"><i class="fa fa-circle-o"></i>Create Stundent</a></li>
+                    <li id="li-student-reg2" name="subject" style="display:block" onclick="callController('/Student/GetRecord','View Students')"><a href="#"><i class="fa fa-circle-o"></i>View Student</a></li>
                 </ul>
             </li>
             <li class="treeview" id="me-teacher" style="display:none;width:auto;">
@@ -199,27 +199,27 @@
                     </span>
                 </a>
                 <ul id="ul-teacherId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=student1 name="student" style="display:block" onclick="callController('/Student/GetRecord','View Student')"><a href="#"><i class="fa fa-circle-o"></i>View Student</a></li>
-                    <li id=student2 name="student" style="display:block" onclick="callController('/StudentResult/GetRecord','Subject Scores')"><a href="#"><i class="fa fa-circle-o"></i>Subject Scores</a></li>
-                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentSubjectMarks/PreRecordMark','Stundent Marks')"><a href="#"><i class="fa fa-circle-o"></i>Record Marks</a></li>
-                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentSubjectMarks/PreAddMark','Stundent Marks')"><a href="#"><i class="fa fa-circle-o"></i>Stundent Marks</a></li>
-                    <li id=student3 name="student" style="display:block" onclick="callController('/StudentAttendance/GetRecord','Student Attendance')"><a href="#"><i class="fa fa-circle-o"></i>Student Attendance</a></li>
+                    <li id="li-teache-pro1" name="student" style="display:block" onclick="callController('/Student/GetRecord','View Student')"><a href="#"><i class="fa fa-circle-o"></i>View Student</a></li>
+                    <li id="li-teache-pro2" name="student" style="display:block" onclick="callController('/StudentResult/GetRecord','Subject Scores')"><a href="#"><i class="fa fa-circle-o"></i>Subject Scores</a></li>
+                    <li id="li-teache-pro3" name="student" style="display:block" onclick="callController('/StudentSubjectMarks/PreRecordMark','Stundent Marks')"><a href="#"><i class="fa fa-circle-o"></i>Record Marks</a></li>
+                    <li id="li-teache-pro3" name="student" style="display:block" onclick="callController('/StudentSubjectMarks/PreAddMark','Stundent Marks')"><a href="#"><i class="fa fa-circle-o"></i>Stundent Marks</a></li>
+                    <li id="li-teache-pro3" name="student" style="display:block" onclick="callController('/StudentAttendance/GetRecord','Student Attendance')"><a href="#"><i class="fa fa-circle-o"></i>Student Attendance</a></li>
                 </ul>
             </li>
             <li class="treeview" id="menu-grade" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
                     <i class="fa fa-book"></i>
-                    <span class="menu-header-name">Grades/Classes/Subjects</span>
+                    <span class="menu-header-name">Grades</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-down pull-right erroSign"></i>
                     </span>
                 </a>
                 <ul id="ul-gradeId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=course3 name="course" style="display:block" onclick="callController('/Grade/AddRecord','Add Grade')"><a href="#"><i class="fa fa-circle-o"></i>Add Grade</a></li>
-                    <li id=course1 name="course" style="display:block" onclick="callController('/Grade/GetRecord','View Grade')"><a href="#"><i class="fa fa-circle-o"></i>View Grade</a></li>
+                    <li id="li-gradeId1" name="course" style="display:block" onclick="callController('/Grade/AddRecord','Add Grade')"><a href="#"><i class="fa fa-circle-o"></i>Add Grade</a></li>
+                    <li id="li-gradeId2" name="course" style="display:block" onclick="callController('/Grade/GetRecord','View Grade')"><a href="#"><i class="fa fa-circle-o"></i>View Grade</a></li>
                 </ul>
             </li>
-            <li class="treeview" id="menu-grade" style="display:block;width:auto;">
+            <li class="treeview" id="menu-class" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
                     <i class="fa fa-book"></i>
                     <span class="menu-header-name">Classes</span>
@@ -227,9 +227,9 @@
                         <i class="fa fa-angle-down pull-right erroSign"></i>
                     </span>
                 </a>
-                <ul id="ul-gradeId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=course1 name="course" style="display:block" onclick="callController('/Classes/GetRecord','View Classes')"><a href="#"><i class="fa fa-circle-o"></i>View Classes</a></li>
-                    <li id=course3 name="course" style="display:block" onclick="callController('/Classes/AddRecord','Add Classes')"><a href="#"><i class="fa fa-circle-o"></i>Add Classes</a></li>
+                <ul id="ul-classId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id="li-classId2" name="course" style="display:block" onclick="callController('/Classes/AddRecord','Add Classes')"><a href="#"><i class="fa fa-circle-o"></i>Add Classes</a></li>
+                    <li id="li-classId1" name="course" style="display:block" onclick="callController('/Classes/GetRecord','View Classes')"><a href="#"><i class="fa fa-circle-o"></i>View Classes</a></li>
                 </ul>
             </li>
 
@@ -242,11 +242,24 @@
                     </span>
                 </a>
                 <ul id="ul-subjectId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=subjecte3 name="subject" style="display:block" onclick="callController('/Subject/AddRecord','Add Subject')"><a href="#"><i class="fa fa-circle-o"></i>Add Subject</a></li>
-                    <li id=subjecte1 name="subject" style="display:block" onclick="callController('/Subject/GetRecord','View Subject')"><a href="#"><i class="fa fa-circle-o"></i>View Subject</a></li>
-
+                    <li id="li-subjecte1" name="subject" style="display:block" onclick="callController('/Subject/AddRecord','Add Subject')"><a href="#"><i class="fa fa-circle-o"></i>Add Subject</a></li>
+                    <li id="li-subjecte2" name="subject" style="display:block" onclick="callController('/Subject/GetRecord','View Subject')"><a href="#"><i class="fa fa-circle-o"></i>View Subject</a></li>
                 </ul>
             </li>
+
+            <li class="treeview" id="menu-gradeMaintanance" style="display:block;width:auto;">
+                <a href="#" class="aprovince">
+                    <i class="fa fa-book"></i>
+                    <span class="menu-header-name">Grade Maintanance</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-down pull-right erroSign"></i>
+                    </span>
+                </a>
+                <ul id="ul-gradeMaintananceId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id="li-gradeMaintananceId1" name="course" style="display:block" onclick="callController('/GradeMaintanance/GetRecord','Grade Maintanance')"><a href="#"><i class="fa fa-circle-o"></i>Grade Maintanance</a></li>
+                </ul>
+            </li>
+
             <li class="treeview" id="menu-teacher" style="display:block;width:auto;">
                 <a href="#" class="aprovince">
                     <i class="fa fa-pencil"></i>
@@ -255,10 +268,10 @@
                         <i class="fa fa-angle-down pull-right erroSign"></i>
                     </span>
                 </a>
-                <ul id="ul-registerId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=student3 name="student" style="display:block" onclick="callController('/TeacherRegister/CreateRecord','Create Teacher')"><a href="#"><i class="fa fa-circle-o"></i>Create Teacher</a></li>
-                    <li id=student1 name="student" style="display:block" onclick="callController('/TeacherRegister/GetRecord','View Teacher')"><a href="#"><i class="fa fa-circle-o"></i>View Teacher</a></li>
-                    <li id=student1 name="student" style="display:none" onclick="callController('/TeacherRoles/CreateRoles','Create Roles')"><a href="#"><i class="fa fa-circle-o"></i>Create Roles</a></li>
+                <ul id="ul-teacherId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id="li-teacherId1" name="student" style="display:block" onclick="callController('/TeacherRegister/CreateRecord','Create Teacher')"><a href="#"><i class="fa fa-circle-o"></i>Create Teacher</a></li>
+                    <li id="li-teacherId2" name="student" style="display:block" onclick="callController('/TeacherRegister/GetRecord','View Teacher')"><a href="#"><i class="fa fa-circle-o"></i>View Teacher</a></li>
+                    <li id="li-teacherId3" name="student" style="display:none" onclick="callController('/TeacherRoles/CreateRoles','Create Roles')"><a href="#"><i class="fa fa-circle-o"></i>Create Roles</a></li>
                     @*<li id=student3 name="student" style="display:block" onclick="callController('/Teacher/AddRecord','Create Teacher')"><a href="#"><i class="fa fa-circle-o"></i>Create Teacher</a></li>
                 <li id=student1 name="student" style="display:block" onclick="callController('/Teacher/GetRecord','View Teacher')"><a href="#"><i class="fa fa-circle-o"></i>View Teacher</a></li>*@
                 </ul>
@@ -267,7 +280,7 @@
             <li class="treeview dashboardId" id="N3" style="display:block;width:auto;">
                 <a id="a-dashboardId" href="#" onclick="callController('/Dashboard/GetRecord')">
                     <i class="fa fa-home"></i>
-                    <span id="span-SurbubId" class="menu-header-name">Dashboard</span>
+                    <span id="span-dashboardId" class="menu-header-name">Dashboard</span>
                     <span class="pull-right-container">
                         <i class="fa pull-right"></i>
                     </span>
@@ -276,7 +289,7 @@
             <li class="treeview rolesId" id="N3" style="display:block;width:auto;">
                 <a id="a-rolesId" href="#" onclick="callController('/Roles/GetRecord')">
                     <i class="fa fa-home"></i>
-                    <span id="span-SurbubId" class="menu-header-name">Roles</span>
+                    <span id="span-roleId" class="menu-header-name">Roles</span>
                     <span class="pull-right-container">
                         <i class="fa pull-right"></i>
                     </span>
@@ -293,9 +306,9 @@
                     </span>
                 </a>
                 <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=subjecte3 name="subject" style="display:block" onclick="callController('/Books/DownloadBooks','Download Books')"><a href="#"><i class="fa fa-circle-o"></i>Download Books</a></li>
-                    <li id=subjecte3 name="subject" style="display:block" onclick="callController('/QuestionPaper/DownloadQuestionPaper','Download Question Paper')"><a href="#"><i class="fa fa-circle-o"></i>Download Question Paper</a></li>
-                    <li id=subjecte1 name="subject" style="display:block" onclick="callController('/Exams/UploadExams','Upload Exams')"><a href="#"><i class="fa fa-circle-o"></i>Upload Exams</a></li>
+                    <li id="subjecte3" name="subject" style="display:block" onclick="callController('/Books/DownloadBooks','Download Books')"><a href="#"><i class="fa fa-circle-o"></i>Download Books</a></li>
+                    <li id="subjecte3" name="subject" style="display:block" onclick="callController('/QuestionPaper/DownloadQuestionPaper','Download Question Paper')"><a href="#"><i class="fa fa-circle-o"></i>Download Question Paper</a></li>
+                    <li id="subjecte1" name="subject" style="display:block" onclick="callController('/Exams/UploadExams','Upload Exams')"><a href="#"><i class="fa fa-circle-o"></i>Upload Exams</a></li>
 
 
                     @*<hr />
@@ -310,7 +323,7 @@
 
 
             <!--Timesheet-->
-            <li class="treeview" id="menu-student" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+            <li class="treeview" id="menu-timesheetId" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
                 <a href="#" class="aprovince">
                     <i class="fa fa-calendar"></i>
                     <span class="menu-header-name">Timesheet</span>
@@ -318,14 +331,14 @@
                         <i class="fa fa-angle-down pull-right erroSign"></i>
                     </span>
                 </a>
-                <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=student1 name="student" style="display:block" onclick="callController('/Timesheet/GetRecord','View Timesheet')"><a href="#"><i class="fa fa-circle-o"></i>View Timesheets(Admin)</a></li>
-                    <li id=student3 name="student" style="display:block" onclick="callController('/Timesheet/AddRecord','Create Timesheet')"><a href="#"><i class="fa fa-circle-o"></i>Create Timesheet(Admin)</a></li>
+                <ul id="ul-timesheetId" class="sidebar-submenu treeview-menu" style="width:auto;">
+                    <li id="timesheetId1" name="student" style="display:block" onclick="callController('/Timesheet/GetRecord','View Timesheet')"><a href="#"><i class="fa fa-circle-o"></i>View Timesheets(Admin)</a></li>
+                    <li id="timesheetId2" name="student" style="display:block" onclick="callController('/Timesheet/AddRecord','Create Timesheet')"><a href="#"><i class="fa fa-circle-o"></i>Create Timesheet(Admin)</a></li>
                 </ul>
             </li>
 
             <!--Payment(Admin)-->
-            <li class="treeview" id="menu-subject" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+            <li class="treeview" id="menu-payment" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
                 <a href="#" class="aprovince">
                     <i class="fa fa-money"></i>
                     <span class="menu-header-name">Payment</span>
@@ -334,14 +347,14 @@
                     </span>
                 </a>
                 <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=subjecte1 name="subject" style="display:block" onclick="callController('/StudentPayment/viewStudentPayment','View All Payment')"><a href="#"><i class="fa fa-circle-o"></i>View All Payment</a></li>
-                    <li id=subjecte3 name="subject" style="display:block" onclick="callController('/StudentPayment/GetRecord','Make Payment')"><a href="#"><i class="fa fa-circle-o"></i>Make Payment</a></li>
+                    <li id="li-paymentId" name="subject" style="display:block" onclick="callController('/StudentPayment/viewStudentPayment','View All Payment')"><a href="#"><i class="fa fa-circle-o"></i>View All Payment</a></li>
+                    <li id="li-paymentId" name="subject" style="display:block" onclick="callController('/StudentPayment/GetRecord','Make Payment')"><a href="#"><i class="fa fa-circle-o"></i>Make Payment</a></li>
                 </ul>
             </li>
 
 
             <!--Upload Study materials)-->
-            <li class="treeview" id="menu-subject" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
+            <li class="treeview" id="menu-study-material" style="display:block;width:auto;background-color:rgb(43, 67, 81)">
                 <a href="#" class="aprovince">
                     <i class="fa fa-money"></i>
                     <span class="menu-header-name">Upload Study materials</span>
@@ -350,8 +363,8 @@
                     </span>
                 </a>
                 <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id=subjecte3 name="subject" style="display:block" onclick="callController('/UploadBooks/DownloadBooks','Upload Books')"><a href="#"><i class="fa fa-circle-o"></i>Upload Books</a></li>
-                    <li id=subjecte3 name="subject" style="display:block" onclick="callController('/UploadQuestionPaper/DownloadQuestionPaper','Upload Question Paper')"><a href="#"><i class="fa fa-circle-o"></i>Upload Question Paper</a></li>
+                    <li id="subjecte33" name="subject" style="display:block" onclick="callController('/UploadBooks/DownloadBooks','Upload Books')"><a href="#"><i class="fa fa-circle-o"></i>Upload Books</a></li>
+                    <li id="subjecte333" name="subject" style="display:block" onclick="callController('/UploadQuestionPaper/DownloadQuestionPaper','Upload Question Paper')"><a href="#"><i class="fa fa-circle-o"></i>Upload Question Paper</a></li>
                 </ul>
             </li>
 

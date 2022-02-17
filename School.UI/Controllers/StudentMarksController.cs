@@ -17,14 +17,13 @@ namespace School.UI.Controllers
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
     public class StudentMarksController : BaseController
     {
-        private IStudentMarksRepository studentSubjectMarksRepository;
+       // private IStudentMarksRepository studentSubjectMarksRepository;
         private ISubjectRepository subjectRepository;
         private IStudentMarksRepository studentMarksRepository;
 
-        public StudentMarksController(IStudentMarksRepository studentSubjectMarksRepository, ISubjectRepository subjectRepository,
+        public StudentMarksController(ISubjectRepository subjectRepository,
             IStudentMarksRepository studentMarksRepository)
         {
-            this.studentSubjectMarksRepository = studentSubjectMarksRepository;
             this.subjectRepository = subjectRepository;
             this.studentMarksRepository = studentMarksRepository;
         }
@@ -39,12 +38,16 @@ namespace School.UI.Controllers
                 _dynamic.TeacherId = "TC00000008";
                 _dynamic.type = "start";
 
-            List<StudentSubjectMarks> _StudentSubjectMarks = studentSubjectMarksRepository.GetByAny(_dynamic);
+            List<StudentSubjectMarks> _StudentSubjectMarks = studentMarksRepository.GetByAny(_dynamic);
             StudentSubjectMarksVM model = new StudentSubjectMarksVM();
             model.StudentSubjectMarksList = _StudentSubjectMarks;
             Dictionary<string, string> GradeDictionary = CostantData.dictGrades();
             List<SelectListItem> list = dropdownHelper(GradeDictionary);
-            model.GradeDropboxItemList = new SelectList(list, "Value", "Text");
+            model.GradeDropboxItemList = new SelectList(list, "Value", "Text", "Grade8");
+            model.Subject = "English 8";
+            // string _genda = model.User.Gender;
+            //model.GenderDropboxItemList = new SelectList(list, "Value", "Text", _genda);
+
 
             return PartialView("_TableRecordSubjectMarks", model);
         }
@@ -96,7 +99,7 @@ namespace School.UI.Controllers
                 }
 
                 List<StudentSubjectMarks> modelList = myDeserialiseFromJson<List<StudentSubjectMarks>>.Deserialise(jsonString);
-                studentSubjectMarksRepository.SaveMany(modelList);
+                studentMarksRepository.SaveMany(modelList);
                 return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -156,11 +159,47 @@ namespace School.UI.Controllers
 
             List<SelectListItem> list = dropdownHelper(dictionary);
             model.SubjectDropboxItemList = new SelectList(list, "Value", "Text");
-                   
+
             return PartialView("_PartialDropBox", model);
         }
 
+        [HttpPost]
+        public ActionResult UpdateTable(string gradeId, string subjectId)
+        {
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+            StudentSubjectMarksVM model = new StudentSubjectMarksVM();
+  
+            dynamic _dynamic = new ExpandoObject();
+            _dynamic.GradeId = gradeId;// "Grade8";
+            _dynamic.SubjectId = subjectId;// "Eng008";
+            _dynamic.type = "start";
 
+            switch (gradeId)
+            {
+                case "Grade8":
+                    _dynamic.TeacherId = "TC00000008";
+                    break;
+                case "Grade9":
+                    _dynamic.TeacherId = "TC00000009";
+                    break;
+                case "Grade10":
+                    _dynamic.TeacherId = "TC00000010";
+                    break;
+                case "Grade11":
+                    _dynamic.TeacherId = "TC00000011";
+                    break;
+                case "Grade12":
+                    _dynamic.TeacherId = "TC00000012";
+                    break;
+                default:
+                    _dynamic.TeacherId = "TC00000008";
+                    break;
+            }
+       
+            List<StudentSubjectMarks> _StudentSubjectMarks = studentMarksRepository.GetByAny(_dynamic);
+            model.StudentSubjectMarksList = _StudentSubjectMarks;          
+            return PartialView("_TableRecordSubjectMarksOnly", model);
+        }
 
         private List<Subject> getSubjectByGrade(string selectedValue, Dictionary<string, string> dictionary)
         {
@@ -173,6 +212,27 @@ namespace School.UI.Controllers
 
             return subjects;
         }
+
+
+        #region Save UpdateRecord
+        [HttpPost]
+        public ActionResult Update(StudentSubjectMarks model)
+        {
+            try
+            {
+                model.GradeId = CostantData.getFieldId(CostantData.dictGrades(), model.GradeId.Trim());
+                studentMarksRepository.Update(model);
+                return Json(new { result = "true", message = "Data updated Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "false", message = ex.Message, title = "Request Failed" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+
+
+
         #endregion
 
     }

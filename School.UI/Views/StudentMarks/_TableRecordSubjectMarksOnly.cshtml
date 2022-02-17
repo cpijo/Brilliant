@@ -1,62 +1,6 @@
 ﻿@model School.UI.ViewModels.StudentSubjectMarksVM
 
-<style>
 
-    .card_t {
-        border-radius: 2px;
-        display: inline-block;
-        min-height: 100px;
-        margin: 1rem;
-        position: relative;
-        width: calc(100% - 20px);
-        padding-top: 5px;
-    }
-
-    .card-s {
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-    }
-
-        .card-s:hover {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
-        }
-</style>
-
-<div id="studentSubjectMarks-page" class="col-md-12" style="border: 0px solid white; display: inline-block;">
-
-    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
-        <div class="card_t card-s">
-            <div class="col-xs-12 form-horizontal">
-
-                <div class="form-group">
-                    <div class="col-md-6">
-                        @Html.DropDownListFor(m => m.Grade, Model.GradeDropboxItemList, new { @id = "gradeId", @class = "form-control selectedSearchId" })
-                    </div>
-                    <div id="inputHolderId66" class="col-md-6">
-                        @*<input id="subjectId" type="text"  class="col-md-12 form-control" />*@
-                        @Html.TextBoxFor(m => m.Subject,new {@id= "subjectId", @class= "col-md-12 form-control" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-6">
-                        <input type="text" id="pickdateId" class="form-control" style="margin-left:1px;margin-right:1px">
-                    </div>
-                    <div class="col-md-6">
-                        <button id="btnSave" type="button" class="btnSave btn btn-primary">Save Marks</button>
-                        <button type="button" id="btnSeachEdit" class="btn btn-warning btnWidth btnlogColor">Search Marks</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <hr />
-
-    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
-        <div class="card_t card-s">
-            <div id="tableHolderId" class="form-group" style="padding:15px;">
 
                 @{
                     int rows = 0;
@@ -117,12 +61,6 @@
                         }
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-
-</div>
-
 
 <script>
 
@@ -156,32 +94,6 @@
             classControllerHelper.appendPartial(response, pageObj);
         }
     });
-
-
-
-
-    $("#subjectId").change(function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        //debugger;
-        //44444444444444
-        var _gradeId = $("#gradeId option:selected").val();
-        var _subjectId = $("#subjectId option:selected").val();
-        var data = {
-            'gradeId': _gradeId.trim(),
-            'subjectId': _subjectId.trim()
-        };
-
-        var partialHolder = "#tableHolderId";
-        var header = 'Update UserInfor';
-        var url = '/StudentMarks/UpdateTable';
-        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
-        classControllerHelper.callController(pageObj);
-
-    });
-
-
-
 
     $("#btnSave").click(function (event) {
         event.preventDefault();

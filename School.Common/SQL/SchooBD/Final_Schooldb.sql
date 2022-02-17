@@ -319,33 +319,33 @@ go
      PRIMARY KEY (StudentId,GradeId)
     );
 
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST08000001','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST08000002','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST08000003','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST08000004','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST08000005','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST08000006','Grade12','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST08000001','Grade8','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST08000002','Grade8','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST08000003','Grade8','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST08000004','Grade8','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST08000005','Grade8','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST08000006','Grade8','2020-10-10');
 
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST09000001','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST09000002','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST09000003','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST09000004','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST09000005','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST09000006','Grade12','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST09000001','Grade9','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST09000002','Grade9','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST09000003','Grade9','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST09000004','Grade9','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST09000005','Grade9','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST09000006','Grade9','2020-10-10');
 
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST10000001','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST10000002','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST10000003','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST10000004','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST10000005','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST10000006','Grade12','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST10000001','Grade10','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST10000002','Grade10','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST10000003','Grade10','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST10000004','Grade10','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST10000005','Grade10','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST10000006','Grade10','2020-10-10');
 
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST11000001','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST11000002','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST11000003','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST11000004','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST11000005','Grade12','2020-10-10');
-	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST11000006','Grade12','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST11000001','Grade11','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST11000002','Grade11','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST11000003','Grade11','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST11000004','Grade11','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST11000005','Grade11','2020-10-10');
+	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST11000006','Grade11','2020-10-10');
 
 	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST12000001','Grade12','2020-10-10');
 	INSERT INTO RegisteredGrade(studentid,GradeId ,CreatedDate) values('ST12000002','Grade12','2020-10-10');
@@ -453,47 +453,47 @@ go
 	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST08000006','Grade8','Quater 1','Bio008',86);
 	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST08000006','Grade8','Quater 1','Geo008',76);
 
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000001','Grade09','Quater 1','Eng009',76);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000001','Grade09','Quater 1','Ven009',70);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000001','Grade09','Quater 1','Sie009',85);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000001','Grade09','Quater 1','Mat009',92);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000001','Grade09','Quater 1','Bio009',81);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000001','Grade09','Quater 1','Geo009',72);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000001','Grade9','Quater 1','Eng009',76);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000001','Grade9','Quater 1','Ven009',70);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000001','Grade9','Quater 1','Sie009',85);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000001','Grade9','Quater 1','Mat009',92);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000001','Grade9','Quater 1','Bio009',81);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000001','Grade9','Quater 1','Geo009',72);
 																													  
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000002','Grade09','Quater 1','Eng009',72);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000002','Grade09','Quater 1','Ven009',72);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000002','Grade09','Quater 1','Sie009',82);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000002','Grade09','Quater 1','Mat009',92);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000002','Grade09','Quater 1','Bio009',82);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000002','Grade09','Quater 1','Geo009',72);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000002','Grade9','Quater 1','Eng009',72);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000002','Grade9','Quater 1','Ven009',72);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000002','Grade9','Quater 1','Sie009',82);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000002','Grade9','Quater 1','Mat009',92);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000002','Grade9','Quater 1','Bio009',82);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000002','Grade9','Quater 1','Geo009',72);
 																													 		
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000003','Grade09','Quater 1','Eng009',73);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000003','Grade09','Quater 1','Ven009',73);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000003','Grade09','Quater 1','Sie009',83);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000003','Grade09','Quater 1','Mat009',93);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000003','Grade09','Quater 1','Bio009',83);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000003','Grade09','Quater 1','Geo009',73);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000003','Grade9','Quater 1','Eng009',73);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000003','Grade9','Quater 1','Ven009',73);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000003','Grade9','Quater 1','Sie009',83);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000003','Grade9','Quater 1','Mat009',93);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000003','Grade9','Quater 1','Bio009',83);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000003','Grade9','Quater 1','Geo009',73);
 																													  		
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000004','Grade09','Quater 1','Eng009',74);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000004','Grade09','Quater 1','Ven009',74);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000004','Grade09','Quater 1','Sie009',84);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000004','Grade09','Quater 1','Mat009',94);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000004','Grade09','Quater 1','Bio009',84);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000004','Grade09','Quater 1','Geo009',74);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000004','Grade9','Quater 1','Eng009',74);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000004','Grade9','Quater 1','Ven009',74);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000004','Grade9','Quater 1','Sie009',84);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000004','Grade9','Quater 1','Mat009',94);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000004','Grade9','Quater 1','Bio009',84);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000004','Grade9','Quater 1','Geo009',74);
 																													   	
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000005','Grade09','Quater 1','Eng009',75);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000005','Grade09','Quater 1','Ven009',75);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000005','Grade09','Quater 1','Sie009',85);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000005','Grade09','Quater 1','Mat009',95);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000005','Grade09','Quater 1','Bio009',85);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000005','Grade09','Quater 1','Geo009',75);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000005','Grade9','Quater 1','Eng009',75);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000005','Grade9','Quater 1','Ven009',75);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000005','Grade9','Quater 1','Sie009',85);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000005','Grade9','Quater 1','Mat009',95);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000005','Grade9','Quater 1','Bio009',85);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000005','Grade9','Quater 1','Geo009',75);
 																													   		
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000006','Grade09','Quater 1','Eng009',76);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000006','Grade09','Quater 1','Ven009',76);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000006','Grade09','Quater 1','Sie009',86);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000006','Grade09','Quater 1','Mat009',96);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000006','Grade09','Quater 1','Bio009',86);
-	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000006','Grade09','Quater 1','Geo009',76);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000006','Grade9','Quater 1','Eng009',76);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000006','Grade9','Quater 1','Ven009',76);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000006','Grade9','Quater 1','Sie009',86);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000006','Grade9','Quater 1','Mat009',96);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000006','Grade9','Quater 1','Bio009',86);
+	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST09000006','Grade9','Quater 1','Geo009',76);
 
 
 	INSERT INTO StudentMarks(StudentId,GradeId,ExamType,SubjectId,MarkValue) values('ST10000001','Grade10','Quater 1','Eng010',76);

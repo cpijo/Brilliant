@@ -58,8 +58,12 @@
     }
 
     function OnFailure(response) {
+        var msgObj = { message: response.message, type: response.type, title: response.title, pageId: "" };
+        classMessageResponse.showMessage(msgObj);
     };
     function OnSuccess(response) {
+        var msgObj = { message: response.message, type: response.type, title: response.title, pageId: "" };
+        classMessageResponse.showMessage(msgObj);
     };
 
 </script>

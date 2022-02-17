@@ -36,6 +36,7 @@ namespace School.UI.Controllers
             return PartialView("_AddSubject", model);
         }
         #endregion
+
         #region Save Subject Results 
         [HttpPost]
         public ActionResult SaveRecord(Subject model)
@@ -48,6 +49,7 @@ namespace School.UI.Controllers
                 }
 
                 subjectRepository.Save(model);
+                bool status = subjectRepository.IsSuccess();
 
                 return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
             }

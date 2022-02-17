@@ -10,5 +10,6 @@ namespace School.Services.Interface
         void SaveMany(List<T> model);
         void Update(T model);
         void Delete(List<T> model);
+        bool IsSuccess();
     }
 }

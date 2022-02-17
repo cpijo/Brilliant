@@ -11,21 +11,20 @@ using System.Web.Mvc;
 namespace School.UI.Controllers
 {
     [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
-    public class ClassesController : Controller
+    public class GradeMaintananceController : Controller
     {
-        private IClassesRepository classRepository;
-        public ClassesController(IClassesRepository _classRepository)
+        private IClassesRepository gradesRepository;
+        public GradeMaintananceController(IClassesRepository gradesRepository)
         {
-            this.classRepository = _classRepository;
+            this.gradesRepository = gradesRepository;
         }
 
         #region Get Grades
         [HttpGet]
         public ActionResult GetRecord()
         {
-            List<Classes> model = classRepository.GetAll();
-            return PartialView("_TableClass", model);
-            //return PartialView("_GetRecord", model);
+            List<Classes> model = gradesRepository.GetAll();
+            return PartialView("_GetRecord", model);
         }
         #endregion
 
@@ -49,9 +48,7 @@ namespace School.UI.Controllers
                     model.ClassId = Guid.NewGuid().ToString();
                 }
 
-                classRepository.Save(model);
-
-                bool status = classRepository.IsSuccess();
+                gradesRepository.Save(model);
 
                 return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
             }
@@ -62,23 +59,22 @@ namespace School.UI.Controllers
         }
         #endregion
 
-        #region Add New Record
+        #region Update View
         [HttpPost]
         public ActionResult UpdateView(Classes model)
         {
-            model.OldClassId = model.ClassId;
+            //model.oldClassId = model.ClassId;
             return PartialView("_UpdateClass", model);
         }
         #endregion
 
-        #region Save Student Results 
+        #region Update
         [HttpPost]
         public ActionResult Update(Classes model)
         {
             try
             {
-                classRepository.Update(model);
-                bool status = classRepository.IsSuccess();
+                gradesRepository.Update(model);
                 return Json(new { result = "true", message = "Data saved Successfully", title = "Request Successfully" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -92,7 +88,7 @@ namespace School.UI.Controllers
         [HttpGet]
         public ActionResult SearchRecord()
         {
-            List<Classes> model = classRepository.GetAll();
+            List<Classes> model = gradesRepository.GetAll();
             return PartialView("_TableClass", model);
         }
         #endregion

@@ -142,6 +142,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\BaseController_Ref.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GradeMaintananceController.cs" />
     <Compile Include="Controllers\QuestionPaperController.cs" />
     <Compile Include="Controllers\GradeClassController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
@@ -231,6 +232,15 @@
     <Content Include="Views\StudentProfile\UploadPartsReport\dynamic_html.cshtml" />
     <Content Include="Views\Books\_ViewBooks.cshtml" />
     <Content Include="Views\ChartGraphs\ChartGraphIndex.cshtml" />
+    <Content Include="Views\GradeMaintanance\_AddClass.cshtml" />
+    <Content Include="Views\GradeMaintanance\_GetRecord.cshtml" />
+    <Content Include="Views\GradeMaintanance\_TableClass.cshtml" />
+    <Content Include="Views\GradeMaintanance\_UpdateClass.cshtml" />
+    <Content Include="Views\Classes - Copy\_AddClass.cshtml" />
+    <Content Include="Views\Classes - Copy\_GetRecord.cshtml" />
+    <Content Include="Views\Classes - Copy\_TableClass.cshtml" />
+    <Content Include="Views\Classes - Copy\_UpdateClass.cshtml" />
+    <Content Include="Views\StudentMarks\_TableRecordSubjectMarksOnly.cshtml" />
     <TypeScriptCompile Include="AppJs\js_notes\override\override_exp_1_class.ts" />
     <Content Include="AppJs\js_notes\mess\inheritance_exp_1.js" />
     <Content Include="AppJs\js_notes\mess\mss2.js" />

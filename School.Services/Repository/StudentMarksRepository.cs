@@ -62,14 +62,17 @@ namespace School.Services.Repository
 
         public override void Update(StudentSubjectMarks model)
         {
-            command.CommandText = "UPDATE SubjectResult SET MarkValue=@MarkValue " +
-                    "Symbol=@Symbol WHERE StudentId = @StudentId AND GradeId = @GradeId AND SubjectId = @SubjectId  AND ExamDate = @ExamDate";
+            //command.CommandText = "UPDATE StudentMarks SET MarkValue=@MarkValue " +
+            //        "Symbol=@Symbol WHERE StudentId = @StudentId AND GradeId = @GradeId AND SubjectId = @SubjectId  AND ExamDate = @ExamDate";
+
+            command.CommandText = "UPDATE StudentMarks SET MarkValue=@MarkValue " +
+          "WHERE StudentId = @StudentId AND GradeId = @GradeId AND SubjectId = @SubjectId";
 
             command.Parameters.AddWithValue("@StudentId", model.StudentId);
             command.Parameters.AddWithValue("@GradeId", model.GradeId);
             command.Parameters.AddWithValue("@SubjectId", model.SubjectId);
             command.Parameters.AddWithValue("@MarkValue", model.MarkValue);
-            command.Parameters.AddWithValue("@ExamDate", model.ExamDate);
+            //command.Parameters.AddWithValue("@ExamDate", model.ExamDate);
 
             base.Update(model);
         }

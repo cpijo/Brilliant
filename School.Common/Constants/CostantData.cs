@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace School.Common.Constants
 {
     public static class CostantData
     {
+
+        public static string RemoveWhiteSpaces(this string input)
+        {
+            return Regex.Replace(input, @"\s+", "");
+        }
+
 
         public static string getFieldId(Dictionary<string, string> dictValues, string selectedValue)
         {
