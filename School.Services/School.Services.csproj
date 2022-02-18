@@ -81,6 +81,7 @@
     <Compile Include="Repository\ClassesRepository.cs" />
     <Compile Include="Repository\BooksRepository.cs" />
     <Compile Include="Repository\GradeTeacherRepository.cs" />
+    <Compile Include="Repository\StudentAttendanceRepositoryIsDirty.cs" />
     <Compile Include="Repository\TeachingRolesRepository.cs" />
     <Compile Include="Repository\UserRolesRepository.cs" />
     <Compile Include="Repository\StudentAttendanceRepository.cs" />
@@ -114,6 +115,10 @@
     <ProjectReference Include="..\School.Entities\School.Entities.csproj">
       <Project>{3060ed27-1d8f-4463-a3dd-864b1c729688}</Project>
       <Name>School.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ToolBox.Common\ToolBox.Common.csproj">
+      <Project>{be09721a-7232-4f32-8c58-59dc31c16f36}</Project>
+      <Name>ToolBox.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

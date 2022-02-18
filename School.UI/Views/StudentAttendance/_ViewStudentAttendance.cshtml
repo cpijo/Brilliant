@@ -30,108 +30,107 @@
 
 @using (Ajax.BeginForm("Save", "StudentAttendance", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
 {
-    <div id="attendance-page" class="col-md-12" style="border: 0px solid white; display: inline-block;">
+<div id="attendance-page" class="col-md-12" style="border: 0px solid white; display: inline-block;">
 
-        <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
 
-            <div class="card_t card-s">
-                <div class="col-xs-12 form-horizontal">
+        <div class="card_t card-s">
+            <div class="col-xs-12 form-horizontal">
 
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            @Html.DropDownListFor(m => m.Grades.Grade, Model.GradeDropboxItemList, new { @id = "gradeId", @class = "form-control" })
-                        </div>
-                        <div id="inputHolderId" class="col-md-6">
-                            @Html.DropDownListFor(m => m.Subject.SubjectName, Model.SubjectDropboxItemList, new { @id = "subjectId", @class = "form-control" })
-                        </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        @Html.DropDownListFor(m => m.Grades.Grade, Model.GradeDropboxItemList, new { @id = "gradeId", @class = "form-control" })
                     </div>
-
-                    <div class="form-group">
-                        <div class="col-md-6">
-                            <input type="text" id="pickdateId" class="form-control" style="margin-left:1px;margin-right:1px">
-                        </div>
-                        <div class="col-md-6">
-                            <button id="btnSaveAttend" type="button" class="btnSaveAttend btn btn-primary">Save Attendance</button>
-                            @*<button id="btnSearchAttend" type="button" class="btn btn-warning btnWidth btnlogColor">Edit Register</button>*@
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
-
-            <div class="card_t card-s">
-                <div class="col-xs-12" style="padding:15px;">
-
-                    <div class="form-group">
-                        <div class="col-md-12">
-
-
-                            <table id="tableId" class="table" style="border:1px solid silver;">
-                                <thead style="background-color:rgb(47, 71, 86);color:white;">
-                                    <tr>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.SubjectId)
-                                        </th>
-                                        <th style="display:none">
-                                            StudentId
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.LastName)
-                                        </th>
-                                        <th>
-                                            <input type="checkbox" id="presentAllId" class="present" /> Present
-                                        </th>
-                                        <th>
-                                            <input type="checkbox" id="absentAllId" class="present" /> Absent
-                                        </th>
-                                        <th>
-                                            @Html.DisplayNameFor(model => model.attandance)
-                                        </th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach (var item in Model.StudentAttendance)
-                                    {
-                                    
-                                        <tr class="tr_id">
-                                            <td style="display:none">
-                                                @Html.DisplayFor(model => item.StudentId)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => item.FirstName)
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => item.LastName)
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" name="present" class="present" />
-                                            </td>
-                                            <td>
-                                                <input type="checkbox" name="absent" class="absent" />
-                                            </td>
-                                            <td>
-                                                @Html.DisplayFor(model => item.AttendanceStatus, new { @id = "AttendanceStatusId", @class = "AttendanceStatus" })
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-
-                        </div>
+                    <div id="inputHolderId" class="col-md-6">
+                        @Html.DropDownListFor(m => m.Subject.SubjectName, Model.SubjectDropboxItemList, new { @id = "subjectId", @class = "form-control" })
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <input type="text" id="pickdateId" class="form-control" style="margin-left:1px;margin-right:1px">
+                    </div>
+                    <div class="col-md-6">
+                        <button id="btnSaveAttend" type="button" class="btnSaveAttend btn btn-primary">Save Attendance</button>
+                        @*<button id="btnSearchAttend" type="button" class="btn btn-warning btnWidth btnlogColor">Edit Register</button>*@
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
+
+    <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
+
+        <div class="card_t card-s">
+            <div id="tableHolderId" style="padding:15px;border:0px solid red;">
+
+                @*<div class="form-group">
+                    <div class="col-md-12">*@
+
+                        <table id="tableId" class="table" style="border:1px solid silver;">
+                            <thead style="background-color:rgb(47, 71, 86);color:white;">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.SubjectId)
+                                    </th>
+                                    <th style="display:none">
+                                        StudentId
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.LastName)
+                                    </th>
+                                    <th>
+                                        <input type="checkbox" id="presentAllId" class="present" /> Present
+                                    </th>
+                                    <th>
+                                        <input type="checkbox" id="absentAllId" class="present" /> Absent
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Attandance)
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model.StudentAttendance)
+                                {
+
+                                    <tr class="tr_id">
+                                        <td style="display:none">
+                                            @Html.DisplayFor(model => item.StudentId)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.FirstName)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.LastName)
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="present" class="present" />
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" name="absent" class="absent" />
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(model => item.AttendanceStatus, new { @id = "AttendanceStatusId", @class = "AttendanceStatus" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    @*</div>
+                </div>*@
+            </div>
+        </div>
+    </div>
+</div>
 }
 
 
-<script>
+    <script>
 
 
     $(document).ready(function () {
@@ -308,4 +307,49 @@
         classMessageResponse.showMessage(msgObj);
     }
 
-</script>
+
+    </script>
+
+
+    <script>
+        $("#subjectId").change(function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            //debugger;
+            //from view
+            var _gradeId = $("#gradeId option:selected").val();
+            var _subjectId = $("#subjectId option:selected").val();
+            var _attendanceDate = $("#pickdateId").val();
+            if (_attendanceDate === undefined || _attendanceDate === "") {
+
+
+                var date = new Date();
+                date.setDate(date.getDate());
+                var tempoMonth = (date.getMonth() + 1);
+                var tempoDate = (date.getDate());
+                if (tempoMonth < 10) tempoMonth = '0' + tempoMonth;
+                if (tempoDate < 10) tempoDate = '0' + tempoDate;
+                _attendanceDate = tempoDate + '/' + tempoMonth + '/' + date.getFullYear();
+
+                //https://www.toptal.com/software/definitive-guide-to-datetime-manipulation
+                //var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                //var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                //var dateTime = date + ' ' + time;
+                //2018-8-3 11:12:40
+
+            }
+            var data = {
+                'gradeId': _gradeId.trim(),
+                'subjectId': _subjectId.trim(),
+                'attendanceDate': _attendanceDate.trim(),
+            };
+
+            var partialHolder = "#tableHolderId";
+            var header = 'Update UserInfor';
+            var url = '/StudentAttendance/UpdateTable';
+            var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+            classControllerHelper.callController(pageObj);
+
+        });
+
+    </script>

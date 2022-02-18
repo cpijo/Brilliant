@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31702.278
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1525
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Common", "School.Common\School.Common.csproj", "{4F048019-4B42-4646-84C8-8AACA06ED644}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.Services", "School.Services\School.Services.csproj", "{AFF3E4ED-2311-4B8D-B72A-F90AD0CA269D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "School.UI", "School.UI\School.UI.csproj", "{0BAD731D-D17B-4965-BC7C-B34C2E12CEE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolBox.Common", "ToolBox.Common\ToolBox.Common.csproj", "{BE09721A-7232-4F32-8C58-59DC31C16F36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0BAD731D-D17B-4965-BC7C-B34C2E12CEE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BAD731D-D17B-4965-BC7C-B34C2E12CEE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BAD731D-D17B-4965-BC7C-B34C2E12CEE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE09721A-7232-4F32-8C58-59DC31C16F36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE09721A-7232-4F32-8C58-59DC31C16F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE09721A-7232-4F32-8C58-59DC31C16F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE09721A-7232-4F32-8C58-59DC31C16F36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

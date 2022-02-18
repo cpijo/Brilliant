@@ -897,3 +897,212 @@ INSERT INTO Roles VALUES
 	PRIMARY KEY (QuestionPaperId),
 	UNIQUE (ISBN)
 	)
+
+
+SELECT s.UserId,s.Firstname,s.LastName 
+		FROM  Student s 
+        WHERE UserId in(SELECT st.StudentId From StudentTeacher st
+        WHERE st.StudentId in(SELECT StudentId from StudentMarks Where GradeId='Grade8' and SubjectId='Eng008')
+        AND TeacherId='TC00000008'
+		)
+	
+
+	Select st.StudentId,FirstName,LastName,sm.GradeId,sm.SubjectId,sm.MarkValue,sm.ExamType
+        From StudentTeacher st 
+        INNER JOIN StudentMarks sm1 ON sm1.StudentId=st.StudentId
+	    AND sm1.GradeId='Grade8' AND sm1.SubjectId='Eng008'
+        LEFT JOIN StudentMarks sm ON sm.StudentId=st.StudentId
+	    AND sm.ExamType='Q2' AND sm.GradeId='Grade8' 
+        LEFT JOIN Student u ON u.UserId=st.StudentId;
+
+
+
+
+	CREATE TABLE StudentAttendance
+	(
+    AttendanceId int IDENTITY(1,1),
+    TeacherId varchar(50)  NOT NULL,
+    StudentId varchar(50)  NOT NULL,
+	GradeId varchar(50)  NOT NULL,
+	SubjectId varchar(50)  NOT NULL,
+	AttendanceDate  DATETIME NOT NULL,
+	CreatedDate  DATETIME NULL,
+	UpdatedDate  DATETIME NULL,
+	PRIMARY KEY (AttendanceId,StudentId),
+	UNIQUE (AttendanceId)
+	)
+
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000008','ST08000001','Grade8','Eng008','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000008','ST08000002','Grade8','Eng008','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000008','ST08000003','Grade8','Eng008','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000008','ST08000004','Grade8','Eng008','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000008','ST08000005','Grade8','Eng008','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000008','ST08000006','Grade8','Eng008','09/11/2021','09/11/2021','09/11/2021');
+
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000009','ST08000001','Grade9','Eng009','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000009','ST08000002','Grade9','Eng009','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000009','ST08000003','Grade9','Eng009','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000009','ST08000004','Grade9','Eng009','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000009','ST08000005','Grade9','Eng009','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000009','ST08000006','Grade9','Eng009','09/11/2021','09/11/2021','09/11/2021');
+
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000008','ST08000001','Grade8','Mat008','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000008','ST08000002','Grade8','Mat008','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000008','ST08000003','Grade8','Mat008','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000008','ST08000004','Grade8','Mat008','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000008','ST08000005','Grade8','Mat008','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000008','ST08000006','Grade8','Mat008','09/11/2021','09/11/2021','09/11/2021');
+
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000009','ST08000001','Grade9','Mat009','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000009','ST08000002','Grade9','Mat009','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000009','ST08000003','Grade9','Mat009','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000009','ST08000004','Grade9','Mat009','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000009','ST08000005','Grade9','Mat009','09/11/2021','09/11/2021','09/11/2021');
+INSERT INTO StudentAttendance(TeacherId,StudentId,GradeId,SubjectId,AttendanceDate,CreatedDate,UpdatedDate) values('TC00000009','ST08000006','Grade9','Mat009','09/11/2021','09/11/2021','09/11/2021');
+
+
+
+ALTER table StudentAttendance
+ADD  
+Attendance Varchar(10) NULL DEFAULT 'present';
+
+  
+
+Select sa.StudentId,FirstName,LastName
+        From Student st 
+        LEFT JOIN StudentAttendance sa
+		ON sa.StudentId =st.UserId
+		 AND sa.TeacherId='TC00000008' 
+		 AND sa.SubjectId='Eng008'
+		Where sa.GradeId='Grade8'
+
+Select sa.StudentId,FirstName,LastName,sa2.AttendanceDate,sa2.CreatedDate,sa2.UpdatedDate
+        From Student st 
+        INNER JOIN StudentAttendance sa
+		ON sa.StudentId =st.UserId
+		 AND sa.TeacherId='TC00000008' 
+		 AND sa.SubjectId='Eng008'
+		
+		 LEFT JOIN StudentAttendance sa2
+		ON sa2.StudentId =st.UserId
+		 AND sa2.AttendanceDate='09/11/2022'
+Where sa.GradeId='Grade8'
+
+
+
+Select sa.StudentId,FirstName,LastName,sa.AttendanceDate,sa.CreatedDate,sa.UpdatedDate
+        From Student st 
+        LEFT JOIN StudentAttendance sa
+		ON sa.StudentId =st.UserId
+		 AND sa.TeacherId='TC00000008' 
+		 AND sa.SubjectId='Eng008'
+	
+Where sa.GradeId='Grade8'	
+AND sa.AttendanceDate<>'09/11/2022'
+
+--https://dev.to/pocharis/relational-database-design-to-store-university-timetables-and-record-of-students-attendance-3jg4
+
+
+--oining subqueries
+--https://mode.com/sql-tutorial/sql-sub-queries/
+
+SELECT incidents.*,
+       sub.incidents AS incidents_that_day
+  FROM tutorial.sf_crime_incidents_2014_01 incidents
+  JOIN ( SELECT date,
+          COUNT(incidnt_num) AS incidents
+           FROM tutorial.sf_crime_incidents_2014_01
+          GROUP BY 1
+       ) sub
+    ON incidents.date = sub.date
+ ORDER BY sub.incidents DESC, time
+
+
+
+ SELECT *
+  FROM tutorial.sf_crime_incidents_2014_01
+ WHERE Date = (SELECT MIN(date)
+                 FROM tutorial.sf_crime_incidents_2014_01
+              )
+
+
+SELECT *
+  FROM tutorial.sf_crime_incidents_2014_01
+ WHERE Date IN (SELECT date
+                 FROM tutorial.sf_crime_incidents_2014_01
+                ORDER BY date
+                )
+
+
+
+--https://www.geeksengine.com/database/subquery/subquery-in-join-operation.php
+
+select y.CategoryID, 
+    y.CategoryName,
+    round(x.actual_unit_price, 2) as "Actual Avg Unit Price",
+    round(y.planned_unit_price, 2) as "Would-Like Avg Unit Price"
+from
+(
+    select avg(a.UnitPrice) as actual_unit_price, c.CategoryID
+    from order_details as a
+    inner join products as b on b.ProductID = a.ProductID
+    inner join categories as c on b.CategoryID = c.CategoryID
+    group by c.CategoryID
+) as x
+inner join 
+(
+    select a.CategoryID, b.CategoryName, avg(a.UnitPrice) as planned_unit_price
+    from products as a
+    inner join categories as b on b.CategoryID = a.CategoryID
+    group by a.CategoryID
+) as y on x.CategoryID = y.CategoryID
+
+
+
+--https://www.geeksengine.com/database/subquery/return-single-value.php
+select OrderID, CustomerID
+from orders
+where ShippedDate = (select max(ShippedDate) from orders);
+
+
+select CustomerID, CompanyName
+from customers
+where CustomerID in 
+(
+   select CustomerID 
+   from orders 
+   where orderDate > '1998-05-01'
+);
+
+
+select CustomerID, CompanyName
+from customers
+where CustomerID in 
+(
+    'BONAP',
+    'DRACD',
+    'ERNSH',
+    'LEHMS',
+    'LILAS',
+    'PERIC',
+    'QUEEN',
+    'RATTC',
+    'RICSU',
+    'SIMOB',
+    'TORTU'
+);
+
+
+
+
+SELECT city, sum_price 
+ FROM 
+(
+  SELECT city, SUM(price) AS sum_price FROM sale
+  GROUP BY city
+) AS s
+WHERE sum_price < 2100;
+
+
+SELECT name FROM product
+WHERE cost > ALL(SELECT price from sale);

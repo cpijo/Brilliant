@@ -77,6 +77,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SQL\SchooBD\northwind-sql.sql" />
     <Content Include="SQL\SchooBD\some_new_user_roles.sql" />
     <Content Include="SQL\SchooBD\Final_Schooldb.sql" />
   </ItemGroup>

@@ -180,6 +180,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Common\MVCHelpers\DropboxHelper.cs" />
     <Compile Include="Models\Common\SelectListHelper.cs" />
     <Compile Include="Models\MySecurity\userPagePermissionAttribute.cs" />
     <Compile Include="Models\MySecurity\CustomAuthorize.cs" />
@@ -223,6 +224,8 @@
     <Content Include="AppJs\controller\classControllerHelper.js" />
     <Content Include="AppJs\home\classIndexPage.js" />
     <Content Include="AppJs\js_notes\Inheritance\inheritance_exp_1.js" />
+    <Content Include="AppJs\Notes\notes - Copy.js" />
+    <Content Include="AppJs\Notes\notes.js" />
     <Content Include="images\school_img.jpg" />
     <Content Include="Views\ChartGraphs\chartjs\Chart.js" />
     <Content Include="Views\ChartGraphs\chartjs\Chart.min.js" />
@@ -241,6 +244,7 @@
     <Content Include="Views\Classes - Copy\_TableClass.cshtml" />
     <Content Include="Views\Classes - Copy\_UpdateClass.cshtml" />
     <Content Include="Views\StudentMarks\_TableRecordSubjectMarksOnly.cshtml" />
+    <Content Include="Views\StudentAttendance\_TableStudentAttendance.cshtml" />
     <TypeScriptCompile Include="AppJs\js_notes\override\override_exp_1_class.ts" />
     <Content Include="AppJs\js_notes\mess\inheritance_exp_1.js" />
     <Content Include="AppJs\js_notes\mess\mss2.js" />
@@ -1406,6 +1410,10 @@
     <ProjectReference Include="..\School.Services\School.Services.csproj">
       <Project>{aff3e4ed-2311-4b8d-b72a-f90ad0ca269d}</Project>
       <Name>School.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ToolBox.Common\ToolBox.Common.csproj">
+      <Project>{be09721a-7232-4f32-8c58-59dc31c16f36}</Project>
+      <Name>ToolBox.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

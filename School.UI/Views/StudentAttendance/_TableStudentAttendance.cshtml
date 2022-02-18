@@ -1,0 +1,238 @@
+﻿@model School.UI.Models.StudentModel.StudentAttendanceModel
+
+@{
+    int nomberOfRows = Model.StudentAttendance.Count();
+}
+
+<table id="tableId" class="table" style="border:1px solid silver;">
+    <thead style="background-color:rgb(47, 71, 86);color:white;">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SubjectId)
+            </th>
+            <th style="display:none">
+                StudentId
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                <input type="checkbox" id="presentAllId" class="present" /> Present
+            </th>
+            <th>
+                <input type="checkbox" id="absentAllId" class="present" /> Absent
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Attandance)
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.StudentAttendance)
+        {
+
+            <tr class="tr_id">
+                <td style="display:none">
+                    @Html.DisplayFor(model => item.StudentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.LastName)
+                </td>
+                <td>
+                    <input type="checkbox" name="present" class="present" />
+                </td>
+                <td>
+                    <input type="checkbox" name="absent" class="absent" />
+                </td>
+                <td>
+                    @Html.DisplayFor(model => item.AttendanceStatus, new { @id = "AttendanceStatusId", @class = "AttendanceStatus" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<script>
+
+
+    $(document).ready(function () {
+
+        $('#tableId input[type="checkbox"]').click(function () {
+
+            var hh = this.name;
+            if (this.name == "present") {
+                if (this.checked) {
+
+                    $(this).closest('td').parent('tr').find("td:eq(5)").text("present").css("color", "green");
+                    $(this).closest('tr').find("td:eq(4)").find('[type=checkbox]').prop('checked', false);
+
+                } else {
+                    $(this).closest('td').parent('tr').find("td:eq(5)").text("not set").css("color", "black");
+                }
+            }
+            else if (this.name == "absent") {
+                if (this.checked) {
+                    $(this).closest('td').parent('tr').find("td:eq(5)").text("abset").css("color", "orange");
+                    $(this).closest('tr').find("td:eq(3)").find('[type=checkbox]').prop('checked', false);
+
+                } else {
+                    $(this).closest('td').parent('tr').find("td:eq(5)").text("not set").css("color", "black");
+                }
+            }
+            else {
+                console.log("signs"); // replace with logic
+            }
+
+        });
+    });
+
+    $("#gradeId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        // debugger;
+        var selectedValue = $("#gradeId option:selected").val();
+        var data = {
+            'selectedValue': selectedValue.trim(),
+            'gradeId': selectedValue.trim()
+        };
+
+        //selectedValue = "Grade8";//position 1
+        var _searchValue = selectedValue.trim().substring(0, 5);
+
+        var partialHolder = "#attendance-page #inputHolderId";
+        var header = 'Update UserInfor';
+        var pageObj = {};
+        if (_searchValue === "Grade") {
+            header = 'Update UserInfor';
+            var url = '/StudentAttendance/UpdateDropBox';
+            partialHolder = "#attendance-page #inputHolderId";
+            pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+            classControllerHelper.callController(pageObj);
+        }
+        else {
+            partialHolder = "#studentSubjectMarks-page #inputHolderId";
+            var response = '<input id="txtName" type="text" placeholder="search by name" class="col-md-12 form-control" />'
+            pageObj = { function: "append", partialHolder: partialHolder };
+            classControllerHelper.appendPartial(response, pageObj);
+        }
+    });
+
+    $("#btnSaveAttend").click(function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        var _inputs = ['subjectId', 'pickdateId'];
+        ClassValidationHelper.preValidateDropbox(['gradeId']);
+        var isvalid = ClassValidationHelper.ValidateInput(_inputs)
+        if (isvalid === false) {
+            ClassValidationHelper.errorEmptyField();
+            return isvalid
+        }
+        debugger;
+        var nomberOfRows = Number(@nomberOfRows) + 1;
+
+        var grade = $("#gradeId option:selected").val();
+        var subjectId = $("#subjectId").val();
+        var searchDate = $("#pickdateId").val();
+        var commonData = {
+            'StudentId': "",
+            'GradeId': grade.trim(),
+            'SubjectId': subjectId.trim(),
+            'AttendanceStatus': 0,
+            'ExamDate': searchDate.trim()
+        };
+
+        var data = {
+            'jsonString': JSON.stringify(tabledata(commonData))
+        };
+
+        var url = '/StudentAttendance/SaveRecord';
+        var pageObj = { function: "message", url: url, type: "Post", data: data, header: "", pageId: "", partialHolder: "" };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+
+    function tabledata(obj) {
+        var countRows = $("#tableId>tbody>tr").length;
+        var allRows = [];
+        for (var i = 0; i < countRows; i++) {
+            var _studentId = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(0)").text();
+            var _attandance = $('#tableId>tbody').find("tr:eq(" + i + ")").find("td:eq(5)").text();
+            var row = {
+                'StudentId': _studentId.trim(),
+                'GradeId': obj.GradeId,
+                'SubjectId': obj.SubjectId,
+                'AttendanceStatus': _attandance.trim(),
+                'ExamDate': obj.ExamDate
+            };
+            allRows.push(row);
+        }
+        return allRows;
+    }
+
+
+
+
+
+
+
+    //$("#presentAllId").on("click", function (event) {
+    //    var chk = document.getElementById('presentAllId').checked;
+    //    selectAll(chk);
+    //});
+    //$("#absentAllId").on("click", function (event) {
+    //    var chk = document.getElementById('absentAllId').checked;
+    //    selectAll(chk);
+    //});
+
+
+    //var chk = document.getElementById('presentAllId').checked;
+
+    function selectAll(chk) {
+
+        if (chk) {
+            var arr = document.getElementsByTagName("input");
+            for (var i in arr) {
+                if (arr[i].name == 'check') arr[i].checked = true;
+            }
+        } else {
+            var arr = document.getElementsByTagName("input");
+            for (var i in arr) {
+                if (arr[i].name == 'check') arr[i].checked = false;
+            }
+        }
+    }
+
+    $('#pickdateId').datepicker({
+        format: 'yyyy-mm-dd',
+        todayHighlight: true,
+        autoclose: true,
+    });
+
+    function OnSuccess(response) {
+
+        classBusyIconHelper.hideBusyIcon();
+        if (response.result === "true") {
+            var msgObj = { message: response.message, type: "success", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+        else {
+            var msgObj = { message: response.message, type: "error", title: response.title, pageId: "" };
+            classMessageResponse.showMessage(msgObj);
+        }
+    }
+
+    function OnFailure(response) {
+        var msgObj = { message: "error", type: "error", title: "error", pageId: "" };
+        classMessageResponse.showMessage(msgObj);
+    }
+
+</script>

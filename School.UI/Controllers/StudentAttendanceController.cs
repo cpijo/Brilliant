@@ -29,6 +29,7 @@ namespace School.UI.Controllers
         [HttpGet]
         public ActionResult GetRecord()
         {
+
             List<StudentAttendance> model = studentAttendanceRepository.GetById("");
             StudentAttendanceModel mod = new StudentAttendanceModel();
             mod.StudentAttendance = model;
@@ -86,6 +87,47 @@ namespace School.UI.Controllers
         }
         #endregion
 
+        [HttpPost]
+        public ActionResult UpdateTable(string gradeId, string subjectId, string attendanceDate, string examType)
+        {
+            Dictionary<string, string> dictionary = new Dictionary<string, string>();
+            
+            dynamic _dynamic = new ExpandoObject();
+            _dynamic.GradeId = gradeId;// "Grade8";
+            _dynamic.SubjectId = subjectId;// "Eng008";
+            _dynamic.TeacherId = "TC00000008";
+            //_dynamic.ExamType = examType;// "Eng008";
+            _dynamic.AttendanceDate = attendanceDate;// "Eng008";
+            //_dynamic.queryType = "markRegister";
+            _dynamic.type = "markRegister";
+
+            switch (gradeId)
+            {
+                case "Grade8":
+                    _dynamic.TeacherId = "TC00000008";
+                    break;
+                case "Grade9":
+                    _dynamic.TeacherId = "TC00000009";
+                    break;
+                case "Grade10":
+                    _dynamic.TeacherId = "TC00000010";
+                    break;
+                case "Grade11":
+                    _dynamic.TeacherId = "TC00000011";
+                    break;
+                case "Grade12":
+                    _dynamic.TeacherId = "TC00000012";
+                    break;
+                default:
+                    _dynamic.TeacherId = "TC00000008";
+                    break;
+            }
+
+            List<StudentAttendance> _StudentSubjectMarks = studentAttendanceRepository.GetByAny(_dynamic);
+            StudentAttendanceModel model = new StudentAttendanceModel();
+            model.StudentAttendance = _StudentSubjectMarks;
+            return PartialView("_TableStudentAttendance", model);
+        }
 
 
 

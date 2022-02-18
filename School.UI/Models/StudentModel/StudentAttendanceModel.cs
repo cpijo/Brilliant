@@ -49,8 +49,11 @@ namespace School.UI.Models.StudentModel
         public string LastName { get; set; }
         public string GradeId { get; set; }
         public string SubjectId { get; set; }
+        public string Attandance { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
 
-        public string attandance { get; set; }
+
         public SelectList AttendanceDropboxItemList { get; set; }
         public bool IsPresent { get; set; }
         public bool IsAbsent { get; set; }

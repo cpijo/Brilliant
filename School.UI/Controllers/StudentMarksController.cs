@@ -48,7 +48,6 @@ namespace School.UI.Controllers
             // string _genda = model.User.Gender;
             //model.GenderDropboxItemList = new SelectList(list, "Value", "Text", _genda);
 
-
             return PartialView("_TableRecordSubjectMarks", model);
         }
         #endregion

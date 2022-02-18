@@ -44,11 +44,13 @@ namespace School.Entities.Fields
 
     public class StudentAttendance
     {
+        public int AttendanceId { get; set; }
         public string StudentId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string GradeId { get; set; }
         public string SubjectId { get; set; }
+        public string Attendance{ get; set; }
         //public string AttendanceStatus { get; set; } = "Not Assign";
 
         private string _attendanceStatus;

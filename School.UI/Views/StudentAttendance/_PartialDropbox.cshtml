@@ -4,4 +4,45 @@
 
 
 
+<script>
+    $("#subjectId").change(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        //debugger;
+        //from drop
+        var _gradeId = $("#gradeId option:selected").val();
+        var _subjectId = $("#subjectId option:selected").val();
+        var _attendanceDate = $("#pickdateId").val();
+        if (_attendanceDate === undefined || _attendanceDate === "") {
 
+
+            var date = new Date();
+            date.setDate(date.getDate());
+            var tempoMonth = (date.getMonth() + 1);
+            var tempoDate = (date.getDate());
+            if (tempoMonth < 10) tempoMonth = '0' + tempoMonth;
+            if (tempoDate < 10) tempoDate = '0' + tempoDate;
+            _attendanceDate = tempoDate + '/' + tempoMonth + '/' + date.getFullYear();
+
+            //https://www.toptal.com/software/definitive-guide-to-datetime-manipulation
+            //var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            //var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            //var dateTime = date + ' ' + time;
+            //2018-8-3 11:12:40
+
+        }
+        var data = {
+            'gradeId': _gradeId.trim(),
+            'subjectId': _subjectId.trim(),
+            'attendanceDate': _attendanceDate.trim(),
+        };
+
+        var partialHolder = "#tableHolderId";
+        var header = 'Update UserInfor';
+        var url = '/StudentAttendance/UpdateTable';
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+
+    });
+
+</script>

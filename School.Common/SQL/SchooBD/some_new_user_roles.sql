@@ -1,4 +1,56 @@
 ﻿
+
+
+/*
+
+https://www.geeksengine.com/database/subquery/subquery-in-join-operation.php
+For each product category, we want to know at what average unit 
+price they were sold and what the average unit price we would 
+like to sell for.
+ 
+Subquery is used in FROM clause to get table x which returns the 
+average unit price sold for each product category.
+ 
+Table y in the join clause returns the average unit price 
+we'd like to sell for each product category.
+ 
+Then table x is joined with table y for each category.
+*/
+select y.CategoryID, 
+    y.CategoryName,
+    round(x.actual_unit_price, 2) as "Actual Avg Unit Price",
+    round(y.planned_unit_price, 2) as "Would-Like Avg Unit Price"
+from
+(
+    select avg(a.UnitPrice) as actual_unit_price, c.CategoryID
+    from order_details as a
+    inner join products as b on b.ProductID = a.ProductID
+    inner join categories as c on b.CategoryID = c.CategoryID
+    group by c.CategoryID
+) as x
+inner join 
+(
+    select a.CategoryID, b.CategoryName, avg(a.UnitPrice) as planned_unit_price
+    from products as a
+    inner join categories as b on b.CategoryID = a.CategoryID
+    group by a.CategoryID
+) as y on x.CategoryID = y.CategoryID
+
+
+
+SELECT wp_woocommerce_order_items.order_id As No_Commande
+FROM  wp_woocommerce_order_items
+LEFT JOIN 
+    (
+        SELECT meta_value As Prenom, post_id  -- <----- this
+        FROM wp_postmeta
+        WHERE meta_key = '_shipping_first_name'
+    ) AS a
+ON wp_woocommerce_order_items.order_id = a.post_id
+WHERE  wp_woocommerce_order_items.order_id =2198 
+
+
+
 -- complete database
 --https://www.sqlservertutorial.net/sql-server-basics/sql-server-left-join/
 --https://sql.queryexamples.com/sql-query-examples-with-answers
