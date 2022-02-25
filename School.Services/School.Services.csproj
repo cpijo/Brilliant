@@ -50,6 +50,7 @@
     <Compile Include="CreateDatabase\DelegatesDatabase.cs" />
     <Compile Include="CreateDatabase\DelegatesExp1.cs" />
     <Compile Include="Data\DataBaseConnectorString.cs" />
+    <Compile Include="Data\sql_Connection.cs" />
     <Compile Include="Interface\Class1.cs" />
     <Compile Include="Interface\IClassTeacherRepository.cs" />
     <Compile Include="Interface\IClassesRepository.cs" />

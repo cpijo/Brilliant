@@ -29,13 +29,67 @@
     }
 
     .card-s {
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        /*box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);*/
+        /*box-shadow: 0 1px 3px rgba(0,0,173,128.74), 0 1px 2px rgba(0,0,173,128.74);*/
+        box-shadow: 0 2px 4px rgb(173, 128, 73);
         transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     }
 
         .card-s:hover {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
+            /*box-shadow: 0 2px 4px rgba(, 0 2px 2px rgba(0,0,0,0.22);*/
+            box-shadow: 0 2px 4px rgb(173, 128, 73);
         }
+
+
+    /*.form-control{
+
+    }*/
+
+    input[type="text"], .form-control {
+        outline: none;
+        cursor: pointer;
+        font-size: 17px;
+        border-radius: 2px;
+        border: thin solid rgb(173, 128, 74);
+        height: 27px;
+    }
+
+    .control-label {
+        /*width: 15%;
+        padding: 5px;*/
+        /*background-color: #1bba93;*/
+        color: black;
+        /*border-radius: 5px;*/
+        font-size: 14px;
+        position: relative;
+        /*top: -8px;*/
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 5px 20px; /* top and bottom , left and right*/
+        /*background-color: #1bba93;*/
+        background-color: rgb(173, 128, 74);
+        font-size: 17px;
+        border: none;
+        border-radius: 5px;
+        color: #bcf5e7;
+        cursor: pointer;
+        width:120px;
+    }
+
+        .btn:hover {
+            background-color: rgb(43, 67, 81);
+            color: white;
+        }
+
+
+    .form-control {
+        font-size: 14px;
+        /*padding: 0.5em;*/
+    }
+
+
 </style>
 
 
@@ -64,11 +118,11 @@
                     </div>
                     @Html.LabelFor(model => model.Student.Gender, new { @id = "lbdGenderId", @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
-                        <label class="col-md-6"  id="lbrdmale">
+                        <label class="col-md-6" id="lbrdmale">
                             <input type="radio" id="rdMale" name="gendar" />
                             Male
                         </label>
-                        <label class="col-md-6" id="lbrdfemale" >
+                        <label class="col-md-6" id="lbrdfemale">
                             <input type="radio" id="rdfemale" name="gendar" />
                             Female
                         </label>
@@ -100,7 +154,7 @@
                     </div>
                 </div>
 
-                <hr />
+                <hr style="border:thin solid rgb(173, 128, 74);" />
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Address.Province, new { @class = "col-sm-2 control-label" })
@@ -145,7 +199,7 @@
                     </div>
                 </div>
 
-                <hr />
+                <hr style="border:thin solid rgb(173, 128, 74);" />
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Student.Phone1, new { @class = "col-sm-2 control-label" })
