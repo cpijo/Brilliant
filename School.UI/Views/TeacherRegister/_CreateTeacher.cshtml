@@ -98,7 +98,9 @@
                         @Html.TextBoxFor(m => m.Teacher.Gender, new { @id = "unknown", @class = " col-sm-12 form-control", @readonly = "readonly" })
                     </div>
                 </div>
-                <hr />
+
+                <hr style="border:0px;border-top:thin solid rgb(173, 128, 74);" />
+
                 <div class="form-group">
                     @Html.LabelFor(model => model.Address.Province, new { @class = "col-sm-2 control-label" })
                     <div class="col-md-4">
@@ -154,17 +156,17 @@
                 </div>
 
                 @*<div class="form-group">
-                @Html.LabelFor(model => model.Teacher.Photo, new { @class = "col-sm-2 control-label" })
-                <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.Teacher.Photo, new { type = "file", @id = "uploaFile", @readonly = "readonly", @class = "uploaFile col-sm-12 fileStyle form-control" })
-                </div>
-                </div>
+        @Html.LabelFor(model => model.Teacher.Photo, new { @class = "col-sm-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Teacher.Photo, new { type = "file", @id = "uploaFile", @readonly = "readonly", @class = "uploaFile col-sm-12 fileStyle form-control" })
+        </div>
+        </div>
 
-                <div class="form-group" style="display:none;">
-                    <div id="parentImgId" class="col-md-offset-4 col-md-8">
-                        <img id="targetImg" class="thumbnail img-responsive" />
-                    </div>
-                </div>
+        <div class="form-group" style="display:none;">
+            <div id="parentImgId" class="col-md-offset-4 col-md-8">
+                <img id="targetImg" class="thumbnail img-responsive" />
+            </div>
+        </div>
                 *@
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">

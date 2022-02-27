@@ -1,4 +1,5 @@
-﻿using School.Entities.Fields;
+﻿using School.Common.PagingHelper;
+using School.Entities.Fields;
 using School.Services.Interface;
 using School.UI.ViewModels;
 using System;
@@ -33,8 +34,19 @@ namespace School.UI.Controllers
         public ActionResult GetRecord()
         {
             List<Student> students = studentRepository.GetAll();
+            int totalData = students.Count();
             Session["students"] = students;
-            return PartialView("_ViewStudent", students);
+
+            List<Student> _students =  students.Take(10).ToList();
+            childPage cpage = new childPage();
+            cpage.StartPage = 1;
+            cpage.CurrentPage = 1;
+            cpage.EndPage = 5;
+            cpage.TotalItems = totalData;
+            cpage.TotalPages = (totalData / 10);
+            Pager pager = new Pager(cpage, totalData, 1, 10, 5);
+
+            return PartialView("_ViewStudent", _students);
         }
         #endregion
 

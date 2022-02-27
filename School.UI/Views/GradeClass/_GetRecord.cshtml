@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<School.Entities.Fields.Grades>
 
+@{
+    string test = "test";
+    //grade get record
+}
+
 <style>
 
     .card_t {
@@ -62,42 +67,42 @@
     <hr />
 
     @*<div class="col-md-12" style="border: 0px solid white; display: inline-block;">
-        <div class="card_t card-s">
-            <div style="padding:15px;">
-                <table id="tableId" class="table" style="border:1px solid silver;">
-                    <thead style="background-color:rgb(240, 240, 240);">
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.GradeId)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Grade)
-                            </th>
-                            <th>
-                                Edit
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
+            <div class="card_t card-s">
+                <div style="padding:15px;">
+                    <table id="tableId" class="table" style="border:1px solid silver;">
+                        <thead style="background-color:rgb(240, 240, 240);">
                             <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.GradeId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Grade)
-                                </td>
-                                <td>
-                                    <button id="btnEditGrade" type="button" class="btnEditGrade btn btn-primary">Edit</button>
-                                </td>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.GradeId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Grade)
+                                </th>
+                                <th>
+                                    Edit
+                                </th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.GradeId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Grade)
+                                    </td>
+                                    <td>
+                                        <button id="btnEditGrade" type="button" class="btnEditGrade btn btn-primary">Edit</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
 
+                </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 
 </div>

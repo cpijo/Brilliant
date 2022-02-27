@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Common\ClassPropertyHelper.cs" />
+    <Compile Include="Common\HtmlTableCreator\HtmlTableCreator.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="LearnFrom\websites\butheleziBusses.cs" />
     <Compile Include="libraryString\Class1.cs" />
@@ -51,6 +52,12 @@
     <Compile Include="libraryString\myRegexHelper.cs" />
     <Compile Include="libraryString\myStringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LearnFrom\jsgrid-1.5.3.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LearnFrom\html_Forms\validationForm.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

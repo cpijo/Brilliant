@@ -95,6 +95,12 @@
 
             $('#rightHeader-logInPageId').css("display", "none");
             $('#rightHeader-logOffPageId').css("display", "block");
+
+
+            $('#rightHeader-registerPageId').css("display", "none").hide();
+            $('#rightHeader-logInUserPageId').css("display", "block").show().text(response.name);
+            $('.default-menu .menu').css("display", "none").hide();
+
         }
     }
 

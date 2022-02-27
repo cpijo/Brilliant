@@ -74,6 +74,7 @@
     <Compile Include="DelegateHandler\ProcessBusinessLogic.cs" />
     <Compile Include="JsonStringHelper\DeserialiseFromJson.cs" />
     <Compile Include="notes\notes_payrol.cs" />
+    <Compile Include="PagingHelper\Pager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

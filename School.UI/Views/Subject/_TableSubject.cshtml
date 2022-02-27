@@ -1,5 +1,28 @@
 ﻿@model IEnumerable<School.Entities.Fields.Subject>
 
+<style>
+
+    td,
+    th {
+        padding: 0.25rem;
+        text-align: left;
+        border: 1px solid #ccc;
+    }
+    table .btn {
+        margin: 0px 1px;
+        height: 26px;
+        padding: 2px 2px;
+        letter-spacing: 1px;
+        font-family: sans-serif;
+        font-size: 1.1rem;
+        width: 80px;
+        background-color: transparent;
+        border: thin solid silver;
+        color:black;
+    }
+
+</style>
+
 <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
     <div class="card_t card-s">
         <div style="padding:15px;">
@@ -12,10 +35,10 @@
                         <th>
                             @Html.DisplayNameFor(model => model.SubjectName)
                         </th>
-                        <th style='min-width:60px;max-width:60px'>
+                        <th style='width:60px'>
                             Edit
                         </th>
-                        <th style='min-width:60px;max-width:60px'>
+                        <th style='width:60px'>
                             Delete
                         </th>
                     </tr>
@@ -23,20 +46,20 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SubjectId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SubjectName)
-                        </td>
-                        <td style='min-width:60px;max-width:60px'>
-                            <button id="btnEdit" type="button" class="btn btn-primary">Edit</button>
-                        </td>
-                        <td style='min-width:60px;max-width:60px'>
-                            <button id="btnDelete" type="button" class="btnDelete btn btn-warning">Delete</button>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SubjectId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SubjectName)
+                            </td>
+                            <td>
+                                <button id="btnEdit" type="button" class="btn btn-primary">Edit</button>
+                            </td>
+                            <td>
+                                <button id="btnDelete" type="button" class="btnDelete btn btn-warning">Delete</button>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -44,40 +67,40 @@
     </div>
 </div>
 
-            <script>
+<script>
 
-                $('#tableId #btnEdit').click(function (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                   
-                    var SubjectId = $(this).closest('td').parent('tr').find("td:eq(0)").text().trim();
-                    var SubjectName = $(this).closest('td').parent('tr').find("td:eq(1)").text().trim();
+    $('#tableId #btnEdit').click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
 
-                    var data = {
-                        'SubjectId': SubjectId.trim(),
-                        'SubjectName': SubjectName.trim()
-                    };
+        var SubjectId = $(this).closest('td').parent('tr').find("td:eq(0)").text().trim();
+        var SubjectName = $(this).closest('td').parent('tr').find("td:eq(1)").text().trim();
 
-                    var header = 'Edit Drade';
-                    var url = '/Subject/UpdateView';
+        var data = {
+            'SubjectId': SubjectId.trim(),
+            'SubjectName': SubjectName.trim()
+        };
 
-                    var objPopup = classPageConstant.popupChildOne;
-                    var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
-                    classControllerHelper.callController(pageObj);
-                  
-                });
+        var header = 'Edit Drade';
+        var url = '/Subject/UpdateView';
+
+        var objPopup = classPageConstant.popupChildOne;
+        var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+        classControllerHelper.callController(pageObj);
+
+    });
 
 
-                $(".btnDelete").click(function (event) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    classMessageResponse.showMessage({ message: "Sorry, but this function is still under construction", type: "warning", title: "Under construction", pageId: "" });
-                });
+    $(".btnDelete").click(function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        classMessageResponse.showMessage({ message: "Sorry, but this function is still under construction", type: "warning", title: "Under construction", pageId: "" });
+    });
 
                 //$("#btnDelete").click()
                 //{
-                //    classMessageResponse.showMessage({ message: "Sorry, but this function is still under construction", type: "warning", title: "Under construction", pageId: "" });          
+                //    classMessageResponse.showMessage({ message: "Sorry, but this function is still under construction", type: "warning", title: "Under construction", pageId: "" });
                 //}
 
-            </script>
+</script>
 

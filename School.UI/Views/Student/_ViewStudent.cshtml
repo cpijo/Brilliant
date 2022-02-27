@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<School.Entities.Fields.Student>
 
+@{
+    School.Common.PagingHelper.Pager MyPaging = TempData["PagerViewModel"] as School.Common.PagingHelper.Pager;
+}
+
+
 <style>
 
     .card_t {
@@ -21,15 +26,400 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
         }
 
-    table .btn{
-        margin :0px 1px;
-        height:26px;
-        padding:2px 2px;
+    table .btn {
+        margin: 0px 1px;
+        height: 26px;
+        padding: 2px 2px;
     }
+
     table tbody tr {
         height: 30px;
     }
+
+
+    tbody tr:nth-child(odd) {
+        background: #eee;
+    }
+
+    col:nth-child(3) {
+        background: yellow;
+    }
+
+
+    th, td {
+        padding: 0.25rem;
+        text-align: left;
+        border: 1px solid #ccc;
+    }
+
+    tbody tr:hover {
+        background: rgb(205, 205, 205);
+    }
+
+    th a.sort-by {
+        padding-right: 18px;
+        position: relative;
+    }
+
+
+    a:link,
+    a:visited,
+    a:hover,
+    a:active {
+        color: #000;
+        text-decoration: none;
+    }
+
+    a.sort-by:before,
+    a.sort-by:after {
+        border: 4px solid transparent;
+        content: "";
+        display: block;
+        height: 0;
+        right: 5px;
+        top: 50%;
+        position: absolute;
+        width: 0;
+    }
+
+    a.sort-by:before {
+        border-bottom-color: #666;
+        margin-top: -9px;
+    }
+
+    a.sort-by:after {
+        border-top-color: #666;
+        margin-top: 1px;
+    }
+
+
+    .up-error {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+
+    .my-errow {
+        /*transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);*/
+        /*background-color: wheat;
+        border-top: 0px solid brown;
+        border-left: 5px solid green;
+        border-right: 5px solid green;
+        border-bottom: 5px solid brown;
+        color: white;
+        height: 5px;
+        max-height: 5px;*/
+    }
+
+
+    .my-triangle-up {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid black;
+    }
+
+    .my-triangle-down {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid black;
+    }
+
+    .my-triangle-left {
+        width: 0;
+        height: 0;
+        border-right: 5px solid black;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        height: 5px;
+    }
+
+    .my-triangle-right {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-top: 5px solid black;
+        border-bottom: 5px solid black;
+    }
+    /*https://css-tricks.com/snippets/css/css-triangle/*/
+    /*https://stackoverflow.com/questions/7073484/how-do-css-triangles-work*/
+    /*http://www.coding-dude.com/wp/css/create-a-triangle/*/
+
+
+
+    table {
+        border-collapse: collapse;
+        border: 2px solid rgb(200, 200, 200);
+        letter-spacing: 1px;
+        font-family: sans-serif;
+        font-size: 1.1rem;
+    }
+
+    td,
+    th {
+        /*border: 1px solid rgb(190, 190, 190);
+        padding: 5px 10px;*/
+    }
+
+    td {
+        text-align: center;
+    }
+
+
+    .btn {
+        letter-spacing: 1px;
+        font-family: sans-serif;
+        font-size: 1.1rem;
+    }
 </style>
+
+
+<style>
+    /*https://css-tricks.com/bubble-point-tooltips-with-css3-jquery/*/
+    .tooltip, .arrow:after {
+        background: black;
+        border: 2px solid white;
+    }
+
+    .tooltip {
+        pointer-events: none;
+        opacity: 0;
+        display: inline-block;
+        position: absolute;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 20px;
+        margin-top: 20px;
+        text-align: center;
+        font: bold 14px "Helvetica Neue", Sans-Serif;
+        font-stretch: condensed;
+        text-decoration: none;
+        text-transform: uppercase;
+        box-shadow: 0 0 7px black;
+    }
+
+    .arrow {
+        width: 70px;
+        height: 16px;
+        overflow: hidden;
+        position: absolute;
+        left: 50%;
+        margin-left: -35px;
+        bottom: -16px;
+    }
+
+        .arrow:after {
+            content: "";
+            position: absolute;
+            left: 20px;
+            top: -20px;
+            width: 25px;
+            height: 25px;
+            box-shadow: 6px 5px 9px -9px black, 5px 6px 9px -9px black;
+            transform: rotate(45deg);
+        }
+
+    .tooltip.active {
+        opacity: 1;
+        margin-top: 5px;
+        transition: all 0.2s ease;
+    }
+
+    .tooltip.out {
+        opacity: 0;
+        margin-top: -20px;
+    }
+</style>
+
+
+<style>
+
+    #student-page .my-footer {
+        padding-top: 2px;
+        padding-bottom: 0px;
+    }
+
+        #student-page .my-footer div {
+            padding: 1px;
+        }
+
+    #student-page .footer-gal {
+        position: absolute;
+        bottom: 1px;
+        opacity: 0.6;
+        height: 20px;
+        color: rgb(249, 168, 22);
+        z-index: 1;
+        width: calc(100% -20px);
+    }
+
+    .pagination {
+        /*background-color: orange;*/
+    }
+
+        .pagination, .pagination li, .pagination li a {
+            /*background-color: orange;*/
+            /*background-color:rgb(107, 125, 135);*/
+        }
+
+            .pagination li, .pagination li a {
+                /*background-color: rgb(107, 125, 135);*/
+                color: orange;
+            }
+
+                .pagination li, .pagination li a {
+                    border: 0px;
+                    border-radius: 0px;
+                }
+
+                    .pagination li a {
+                        height: 22px;
+                        border: 1px solid rgb(59, 90, 108);
+                        background-color: rgb(107, 125, 135);
+                    }
+
+    #student-page a {
+        /*border-radius: 0px;
+        background-color: rgb(107, 125, 135);*/
+        /*padding:1px;*/
+    }
+
+    #student-page li a:hover {
+        /*background-color: rgb(107, 125, 135);*/
+        /*background-color: rgb(51, 122, 183);*/ /*Active Color*/
+    }
+
+    .selectedPage {
+        background-color: rgb(51, 122, 183); /*Active Color*/
+    }
+</style>
+
+
+<style>
+
+    .form-LCR {
+        width: calc(100% - 0px);
+        height: 32px;
+        border: thin solid green;
+    }
+
+    .form-L {
+        width: 200px;
+        height: 32px;
+        border: thin solid red;
+        float: left;
+    }
+
+    .form-C {
+        width: calc(100% - 500px);
+        height: 32px;
+        border: thin solid yellow;
+        float: left;
+    }
+
+    .form-R {
+        width: 300px;
+        height: 32px;
+        border: thin solid black;
+        float: left;
+    }
+
+    .form-LCR li {
+        width: 30px;
+        height: 30px;
+        border: thin solid black;
+        float: left;
+        padding-top: 4px;
+    }
+
+    .form-LCR .previous-li {
+        width: 70px;
+        /*height: 35px;
+        border: thin solid black;
+        float: left;*/
+    }
+
+    .form-LCR .next-li {
+        width: 35px;
+        /*height: 35px;
+        border: thin solid black;
+        float: left;*/
+    }
+</style>
+
+    <style >
+
+        .my-triangle-up {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid black;
+        }
+
+        .my-triangle-down {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid black;
+        }
+
+        .my-triangle-left {
+            width: 0;
+            height: 0;
+            border-right: 5px solid black;
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+            height: 5px;
+        }
+
+        .my-triangle-right {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-top: 5px solid black;
+            border-bottom: 5px solid black;
+        }
+
+        .col-wrapper {
+            
+        }
+        .col-L {
+            float: left;
+            width: calc(100% - 30px);
+            /*border: thin solid red;*/
+        }
+        .col-R {
+            float: left;
+            width: 20px;
+            /*border: thin solid red;*/
+            height:18px;
+            position: relative;
+        }
+            .col-R i, .col-R div {
+                float: left;
+                /*width: 100%;*/
+                position: absolute;
+                font-size:12px;
+                height: 12px;
+
+                top:-6px;
+            }
+
+            .col-R .my-triangle-up {
+                margin-top:1px;
+            }
+            .col-R .my-triangle-down {
+                margin-top: 15px;
+            }
+
+
+</style>
+
 
 <div id="student-page" class="col-md-12" style="border: 0px solid white; display: inline-block;">
 
@@ -53,7 +443,7 @@
                             <input id="txtName" type="text" value="Sphiwe" class="col-md-12 form-control" />
                         </div>
                         <div class="col-md-2">
-                            <input id="btnSearch" type="button" value="Search" class="btn btn-default" style="background-color:transparent;border:thin solid rgb(173, 128, 73);"/>
+                            <input id="btnSearch" type="button" value="Search" class="btn btn-default" style="background-color:transparent;border:thin solid rgb(173, 128, 73);" />
                         </div>
                     </div>
                 </div>
@@ -74,52 +464,140 @@
                     <thead style="background-color:rgb(173, 128, 73);">
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.StudentId)
+                                <div class="col-wrapper">
+                                    <div class="col-L">
+                                        @Html.DisplayNameFor(model => model.StudentId)
+                                    </div>
+                                    <div class="col-R rm-pd">
+                                        <div class="my-triangle-up"></div>
+                                        <div class="my-triangle-down"></div>
+                                    </div>
+                                </div>
+
+                                @*<a href="#" class="col-wrapper">
+                                    <span class="col-L">
+                                    </span>
+                                    <span class="col-R">
+                                        <i class="fa fa-angle-up" style="height:10px"></i>
+                                        <i class="fa fa-angle-down" style="height:10px;margin-top:1px;"></i>
+                                    </span>
+                                </a>*@
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Firstname)
+                                <div class="col-wrapper">
+                                    <div class="col-L">
+                                        @Html.DisplayNameFor(model => model.Firstname)
+                                    </div>
+                                    <div class="col-R rm-pd">
+                                        <div class="my-triangle-up"></div>
+                                        <div class="my-triangle-down"></div>
+                                    </div>
+                                </div>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.LastName)
+                                <div class="col-wrapper">
+                                    <div class="col-L">
+                                        @Html.DisplayNameFor(model => model.LastName)
+                                    </div>
+                                    <div class="col-R rm-pd">
+                                        <div class="my-triangle-up"></div>
+                                        <div class="my-triangle-down"></div>
+                                    </div>
+                                </div>
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Gender)
+                                <div class="col-wrapper">
+                                    <div class="col-L">
+                                        @Html.DisplayNameFor(model => model.Gender)
+                                    </div>
+                                    <div class="col-R rm-pd">
+                                        <div class="my-triangle-up"></div>
+                                        <div class="my-triangle-down"></div>
+                                    </div>
+                                </div>
                             </th>
                             <th style="display:none;">
                                 View Report
                             </th>
                             <th style="width:220px;">
-                               Process
+                                <div class="col-wrapper">
+                                    <div class="col-L">
+                                       Process
+                                    </div>
+                                    <div class="col-R rm-pd">
+                                        <div class="my-triangle-up"></div>
+                                        <div class="my-triangle-down"></div>
+                                    </div>
+                                </div>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.StudentId)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Firstname)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LastName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Gender)
-                            </td>
-                            <td style="display:none;">
-                                <button id="btnEdit" type="button" class="btnEdit btn btn-primary" style="width:100px;display:none;">Edit</button>
-                            </td>
-                            <td style="padding:4px 0px;">
-                                <button id="btnView" type="button" class="btnView btn btn-primary" style="width:60px;">View</button>
-                                <button id="btnEdit" type="button" class="btnEdit btn btn-warning" style="width:60px;">Edit</button>
-                                <button id="btnDelete" type="button" class="btnDelete btn btn-danger" style="width:60px;">Delete</button>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StudentId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Firstname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Gender)
+                                </td>
+                                <td style="display:none;">
+                                    <button id="btnEdit" type="button" class="btnEdit btn btn-primary" style="width:100px;display:none;">Edit</button>
+                                </td>
+                                <td style="padding:4px 0px;">
+                                    <button id="btnView" type="button" class="btnView btn btn-primary" style="width:60px;">View</button>
+                                    <button id="btnEdit" type="button" class="btnEdit btn btn-warning" style="width:60px;">Edit</button>
+                                    <button id="btnDelete" type="button" class="btnDelete btn btn-danger" style="width:60px;">Delete</button>
+                                </td>
+                            </tr>
                         }
                     </tbody>
+                    <tfoot class="hide-if-no-paging">
+                        <tr>
+                            <td colspan="5" class="text-center" style="border:thin solid red;">
+
+                                <div class="form-LCR">
+                                    <div class="form-L">
+                                        <span>Showing 1 to 10 of 57 entries</span>
+                                    </div>
+                                    <div class="form-C"></div>
+                                    <div class="form-R">
+                                        <ul style="width:auto;">
+                                            <li class="previous-li" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                                <a href="#">Previous</a>
+                                            </li>
+                                            <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                                <a href="#">1</a>
+                                            </li>
+                                            <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                                <a href="#">2</a>
+                                            </li>
+                                            <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                                <a href="#">3</a>
+                                            </li>
+                                            <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                                <a href="#">4</a>
+                                            </li>
+                                            <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                                <a href="#">5</a>
+                                            </li>
+                                            <li class="next-li" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                                <a href="#">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tfoot>
                 </table>
 
             </div>
@@ -186,6 +664,116 @@
         var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
         classControllerHelper.callController(pageObj);
     });
+
+    //Not working
+
+    // $("#btnDelete").tooltips();
+
+    // Basic example
+    //$(document).ready(function () {
+    //    $('#dtBasicExample').DataTable({
+    //        "paging": false // false to disable pagination (or any other option)
+    //    });
+    //    $('.dataTables_length').addClass('bs-select');
+    //});
+
+
+    //https://css-tricks.com/bubble-point-tooltips-with-css3-jquery/
+    // IIFE to ensure safe use of $
+    (function ($) {
+
+        // Create plugin
+        $.fn.tooltips = function (el) {
+
+            var $tooltip,
+                $body = $('body'),
+                $el;
+
+            // Ensure chaining works
+            return this.each(function (i, el) {
+
+                $el = $(el).attr("data-tooltip", i);
+
+                // Make DIV and append to page
+                var $tooltip = $('<div class="tooltip" data-tooltip="' + i + '">' + $el.attr('title') + '<div class="arrow"></div></div>').appendTo("body");
+
+                // Position right away, so first appearance is smooth
+                var linkPosition = $el.position();
+
+                $tooltip.css({
+                    top: linkPosition.top - $tooltip.outerHeight() - 13,
+                    left: linkPosition.left - ($tooltip.width() / 2)
+                });
+
+                $el
+                    // Get rid of yellow box popup
+                    .removeAttr("title")
+
+                    // Mouseenter
+                    .hover(function () {
+
+                        $el = $(this);
+
+                        $tooltip = $('div[data-tooltip=' + $el.data('tooltip') + ']');
+
+                        // Reposition tooltip, in case of page movement e.g. screen resize
+                        var linkPosition = $el.position();
+
+                        $tooltip.css({
+                            top: linkPosition.top - $tooltip.outerHeight() - 13,
+                            left: linkPosition.left - ($tooltip.width() / 2)
+                        });
+
+                        // Adding class handles animation through CSS
+                        $tooltip.addClass("active");
+
+                        // Mouseleave
+                    }, function () {
+
+                        $el = $(this);
+
+                        // Temporary class for same-direction fadeout
+                        $tooltip = $('div[data-tooltip=' + $el.data('tooltip') + ']').addClass("out");
+
+                        // Remove all classes
+                        setTimeout(function () {
+                            $tooltip.removeClass("active").removeClass("out");
+                        }, 300);
+
+                    });
+
+            });
+
+        }
+
+    })(jQuery);
+
+
+
+    //var $tooltip = $('<div>')
+    //    .addClass('tooltip')
+    //    .data('tooltip', i)
+    //    .text($el.attr('title'))
+    //    .append('<div class="arrow"></div>')
+    //    .appendTo("body");
+
+
+</script>
+
+
+
+
+<script>
+        //https://drupal.stackexchange.com/questions/230052/display-both-sort-icons-on-sortable-table-columns
+        //function mytheme_preprocess_table(&$variables) {
+        //    //foreach($variables['header'] as $key => $header) {
+        //    //    if (!isset($header['sort'])) {
+        //    //        $header['data'].= theme('image', array('path' => 'misc/arrow-desc.png', 'width' => 13, 'height' => 13, 'alt' => t('sort descending'), 'title' => t('sort descending')));
+        //    //        $header['data'].= theme('image', array('path' => 'misc/arrow-asc.png', 'width' => 13, 'height' => 13, 'alt' => t('sort ascending'), 'title' => t('sort ascending')));
+        //    //    }
+        //    //    $variables['header'][$key] = $header;
+        //    //}
+        //}
 
 </script>
 

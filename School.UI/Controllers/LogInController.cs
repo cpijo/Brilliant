@@ -56,7 +56,9 @@ namespace School.UI.Controllers
                     Session["permissionList"] = roles;
                     appMenu menu = new appMenu();
                     menu.menuRequest.name = "login";
-                    return PartialView("_PartialLayoutMenu");
+                    return Json(new { result = "true", name = _user[0].Name, surname = _user[0].Surname }, JsonRequestBehavior.AllowGet);
+
+                    //return PartialView("_PartialLayoutMenu");
                 }
 
             }

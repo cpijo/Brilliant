@@ -226,6 +226,8 @@
     <Content Include="AppJs\js_notes\Inheritance\inheritance_exp_1.js" />
     <Content Include="AppJs\Notes\notes - Copy.js" />
     <Content Include="AppJs\Notes\notes.js" />
+    <Content Include="Content\css_mine\triangleArrow.css" />
+    <Content Include="Content\css_mine\common.css" />
     <Content Include="images\school_img.jpg" />
     <Content Include="Views\ChartGraphs\chartjs\Chart.js" />
     <Content Include="Views\ChartGraphs\chartjs\Chart.min.js" />
@@ -245,6 +247,7 @@
     <Content Include="Views\Classes - Copy\_UpdateClass.cshtml" />
     <Content Include="Views\StudentMarks\_TableRecordSubjectMarksOnly.cshtml" />
     <Content Include="Views\StudentAttendance\_TableStudentAttendance.cshtml" />
+    <Content Include="Views\Student\css-tooltip-on-hover-div\Codeconvey - Free CSS Examples with Source Code.url" />
     <TypeScriptCompile Include="AppJs\js_notes\override\override_exp_1_class.ts" />
     <Content Include="AppJs\js_notes\mess\inheritance_exp_1.js" />
     <Content Include="AppJs\js_notes\mess\mss2.js" />
@@ -1256,6 +1259,13 @@
     <Content Include="Views\Shared\_PartialMessageResponse.cshtml" />
     <Content Include="Views\Shared\_UserSignOutPartial.cshtml" />
     <Content Include="Views\Dashboard\z_ViewCourses.cshtml" />
+    <Content Include="Views\Student\css-tooltip-on-hover-div\demo.css" />
+    <Content Include="Views\Student\css-tooltip-on-hover-div\index.html" />
+    <Content Include="Views\Student\css-tooltip-on-hover-div\info.txt" />
+    <Content Include="Views\Student\css-tooltip-on-hover-div\tooltip.css" />
+    <Content Include="Views\Student\index.html" />
+    <Content Include="Views\Student\tooltip.css" />
+    <Content Include="Views\Student\toolTips_css.css" />
     <Content Include="Views\SubjectMarks\_AddSubject.cshtml" />
     <Content Include="Views\SubjectMarks\_TableCourse.cshtml" />
     <Content Include="Views\SubjectMarks\_TableSubject.cshtml" />

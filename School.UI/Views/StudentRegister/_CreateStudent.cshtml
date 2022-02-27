@@ -46,48 +46,77 @@
     }*/
 
     input[type="text"], .form-control {
-        outline: none;
+        /*outline: none;
         cursor: pointer;
         font-size: 17px;
         border-radius: 2px;
         border: thin solid rgb(173, 128, 74);
-        height: 27px;
+        height: 27px;*/
     }
 
     .control-label {
         /*width: 15%;
         padding: 5px;*/
         /*background-color: #1bba93;*/
-        color: black;
         /*border-radius: 5px;*/
-        font-size: 14px;
-        position: relative;
         /*top: -8px;*/
+
+        /*color: black;
+        font-size: 14px;
+        position: relative;*/
     }
 
     .btn {
-        display: inline-block;
-        padding: 5px 20px; /* top and bottom , left and right*/
-        /*background-color: #1bba93;*/
+        /*display: inline-block;
+        padding: 5px 20px; 
+      
         background-color: rgb(173, 128, 74);
         font-size: 17px;
         border: none;
         border-radius: 5px;
         color: #bcf5e7;
         cursor: pointer;
-        width:120px;
+        width:120px;*/
     }
 
         .btn:hover {
-            background-color: rgb(43, 67, 81);
-            color: white;
+            /*background-color: rgb(43, 67, 81);
+            color: white;*/
         }
 
 
     .form-control {
-        font-size: 14px;
+        /*font-size: 14px;*/
         /*padding: 0.5em;*/
     }
+
+
+    /*.select_box{
+  width: 200px;
+  overflow: hidden;
+  border: 1px solid #000;
+  position: relative;
+  padding: 10px 0;
+}
+.select_box:after{
+  width: 0; 
+  height: 0; 
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #f00;
+  position: absolute;
+  top: 40%;
+  right: 5px;
+  content: "";
+  z-index: 98;
+ }
+.select_box select{
+  width: 220px;
+  border: 0;
+  position: relative;
+  z-index: 99;
+  background: none;
+}*/
 
 
 </style>
@@ -145,16 +174,16 @@
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Grades.Grade, new { @class = "col-sm-2 control-label" })
-                    <div class="col-md-4">
+                    <div class="col-md-4 select_box">
                         @Html.DropDownListFor(m => m.Grades.Grade, Model.GradeDropboxItemList, new { @id = "gradeId", @class = "form-control" })
                     </div>
                     @Html.LabelFor(model => model.ClassOrCourse.ClassName, new { @class = "col-sm-2 control-label" })
-                    <div id="divClassOrCourseId" class="col-md-4">
+                    <div id="divClassOrCourseId" class="col-md-4 select_box">
                         @Html.DropDownListFor(m => m.ClassOrCourse.ClassName, Model.ClassOrCourseDropboxItemList, new { @id = "className", @class = "form-control" })
                     </div>
                 </div>
 
-                <hr style="border:thin solid rgb(173, 128, 74);" />
+                <hr style="border:0px;border-top:thin solid rgb(173, 128, 74);" />
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Address.Province, new { @class = "col-sm-2 control-label" })
@@ -199,7 +228,7 @@
                     </div>
                 </div>
 
-                <hr style="border:thin solid rgb(173, 128, 74);" />
+                <hr style="border:0px;border-top:thin solid rgb(173, 128, 74);" />
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Student.Phone1, new { @class = "col-sm-2 control-label" })
