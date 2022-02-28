@@ -1,4 +1,8 @@
 ﻿@model IEnumerable<School.Entities.Fields.Classes>
+@{
+    School.Common.PagingHelper.Pager pager = Session["pager"] as School.Common.PagingHelper.Pager;
+}
+
 
 <style>
 
@@ -27,6 +31,7 @@
         text-align: left;
         border: 1px solid #ccc;
     }
+
     table .btn {
         margin: 0px 1px;
         height: 26px;
@@ -38,7 +43,6 @@
         background-color: transparent;
         border: thin solid silver;
     }
-
 </style>
 
 <div class="col-md-12" style="border: 0px solid white; display: inline-block;">
@@ -49,10 +53,26 @@
                 <thead style="background-color:rgb(240, 240, 240);">
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.ClassId)
+                            <div class="col-wrapper">
+                                <div class="col-L">
+                                    @Html.DisplayNameFor(model => model.ClassId)
+                                </div>
+                                <div class="col-R rm-pd">
+                                    <div class="my-triangle-up"></div>
+                                    <div class="my-triangle-down"></div>
+                                </div>
+                            </div>
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ClassName)
+                            <div class="col-wrapper">
+                                <div class="col-L">
+                                    @Html.DisplayNameFor(model => model.ClassName)
+                                </div>
+                                <div class="col-R rm-pd">
+                                    <div class="my-triangle-up"></div>
+                                    <div class="my-triangle-down"></div>
+                                </div>
+                            </div>
                         </th>
                         <th style="width:100px;">
                             Edit
@@ -75,6 +95,49 @@
                         </tr>
                     }
                 </tbody>
+
+                <tfoot class="hide-if-no-paging">
+                    <tr>
+                        <td colspan="5" class="text-center" style="border:0px solid red;">
+
+                            <div class="form-LCR">
+                                <div class="form-L">
+                                    @{
+                                        // string lines = String.Format("Showing {0} to {1} of {2} entries", pager.StartItem, pager.LastItem, 50);
+                                        string lines = String.Format("Showing {0} to {1} of {2} entries", pager.StartPage, 10, pager.TotalItems);
+                                        <span>@lines</span>
+                                    }
+
+                                </div>
+                                <div class="form-C"></div>
+                                <div class="form-R">
+                                    <ul style="width:auto;">
+                                        <li class="previous-li" style="display:block" onclick="callControllerByPage('/Student/GetRecordByPage','View Student')">
+                                            <a href="#">Previous</a>
+                                        </li>
+
+                                        @{
+                                            for (int i = 0; i < pager.TotalPages; i++)
+                                            {
+                                                int pg = i + pager.StartPage;
+                                                <li class="page-number" style="display:block" onclick="callControllerByPage('/Student/GetRecordByPage?page=@pg','View Student')">
+                                                    <a href="#">@pg</a>
+                                                </li>
+                                            }
+                                        }
+
+                                        <li class="next-li" style="display:block" onclick="callController('/Student/GetRecordByPage','View Student')">
+                                            <a href="#">Next</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tfoot>
+
+
             </table>
         </div>
     </div>

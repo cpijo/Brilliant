@@ -1,4 +1,5 @@
-﻿using School.Entities.Fields;
+﻿using School.Common.PagingHelper;
+using School.Entities.Fields;
 using School.Services.Interface;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,17 @@ namespace School.UI.Controllers
         [HttpGet]
         public ActionResult GetRecord()
         {
-            List<Classes> model = classRepository.GetAll();
+            List<Classes> _model = classRepository.GetAll();
+            int totalData = _model.Count();
+            List<Classes> model = _model.Take(10).ToList();
+            childPage cpage = new childPage();
+            cpage.StartPage = 1;
+            cpage.CurrentPage = 1;
+            cpage.EndPage = 5;
+            cpage.TotalItems = totalData;
+            cpage.TotalPages = (totalData / 10);
+            Pager pager = new Pager(cpage, totalData, 1, 10, 5);
+            Session["pager"] = pager;
             return PartialView("_TableClass", model);
             //return PartialView("_GetRecord", model);
         }

@@ -45,6 +45,8 @@
     <Compile Include="Common\ClassPropertyHelper.cs" />
     <Compile Include="Common\HtmlTableCreator\HtmlTableCreator.cs" />
     <Compile Include="Constants\Constants.cs" />
+    <Compile Include="LearnFrom\Material Desh\Class1.cs" />
+    <Compile Include="LearnFrom\React_forms\Class1.cs" />
     <Compile Include="LearnFrom\websites\butheleziBusses.cs" />
     <Compile Include="libraryString\Class1.cs" />
     <Compile Include="libraryString\myDateHelper.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="libraryString\myRegexHelper.cs" />
     <Compile Include="libraryString\myStringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VS_Shortcut\Class1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="LearnFrom\jsgrid-1.5.3.zip" />

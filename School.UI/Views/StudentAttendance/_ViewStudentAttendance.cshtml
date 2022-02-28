@@ -26,6 +26,24 @@
         .card-s:hover {
             box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 2px 2px rgba(0,0,0,0.22);
         }
+
+
+
+    .PartialLayoutMenu, #menuId, #menuId .sidebar, .treeview a,
+    #layoutLeftId, #layoutLeftId .layoutLeft-header, .layoutRight-header-bottom,
+    #Home-Container #basePartialHolder .divHeader {
+        background-color: rgb(173, 128, 73);
+    }
+
+        #Home-Container #basePartialHolder .divHeader p {
+            color: white;
+        }
+
+    #tableId thead {
+        background-color: rgb(173, 128, 73);
+        color: white;
+    }
+
 </style>
 
 @using (Ajax.BeginForm("Save", "StudentAttendance", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", HttpMethod = "POST" }, new { @class = "form-horizontal", role = "form", id = "addNewForm" }))
@@ -69,7 +87,7 @@
                     <div class="col-md-12">*@
 
                         <table id="tableId" class="table" style="border:1px solid silver;">
-                            <thead style="background-color:rgb(47, 71, 86);color:white;">
+                            <thead>
                                 <tr>
                                     <th>
                                         @Html.DisplayNameFor(model => model.SubjectId)

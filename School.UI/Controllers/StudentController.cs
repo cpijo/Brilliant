@@ -46,6 +46,46 @@ namespace School.UI.Controllers
             cpage.TotalPages = (totalData / 10);
             Pager pager = new Pager(cpage, totalData, 1, 10, 5);
 
+            Session["pager"] = pager;
+
+            return PartialView("_ViewStudent", _students);
+        }
+        #endregion
+
+        #region Get Student
+        [HttpPost]
+        public ActionResult GetRecordByPage(int pageNo,int startNo,int endNo,int currentNo)
+        {
+            List<Student> students = Session["students"] as List<Student>;
+            int totalData = students.Count();
+            Session["students"] = students;
+
+            //int skip = 10 * page;  
+            int skip = 10 * pageNo;  
+            
+
+            List<Student> _students = students.Skip(skip).Take(10).ToList();
+
+            //_page = int.Parse(start_end_current[0]);
+            //_start = int.Parse(start_end_current[0]);
+            //_end = int.Parse(start_end_current[1]);
+            //_current = int.Parse(start_end_current[2]);
+
+
+
+
+
+
+            childPage cpage = new childPage();
+            cpage.StartPage = 1;
+            cpage.CurrentPage = pageNo;
+            cpage.EndPage = 5;
+            cpage.TotalItems = totalData;
+            cpage.TotalPages = (totalData / 10);
+            Pager pager = new Pager(cpage, totalData, 1, 10, 5);
+
+            Session["pager"] = pager;
+
             return PartialView("_ViewStudent", _students);
         }
         #endregion

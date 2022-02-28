@@ -1,0 +1,117 @@
+﻿
+.form-LCR {
+    width: calc(100% - 0px);
+    height: 32px;
+    /*border: thin solid green;*/
+}
+
+.form-L {
+    width: 200px;
+    height: 32px;
+    /*border: thin solid red;*/
+    float: left;
+}
+
+.form-C {
+    width: calc(100% - 500px);
+    height: 32px;
+    /*border: thin solid yellow;*/
+    float: left;
+}
+
+.form-R {
+    width: 300px;
+    height: 32px;
+    /*border: thin solid black;*/
+    float: left;
+}
+
+.form-LCR li {
+    width: 30px;
+    height: 30px;
+    /*border: thin solid black;*/
+    float: left;
+    padding-top: 4px;
+}
+
+.form-LCR .previous-li {
+    width: 70px;
+    /*height: 35px;
+        border: thin solid black;
+        float: left;*/
+}
+
+.form-LCR .next-li {
+    width: 35px;
+    /*height: 35px;
+        border: thin solid black;
+        float: left;*/
+}
+
+
+.my-triangle-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid black;
+}
+
+.my-triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+}
+
+.my-triangle-left {
+    width: 0;
+    height: 0;
+    border-right: 5px solid black;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    height: 5px;
+}
+
+.my-triangle-right {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+}
+
+.col-wrapper {
+}
+
+.col-L {
+    float: left;
+    width: calc(100% - 30px);
+    /*border: thin solid red;*/
+}
+
+.col-R {
+    float: left;
+    width: 20px;
+    /*border: thin solid red;*/
+    height: 18px;
+    position: relative;
+}
+
+    .col-R i, .col-R div {
+        float: left;
+        /*width: 100%;*/
+        position: absolute;
+        font-size: 12px;
+        height: 12px;
+        top: -6px;
+    }
+
+    .col-R .my-triangle-up {
+        margin-top: 1px;
+    }
+
+    .col-R .my-triangle-down {
+        margin-top: 15px;
+    }

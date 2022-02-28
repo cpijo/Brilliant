@@ -1,45 +1,32 @@
 ﻿@using School.Entities.Fields;
 @model UserLogin
 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
 <style type="text/css">
-    input[type="submit"] {
-        outline: 0;
-        outline: none
-            
-    }
 
-    .card-btn {
-        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-        height:30px;
-       background-color:orange;
-       border:thin solid orange;
-       width:80px;
+    .w_load_icon {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: url(../images/w_load.gif) no-repeat;
+        background-image: url('../../Content/Logo/loading.gif');
     }
-
-    .card-btn:hover {
-        box-shadow: 0 2px 4px rgba(0,0,0,0.25), 0 4px 6px rgba(0,0,0,0.22);
-    }
-
-        #childPage #partialHolder {
-            border: none;
-            overflow-y: hidden;
-            overflow-x: hidden;
-            max-height: 260px;
-        }
 
     #Login-page .control-label {
         font-size: 12px;
         font-stretch: wider;
-        background-color: transparent;
     }
 
-    #Login-page input[type="text"], #Login-page .form-control {
+    #Login-page input[type="text"], #Login-page #passwordId {
         min-height: 35px;
         max-height: 35px;
-        /*background-color: rgb(43, 67, 81);*/
-        border: thin solid orange;
-        color: black;
+        background-color: rgb(43, 67, 81);
+        border: thin solid white;
+        color: wheat;
     }
 
     #Login-page .form-control {
@@ -48,42 +35,48 @@
         border-right: none;
         transition: none;
         font-size: 12px;
-        border: thin solid orange;
-        color:black;
-        /*border: thin solid rgb(210, 214, 222);*/
-        /*height: 28px;*/
+        border: thin solid rgb(210, 214, 222);
+        height: 28px;
     }
 
+    input[type="submit"] {
+        outline: 0;
+        outline: none
+    }
 
     #Home-Container #PopupBodyUserLogin {
-        /*top: 30px;*/
-        width: 450px;
-        left: calc(50% - 215px);
+        top: 30px;
+        width: 360px;
+        left: calc(50% - 180px);
     }
-    #Login-page {
-        height: 280px;
-        max-height: 280px;
-    }
-
-
 </style>
 
 <div id="Login-page" class="col-xs-12 rm-pd" style="padding-top:20px;">
 
-    @using (Ajax.BeginForm("LogIn", "LogIn", new AjaxOptions { HttpMethod = "Post", OnSuccess = "OnSuccess", OnFailure = "OnFailure"}, new { @id = "loginForm" }))
+    @using (Ajax.BeginForm("Login", "Account", new AjaxOptions { HttpMethod = "Post", OnSuccess = "OnSuccess", OnFailure = "OnFailure", OnBegin = "OnBegin" }, new { @id = "loginForm" }))
     {
         @Html.AntiForgeryToken()
         <div class="form-group has-feedback" style="padding-left:10px;padding-right:10px;">
-            @Html.TextBoxFor(m => m.Username, new {@class = "form-control"})
+            @Html.TextBoxFor(m => m.Username, new { @id = "userId", @class = "form-control", @placeholder = "EmailAddress Or Phone Number", autocomplete = "off" })
+            @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+            <span class="glyphicon glyphicon-user form-control-feedback" style="right:10px;font-size:26px;"> </span>
         </div>
-        <div class="form-group has-feedback" style="padding-left:10px;padding-right:10px;">           
-          @Html.TextBoxFor(m => m.Password, new { @class = "form-control password",Type="Password" })           
+        <div class="form-group has-feedback" style="padding-left:10px;padding-right:10px;">
+            <div class="input-group">
+                @Html.PasswordFor(m => m.Password, new { @id = "passwordId", @class = "form-control", @placeholder = "Password", autocomplete = "off" })
+                <div class="input-group-btn">
+                    <button id="showPasswordId" class="btn btn-default" type="button" style="height:35px;background-color:rgb(59, 90, 108);">
+                        <i class="glyphicon glyphicon-eye-open" style="color:red;"></i>
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="form-group" style="padding-left:10px;padding-right:10px;">
-            <button type="submit" class="btnlogColor card-btn ">Sign In</button>
-            <button type="button" id="btnClose" class="btnlogColor card-btn " >Close</button>
+            <button type="submit" class="btn btn-primary btnWidth btnlogColor" onclick='return validateInput()'>Sign In</button>
             <hr />
-            <a href="#" style="color:blue;"><i class="fa fa-key"></i> I forgot my password </a>
+            <a href="#" style="color:blue;" onclick="callingForgotPassword('forgotPassword','/ResetPassword/ForgotPasswordPartial')"><i class="fa fa-key"></i> I forgot my password </a>
+            @*<br /><br />
+                <a href="#" style="color:blue;" onclick="callingForgotPassword('changePassword','/ResetPassword/ResetPassword')"><i class="fa fa-key"></i> Reset Password </a>*@
         </div>
     }
 </div>
@@ -101,7 +94,7 @@
         //var popupBodyID = $(_this).parent('div').parent('div .childBodyPage').attr('id');
         //var partialHolderId = $(_this).siblings('div .partialHolder').attr('id');
 
-        $('#PopupBodyUserLogin').css("display", "none");  
+        $('#PopupBodyUserLogin').css("display", "none");
         $('#PopupOverlayLogIn').css("display", "none");
         //PopupOverlayLogIn
         //classIndexPage.closePopup(_this);
@@ -109,13 +102,13 @@
 
 
     function OnFailure(response) {
-        
+
         $('#div-busy-Icon').hide();
         showMessage(response.message, "error", response.title);
     }
 
     function OnSuccess(response) {
-       // debugger;
+        // debugger;
         $('#div-busy-Icon').hide();
         if (response.result === "false") {
             classMessageResponse.showMessage({ message: response.message, type: "error", title: response.title, pageId: "" });
@@ -125,7 +118,7 @@
             //$('#childPage').css("display", "none");
             //$('#PopupOverlay').css("display", "none");
             //$('#Home-Container #Home-page').css("display", "none");
-            //$('#Home-Container #basePageId').empty().show().html(response);          
+            //$('#Home-Container #basePageId').empty().show().html(response);
         }
         else {
 
@@ -135,7 +128,7 @@
             var partialHolder = "#basePartialHolder #partialHolder";
             var header = 'View Desktop';
             var url = '/Dashboard/GetRecord';
-             $('#basePartialHolder').css("display", "block");
+            $('#basePartialHolder').css("display", "block");
             var pageObj = { function: "append", url: url, type: "Get", data: "", header: header, pageId: "", partialHolder: partialHolder };
             classControllerHelper.callController(pageObj);
             $('#basePartialHolder').css("display", "block");
@@ -153,3 +146,4 @@
     }
 
 </script>
+

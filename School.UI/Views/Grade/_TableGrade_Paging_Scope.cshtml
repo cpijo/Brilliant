@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<School.Entities.Fields.Grades>
 
 @{
-    School.Common.PagingHelper.Pager pager = Session["pager"] as School.Common.PagingHelper.Pager;
+    string test = "test";
+    //grade
 }
+
 <style>
 
     .card_t {
@@ -88,6 +90,135 @@
         background-color: rgb(47, 71, 86);
         color: white;
     }
+
+
+
+
+
+
+
+</style>
+
+<style>
+
+    .form-LCR {
+        width: calc(100% - 0px);
+        height: 32px;
+        border: thin solid green;
+    }
+
+    .form-L {
+        width: 200px;
+        height: 32px;
+        border: thin solid red;
+        float: left;
+    }
+
+    .form-C {
+        width: calc(100% - 500px);
+        height: 32px;
+        border: thin solid yellow;
+        float: left;
+    }
+
+    .form-R {
+        width: 300px;
+        height: 32px;
+        border: thin solid black;
+        float: left;
+    }
+
+    .form-LCR li {
+        width: 30px;
+        height: 30px;
+        border: thin solid black;
+        float: left;
+        padding-top: 4px;
+    }
+
+    .form-LCR .previous-li {
+        width: 70px;
+        /*height: 35px;
+        border: thin solid black;
+        float: left;*/
+    }
+
+    .form-LCR .next-li {
+        width: 35px;
+        /*height: 35px;
+        border: thin solid black;
+        float: left;*/
+    }
+</style>
+
+<style>
+
+    .my-triangle-up {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid black;
+    }
+
+    .my-triangle-down {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid black;
+    }
+
+    .my-triangle-left {
+        width: 0;
+        height: 0;
+        border-right: 5px solid black;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        height: 5px;
+    }
+
+    .my-triangle-right {
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-top: 5px solid black;
+        border-bottom: 5px solid black;
+    }
+
+    .col-wrapper {
+    }
+
+    .col-L {
+        float: left;
+        width: calc(100% - 30px);
+        /*border: thin solid red;*/
+    }
+
+    .col-R {
+        float: left;
+        width: 20px;
+        /*border: thin solid red;*/
+        height: 18px;
+        position: relative;
+    }
+
+        .col-R i, .col-R div {
+            float: left;
+            /*width: 100%;*/
+            position: absolute;
+            font-size: 12px;
+            height: 12px;
+            top: -6px;
+        }
+
+        .col-R .my-triangle-up {
+            margin-top: 1px;
+        }
+
+        .col-R .my-triangle-down {
+            margin-top: 15px;
+        }
 </style>
 
 
@@ -107,7 +238,7 @@
                                     <div class="my-triangle-down"></div>
                                 </div>
                             </div>
-                            @*@Html.DisplayNameFor(model => model.GradeId)*@
+                           @*@Html.DisplayNameFor(model => model.GradeId)*@
                         </th>
                         <th>
                             <div class="col-wrapper">
@@ -142,39 +273,36 @@
                         </tr>
                     }
                 </tbody>
-
-
                 <tfoot class="hide-if-no-paging">
                     <tr>
-                        <td colspan="5" class="text-center" style="border:0px solid red;">
+                        <td colspan="5" class="text-center" style="border:thin solid red;">
 
                             <div class="form-LCR">
                                 <div class="form-L">
-                                    @{
-                                        // string lines = String.Format("Showing {0} to {1} of {2} entries", pager.StartItem, pager.LastItem, 50);
-                                        string lines = String.Format("Showing {0} to {1} of {2} entries", pager.StartPage, 10, pager.TotalItems);
-                                        <span>@lines</span>
-                                    }
-
+                                    <span>Showing 1 to 10 of 57 entries</span>
                                 </div>
                                 <div class="form-C"></div>
                                 <div class="form-R">
                                     <ul style="width:auto;">
-                                        <li class="previous-li" style="display:block" onclick="callControllerByPage('/Student/GetRecordByPage','View Student')">
+                                        <li class="previous-li" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
                                             <a href="#">Previous</a>
                                         </li>
-
-                                        @{
-                                            for (int i = 0; i < pager.TotalPages; i++)
-                                            {
-                                                int pg = i + pager.StartPage;
-                                                <li class="page-number" style="display:block" onclick="callControllerByPage('/Student/GetRecordByPage?page=@pg','View Student')">
-                                                    <a href="#">@pg</a>
-                                                </li>
-                                            }
-                                        }
-
-                                        <li class="next-li" style="display:block" onclick="callController('/Student/GetRecordByPage','View Student')">
+                                        <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                            <a href="#">1</a>
+                                        </li>
+                                        <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                            <a href="#">2</a>
+                                        </li>
+                                        <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                            <a href="#">3</a>
+                                        </li>
+                                        <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                            <a href="#">4</a>
+                                        </li>
+                                        <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                            <a href="#">5</a>
+                                        </li>
+                                        <li class="next-li" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
                                             <a href="#">Next</a>
                                         </li>
                                     </ul>
@@ -184,9 +312,6 @@
                         </td>
                     </tr>
                 </tfoot>
-
-
-
             </table>
 
         </div>

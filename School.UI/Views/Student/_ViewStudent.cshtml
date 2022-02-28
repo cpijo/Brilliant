@@ -2,6 +2,7 @@
 
 @{
     School.Common.PagingHelper.Pager MyPaging = TempData["PagerViewModel"] as School.Common.PagingHelper.Pager;
+    School.Common.PagingHelper.Pager pager = Session["pager"] as School.Common.PagingHelper.Pager;
 }
 
 
@@ -303,34 +304,34 @@
     .form-LCR {
         width: calc(100% - 0px);
         height: 32px;
-        border: thin solid green;
+        /*border: thin solid green;*/
     }
 
     .form-L {
         width: 200px;
         height: 32px;
-        border: thin solid red;
+        /*border: thin solid red;*/
         float: left;
     }
 
     .form-C {
         width: calc(100% - 500px);
         height: 32px;
-        border: thin solid yellow;
+        /*border: thin solid yellow;*/
         float: left;
     }
 
     .form-R {
         width: 300px;
         height: 32px;
-        border: thin solid black;
+        /*border: thin solid black;*/
         float: left;
     }
 
     .form-LCR li {
         width: 30px;
         height: 30px;
-        border: thin solid black;
+        /*border: thin solid black;*/
         float: left;
         padding-top: 4px;
     }
@@ -392,7 +393,7 @@
             float: left;
             width: calc(100% - 30px);
             /*border: thin solid red;*/
-        }
+        }                                                               
         .col-R {
             float: left;
             width: 20px;
@@ -417,6 +418,23 @@
                 margin-top: 15px;
             }
 
+
+
+
+        .PartialLayoutMenu, #menuId, #menuId .sidebar, .treeview a,
+        #layoutLeftId, #layoutLeftId .layoutLeft-header, .layoutRight-header-bottom,
+        #Home-Container #basePartialHolder .divHeader {
+            background-color: rgb(173, 128, 73);
+        }
+
+            #Home-Container #basePartialHolder .divHeader p {
+                color: white;
+            }
+
+        #tableId thead {
+            background-color: rgb(173, 128, 73);
+            color: white;
+        }
 
 </style>
 
@@ -561,34 +579,35 @@
                     </tbody>
                     <tfoot class="hide-if-no-paging">
                         <tr>
-                            <td colspan="5" class="text-center" style="border:thin solid red;">
+                            <td colspan="5" class="text-center" style="border:0px solid red;">
 
                                 <div class="form-LCR">
                                     <div class="form-L">
-                                        <span>Showing 1 to 10 of 57 entries</span>
+                                        @{
+                                            // string lines = String.Format("Showing {0} to {1} of {2} entries", pager.StartItem, pager.LastItem, 50);
+                                            string lines = String.Format("Showing {0} to {1} of {2} entries", pager.StartPage, 10, pager.TotalItems);
+                                            <span>@lines</span>
+                                        }
+
                                     </div>
                                     <div class="form-C"></div>
                                     <div class="form-R">
                                         <ul style="width:auto;">
-                                            <li class="previous-li" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+                                            <li class="previous-li" style="display:block" onclick="callControllerByPage('/Student/GetRecordByPage','View Student')">
                                                 <a href="#">Previous</a>
                                             </li>
-                                            <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
-                                                <a href="#">1</a>
-                                            </li>
-                                            <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
-                                                <a href="#">2</a>
-                                            </li>
-                                            <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
-                                                <a href="#">3</a>
-                                            </li>
-                                            <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
-                                                <a href="#">4</a>
-                                            </li>
-                                            <li class="page-number" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
-                                                <a href="#">5</a>
-                                            </li>
-                                            <li class="next-li" style="display:block" onclick="callController('/StudentRegister/CreateRecord','Create Student')">
+
+                                            @{
+                                                for (int i = 0; i < pager.TotalPages; i++)
+                                                {
+                                                    int pg = i + pager.StartPage;
+                                                    <li class="page-number" style="display:block" onclick="callControllerByPage('/Student/GetRecordByPage?page=@pg','View Student')">
+                                                        <a href="#">@pg</a>
+                                                    </li>
+                                                }
+                                            }
+
+                                            <li class="next-li" style="display:block" onclick="callController('/Student/GetRecordByPage','View Student')">
                                                 <a href="#">Next</a>
                                             </li>
                                         </ul>
@@ -606,6 +625,34 @@
 
 </div>
 <script>
+
+
+    function callControllerByPage(url,header) {
+        //debugger;
+        var _page = JSON.parse('@Html.Raw(Json.Encode(Session["pager"]))');
+        var pageNo = classControllerHelper.getParameterByurl(url).value;
+        var startNo = _page.StartPage;
+        var endNo = _page.EndPage;
+        var currentNo = _page.CurrentPage;
+        var data = {
+            'pageNo': pageNo,
+            'startNo': startNo,
+            'endNo': endNo,
+            'currentNo': currentNo
+        };
+
+        var partialHolder = "#tableHolderId";
+        var header = 'Update UserInfor';
+        var url = '/Student/GetRecordByPage';//'/Student/GetRecordByPage'
+        var pageObj = { function: "append", url: url, type: "Post", data: data, header: header, pageId: "", partialHolder: partialHolder };
+        classControllerHelper.callController(pageObj);
+
+
+
+
+        //var objPopup = classPageConstant.popupChildOne;
+        //var pageObj = { function: "popup", url: url, type: "Post", data: data, header: header, pageId: "", objPopup: objPopup };
+    }
 
 
     function registeredUserToDo(_name) {

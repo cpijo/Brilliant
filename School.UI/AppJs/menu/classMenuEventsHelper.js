@@ -16,6 +16,43 @@ var classMenuEventsHelper = function () {
             event.preventDefault();
             event.stopImmediatePropagation();
 
+var tags ='.PartialLayoutMenu, #menuId, #menuId .sidebar, .treeview a, '+
+    '#layoutLeftId, #layoutLeftId .layoutLeft-header, .layoutRight-header-bottom, '+
+                    '#Home-Container #basePartialHolder .divHeader, #tableId thead';
+                var divHeaderP = '#Home-Container #basePartialHolder .divHeader p';
+
+            if ($(this).hasClass('menu-st')) {               
+                $(tags).css({ "background-color": "rgb(173, 128, 73)", "color": "white" });
+                $(divHeaderP).css({ "color": "white" });
+                $('input[type="text"], .form-control').css(
+                    {
+                        "outline": "none",
+                        "cursor": "pointer",
+                        "font-size": "14px",
+                        "border-radius": "2px",
+                        "border": "thin solid rgb(173, 128, 74)",
+                        "height": "27px"
+                    });
+            }
+            else if($(this).hasClass('menu-a')) {
+                $(tags).css({ "background-color": "rgb(43, 67, 81)", "color": "white" });
+                $(divHeaderP).css({ "color": "white" });
+                $('input[type="text"], .form-control').css(
+                    {
+                        "outline": "none",
+                        "cursor": "pointer",
+                        "font-size": "14px",
+                        "border-radius": "2px",
+                        "border": "thin solid rgb(43, 67, 82)",
+                        "height": "27px"
+                    });
+            }
+            else {
+                ;
+            }
+
+
+
             if (event.target === event.currentTarget) {
                 var mytag = event.currentTarget;
             }

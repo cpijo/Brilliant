@@ -2,6 +2,22 @@
 
 <style>
 
+    .PartialLayoutMenu, #menuId, #menuId .sidebar, .treeview a,
+    #layoutLeftId, #layoutLeftId .layoutLeft-header, .layoutRight-header-bottom,
+    #Home-Container #basePartialHolder .divHeader {
+        background-color: rgb(173, 128, 73);
+    }
+
+        #Home-Container #basePartialHolder .divHeader p {
+            color: white;
+        }
+
+    #tableId thead {
+        background-color: rgb(173, 128, 73);
+        color: white;
+    }
+
+
     .card_t {
         border-radius: 2px;
         display: inline-block;
@@ -64,7 +80,7 @@
                 <input id="nomberOfRows" type="hidden" value=@Model.StudentSubjectMarksList.Count() />
 
                 <table id="tableId" class="table" style="border:1px solid silver;">
-                    <thead style="background-color:rgb(47, 71, 86);color:white;">
+                    <thead>
                         <tr>
                             <th>
                                 @Html.DisplayNameFor(model => model.StudentSubjectMarks.StudentId)

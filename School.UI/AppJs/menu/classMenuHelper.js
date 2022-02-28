@@ -120,5 +120,11 @@ var classMenuHelper = {
             }, 1000); //Same time as animation    
         }
     }
+    ,
+    changeTheme: function () {
+        var menus = $('#menuId .sidebar-menu li') 
+        //id="menu-student-maint"  id = "menu-student-reg"  menu-teacher
+        //.menu-st  .menu-a
+    }
 };
 

@@ -76,6 +76,7 @@
     <Compile Include="notes\notes_payrol.cs" />
     <Compile Include="PagingHelper\Pager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="short_cut\shortCut.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SQL\SchooBD\northwind-sql.sql" />

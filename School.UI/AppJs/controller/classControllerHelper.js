@@ -34,6 +34,60 @@ var classControllerHelper = {
 
     }
     ,
+    getParameterByurl: function (url) {
+        var str = url.substring(1);
+        var pos = str.indexOf('/');
+        var hasQuestionMark = str.indexOf('?');
+        var getController = '';
+        var getAction = '';
+        var urlScope = '';
+        var newUrl = '';
+        var obj = {};
+        if (hasQuestionMark === -1) {
+            // url = '/ViewEscort/GetGalleryPage';
+            getController = str.substring(0, pos);
+            getAction = str.substring(pos + 1);
+            urlScope = '@Url.Action("actionHolder","controllerHolder")';//Inside View
+            urlScope = '/controllerHolder/actionHolder';
+
+            newUrl = urlScope.replace("actionHolder", getAction).replace("controllerHolder", getController);
+            obj = {
+                propertyName: 'none',
+                value: 'none',
+                url: newUrl
+            };
+        }
+        else {
+            // url = '/ViewEscort/GetGalleryPage/?page=1020';
+            var pos2 = str.indexOf('?');
+            var _pos2 = pos2 - 1;
+            var str_Controller = str.substring(0, _pos2);
+            pos = str_Controller.indexOf('/');
+
+            getController = str_Controller.substring(0, pos);
+            getAction = str_Controller.substring(pos + 1);
+            var getVariableParamenter = str.substring(pos2 + 1);
+            var pos3 = getVariableParamenter.indexOf('=');
+            var variableName = getVariableParamenter.substring(0, pos3);
+            var variableValue = getVariableParamenter.substring(pos3 + 1);
+
+            urlScope = '@Url.Action("actionHolder","controllerHolder", new {parameterName = "parameterValue"})';//Inside View
+            urlScope = '/controllerHolder/actionHolder/?parameterName=parameterValue';
+
+            newUrl = urlScope.replace("actionHolder", getAction)
+                .replace("controllerHolder", getController)
+                .replace("parameterName", variableName)
+                .replace("parameterValue", variableValue);
+
+            obj = {
+                propertyName: variableName,
+                value: variableValue,
+                url: newUrl
+            };
+        }
+        return obj;
+    }
+    ,
     urlHelper: function (url) {
         var str = url.substring(1);
         var pos = str.indexOf('/');
