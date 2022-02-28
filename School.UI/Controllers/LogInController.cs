@@ -43,16 +43,21 @@ namespace School.UI.Controllers
                 _dynamic.password = model.Password;// "7507239F3C3EB689DB85A29151C0CF5BB5F4A1FD";
                 string _encodedPassword = HashingPassword.HashSHA1(model.Password);
                 _dynamic.password = _encodedPassword;
-                List<UserLogin> _user = loginRepository.GetByAny(_dynamic);
+                var _user = loginRepository.GetByAny(_dynamic);
 
-                if (_user == null || _user.Count==0)
+                if (_user == null)
                 {
                     return Json(new { result = "false", message = "Invalid Username or Password!", title = "Invalid LogIn" }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {                   
                     Session["UserDetails"] = _user[0];
-                    List<Roles> roles= permissionRepository.GetById(_user[0].UserId);
+
+
+                    //List<Roles> roles= permissionRepository.GetById(_user[0].UserId);
+                    List<Roles> roles = new List<Roles>();
+                    roles.Add(new Roles() { RoleID = 200, RoleName = "Test0" });
+                    roles.Add(new Roles() { RoleID = 500, RoleName = "Test1" });
                     Session["permissionList"] = roles;
                     appMenu menu = new appMenu();
                     menu.menuRequest.name = "login";

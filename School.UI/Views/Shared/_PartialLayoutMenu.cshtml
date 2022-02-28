@@ -260,7 +260,7 @@
                 </ul>
             </li>
 
-            <li class="treeview" id="menu-teacher" style="display:block;width:auto;">
+            <li class="treeview" id="menu-teacher" style="display:none;width:auto;">
                 <a href="#" class="menu-a">
                     <i class="fa fa-pencil"></i>
                     <span class="menu-header-name">Teacher Registration</span>
@@ -286,8 +286,8 @@
                     </span>
                 </a>
             </li>
-            <li class="treeview rolesId" id="N3" style="display:block;width:auto;">
-                <a id="a-rolesId" href="#" onclick="callController('/Roles/GetRecord')">
+            <li class="treeview rolesId" id="N3" style="display:none;width:auto;">
+                <a id="a-rolesId" href="#" onclick="callController_uderConstraction('/Roles/GetRecord')">
                     <i class="fa fa-home"></i>
                     <span id="span-roleId" class="menu-header-name">Roles</span>
                     <span class="pull-right-container">
@@ -306,9 +306,9 @@
                     </span>
                 </a>
                 <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id="subjecte3" name="subject" style="display:block" onclick="callController('/Books/DownloadBooks','Download Books')"><a href="#"><i class="fa fa-circle-o"></i>Download Books</a></li>
-                    <li id="subjecte3" name="subject" style="display:block" onclick="callController('/QuestionPaper/DownloadQuestionPaper','Download Question Paper')"><a href="#"><i class="fa fa-circle-o"></i>Download Question Paper</a></li>
-                    <li id="subjecte1" name="subject" style="display:block" onclick="callController('/Exams/UploadExams','Upload Exams')"><a href="#"><i class="fa fa-circle-o"></i>Upload Exams</a></li>
+                    <li id="subjecte3" name="subject" style="display:block" onclick="callController_uderConstraction('/Books/DownloadBooks','Download Books')"><a href="#"><i class="fa fa-circle-o"></i>Download Books</a></li>
+                    <li id="subjecte3" name="subject" style="display:block" onclick="callController_uderConstraction('/QuestionPaper/DownloadQuestionPaper','Download Question Paper')"><a href="#"><i class="fa fa-circle-o"></i>Download Question Paper</a></li>
+                    <li id="subjecte1" name="subject" style="display:block" onclick="callController_uderConstraction('/Exams/UploadExams','Upload Exams')"><a href="#"><i class="fa fa-circle-o"></i>Upload Exams</a></li>
 
 
                     @*<hr />
@@ -332,8 +332,8 @@
                     </span>
                 </a>
                 <ul id="ul-timesheetId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id="timesheetId1" name="student" style="display:block" onclick="callController('/Timesheet/GetRecord','View Timesheet')"><a href="#"><i class="fa fa-circle-o"></i>View Timesheets(Admin)</a></li>
-                    <li id="timesheetId2" name="student" style="display:block" onclick="callController('/Timesheet/AddRecord','Create Timesheet')"><a href="#"><i class="fa fa-circle-o"></i>Create Timesheet(Admin)</a></li>
+                    <li id="timesheetId1" name="student" style="display:block" onclick="callController_uderConstraction('/Timesheet/GetRecord','View Timesheet')"><a href="#"><i class="fa fa-circle-o"></i>View Timesheets(Admin)</a></li>
+                    <li id="timesheetId2" name="student" style="display:block" onclick="callController_uderConstraction('/Timesheet/AddRecord','Create Timesheet')"><a href="#"><i class="fa fa-circle-o"></i>Create Timesheet(Admin)</a></li>
                 </ul>
             </li>
 
@@ -347,8 +347,8 @@
                     </span>
                 </a>
                 <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id="li-paymentId" name="subject" style="display:block" onclick="callController('/StudentPayment/viewStudentPayment','View All Payment')"><a href="#"><i class="fa fa-circle-o"></i>View All Payment</a></li>
-                    <li id="li-paymentId" name="subject" style="display:block" onclick="callController('/StudentPayment/GetRecord','Make Payment')"><a href="#"><i class="fa fa-circle-o"></i>Make Payment</a></li>
+                    <li id="li-paymentId" name="subject" style="display:block" onclick="callController_uderConstraction('/StudentPayment/viewStudentPayment','View All Payment')"><a href="#"><i class="fa fa-circle-o"></i>View All Payment</a></li>
+                    <li id="li-paymentId" name="subject" style="display:block" onclick="callController_uderConstraction('/StudentPayment/GetRecord','Make Payment')"><a href="#"><i class="fa fa-circle-o"></i>Make Payment</a></li>
                 </ul>
             </li>
 
@@ -363,8 +363,8 @@
                     </span>
                 </a>
                 <ul id="ul-provinceId" class="sidebar-submenu treeview-menu" style="width:auto;">
-                    <li id="subjecte33" name="subject" style="display:block" onclick="callController('/UploadBooks/DownloadBooks','Upload Books')"><a href="#"><i class="fa fa-circle-o"></i>Upload Books</a></li>
-                    <li id="subjecte333" name="subject" style="display:block" onclick="callController('/UploadQuestionPaper/DownloadQuestionPaper','Upload Question Paper')"><a href="#"><i class="fa fa-circle-o"></i>Upload Question Paper</a></li>
+                    <li id="subjecte33" name="subject" style="display:block" onclick="callController_uderConstraction('/UploadBooks/DownloadBooks','Upload Books')"><a href="#"><i class="fa fa-circle-o"></i>Upload Books</a></li>
+                    <li id="subjecte333" name="subject" style="display:block" onclick="callController_uderConstraction('/UploadQuestionPaper/DownloadQuestionPaper','Upload Question Paper')"><a href="#"><i class="fa fa-circle-o"></i>Upload Question Paper</a></li>
                 </ul>
             </li>
 
@@ -423,6 +423,14 @@
         var pageObj = { function: "append", url: url, type: "Get", data: objPage, header: header, pageId: "", partialHolder: partialHolder };
         classControllerHelper.callController(pageObj);
         //overrideUserSession.openPage = objPopup.popupName;
+    }
+
+
+
+    function callController_uderConstraction(url, header) {
+
+        classMessageResponse.showMessage({ message: "Sorry, this function is still under construction", type: "warning", title: "Under construction", pageId: "" });
+
     }
 
 </script>

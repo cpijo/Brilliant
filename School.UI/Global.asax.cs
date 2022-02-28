@@ -17,8 +17,37 @@ namespace School.UI
         static MvcApplication()
         {
             initialRequest = HttpContext.Current.Request;
-            string host = HttpContext.Current.Request.Url.Host.ToLower();
-            var IsLocal = HttpContext.Current.Request.Url.AbsoluteUri.StartsWith("http://localhost:");
+            string hostName = System.Web.HttpContext.Current.Server.MachineName;
+            var hostName1 = System.Environment.GetEnvironmentVariable("COMPUTERNAME");
+            var host = HttpContext.Current.Request.UserHostName;
+            var clientBrowser = HttpContext.Current.Request.Browser.Browser;
+
+            if (hostName1.ToLower().Contains("sphiwe"))
+            {
+                string visitors = ConfigurationManager.AppSettings["urlHost"];
+                ConfigurationManager.AppSettings["urlHost"] = "isLocalHost";
+            }
+            else
+            {
+                ConfigurationManager.AppSettings["urlHost"] = "notLocalHost";
+            }
+        }
+
+
+
+
+
+        static void  Not_In_Used_MvcApplication()
+        {
+            initialRequest = HttpContext.Current.Request;
+            var _host = System.Net.Dns.GetHostEntry(HttpContext.Current.Request.ServerVariables["REMOTE_HOST"]);
+            string hostName1 = System.Web.HttpContext.Current.Server.MachineName;
+            var hostName2 = System.Environment.GetEnvironmentVariable("COMPUTERNAME");
+            //string host = HttpContext.Current.Request.Url.Host.ToLower();
+            //var IsLocal = HttpContext.Current.Request.Url.AbsoluteUri.StartsWith("http://localhost:");
+            //var yo = HttpContext.Current.Request.UserHostAddress.ToString();
+            var host = HttpContext.Current.Request.UserHostName;
+            var clientBrowser = HttpContext.Current.Request.Browser.Browser;
 
             if (host == "localhost" || host == "127.0.0.1")
             {
@@ -30,6 +59,11 @@ namespace School.UI
                 ConfigurationManager.AppSettings["urlHost"] = "notLocalHost";
             }
         }
+
+
+
+
+
 
         protected void Application_Start()
         {
